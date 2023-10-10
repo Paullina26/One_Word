@@ -8,7 +8,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   *, *::after, *::before {
-    font-family: 'Signika', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
     box-sizing: inherit;
     margin: 0;
     padding: 0;
@@ -24,6 +24,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   a, button {
-    font-family: 'Signika', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
   }
 `;
