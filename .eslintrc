@@ -29,6 +29,7 @@
     "react/prop-types": "off",
     "no-console": "warn",
     "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "no-undef": "off"
   }
 }

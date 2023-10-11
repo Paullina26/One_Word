@@ -1,25 +1,25 @@
-import * as S from './StyleHomePage';
-import Background from '../../components/atoms/Background';
+import Background from '../../components/background/Background';
+import { Button } from '../../components/buttons/Button';
+import Logo from '../../components/logo/Logo';
+import { GlassWrapper } from '../../components/containers/GlassWrapper';
+import Welcome from '../../components/welcome/Welcome';
+import styled from 'styled-components';
+
+export const WrapperHome = styled.div`
+  text-align: center;
+`;
 
 export const HomePage = () => {
   return (
     <>
       <Background />
-      <S.WrapperHome>
-        <S.WrapperOneWord>
-          <S.TittleOnly>only</S.TittleOnly>
-          <S.TittleOneWord>One Word</S.TittleOneWord>
-          <S.TittleaDay>a day</S.TittleaDay>
-        </S.WrapperOneWord>
-        <S.WrapperContainer>
-          <S.Tittle>Hello</S.Tittle>
-          <S.Description>It’s a pleasure to see you here</S.Description>
-          <S.Description>You don’t have much time?</S.Description>
-          <S.Description>Great! One word a day it’s enough!</S.Description>
-          <S.Description>Create your own database of words to learn.</S.Description>
-          <S.Button>Try It</S.Button>
-        </S.WrapperContainer>
-      </S.WrapperHome>
+      <WrapperHome>
+        <Logo />
+        <GlassWrapper>
+          <Welcome />
+          <Button>Try It</Button>
+        </GlassWrapper>
+      </WrapperHome>
     </>
   );
 };
