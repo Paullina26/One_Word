@@ -4,12 +4,20 @@ import Logo from 'components/Logo/Logo';
 import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
 import Welcome from 'components/Welcome/Welcome';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 export const WrapperHome = styled.div`
   text-align: center;
 `;
 
 export const HomePage = () => {
+  const navigate = useNavigate();
+
+  const handleGoToAuth = () => {
+    console.log('goAuth');
+    navigate('auth');
+  };
+
   return (
     <>
       <Background />
@@ -17,7 +25,7 @@ export const HomePage = () => {
         <Logo />
         <GlassWrapper>
           <Welcome />
-          <Button>Try It</Button>
+          <Button onClick={handleGoToAuth}>Try It</Button>
         </GlassWrapper>
       </WrapperHome>
     </>

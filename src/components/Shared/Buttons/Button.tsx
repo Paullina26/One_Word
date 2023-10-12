@@ -7,6 +7,6 @@ export const Button = styled.button`
   padding: 7px 20px;
   border-radius: 12px;
   border: none;
-  background: ${({ theme }) => theme.Pink};
-  color: ${({ theme }) => theme.White};
+  background: ${({ theme }) => theme.pink};
+  color: ${({ theme }) => theme.white};
 `;

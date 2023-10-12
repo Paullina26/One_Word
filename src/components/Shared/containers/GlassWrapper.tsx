@@ -8,15 +8,15 @@ export const GlassWrapper = styled.div`
   min-height: 40vh;
   background-image: linear-gradient(
     to bottom right,
-    ${({ theme }) => theme.GlassDarkWhite},
-    ${({ theme }) => theme.GlassMediumWhite},
-    ${({ theme }) => theme.GlassLightWhite},
-    ${({ theme }) => theme.GlassWhite},
-    ${({ theme }) => theme.GlassLightWhite},
-    ${({ theme }) => theme.GlassMediumWhite},
-    ${({ theme }) => theme.GlassDarkWhite}
+    ${({ theme }) => theme.glassDarkWhite},
+    ${({ theme }) => theme.glassMediumWhite},
+    ${({ theme }) => theme.glassLightWhite},
+    ${({ theme }) => theme.glassWhite},
+    ${({ theme }) => theme.glassLightWhite},
+    ${({ theme }) => theme.glassMediumWhite},
+    ${({ theme }) => theme.glassDarkWhite}
   );
   border-radius: 16px;
-  box-shadow: 0 4px 30px ${({ theme }) => theme.GlassShadowBlack};
+  box-shadow: 0 4px 30px ${({ theme }) => theme.glassShadowBlack};
   backdrop-filter: blur(5px);
 `;

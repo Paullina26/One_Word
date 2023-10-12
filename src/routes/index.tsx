@@ -1,19 +1,27 @@
 import { useContext } from 'react';
 // import { GlobalContext } from 'utils/GlobalContext';
 import { Routes, Route } from 'react-router-dom';
-import HomePage from 'pages/Home/Home';
+import Home from 'pages/Home/Home';
+import Auth from 'pages/Auth/Auth';
+import Login from 'components/Login/Login';
+import Registration from 'components/Registration/Registration';
 
 const RoutesComponent = () => {
   // const { isLogin } = useContext(GlobalContext);
   return (
     <Routes>
-      <Route path='/' element={<HomePage />} />
-      {/* <Route path='auth' element={<Auth />} /> */}
+      <Route path='/' element={<Home />} />
+      <Route path='auth' element={<Auth />}>
+        <Route path='login' element={<Login />} />
+        <Route path='registration' element={<Registration />} />
+      </Route>
+
       {/* {!isLogin && (
-          <Route path='auth' element={<Auth />}>
+        <Route path='/' element={<Home />} />
+        <Route path='auth' element={<Auth />}>
           <Route path='login' element={<Login />} />
           <Route path='registration' element={<Registration />} />
-          </Route>
+        </Route>
       )}
       {isLogin && (
         <>
