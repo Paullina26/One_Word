@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import Bubble from './Bubble';
-import { flags } from '../../assets/flags';
+import Bubble from 'components/Background/Bubble';
+import { flags } from 'helpers/flags';
 
 const BgStyled = styled.div`
   /* z-index: -1; */
@@ -28,7 +28,7 @@ const BgStyled = styled.div`
 const bubbles = [
   {
     directions: 'to right top',
-    flagUrl: flags.flagDeu,
+    flagUrl: flags.FlagDeu,
     top: '72vh',
     left: '50vw',
     height: '60px',
@@ -37,7 +37,7 @@ const bubbles = [
   },
   {
     directions: 'to right top',
-    flagUrl: flags.flagPl,
+    flagUrl: flags.FlagPl,
     top: '75vh',
     left: '20vw',
     height: '55px',
@@ -46,7 +46,7 @@ const bubbles = [
   },
   {
     directions: 'to right top',
-    flagUrl: flags.flagGbr,
+    flagUrl: flags.FlagGbr,
     top: '65vh',
     left: '70vw',
     height: '45px',
@@ -55,7 +55,7 @@ const bubbles = [
   },
   {
     directions: 'to right bottom',
-    flagUrl: flags.flagGbr,
+    flagUrl: flags.FlagGbr,
     top: '15vh',
     left: '5vw',
     height: '70px',
@@ -65,7 +65,7 @@ const bubbles = [
   },
   {
     directions: 'to right top',
-    flagUrl: flags.flagGbr,
+    flagUrl: flags.FlagGbr,
     top: '25vh',
     left: '30vw',
     height: '75px',
@@ -75,7 +75,7 @@ const bubbles = [
   },
   {
     directions: 'to right bottom',
-    flagUrl: flags.flagPl,
+    flagUrl: flags.FlagPl,
     top: '20vh',
     left: '58vw',
     height: '55px',
@@ -85,7 +85,7 @@ const bubbles = [
   },
   {
     directions: 'to left top',
-    flagUrl: flags.flagFr,
+    flagUrl: flags.FlagFr,
     top: '20vh',
     left: '45vw',
     height: '30px',
@@ -95,7 +95,7 @@ const bubbles = [
   },
   {
     directions: 'to right bottom',
-    flagUrl: flags.flagFr,
+    flagUrl: flags.FlagFr,
     top: '50vh',
     left: '70vw',
     height: '90px',
@@ -106,7 +106,7 @@ const bubbles = [
 
   {
     directions: 'to right top',
-    flagUrl: flags.flagGbr,
+    flagUrl: flags.FlagGbr,
     top: '65vh',
     left: '22vw',
     height: '70px',
@@ -116,7 +116,7 @@ const bubbles = [
   },
   {
     directions: 'circle',
-    flagUrl: flags.flagDeu,
+    flagUrl: flags.FlagDeu,
     top: '25vh',
     left: '80vw',
     height: '70px',

@@ -16,9 +16,10 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     font-size: 1.6rem;
-    /* position: relative; */
-    /* background-color: #E4E5F0; */
     background-attachment: fixed;
+    color: black;
+    overflow-x: hidden;
+    width: 100vw;
     background-image: radial-gradient(
     circle,
     #a2a0c8,
@@ -34,10 +35,6 @@ export const GlobalStyle = createGlobalStyle`
     #dddeeb,
     #e5e6ef
   );
-    color: black;
-    overflow-x: hidden;
-    width: 100vw;
-    /* height: 100vh; */
   }
 
   a, button {

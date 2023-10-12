@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import OneWord from './OneWord';
+import OneWord from 'components/Logo/OneWord';
 
 export const WrapperLogo = styled.div`
   text-align: center;

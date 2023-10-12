@@ -1,9 +1,8 @@
 import styled from 'styled-components';
+import { font } from 'style/mixins';
 
 export const TittleOneWord = styled.h1`
-  font-size: 5rem;
-  font-weight: 900;
-  font-style: italic;
+  ${font(5, 'italic', 900)};
   color: ${({ theme }) => theme.PurpleDark};
 `;
 

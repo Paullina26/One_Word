@@ -23,7 +23,7 @@ const texts = [
   'Create your own database of words to learn.',
 ];
 
-const renderDescription = texts.map(text => <Description key={text.index}>{text}</Description>);
+const renderDescription = texts.map(text => <Description key={text}>{text}</Description>);
 
 export const Welcome = () => {
   return (
