@@ -16,6 +16,12 @@ export const theme = {
   //-----WRAPPER----//
 
   //-----GLASS_EFFECT----//
+  GlassWhite: '#ffffffaa',
+  GlassLightWhite: '#ffffff7d',
+  GlassMediumWhite: '#d7d7d780',
+  GlassDarkWhite: '#a1a1a181',
+  GlassShadowBlack: 'rgba(0, 0, 0, 0.1)',
+
   // status: ['#2e2757', '#8c3a68', '#009300'],
 };
 
