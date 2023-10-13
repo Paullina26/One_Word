@@ -8,18 +8,15 @@ import Registration from 'components/Registration/Registration';
 export const WrapperLogo = styled.div`
   text-align: center;
   padding-top: 10px;
-  /* background-color: ${({ theme }) => theme.purpleDark}; */
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 40px 40px;
   margin-bottom: 10px;
-  background-image: linear-gradient(
-    to bottom right,
-    ${({ theme }) => theme.glassDarkPurpleRegistration},
-    ${({ theme }) => theme.glassMediumPurpleRegistration},
-    ${({ theme }) => theme.glassLightPurpleRegistration},
-    ${({ theme }) => theme.glassPurpleRegistration},
-    ${({ theme }) => theme.glassLightPurpleRegistration},
-    ${({ theme }) => theme.glassMediumPurpleRegistration},
-    ${({ theme }) => theme.glassDarkPurpleRegistration}
+  background: radial-gradient(
+    circle,
+    ${({ theme }) => theme.gradientPurpleDark} 0%,
+    ${({ theme }) => theme.gradientPurpleOne} 25%,
+    ${({ theme }) => theme.gradientPurpleTwo} 50%,
+    ${({ theme }) => theme.gradientPurpleThere} 75%,
+    ${({ theme }) => theme.gradientPurpleFour}100%
   );
   backdrop-filter: blur(5px);
 `;
@@ -29,7 +26,7 @@ export const Auth = () => {
     <>
       <Background />
       <WrapperLogo>
-        <OneWord fontColor='light' />
+        <OneWord fontColor='white' />
       </WrapperLogo>
       <Login />
       {/* <Registration /> */}

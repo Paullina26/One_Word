@@ -8,7 +8,6 @@ interface TittleOneWordProps {
 
 export const TittleOneWord = styled.h1<{ fontColor: string }>`
   ${font(5, 'italic', 900)};
-  /* color: ${({ theme }) => theme.PurpleDark}; */
   color: ${({ theme, fontColor }) => theme[fontColor]};
 `;
 

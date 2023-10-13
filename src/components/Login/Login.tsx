@@ -2,40 +2,40 @@ import styled from 'styled-components';
 import { font } from 'style/mixins';
 
 export const WrapperLogin = styled.div`
+  position: relative;
+  top: 20vh;
   text-align: center;
   width: 100vw;
-  min-height: 40vh;
-  height: 80vh;
-  background-image: linear-gradient(
-    to bottom right,
-    ${({ theme }) => theme.glassDarkWhiteLogin},
-    ${({ theme }) => theme.glassMediumWhiteLogin},
-    ${({ theme }) => theme.glassLightWhiteLogin},
-    ${({ theme }) => theme.glassWhiteLogin},
-    ${({ theme }) => theme.glassLightWhiteLogin},
-    ${({ theme }) => theme.glassMediumWhiteLogin},
-    ${({ theme }) => theme.glassDarkWhiteLogin}
+  height: 70vh;
+  background: radial-gradient(
+    circle,
+    ${({ theme }) => theme.gradientPurpleLight} 0%,
+    ${({ theme }) => theme.gradientPurpleLightOne} 25%,
+    ${({ theme }) => theme.gradientPurpleLightTwo} 50%,
+    ${({ theme }) => theme.gradientPurpleLightThere} 75%,
+    ${({ theme }) => theme.gradientPurpleLightFour}100%
   );
-  border-radius: 20px 20px 0 0;
-  box-shadow: 0 4px 30px ${({ theme }) => theme.glassShadowBlack};
+  border-radius: 40px 40px 0 0;
+  box-shadow: 0 4px 30px ${({ theme }) => theme.shadowBlack};
   backdrop-filter: blur(5px);
 `;
 
 export const SingIn = styled.div`
   ${font(3, 'italic', 900)};
   color: ${({ theme }) => theme.white};
-  background-image: linear-gradient(
-    to bottom right,
-    ${({ theme }) => theme.glassDarkPurpleRegistration},
-    ${({ theme }) => theme.glassMediumPurpleRegistration},
-    ${({ theme }) => theme.glassLightPurpleRegistration},
-    ${({ theme }) => theme.glassPurpleRegistration},
-    ${({ theme }) => theme.glassLightPurpleRegistration},
-    ${({ theme }) => theme.glassMediumPurpleRegistration},
-    ${({ theme }) => theme.glassDarkPurpleRegistration}
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+  background: radial-gradient(
+    circle,
+    ${({ theme }) => theme.gradientPurpleDark} 0%,
+    ${({ theme }) => theme.gradientPurpleOne} 25%,
+    ${({ theme }) => theme.gradientPurpleTwo} 50%,
+    ${({ theme }) => theme.gradientPurpleThere} 75%,
+    ${({ theme }) => theme.gradientPurpleFour}100%
   );
   backdrop-filter: blur(5px);
-  box-shadow: 0 4px 30px ${({ theme }) => theme.glassShadowBlackRegistration};
+  box-shadow: 0 4px 30px ${({ theme }) => theme.shadowBlack};
   border-radius: 50% 50% 0 0;
   padding: 20px;
 `;
