@@ -1,20 +1,24 @@
 export const theme = {
   //-----DEFAULT----//
-  black: '#000000',
-  white: '#ffffff',
-  light: '#E4E5F0',
-  purpleLight: '#d2d2ea',
-  purple: '#a6a6dc',
-  purpleDark: '#2E2756',
-  pink: '#8C3B68',
-  red: '#B22334',
+  black: 'rgb(0, 0, 0)',
+  white: 'rgb(255, 255, 255)',
+  gray: 'rgb(235, 235, 235)',
+  light: 'rgb(228, 229, 240)',
+  purpleLight: 'rgb(210, 210, 234)',
+  purple: 'rgb(166, 166, 220)',
+  purpleDark: 'rgb(46, 39, 86)',
+  pink: 'rgb(140, 59, 104)',
+  red: 'rgb(178, 35, 52)',
   shadowBlack: 'rgba(0, 0, 0, 0.1)',
 
+  //-----INPUT----//
+  purpleLightInput: '#d2d2ea',
+
   //-----GLASS_EFFECT----//
-  glassWhite: '#ffffffaa',
-  glassLightWhite: '#ffffff7d',
-  glassMediumWhite: '#d7d7d780',
-  glassDarkWhite: '#a1a1a181',
+  glassWhite: 'rgba(255, 255, 255, 0.66)',
+  glassLightWhite: 'rgba(255, 255, 255, 0.49)',
+  glassMediumWhite: 'rgba(215, 215, 215, 0.5)',
+  glassDarkWhite: 'rgba(161, 161, 161, 0.5)',
   glassShadowBlack: 'rgba(0, 0, 0, 0.1)',
 
   //-----GRADIENT_CIRCLE_LIGHT_PURPLE---//
@@ -34,19 +38,5 @@ export const theme = {
   // status: ['#2e2757', '#8c3a68', '#009300'],
 };
 
-// export const fonts = {
-//   s: '0.8rem',
-//   m: '1rem',
-// };
-
-// export const padding = {
-//   button: '4px 16px',
-//   bigButton: '10px 32px',
-// };
-
-//-----GLASS_EFFECT_Login----//
-// glassWhiteLogin: '#ffffffd5',
-// glassLightWhiteLogin: '#ffffffd9',
-// glassMediumWhiteLogin: '#d7d7d7d4',
-// glassDarkWhiteLogin: '#a1a1a1d1',
-// glassShadowBlackLogin: 'rgba(0, 0, 0, 0.1)',
+/* box-shadow: -3px -3px 5px rgba(255, 255, 255, 0.4), 3px 3px 5px rgba(94, 104, 121, 0.3),
+    inset -3px -3px 5px rgba(255, 255, 255, 0.4), inset 3px 3px 5px rgba(94, 104, 121, 0.3); */
