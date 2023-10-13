@@ -17,8 +17,13 @@ export const SubmitStyle = styled.input`
   padding: 10px 25px;
   border: 0px;
   margin: 40px auto 20px auto;
-  background-color: ${({ theme }) => theme.pink};
-  box-shadow: -5px -5px 9px rgba(255, 255, 255, 0.6), 5px 5px 7px rgba(94, 104, 121, 0.4);
+  background: radial-gradient(
+    circle,
+    ${({ theme }) => theme.buttonPink} 0%,
+    ${({ theme }) => theme.buttonPinkLight} 100%
+  );
+  box-shadow: -4px -4px 7px ${({ theme }) => theme.boxShadowWhite},
+    4px 4px 7px ${({ theme }) => theme.boxShadowGray};
   cursor: pointer;
   /* :hover {
     color: ${({ theme }) => theme.white};

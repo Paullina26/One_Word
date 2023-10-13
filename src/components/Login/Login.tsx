@@ -5,10 +5,10 @@ import Submit from 'components/Form/Submit';
 
 export const WrapperLogin = styled.div`
   position: relative;
-  top: 20vh;
+  top: 10vh;
   text-align: center;
   width: 100vw;
-  height: 70vh;
+  height: 80vh;
   background: radial-gradient(
     circle,
     ${({ theme }) => theme.gradientPurpleLight} 0%,
@@ -17,7 +17,7 @@ export const WrapperLogin = styled.div`
     ${({ theme }) => theme.gradientPurpleLightThere} 75%,
     ${({ theme }) => theme.gradientPurpleLightFour}100%
   );
-  border-radius: 40px 40px 0 0;
+  border-radius: 50px 50px 0 0;
   box-shadow: 0 4px 30px -50px ${({ theme }) => theme.shadowBlack};
   backdrop-filter: blur(5px);
 `;
