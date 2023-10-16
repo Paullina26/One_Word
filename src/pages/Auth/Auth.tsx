@@ -1,37 +1,37 @@
 import { useNavigate } from 'react-router-dom';
+import { FC } from 'react';
+import { useState } from 'react';
 import Background from 'components/Background/Background';
 import OneWord from 'components/Logo/OneWord';
-import styled from 'styled-components';
 import Login from 'components/Login/Login';
 import Registration from 'components/Registration/Registration';
+import * as S from 'pages/Auth/StyleAuth';
+import styled from 'styled-components';
 
-export const WrapperLogo = styled.div`
-  text-align: center;
-  padding-top: 10px;
-  border-radius: 0 0 40px 40px;
-  margin-bottom: 10px;
-  background: radial-gradient(
-    circle,
-    ${({ theme }) => theme.gradientPurpleDark} 0%,
-    ${({ theme }) => theme.gradientPurpleOne} 25%,
-    ${({ theme }) => theme.gradientPurpleTwo} 50%,
-    ${({ theme }) => theme.gradientPurpleThere} 75%,
-    ${({ theme }) => theme.gradientPurpleFour} 100%
-  );
-  backdrop-filter: blur(5px);
-  box-shadow: 3px 3px 15px rgba(46, 39, 86, 0.7);
+export const WrapperAuth = styled.div`
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden;
 `;
 
 export const Auth = () => {
+  const [isActive, setIsActive] = useState(true);
+
+  const handleActive = () => {
+    setIsActive(prev => !prev);
+    console.log(isActive);
+  };
+
   return (
-    <>
+    <WrapperAuth>
       <Background />
-      <WrapperLogo>
-        <OneWord fontColor='white' />
-      </WrapperLogo>
-      <Login />
-      {/* <Registration /> */}
-    </>
+      <S.WrapperLogo>
+        <OneWord font_color='white' />
+      </S.WrapperLogo>
+      <Login onClick={handleActive} />
+      <Registration onClick={handleActive} isActive={isActive} />
+      {/* {isActive ? <Login onClick={handleActive} /> : <Registration onClick={handleActive} />} */}
+    </WrapperAuth>
   );
 };
 

@@ -15,12 +15,13 @@ interface InputProps {
   className?: string;
   minlength?: number;
   maxLength?: number;
+  font_color_label: string;
 }
 
-export const LabelStyle = styled.label`
+export const LabelStyle = styled.label<{ font_color_label: string }>`
   ${font(2, 'italic', 400)};
   text-align: center;
-  color: ${({ theme }) => theme.purpleDark};
+  color: ${({ theme, font_color_label }) => theme[font_color_label]};
 `;
 export const InputStyle = styled.input`
   ${font(1.8, 'italic', 300)};
@@ -35,8 +36,8 @@ export const InputStyle = styled.input`
   border: none;
   /* box-shadow: inset 0px 0px 80px -50px rgba(175, 175, 220, 1),
     -3px -3px 9px rgba(255, 255, 255, 0.4), 3px 3px 7px rgba(46, 39, 86, 0.3); */
-  box-shadow: -4px -4px 7px ${({ theme }) => theme.boxShadowWhite},
-    4px 4px 7px ${({ theme }) => theme.boxShadowGray};
+  box-shadow: -5px -5px 10px ${({ theme }) => theme.boxShadowWhite},
+    5px 5px 10px ${({ theme }) => theme.boxShadowGray};
 `;
 
 const Input: FC<InputProps> = ({
@@ -52,9 +53,10 @@ const Input: FC<InputProps> = ({
   required,
   className,
   maxLength,
+  font_color_label,
 }) => {
   return (
-    <LabelStyle htmlFor={id}>
+    <LabelStyle htmlFor={id} font_color_label={font_color_label}>
       {label}
       <InputStyle
         id={id}

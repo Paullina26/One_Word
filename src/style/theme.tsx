@@ -19,8 +19,10 @@ export const theme = {
   buttonPinkLight: 'rgb(160, 80, 125)',
 
   //-----BOX_SHADOW----//
-  boxShadowWhite: 'rgba(255, 255, 255, 0.5)',
-  boxShadowGray: 'rgba(94, 104, 121, 0.5)',
+  boxShadowWhite: 'rgba(255, 255, 255, 0.3)',
+  boxShadowGray: 'rgba(94, 104, 121, 0.7)',
+  // boxShadowWhite: 'rgba(134, 134, 171, 0.3)',
+  // boxShadowGray: 'rgba(31, 25, 70, 0.5)',
 
   //-----GLASS_EFFECT_WRAPPER----//
   glassLightOne: 'rgba(220, 220, 240, 0.85)',

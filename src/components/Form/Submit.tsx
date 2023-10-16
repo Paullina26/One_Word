@@ -6,7 +6,6 @@ interface SubmitProps {
   id: string;
   type: string;
   value: string;
-  onClick: () => void;
 }
 
 export const SubmitStyle = styled.input`
@@ -14,7 +13,7 @@ export const SubmitStyle = styled.input`
   color: ${({ theme }) => theme.white};
   display: block;
   border-radius: 20px;
-  padding: 10px 25px;
+  padding: 10px 35px;
   border: 0px;
   margin: 40px auto 20px auto;
   background: radial-gradient(
@@ -22,8 +21,8 @@ export const SubmitStyle = styled.input`
     ${({ theme }) => theme.buttonPink} 0%,
     ${({ theme }) => theme.buttonPinkLight} 100%
   );
-  box-shadow: -4px -4px 7px ${({ theme }) => theme.boxShadowWhite},
-    4px 4px 7px ${({ theme }) => theme.boxShadowGray};
+  box-shadow: -5px -5px 10px ${({ theme }) => theme.boxShadowWhite},
+    5px 5px 10px ${({ theme }) => theme.boxShadowGray};
   cursor: pointer;
   /* :hover {
     color: ${({ theme }) => theme.white};
@@ -31,8 +30,8 @@ export const SubmitStyle = styled.input`
   } */
 `;
 
-const Submit: FC<SubmitProps> = ({ id, type, value, onClick }) => {
-  return <SubmitStyle id={id} type={type} value={value} onClick={onClick} />;
+const Submit: FC<SubmitProps> = ({ id, type, value }) => {
+  return <SubmitStyle id={id} type={type} value={value} />;
 };
 
 export default Submit;
