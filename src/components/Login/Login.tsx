@@ -2,6 +2,7 @@ import { FC } from 'react';
 import Input from 'components/Form/Input';
 import Submit from 'components/Form/Submit';
 import * as S from 'components/Login/StyleLogin';
+import { WrapperForm } from 'components/Form/StyleForm';
 
 interface LoginProps {
   onClick: () => void;
@@ -14,14 +15,14 @@ export const Login: FC<LoginProps> = ({ onClick }) => {
 
   return (
     <S.WrapperLogin>
-      <S.LoginText>Login</S.LoginText>
-      <S.WrapperForm>
+      <S.LoginText onClick={onClick}>Login</S.LoginText>
+      <WrapperForm>
         <form onSubmit={handleForm}>
           <Input
             $fontColorLabel='purpleDark'
             // label={nameElement.email}
             label='Email'
-            id='e-mail_Registration'
+            id='e-mail_Login'
             type='email'
             // value={mail}
             value=''
@@ -38,7 +39,7 @@ export const Login: FC<LoginProps> = ({ onClick }) => {
             $fontColorLabel='purpleDark'
             // label={nameElement.email}
             label='Password'
-            id='password_Registration'
+            id='password_Login'
             type='password'
             // value={mail}
             value=''
@@ -52,8 +53,8 @@ export const Login: FC<LoginProps> = ({ onClick }) => {
           />
           <Submit id='submit_Registration' type='submit' value='Login' />
         </form>
-      </S.WrapperForm>
-      <S.SingIn onClick={onClick}>Sing In</S.SingIn>
+      </WrapperForm>
+      {/* <S.SingIn onClick={onClick}>Sing In</S.SingIn> */}
     </S.WrapperLogin>
   );
 };

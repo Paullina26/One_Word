@@ -4,8 +4,8 @@ import { fly } from 'components/Background/animation';
 
 interface BubbleProps {
   $flagUrl: string;
-  $top: string;
-  $left: string;
+  top: string;
+  left: string;
   height: string;
   width: string;
   $directions: string;
@@ -20,8 +20,8 @@ const BubbleStyled = styled.div<BubbleProps>`
 
   border-radius: 50%;
   position: fixed;
-  $top: ${({ $top }) => $top};
-  $left: ${({ $left }) => $left};
+  top: ${({ top }) => top};
+  left: ${({ left }) => left};
   height: ${({ height }) => height};
   width: ${({ width }) => width};
   box-shadow: 0 1rem 1.25rem 0 rgba(95, 98, 107, 0.247), 0 -0.25rem 1.5rem #3333334a inset,
@@ -33,8 +33,8 @@ const BubbleStyled = styled.div<BubbleProps>`
 
 const Bubble: FC<BubbleProps> = ({
   $flagUrl,
-  $top,
-  $left,
+  top,
+  left,
   height,
   width,
   $directions,
@@ -45,8 +45,8 @@ const Bubble: FC<BubbleProps> = ({
     <BubbleStyled
       $directions={$directions}
       $flagUrl={$flagUrl}
-      $top={$top}
-      $left={$left}
+      top={top}
+      left={left}
       height={height}
       width={width}
       $zIndex={$zIndex}

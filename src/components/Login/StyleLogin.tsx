@@ -46,7 +46,3 @@ export const LoginText = styled.div`
   ${font(3, 'italic', 900)};
   color: ${({ theme }) => theme.purpleDark};
 `;
-
-export const WrapperForm = styled.div`
-  /* background-color: #478787; */
-`;

@@ -4,11 +4,12 @@ import Bubble from 'components/Background/Bubble';
 import { flags } from 'helpers/flags';
 
 const BgStyled = styled.div`
-  /* z-index: -1; */
-  /* height: 100vh; */
-  /* width: 100vw; */
-  /* background-attachment: fixed;
-  background-image: radial-gradient(
+  /* z-index: -100; */
+  /* height: 100%;
+  width: 100%; */
+  /* background-attachment: fixed; */
+  /* overflow: hidden; */
+  /* background-image: radial-gradient(
     circle,
     #a2a0c8,
     #a7a5cc,
@@ -29,35 +30,38 @@ const bubbles = [
   {
     $directions: 'to right top',
     $flagUrl: flags.FlagDeu,
-    $top: '72vh',
-    $left: '50vw',
+    top: '72vh',
+    left: '50vw',
     height: '60px',
     width: '60px',
+    $zIndex: -10,
     $flyParams: { x: 0.3, y: 1, time: 75 },
   },
   {
     $directions: 'to right top',
     $flagUrl: flags.FlagPl,
-    $top: '75vh',
-    $left: '20vw',
+    top: '75vh',
+    left: '20vw',
     height: '55px',
     width: '55px',
+    $zIndex: -10,
     $flyParams: { x: 0.3, y: 1, time: 85 },
   },
   {
     $directions: 'to right top',
     $flagUrl: flags.FlagGbr,
-    $top: '65vh',
-    $left: '70vw',
+    top: '65vh',
+    left: '70vw',
     height: '45px',
     width: '45px',
+    $zIndex: -10,
     $flyParams: { x: 0.3, y: 1, time: 75 },
   },
   {
     $directions: 'to right bottom',
     $flagUrl: flags.FlagGbr,
-    $top: '15vh',
-    $left: '5vw',
+    top: '15vh',
+    left: '5vw',
     height: '70px',
     width: '70px',
     $zIndex: -10,
@@ -66,8 +70,8 @@ const bubbles = [
   {
     $directions: 'to right top',
     $flagUrl: flags.FlagGbr,
-    $top: '25vh',
-    $left: '30vw',
+    top: '25vh',
+    left: '30vw',
     height: '75px',
     width: '75px',
     $zIndex: -10,
@@ -76,8 +80,8 @@ const bubbles = [
   {
     $directions: 'to right bottom',
     $flagUrl: flags.FlagPl,
-    $top: '20vh',
-    $left: '58vw',
+    top: '20vh',
+    left: '58vw',
     height: '55px',
     width: '55px',
     $zIndex: -10,
@@ -86,8 +90,8 @@ const bubbles = [
   {
     $directions: 'to left top',
     $flagUrl: flags.FlagFr,
-    $top: '20vh',
-    $left: '45vw',
+    top: '20vh',
+    left: '45vw',
     height: '30px',
     width: '30px',
     $zIndex: -10,
@@ -96,8 +100,8 @@ const bubbles = [
   {
     $directions: 'to right bottom',
     $flagUrl: flags.FlagFr,
-    $top: '50vh',
-    $left: '70vw',
+    top: '50vh',
+    left: '70vw',
     height: '90px',
     width: '90px',
     $zIndex: -10,
@@ -107,21 +111,21 @@ const bubbles = [
   {
     $directions: 'to right top',
     $flagUrl: flags.FlagGbr,
-    $top: '65vh',
-    $left: '22vw',
+    top: '65vh',
+    left: '22vw',
     height: '70px',
     width: '70px',
-    $zIndex: 0,
+    $zIndex: -10,
     $flyParams: { x: -0.8, y: -0.45, time: 60 },
   },
   {
     $directions: 'circle',
     $flagUrl: flags.FlagDeu,
-    $top: '25vh',
-    $left: '80vw',
+    top: '25vh',
+    left: '80vw',
     height: '70px',
     width: '70px',
-    $zIndex: 0,
+    $zIndex: -10,
   },
 ];
 

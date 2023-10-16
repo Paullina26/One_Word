@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 
 export const WrapperHome = styled.div`
   text-align: center;
+  height: 100vh;
+  overflow: hidden;
 `;
 
 export const HomePage = () => {

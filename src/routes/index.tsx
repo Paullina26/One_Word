@@ -12,9 +12,7 @@ const RoutesComponent = () => {
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='auth' element={<Auth />}>
-        {/* <Route path='login' element={<Login />} />
-        <Route path='registration' element={<Registration />} /> */}
-      </Route>
+    </Route>
 
       {/* {!isLogin && (
         <Route path='/' element={<Home />} />

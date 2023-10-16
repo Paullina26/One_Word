@@ -34,8 +34,6 @@ export const InputStyle = styled.input`
   background-color: ${({ theme }) => theme.white};
   border-radius: 20px;
   border: none;
-  /* box-shadow: inset 0px 0px 80px -50px rgba(175, 175, 220, 1),
-    -3px -3px 9px rgba(255, 255, 255, 0.4), 3px 3px 7px rgba(46, 39, 86, 0.3); */
   box-shadow: -5px -5px 10px ${({ theme }) => theme.boxShadowWhite},
     5px 5px 10px ${({ theme }) => theme.boxShadowGray};
 `;
