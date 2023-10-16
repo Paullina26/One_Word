@@ -22,7 +22,7 @@ export const Logo = () => {
   return (
     <WrapperLogo>
       <TittleOnly>only</TittleOnly>
-      <OneWord font_color='purpleDark' />
+      <OneWord $fontColor='purpleDark' />
       <TittleDay>a day</TittleDay>
     </WrapperLogo>
   );

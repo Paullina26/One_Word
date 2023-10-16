@@ -3,16 +3,16 @@ import styled from 'styled-components';
 import { font } from 'style/mixins';
 
 interface TittleOneWordProps {
-  font_color: string;
+  $fontColor: string;
 }
 
-export const TittleOneWord = styled.h1<{ font_color: string }>`
+export const TittleOneWord = styled.h1<{ $fontColor: string }>`
   ${font(5, 'italic', 900)};
-  color: ${({ theme, font_color }) => theme[font_color]};
+  color: ${({ theme, $fontColor }) => theme[$fontColor]};
 `;
 
-export const OneWord: FC<TittleOneWordProps> = ({ font_color }) => {
-  return <TittleOneWord font_color={font_color}>One Word</TittleOneWord>;
+export const OneWord: FC<TittleOneWordProps> = ({ $fontColor }) => {
+  return <TittleOneWord $fontColor={$fontColor}>One Word</TittleOneWord>;
 };
 
 export default OneWord;

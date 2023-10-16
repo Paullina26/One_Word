@@ -56,7 +56,7 @@ const hideRegistration = keyframes`
   }
 `;
 
-export const SingInWrapper = styled.div<{ is_hidden: boolean }>`
+export const SingInWrapper = styled.div<{ $isHidden: boolean }>`
   ${font(3, 'italic', 900)};
   color: ${({ theme }) => theme.white};
   width: 100%;
@@ -77,7 +77,7 @@ export const SingInWrapper = styled.div<{ is_hidden: boolean }>`
   border: none;
   padding: 20px;
   /* animation: ${showRegistration} 1s ease-in-out; */
-  animation: ${({ is_hidden }) => (is_hidden ? hideRegistration : showRegistration)} 1s ease-in-out;
+  animation: ${({ $isHidden }) => ($isHidden ? hideRegistration : showRegistration)} 1s ease-in-out;
   /* transform: rotateY('angle'); */
 `;
 
@@ -89,12 +89,12 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
   return (
     <S.WrapperLogin>
       <S.LoginText onClick={onClick}>Login</S.LoginText>
-      <SingInWrapper is_hidden={isActive}>
+      <SingInWrapper $isHidden={Boolean(isActive)}>
         <RegistrationText>Sing In</RegistrationText>
         <S.WrapperForm>
           <form onSubmit={handleForm}>
             <Input
-              font_color_label='white'
+              $fontColorLabel='white'
               // label={nameElement.email}
               label='Email'
               id='e-mail_Registration'
@@ -111,7 +111,7 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
               required
             />
             <Input
-              font_color_label='white'
+              $fontColorLabel='white'
               // label={nameElement.email}
               label='Password'
               id='password_Registration'
@@ -127,7 +127,7 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
               required
             />
             <Input
-              font_color_label='white'
+              $fontColorLabel='white'
               // label={nameElement.email}
               label='Password'
               id='password_Registration_Repeating'

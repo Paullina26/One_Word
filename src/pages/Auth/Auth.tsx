@@ -26,7 +26,7 @@ export const Auth = () => {
     <WrapperAuth>
       <Background />
       <S.WrapperLogo>
-        <OneWord font_color='white' />
+        <OneWord $fontColor='white' />
       </S.WrapperLogo>
       <Login onClick={handleActive} />
       <Registration onClick={handleActive} isActive={isActive} />

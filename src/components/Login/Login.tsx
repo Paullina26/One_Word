@@ -7,18 +7,18 @@ interface LoginProps {
   onClick: () => void;
 }
 
-const handleForm = () => {
-  console.log('wysłano');
-};
-
 export const Login: FC<LoginProps> = ({ onClick }) => {
+  const handleForm = () => {
+    console.log('wysłano');
+  };
+
   return (
     <S.WrapperLogin>
       <S.LoginText>Login</S.LoginText>
       <S.WrapperForm>
         <form onSubmit={handleForm}>
           <Input
-            font_color_label='purpleDark'
+            $fontColorLabel='purpleDark'
             // label={nameElement.email}
             label='Email'
             id='e-mail_Registration'
@@ -35,7 +35,7 @@ export const Login: FC<LoginProps> = ({ onClick }) => {
             required
           />
           <Input
-            font_color_label='purpleDark'
+            $fontColorLabel='purpleDark'
             // label={nameElement.email}
             label='Password'
             id='password_Registration'
