@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import Background from 'components/Background/Background';
 import OneWord from 'components/Logo/OneWord';
 import Login from 'components/Login/Login';
@@ -20,8 +20,10 @@ export const Auth: FC = () => {
         <S.WrapperLogo>
           <OneWord $fontColor='white' />
         </S.WrapperLogo>
-        <Login onClick={handleActive} />
-        <Registration onClick={handleActive} isActive={isActive} />
+        <S.WrapperElementRegistrationLogin>
+          <Login onClick={handleActive} />
+          <Registration onClick={handleActive} isActive={isActive} />
+        </S.WrapperElementRegistrationLogin>
       </S.WrapperAuth>
     </>
   );

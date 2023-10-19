@@ -1,16 +1,25 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import Input from 'components/Form/Input';
 import Submit from 'components/Form/Submit';
 import * as S from 'components/Login/StyleLogin';
 import { WrapperForm } from 'components/Form/StyleForm';
-
+import { useState } from 'react';
+import { headers, API } from 'API/api';
 interface LoginProps {
   onClick: () => void;
 }
 
 export const Login: FC<LoginProps> = ({ onClick }) => {
-  const handleForm = () => {
+  const [mail, setMail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  const handleForm = (event: React.FormEvent<HTMLFormElement>) => {
     console.log('wysłano');
+    console.log(mail);
+    console.log(password);
+    event.preventDefault();
+    setMail('');
+    setPassword('');
   };
 
   return (
@@ -20,41 +29,42 @@ export const Login: FC<LoginProps> = ({ onClick }) => {
         <form onSubmit={handleForm}>
           <Input
             $fontColorLabel='purpleDark'
-            // label={nameElement.email}
             label='Email'
             id='e-mail_Login'
             type='email'
-            // value={mail}
-            value=''
-            // onChange={e => setMail(e.target.value)}
-            onChange={e => console.log(e)}
+            value={mail}
+            onChange={value => setMail(value)}
             autoComplete='email'
-            // placeholder={nameElement.email}
             placeholder='email'
             minlength={4}
             pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
             required
+            $boxShadowLight='boxShadowWhite'
+            $boxShadowDark='boxShadowGray'
           />
           <Input
             $fontColorLabel='purpleDark'
-            // label={nameElement.email}
             label='Password'
             id='password_Login'
             type='password'
-            // value={mail}
-            value=''
-            // onChange={e => setMail(e.target.value)}
-            onChange={e => console.log(e)}
+            value={password}
+            onChange={value => setPassword(value)}
             autoComplete='password'
-            // placeholder={nameElement.email}
             placeholder='password'
             minlength={4}
             required
+            $boxShadowLight='boxShadowWhite'
+            $boxShadowDark='boxShadowGray'
           />
-          <Submit id='submit_Registration' type='submit' value='Login' />
+          <Submit
+            id='submit_Registration'
+            type='submit'
+            value='Login'
+            $boxShadowLight='boxShadowWhite'
+            $boxShadowDark='boxShadowGray'
+          />
         </form>
       </WrapperForm>
-      {/* <S.SingIn onClick={onClick}>Sing In</S.SingIn> */}
     </S.WrapperLogin>
   );
 };

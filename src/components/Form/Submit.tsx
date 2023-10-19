@@ -6,9 +6,11 @@ interface SubmitProps {
   id: string;
   type: string;
   value: string;
+  $boxShadowLight: string;
+  $boxShadowDark: string;
 }
 
-export const SubmitStyle = styled.input`
+export const SubmitStyle = styled.input<{ $boxShadowLight: string; $boxShadowDark: string }>`
   ${font(2.2, 'italic', 400)};
   color: ${({ theme }) => theme.white};
   display: block;
@@ -21,8 +23,8 @@ export const SubmitStyle = styled.input`
     ${({ theme }) => theme.buttonPink} 0%,
     ${({ theme }) => theme.buttonPinkLight} 100%
   );
-  box-shadow: -5px -5px 10px ${({ theme }) => theme.boxShadowWhite},
-    5px 5px 10px ${({ theme }) => theme.boxShadowGray};
+  box-shadow: -5px -5px 10px ${({ theme, $boxShadowLight }) => theme[$boxShadowLight]},
+    5px 5px 10px ${({ theme, $boxShadowDark }) => theme[$boxShadowDark]};
   cursor: pointer;
   /* :hover {
     color: ${({ theme }) => theme.white};
@@ -30,8 +32,16 @@ export const SubmitStyle = styled.input`
   } */
 `;
 
-const Submit: FC<SubmitProps> = ({ id, type, value }) => {
-  return <SubmitStyle id={id} type={type} value={value} />;
+const Submit: FC<SubmitProps> = ({ id, type, value, $boxShadowLight, $boxShadowDark }) => {
+  return (
+    <SubmitStyle
+      id={id}
+      type={type}
+      value={value}
+      $boxShadowLight={$boxShadowLight}
+      $boxShadowDark={$boxShadowDark}
+    />
+  );
 };
 
 export default Submit;

@@ -21,7 +21,8 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
         <form onSubmit={handleForm}>
           <Input
             $fontColorLabel='white'
-            // label={nameElement.email}
+            $boxShadowLight='boxShadowPurpleLight'
+            $boxShadowDark='boxShadowPurpleDark'
             label='Email'
             id='e-mail_Registration'
             type='email'
@@ -30,7 +31,6 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
             // onChange={e => setMail(e.target.value)}
             onChange={e => console.log(e)}
             autoComplete='email'
-            // placeholder={nameElement.email}
             placeholder='email'
             minlength={4}
             pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
@@ -38,7 +38,6 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
           />
           <Input
             $fontColorLabel='white'
-            // label={nameElement.email}
             label='Password'
             id='password_Registration'
             type='password'
@@ -51,11 +50,14 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
             placeholder='password'
             minlength={4}
             required
+            $boxShadowLight='boxShadowPurpleLight'
+            $boxShadowDark='boxShadowPurpleDark'
           />
           <Input
             $fontColorLabel='white'
-            // label={nameElement.email}
-            label='Password'
+            $boxShadowLight='boxShadowPurpleLight'
+            $boxShadowDark='boxShadowPurpleDark'
+            label='Password Repeating'
             id='password_Registration_Repeating'
             type='password'
             // value={mail}
@@ -63,12 +65,17 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
             // onChange={e => setMail(e.target.value)}
             onChange={e => console.log(e)}
             autoComplete='password'
-            // placeholder={nameElement.email}
             placeholder='password'
             minlength={4}
             required
           />
-          <Submit id='submit_Login' type='submit' value='Sing In' />
+          <Submit
+            id='submit_Login'
+            type='submit'
+            value='Sing In'
+            $boxShadowLight='boxShadowPurpleLight'
+            $boxShadowDark='boxShadowPurpleDark'
+          />
         </form>
       </WrapperForm>
     </S.SingInWrapper>

@@ -16,6 +16,8 @@ interface InputProps {
   minlength?: number;
   maxLength?: number;
   $fontColorLabel: string;
+  $boxShadowLight: string;
+  $boxShadowDark: string;
 }
 
 export const LabelStyle = styled.label<{ $fontColorLabel: string }>`
@@ -23,19 +25,19 @@ export const LabelStyle = styled.label<{ $fontColorLabel: string }>`
   text-align: center;
   color: ${({ theme, $fontColorLabel }) => theme[$fontColorLabel]};
 `;
-export const InputStyle = styled.input`
+export const InputStyle = styled.input<{ $boxShadowLight: string; $boxShadowDark: string }>`
   ${font(1.8, 'italic', 300)};
   display: block;
   text-align: center;
   width: 70%;
   height: 35px;
-  margin: 5px auto 15px auto;
+  margin: 10px auto 20px auto;
   padding: 5px;
   background-color: ${({ theme }) => theme.white};
   border-radius: 20px;
   border: none;
-  box-shadow: -5px -5px 10px ${({ theme }) => theme.boxShadowWhite},
-    5px 5px 10px ${({ theme }) => theme.boxShadowGray};
+  box-shadow: -5px -5px 10px ${({ theme, $boxShadowLight }) => theme[$boxShadowLight]},
+    5px 5px 10px ${({ theme, $boxShadowDark }) => theme[$boxShadowDark]};
 `;
 
 const Input: FC<InputProps> = ({
@@ -52,6 +54,8 @@ const Input: FC<InputProps> = ({
   className,
   maxLength,
   $fontColorLabel,
+  $boxShadowLight,
+  $boxShadowDark,
 }) => {
   return (
     <LabelStyle htmlFor={id} $fontColorLabel={$fontColorLabel}>
@@ -68,6 +72,8 @@ const Input: FC<InputProps> = ({
         className={className}
         minLength={minlength}
         maxLength={maxLength}
+        $boxShadowLight={$boxShadowLight}
+        $boxShadowDark={$boxShadowDark}
       />
     </LabelStyle>
   );
