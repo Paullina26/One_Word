@@ -3,13 +3,16 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from 'style/theme';
 import { GlobalStyle } from 'style/GlobalStyle';
 import RoutesComponent from 'routes';
+import GlobalProvider from 'utils/GlobalContext';
 
 function App() {
   return (
     <Router>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <RoutesComponent />
+        <GlobalProvider>
+          <RoutesComponent />
+        </GlobalProvider>
       </ThemeProvider>
     </Router>
   );

@@ -24,7 +24,7 @@ const texts = [
 ];
 
 const renderDescription = texts.map(text => <Description key={text}>{text}</Description>);
-
+// @ts-ignore
 export const Welcome = () => {
   return (
     <>

@@ -1,9 +1,8 @@
-import { FC, useContext } from 'react';
+import { FC, useContext, useState } from 'react';
 import Input from 'components/Form/Input';
 import Submit from 'components/Form/Submit';
 import * as S from 'components/Login/StyleLogin';
 import { WrapperForm } from 'components/Form/StyleForm';
-import { useState } from 'react';
 import { headers, API } from 'API/api';
 interface LoginProps {
   onClick: () => void;

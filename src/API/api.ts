@@ -2,27 +2,18 @@ export const API_BASE_URL = 'https://one-word-server.vercel.app/api/';
 
 export const headers = {
   Accept: 'application.json',
-  'Content-Type': 'application/json',
+  'Content-Type': 'application/json; charset=utf-8',
 };
 
 export const API = {
   login: `${API_BASE_URL}auth/login`,
+  registration: `${API_BASE_URL}auth/register`,
   isLoginUser: `${API_BASE_URL}auth/user`,
   getUserSettings: `${API_BASE_URL}/user-settingsr`,
   putUserSettings: `${API_BASE_URL}/user-settings`,
   getAllWords: `${API_BASE_URL}/all`,
   postOneWords: `${API_BASE_URL}/add-one`,
-
-  // postAdvertisement: `${API_BASE_URL}advertisement/add`,
-  // getAdvertisement: `${API_BASE_URL}advertisement/all`,
-  // getAdvertisementUser: `${API_BASE_URL}advertisement/all-user`,
-  // postFavoriteAdvertisement: `${API_BASE_URL}favorites/update`,
-  // getFavoriteAdvertisementUser: `${API_BASE_URL}favorites/user-favorites`,
 };
-
-//  ogłoszenia danego usera przekazać token do zapytania /all-user
-// PUT favorite/favorite - dodanie/usunięcie
-// GET favorite/user-favorites - pobranie wszystkich ulubionych usera
 
 // const SettingsSchema = new mongoose.Schema({
 //   userId: {
