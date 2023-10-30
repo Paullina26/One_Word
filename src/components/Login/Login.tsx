@@ -1,22 +1,59 @@
 import { FC, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { GlobalContext } from 'utils/GlobalContext';
+import { ToastContainer, toast, ToastOptions } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { toastColored } from 'helpers/StyleToastify';
+import { headers, API } from 'API/api';
+import * as S from 'components/Login/StyleLogin';
 import Input from 'components/Form/Input';
 import Submit from 'components/Form/Submit';
-import * as S from 'components/Login/StyleLogin';
 import { WrapperForm } from 'components/Form/StyleForm';
-import { headers, API } from 'API/api';
+
 interface LoginProps {
   onClick: () => void;
 }
 
 export const Login: FC<LoginProps> = ({ onClick }) => {
+  const { isLoginUser, setIsLoginUser } = useContext(GlobalContext);
+  const navigate = useNavigate();
   const [mail, setMail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const handleForm = (event: React.FormEvent<HTMLFormElement>) => {
-    console.log('wysłano');
-    console.log(mail);
-    console.log(password);
-    event.preventDefault();
+  const handleFormLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      await loginUserToBase(mail, password);
+    } catch (error) {
+      console.log('LOGIN:', Error);
+      toast.error(`${error}`, toastColored as ToastOptions<{}>);
+    }
+    cleaningValueInput();
+  };
+
+  const loginUserToBase = async (mail: string, password: string) => {
+    const toastAlerts = {
+      pending: 'Waiting',
+      success: 'Login is success. 👌',
+      error: 'An error occurred while login. 🤯',
+    };
+
+    const requestDetails = {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ username: mail, password }),
+    };
+
+    const response = await toast.promise(fetch(API.login, requestDetails), toastAlerts);
+    console.log(response);
+    const json = await response.json();
+    console.log(json);
+    // localStorage.setItem('token', jwt.access_token);
+    navigate('/user');
+    setIsLoginUser(true);
+  };
+
+  const cleaningValueInput = () => {
     setMail('');
     setPassword('');
   };
@@ -25,7 +62,7 @@ export const Login: FC<LoginProps> = ({ onClick }) => {
     <S.WrapperLogin>
       <S.LoginText onClick={onClick}>Login</S.LoginText>
       <WrapperForm>
-        <form onSubmit={handleForm}>
+        <form onSubmit={handleFormLogin}>
           <Input
             $fontColorLabel='purpleDark'
             label='Email'

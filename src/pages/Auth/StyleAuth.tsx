@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { device } from 'style/devices';
 
 export const WrapperLogo = styled.div`
-  /* z-index: 1; */
   text-align: center;
   padding-top: 10px;
   border-radius: 0 0 40px 40px;
@@ -20,7 +19,6 @@ export const WrapperLogo = styled.div`
 `;
 export const WrapperAuth = styled.div`
   position: relative;
-
   width: 100vw;
   height: 100vh;
   overflow: hidden;
