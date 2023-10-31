@@ -27,8 +27,9 @@ export const Login: FC<LoginProps> = ({ onClick }) => {
     } catch (error) {
       console.log('LOGIN:', Error);
       toast.error(`${error}`, toastColored as ToastOptions<{}>);
+    } finally {
+      cleaningValueInput();
     }
-    cleaningValueInput();
   };
 
   const loginUserToBase = async (mail: string, password: string) => {
@@ -37,20 +38,21 @@ export const Login: FC<LoginProps> = ({ onClick }) => {
       success: 'Login is success. 👌',
       error: 'An error occurred while login. 🤯',
     };
-
     const requestDetails = {
       method: 'POST',
       headers,
       body: JSON.stringify({ username: mail, password }),
     };
-
     const response = await toast.promise(fetch(API.login, requestDetails), toastAlerts);
-    console.log(response);
-    const json = await response.json();
-    console.log(json);
-    // localStorage.setItem('token', jwt.access_token);
+    const { status } = response;
+    console.log('STATUS_LOGIN', status);
+    if (status === 200) setIsLoginUser(true);
     navigate('/user');
-    setIsLoginUser(true);
+    console.log('RESPONSE_LOGIN', response);
+    const json = await response.json();
+    console.log('JSON_LOGIN', json);
+    console.log('JSON_LOGIN_TOKEN', json.token);
+    localStorage.setItem('token', json.token);
   };
 
   const cleaningValueInput = () => {

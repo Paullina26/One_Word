@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 import Background from 'components/Background/Background';
+import Logo from 'components/Logo/Logo';
+import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
+import OneWord from 'components/Logo/OneWord';
 
 export const User = () => {
   return (
     <>
       <Background />
-      <div>
-        <p>USER LOGIN</p>
-      </div>
+      <OneWord $fontColor='white' />
+      <Logo />
+      <GlassWrapper>Word For Today</GlassWrapper>
     </>
   );
 };

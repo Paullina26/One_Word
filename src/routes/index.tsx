@@ -19,8 +19,8 @@ const RoutesComponent = () => {
           <Route path='auth' element={<Auth />} />
         </>
       )}
-      {/* {isLoginUser && <Route path='user' element={<User />}></Route>} */}
-      <Route path='user' element={<User />}></Route>
+      {isLoginUser && <Route path='user' element={<User />}></Route>}
+      {/* <Route path='user' element={<User />}></Route> */}
 
       {/* {!isLogin && (
         <Route path='/' element={<Home />} />

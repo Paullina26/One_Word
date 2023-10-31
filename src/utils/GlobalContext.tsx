@@ -26,7 +26,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isLoadingOpen, setIsLoadingOpen] = useState(false);
-
+  console.log('---IS_LOGIN_USER---GlobalCon', isLoginUser);
   const values = {
     isLoginUser,
     setIsLoginUser,
@@ -41,20 +41,24 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   // useEffect(() => {
   //   setIsOpenMenu(false);
   // }, [location.pathname]);
+
   const checkLoginStatus = async () => {
-    const token = localStorage.getItem('TOKEN');
-    console.log('TOKEN:', token);
+    const token = localStorage.getItem('token');
+    // console.log('Local_Storage:', localStorage.token);
+    // console.log('1---TOKEN---In_Local_Storage:', token);
     if (!token || isLoginUser) return;
     setIsLoadingUser(true);
     try {
       const response = await fetch(API.isLoginUser, {
         headers: { ...headers, Authorization: `Bearer ${token}` },
       });
+      // console.log('2---RESPONSE---GlobalCon_isLoginUser', response);
       const { status } = response;
-      console.log('GlobalContext_isLoginUser', status);
+      // console.log('3---STATUS---GlobalCon_isLoginUser', status);
       if (status === 200) setIsLoginUser(true);
+      // console.log('4---GlobalCon_IsLoginUser_status', isLoginUser);
     } catch (err) {
-      console.log('useEf_GlobCont_LoadingUser', err);
+      console.log('5---useEf_GlobCont_LoadingUser', err);
     } finally {
       setIsLoadingUser(false);
     }
