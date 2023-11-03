@@ -5,7 +5,7 @@ export const Tittle = styled.p`
   margin-bottom: 10px;
   font-size: 2.5rem;
   font-weight: 500;
-  color: ${({ theme }) => theme.PurpleDark};
+  color: ${({ theme }) => theme.purpleDark};
 `;
 
 export const Description = styled.p`
@@ -13,7 +13,7 @@ export const Description = styled.p`
   text-align: left;
   font-size: 1.8rem;
   font-style: italic;
-  color: ${({ theme }) => theme.PurpleDark};
+  color: ${({ theme }) => theme.purpleDark};
 `;
 
 const texts = [
@@ -24,7 +24,7 @@ const texts = [
 ];
 
 const renderDescription = texts.map(text => <Description key={text}>{text}</Description>);
-
+// @ts-ignore
 export const Welcome = () => {
   return (
     <>

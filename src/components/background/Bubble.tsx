@@ -1,20 +1,20 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { fly } from 'style/animation';
+import { fly } from 'components/Background/animation';
 
 interface BubbleProps {
-  flagUrl: string;
+  $flagUrl: string;
   top: string;
   left: string;
   height: string;
   width: string;
-  directions: string;
-  zIndex?: number;
-  flyParams?: { x: number; y: number; time: number };
+  $directions: string;
+  $zIndex?: number;
+  $flyParams?: { x: number; y: number; time: number };
 }
 
 const BubbleStyled = styled.div<BubbleProps>`
-  background-image: url(${({ flagUrl }) => flagUrl});
+  background-image: url(${({ $flagUrl }) => $flagUrl});
   background-size: cover;
   background-position: center;
 
@@ -26,31 +26,31 @@ const BubbleStyled = styled.div<BubbleProps>`
   width: ${({ width }) => width};
   box-shadow: 0 1rem 1.25rem 0 rgba(95, 98, 107, 0.247), 0 -0.25rem 1.5rem #3333334a inset,
     0 0.75rem 0.5rem rgba(255, 255, 255, 0.37) inset, 0 0.25rem 0.5rem 0 #e2e2e253 inset;
-  z-index: ${({ zIndex }) => zIndex};
-  animation: ${({ flyParams }) => fly(flyParams?.x, flyParams?.y)}
-    ${({ flyParams }) => flyParams?.time || 0}s linear infinite;
+  z-index: ${({ $zIndex }) => $zIndex};
+  animation: ${({ $flyParams }) => fly($flyParams?.x, $flyParams?.y)}
+    ${({ $flyParams }) => $flyParams?.time || 0}s linear infinite;
 `;
 
 const Bubble: FC<BubbleProps> = ({
-  flagUrl,
+  $flagUrl,
   top,
   left,
   height,
   width,
-  directions,
-  zIndex,
-  flyParams,
+  $directions,
+  $zIndex,
+  $flyParams,
 }) => {
   return (
     <BubbleStyled
-      directions={directions}
-      flagUrl={flagUrl}
+      $directions={$directions}
+      $flagUrl={$flagUrl}
       top={top}
       left={left}
       height={height}
       width={width}
-      zIndex={zIndex}
-      flyParams={flyParams}
+      $zIndex={$zIndex}
+      $flyParams={$flyParams}
     />
   );
 };

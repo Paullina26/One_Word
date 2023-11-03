@@ -8,12 +8,12 @@ export const WrapperLogo = styled.div`
 `;
 
 export const TittleOnly = styled.p`
-  color: ${({ theme }) => theme.PurpleDark};
+  color: ${({ theme }) => theme.purpleDark};
   font-size: 3rem;
 `;
 
-export const TittleaDay = styled.p`
-  color: ${({ theme }) => theme.PurpleDark};
+export const TittleDay = styled.p`
+  color: ${({ theme }) => theme.purpleDark};
   font-size: 3rem;
   margin-top: -5px;
 `;
@@ -22,8 +22,8 @@ export const Logo = () => {
   return (
     <WrapperLogo>
       <TittleOnly>only</TittleOnly>
-      <OneWord />
-      <TittleaDay>a day</TittleaDay>
+      <OneWord $fontColor='purpleDark' />
+      <TittleDay>a day</TittleDay>
     </WrapperLogo>
   );
 };
