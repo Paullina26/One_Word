@@ -38,12 +38,26 @@ export const theme = {
   gradientPurpleLightThere: 'rgba(230, 230, 250, 0.90)',
   gradientPurpleLightFour: 'rgba(240, 240, 250, 0.88)',
 
-  //-----GRADIENT_CIRCLE_PURPLE----//
+  //-----GRADIENT_CIRCLE_PURPLE_DARK----//
   gradientPurpleDark: 'rgba(46, 39, 86, 1)',
   gradientPurpleOne: 'rgba(48, 41, 86, 0.95)',
   gradientPurpleTwo: 'rgba(50, 43, 86, 0.92)',
   gradientPurpleThere: 'rgba(52, 45, 86, 0.90)',
   gradientPurpleFour: 'rgba(50, 47, 86, 0.88)',
+
+  //-----GRADIENT_LINEAR_MENU---//
+  gradientMenuLightOne: 'rgb(250, 250, 250)',
+  gradientMenuLightTwo: 'rgba(230, 230, 240, 1) ',
+  gradientMenuLightThere: 'rgba(210, 210, 230, 1)',
+  gradientMenuLightFour: 'rgba(190, 190, 220, 1)',
+  gradientMenuLightFive: 'rgba(170, 170, 220, 1)',
+
+  //-----GRADIENT_LINEAR_RAINBOW_PASTEL---//
+  gradientRainbowOne: 'rgba(171,255,147,1) ',
+  gradientRainbowTwo: ' rgba(137,238,190,1) ',
+  gradientRainbowThere: ' rgba(87,212,255,1) ',
+  gradientRainbowFour: 'rgba(173,171,255,1)',
+  gradientRainbowFive: 'rgba(241,138,255,1)',
 
   // status: ['#2e2757', '#8c3a68', '#009300'],
 };

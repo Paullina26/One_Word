@@ -6,6 +6,11 @@ import Auth from 'pages/Auth/Auth';
 import Login from 'components/Login/Login';
 import Registration from 'components/Registration/Registration';
 import User from 'pages/User/User';
+import TodaysWord from 'pages/User/TodaysWord';
+import Hangman from 'pages/User/Hangman';
+import Translate from 'pages/User/Translate';
+import Flashcard from 'pages/User/Flashcard';
+import Repeat from 'pages/User/Repeat';
 
 const RoutesComponent = () => {
   const { isLoginUser } = useContext(GlobalContext);
@@ -19,9 +24,17 @@ const RoutesComponent = () => {
           <Route path='auth' element={<Auth />} />
         </>
       )}
-      {isLoginUser && <Route path='user' element={<User />}></Route>}
-      {/* <Route path='user' element={<User />}></Route> */}
-
+      {isLoginUser && (
+        <>
+          <Route path='user' element={<User />}>
+            <Route path='learning/todays_word' element={<TodaysWord />} />
+            <Route path='learning/hangman' element={<Hangman />} />
+            <Route path='learning/translate' element={<Translate />} />
+            <Route path='learning/repeat' element={<Repeat />} />
+            <Route path='learning/flashcard' element={<Flashcard />} />
+          </Route>
+        </>
+      )}
       {/* {!isLogin && (
         <Route path='/' element={<Home />} />
         <Route path='auth' element={<Auth />}>
