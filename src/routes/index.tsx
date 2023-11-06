@@ -5,7 +5,7 @@ import Home from 'pages/Home/Home';
 import Auth from 'pages/Auth/Auth';
 import Login from 'components/Login/Login';
 import Registration from 'components/Registration/Registration';
-import User from 'pages/User/User';
+import UserDashboard from 'pages/User/UserDashboard';
 import TodaysWord from 'pages/User/TodaysWord';
 import Hangman from 'pages/User/Hangman';
 import Translate from 'pages/User/Translate';
@@ -26,7 +26,7 @@ const RoutesComponent = () => {
       )}
       {isLoginUser && (
         <>
-          <Route path='user' element={<User />}>
+          <Route path='user' element={<UserDashboard />}>
             <Route path='learning/todays_word' element={<TodaysWord />} />
             <Route path='learning/hangman' element={<Hangman />} />
             <Route path='learning/translate' element={<Translate />} />

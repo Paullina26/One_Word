@@ -52,7 +52,7 @@ export const Navigation: FC<NavigationProps> = () => {
 
   const navItemLearningRender = navItemLearning.map(item => {
     return (
-      <S.StyledLink key={item.name} to={item.to}>
+      <S.StyledLink key={item.name} to={item.to} data-hover={item.name}>
         <p>{item.name}</p>
       </S.StyledLink>
     );
@@ -60,7 +60,7 @@ export const Navigation: FC<NavigationProps> = () => {
 
   const navItemSettingsRender = navItemSettingsUSer.map(item => {
     return (
-      <S.StyledLink key={item.name} to={item.to}>
+      <S.StyledLink key={item.name} to={item.to} data-hover={item.name}>
         <p>{item.name}</p>
       </S.StyledLink>
     );

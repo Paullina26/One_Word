@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useNavigate, useLocation, NavLink } from 'react-router-dom';
 import { font } from 'style/mixins';
 
@@ -10,7 +10,6 @@ export const NavigationWrapper = styled.div`
   bottom: 0;
   padding: 0;
   position: absolute;
-  /* overflow: hidden; */
   background: radial-gradient(
     circle,
     ${({ theme }) => theme.gradientPurpleDark} 0%,
@@ -20,8 +19,6 @@ export const NavigationWrapper = styled.div`
     ${({ theme }) => theme.gradientPurpleFour}100%
   );
   backdrop-filter: blur(5px);
-  /* box-shadow: -2px -2px 15px rgba(46, 39, 86, 0.7); */
-  /* border-radius: 50px 50px 0 0; */
   border: none;
 `;
 
@@ -69,14 +66,26 @@ export const NavigationElementTitle = styled.div`
   }
 `;
 
+const fadeIn = keyframes`
+  from { transform: scaleX(0)
+  }
+  to {  transform: scaleX(1)
+  }
+`;
+
+const fadeOut = keyframes`
+  from { transform: scaleX(1)}
+  to { transform: scaleX(0) }
+`;
+
 export const StyledLink = styled(NavLink)`
   display: block;
   ${font(2, 'normal', 500)};
   padding: 10px 0 10px 100px;
   margin: 10px 0;
-  width: 250px;
   width: 300px;
-  margin: 10px 0 10px -50px;
+  /* height: 3.5rem; */
+  margin: 10px 0;
   text-decoration: none;
   color: ${({ theme }) => theme.black};
   background: linear-gradient(
@@ -88,21 +97,40 @@ export const StyledLink = styled(NavLink)`
     ${({ theme }) => theme.gradientMenuLightFive} 100%
   );
   border-radius: 0px 20px 20px 0px;
-  transition: background 4.5s linear;
-  /* transition-delay: 0.2s; */
+  position: relative;
+
+  &:after {
+    padding: 10px 0 10px 100px;
+    /* padding: 10px 20px; */
+    content: attr(data-hover);
+    white-space: nowrap;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0px 20px 20px 0px;
+  }
 
   &:hover {
-    background: linear-gradient(
-      90deg,
-      ${({ theme }) => theme.gradientRainbowOne} 0%,
-      ${({ theme }) => theme.gradientRainbowTwo}25%,
-      ${({ theme }) => theme.gradientRainbowThere} 50%,
-      ${({ theme }) => theme.gradientRainbowFour} 75%,
-      ${({ theme }) => theme.gradientRainbowFive} 100%
-    );
-    /* width: 300px; */
-    transition: width 0.3s linear, transform 0.3s linear;
-    transform: translate(50px, 0px);
+    &:after {
+      background: linear-gradient(
+        90deg,
+        ${({ theme }) => theme.gradientRainbowOne} 0%,
+        ${({ theme }) => theme.gradientRainbowTwo}25%,
+        ${({ theme }) => theme.gradientRainbowThere} 50%,
+        ${({ theme }) => theme.gradientRainbowFour} 75%,
+        ${({ theme }) => theme.gradientRainbowFive} 100%
+      );
+      animation: ${fadeIn} 0.3s ease forwards;
+      border-radius: 0px 20px 20px 0px;
+      transform: scaleX(1);
+    }
+  }
+  &:not(:hover) {
+    &:after {
+      animation: ${fadeOut} 0.3s ease forwards;
+    }
   }
   &.active {
     background: linear-gradient(
@@ -113,8 +141,5 @@ export const StyledLink = styled(NavLink)`
       ${({ theme }) => theme.gradientRainbowFour} 75%,
       ${({ theme }) => theme.gradientRainbowFive} 100%
     );
-    /* width: 300px; */
-    transform: translate(50px, 0px);
   }
 `;
-
