@@ -3,7 +3,7 @@ import { useNavigate, useLocation, NavLink } from 'react-router-dom';
 import { font } from 'style/mixins';
 
 // export const NavigationWrapper = styled.div<{ $isHidden: boolean }>`
-export const NavigationWrapper = styled.div`
+export const NavigationWrapper = styled.div<{ $isOpenMenu: boolean }>`
   color: ${({ theme }) => theme.white};
   width: 100vw;
   height: 100vh;
@@ -20,6 +20,8 @@ export const NavigationWrapper = styled.div`
   );
   backdrop-filter: blur(5px);
   border: none;
+  transition: all 0.3s linear;
+  transform: ${({ $isOpenMenu }) => ($isOpenMenu ? 'translateY(0)' : 'translateY(100vh)')};
 `;
 
 export const WrapperNav = styled.div`
@@ -37,45 +39,21 @@ export const Menu = styled.div`
 
 export const NavigationElementTitle = styled.div`
   ${font(2.5, 'normal', 500)};
-  color: ${({ theme }) => theme.black};
+  color: ${({ theme }) => theme.white};
   text-align: center;
   padding: 10px 0;
   margin: 5px 0;
   width: 360px;
   background: linear-gradient(
     90deg,
-    ${({ theme }) => theme.gradientMenuLightOne} 0%,
-    ${({ theme }) => theme.gradientMenuLightTwo}25%,
-    ${({ theme }) => theme.gradientMenuLightThere} 50%,
-    ${({ theme }) => theme.gradientMenuLightFour} 75%,
-    ${({ theme }) => theme.gradientMenuLightFive} 100%
+    ${({ theme }) => theme.gradientPurpleFour} 0%,
+    ${({ theme }) => theme.gradientPurpleThere}25%,
+    ${({ theme }) => theme.gradientPurpleTwo} 50%,
+    ${({ theme }) => theme.gradientPurpleOne} 75%,
+    ${({ theme }) => theme.gradientPurpleDark} 100%
   );
   backdrop-filter: blur(5px);
   border-radius: 0px 20px 20px 0px;
-
-  &.active {
-    background: linear-gradient(
-      90deg,
-      ${({ theme }) => theme.gradientRainbowOne} 0%,
-      ${({ theme }) => theme.gradientRainbowTwo}25%,
-      ${({ theme }) => theme.gradientRainbowThere} 50%,
-      ${({ theme }) => theme.gradientRainbowFour} 75%,
-      ${({ theme }) => theme.gradientRainbowFive} 100%
-    );
-    width: 300px;
-  }
-`;
-
-const fadeIn = keyframes`
-  from { transform: scaleX(0)
-  }
-  to {  transform: scaleX(1)
-  }
-`;
-
-const fadeOut = keyframes`
-  from { transform: scaleX(1)}
-  to { transform: scaleX(0) }
 `;
 
 export const StyledLink = styled(NavLink)`
@@ -84,7 +62,6 @@ export const StyledLink = styled(NavLink)`
   padding: 10px 0 10px 100px;
   margin: 10px 0;
   width: 300px;
-  /* height: 3.5rem; */
   margin: 10px 0;
   text-decoration: none;
   color: ${({ theme }) => theme.black};
@@ -99,9 +76,41 @@ export const StyledLink = styled(NavLink)`
   border-radius: 0px 20px 20px 0px;
   position: relative;
 
+  p {
+    color: transparent;
+  }
+
+  &:before {
+    padding: 10px 0 10px 100px;
+    content: '';
+    white-space: nowrap;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0px 20px 20px 0px;
+    transform: scaleX(0);
+    transition: 0.5s;
+    transform-origin: 0 0;
+    background: linear-gradient(
+      90deg,
+      ${({ theme }) => theme.gradientRainbowOne} 0%,
+      ${({ theme }) => theme.gradientRainbowTwo}25%,
+      ${({ theme }) => theme.gradientRainbowThere} 50%,
+      ${({ theme }) => theme.gradientRainbowFour} 75%,
+      ${({ theme }) => theme.gradientRainbowFive} 100%
+    );
+  }
+
+  &:hover {
+    &:before {
+      transform: scaleX(1);
+    }
+  }
+
   &:after {
     padding: 10px 0 10px 100px;
-    /* padding: 10px 20px; */
     content: attr(data-hover);
     white-space: nowrap;
     position: absolute;
@@ -112,26 +121,6 @@ export const StyledLink = styled(NavLink)`
     border-radius: 0px 20px 20px 0px;
   }
 
-  &:hover {
-    &:after {
-      background: linear-gradient(
-        90deg,
-        ${({ theme }) => theme.gradientRainbowOne} 0%,
-        ${({ theme }) => theme.gradientRainbowTwo}25%,
-        ${({ theme }) => theme.gradientRainbowThere} 50%,
-        ${({ theme }) => theme.gradientRainbowFour} 75%,
-        ${({ theme }) => theme.gradientRainbowFive} 100%
-      );
-      animation: ${fadeIn} 0.3s ease forwards;
-      border-radius: 0px 20px 20px 0px;
-      transform: scaleX(1);
-    }
-  }
-  &:not(:hover) {
-    &:after {
-      animation: ${fadeOut} 0.3s ease forwards;
-    }
-  }
   &.active {
     background: linear-gradient(
       90deg,

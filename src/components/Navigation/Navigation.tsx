@@ -8,10 +8,10 @@ import * as S from 'components/Navigation/StyleNavigation';
 
 interface NavigationProps {
   // isActive: boolean;
+  isOpenMenu: boolean;
 }
 
-export const Navigation: FC<NavigationProps> = () => {
-  const { isOpenMenu, setIsOpenMenu } = useContext(GlobalContext);
+export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
 
   const navItemLearning = [
     {
@@ -68,11 +68,7 @@ export const Navigation: FC<NavigationProps> = () => {
 
   return (
     <>
-      {/* <Background /> */}
-      {/* <OneWord $fontColor='white' /> */}
-      {/* <Logo /> */}
-      {/* <S.NavigationWrapper $isHidden={isActive}> */}
-      <S.NavigationWrapper>
+      <S.NavigationWrapper $isOpenMenu={isOpenMenu}>
         <S.Menu>MENU</S.Menu>
         <S.WrapperNav>
           <S.NavigationElementTitle>Learning</S.NavigationElementTitle>

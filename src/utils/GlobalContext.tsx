@@ -28,6 +28,8 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isLoadingOpen, setIsLoadingOpen] = useState(false);
   console.log('---IS_LOGIN_USER---GlobalCon', isLoginUser);
+  console.log('---Global_Context_OPEN_MENU---', isOpenMenu);
+
   const values = {
     isLoginUser,
     setIsLoginUser,
@@ -39,9 +41,9 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     setIsLoadingOpen,
   };
 
-  // useEffect(() => {
-  //   setIsOpenMenu(false);
-  // }, [location.pathname]);
+  useEffect(() => {
+    setIsOpenMenu(false);
+  }, [location.pathname]);
 
   const checkLoginStatus = async () => {
     const token = localStorage.getItem('token');
