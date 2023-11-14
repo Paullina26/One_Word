@@ -12,7 +12,6 @@ interface NavigationProps {
 }
 
 export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
-
   const navItemLearning = [
     {
       to: 'learning/todays_word',
@@ -67,17 +66,14 @@ export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
   });
 
   return (
-    <>
-      <S.NavigationWrapper $isOpenMenu={isOpenMenu}>
-        <S.Menu>MENU</S.Menu>
-        <S.WrapperNav>
-          <S.NavigationElementTitle>Learning</S.NavigationElementTitle>
-          {navItemLearningRender}
-          <S.NavigationElementTitle>Settings</S.NavigationElementTitle>
-          {navItemSettingsRender}
-        </S.WrapperNav>
-      </S.NavigationWrapper>
-    </>
+    <S.NavigationWrapper $isOpenMenu={isOpenMenu}>
+      <S.WrapperNav>
+        <S.NavigationElementTitle>Learning</S.NavigationElementTitle>
+        {navItemLearningRender}
+        <S.NavigationElementTitle>Settings</S.NavigationElementTitle>
+        {navItemSettingsRender}
+      </S.WrapperNav>
+    </S.NavigationWrapper>
   );
 };
 

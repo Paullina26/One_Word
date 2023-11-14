@@ -59,6 +59,13 @@ export const theme = {
   gradientRainbowFour: 'rgba(173,171,255,1)',
   gradientRainbowFive: 'rgba(241,138,255,1)',
 
+  //-----GRADIENT_LINEAR_PURPLE_DARK----//
+  gradientPurpleDarkOne: 'rgba(46, 40, 85, 1)',
+  gradientPurpleDarkTwo: 'rgba(46, 40, 85, 0.95)',
+  gradientPurpleDarkThere: 'rgba(46, 40, 85, 0.90)',
+  gradientPurpleDarkFour: 'rgba(46, 40, 85, 0.85)',
+  gradientPurpleDarkFive: 'rgba(46, 40, 85, 0.80)',
+
   // status: ['#2e2757', '#8c3a68', '#009300'],
 };
 

@@ -2,26 +2,31 @@ import styled, { keyframes } from 'styled-components';
 import { useNavigate, useLocation, NavLink } from 'react-router-dom';
 import { font } from 'style/mixins';
 
-// export const NavigationWrapper = styled.div<{ $isHidden: boolean }>`
 export const NavigationWrapper = styled.div<{ $isOpenMenu: boolean }>`
   color: ${({ theme }) => theme.white};
+  position: absolute;
   width: 100vw;
+  max-width: 350px;
   height: 100vh;
   bottom: 0;
   padding: 0;
   position: absolute;
-  background: radial-gradient(
-    circle,
-    ${({ theme }) => theme.gradientPurpleDark} 0%,
-    ${({ theme }) => theme.gradientPurpleOne} 25%,
-    ${({ theme }) => theme.gradientPurpleTwo} 50%,
-    ${({ theme }) => theme.gradientPurpleThere} 75%,
-    ${({ theme }) => theme.gradientPurpleFour}100%
+  border-right: 2px solid ${({ theme }) => theme.purpleLight};
+  background: linear-gradient(
+    90deg,
+    ${({ theme }) => theme.gradientPurpleDarkOne} 0%,
+    ${({ theme }) => theme.gradientPurpleDarkTwo} 25%,
+    ${({ theme }) => theme.gradientPurpleDarkThere} 50%,
+    ${({ theme }) => theme.gradientPurpleDarkFour} 75%,
+    ${({ theme }) => theme.gradientPurpleDarkFive}100%
   );
+  box-shadow: 2px 2px 3px rgb(92, 92, 143);
   backdrop-filter: blur(5px);
-  border: none;
-  transition: all 0.3s linear;
-  transform: ${({ $isOpenMenu }) => ($isOpenMenu ? 'translateY(0)' : 'translateY(100vh)')};
+  transition: transform 0.4s linear, opacity 0.2s linear, border-radius 0.2s linear;
+  opacity: ${({ $isOpenMenu }) => ($isOpenMenu ? '1' : '0')};
+  border-radius: ${({ $isOpenMenu }) => ($isOpenMenu ? '0' : '0 100px 100px 0')};
+  transform: ${({ $isOpenMenu }) => ($isOpenMenu ? ' translateX(0) ' : ' translateX(-50vh)')};
+  transform-origin: ${({ $isOpenMenu }) => ($isOpenMenu ? '100%' : '100%')};
 `;
 
 export const WrapperNav = styled.div`
@@ -42,8 +47,8 @@ export const NavigationElementTitle = styled.div`
   color: ${({ theme }) => theme.white};
   text-align: center;
   padding: 10px 0;
-  margin: 5px 0;
-  width: 360px;
+  margin: 25px 0 10px 0;
+  width: 300px;
   background: linear-gradient(
     90deg,
     ${({ theme }) => theme.gradientPurpleFour} 0%,
@@ -54,15 +59,19 @@ export const NavigationElementTitle = styled.div`
   );
   backdrop-filter: blur(5px);
   border-radius: 0px 20px 20px 0px;
+  box-shadow: -1px -1px 2px rgba(255, 255, 255, 0.35), 1px 1px 2px rgba(0, 0, 0, 0.35),
+    inset 0px 5px 10px rgba(255, 255, 255, 0.15), inset -5px -5px 10px rgba(0, 0, 0, 0.25);
 `;
 
 export const StyledLink = styled(NavLink)`
+  box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.95), 5px 5px 5px rgba(0, 0, 0, 0.35),
+    inset 1px 2px 5px rgba(255, 255, 255, 0.35), inset -4px -4px 5px rgba(0, 0, 0, 0.25);
   display: block;
   ${font(2, 'normal', 500)};
-  padding: 10px 0 10px 100px;
+  padding: 10px;
   margin: 10px 0;
-  width: 300px;
-  margin: 10px 0;
+  width: 220px;
+  margin: 15px 0;
   text-decoration: none;
   color: ${({ theme }) => theme.black};
   background: linear-gradient(
@@ -81,7 +90,8 @@ export const StyledLink = styled(NavLink)`
   }
 
   &:before {
-    padding: 10px 0 10px 100px;
+    box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.95), 5px 5px 5px rgba(0, 0, 0, 0.35),
+      inset 1px 2px 5px rgba(255, 255, 255, 0.35), inset -4px -4px 5px rgba(0, 0, 0, 0.25);
     content: '';
     white-space: nowrap;
     position: absolute;
@@ -110,7 +120,7 @@ export const StyledLink = styled(NavLink)`
   }
 
   &:after {
-    padding: 10px 0 10px 100px;
+    padding: 10px 0 10px 40px;
     content: attr(data-hover);
     white-space: nowrap;
     position: absolute;
