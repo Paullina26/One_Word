@@ -18,7 +18,7 @@ export const Auth: FC = () => {
       <Background />
       <S.WrapperAuth>
         <S.WrapperLogo>
-          <OneWord $fontColor='white' />
+          <OneWord $fontColor='rgb(46, 40, 85)' />
         </S.WrapperLogo>
         <S.WrapperElementRegistrationLogin>
           <Login onClick={handleActive} />

@@ -62,7 +62,7 @@ export const Login: FC<LoginProps> = ({ onClick }) => {
 
   return (
     <S.WrapperLogin>
-      <S.LoginText onClick={onClick}>Login</S.LoginText>
+      <S.LoginText>Login</S.LoginText>
       <WrapperForm>
         <form onSubmit={handleFormLogin}>
           <Input
@@ -103,6 +103,7 @@ export const Login: FC<LoginProps> = ({ onClick }) => {
           />
         </form>
       </WrapperForm>
+      <S.LoginText onClick={onClick}>Registration</S.LoginText>
     </S.WrapperLogin>
   );
 };

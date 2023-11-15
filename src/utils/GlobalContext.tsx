@@ -28,7 +28,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isLoadingOpen, setIsLoadingOpen] = useState(false);
   console.log('---IS_LOGIN_USER---GlobalCon', isLoginUser);
-  console.log('---Global_Context_OPEN_MENU---', isOpenMenu);
+  // console.log('---Global_Context_OPEN_MENU---', isOpenMenu);
 
   const values = {
     isLoginUser,
@@ -65,10 +65,10 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
 
   useEffect(() => {
     checkLoginStatus();
+    // console.log('---IS_LOGIN_USER2---GlobalCon', isLoginUser);
   }, []);
 
   return (
-    //@ts-ignore
     <GlobalContext.Provider value={values}>
       {children}
       {/* {isLoadingOpen && <Loading />} */}

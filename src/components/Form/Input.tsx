@@ -29,9 +29,10 @@ export const InputStyle = styled.input<{ $boxShadowLight: string; $boxShadowDark
   ${font(1.8, 'italic', 300)};
   display: block;
   text-align: center;
-  width: 70%;
+  width: 80%;
+  max-width: 300px;
   height: 35px;
-  margin: 10px auto 20px auto;
+  margin: 5px auto 10px auto;
   padding: 5px;
   background-color: ${({ theme }) => theme.white};
   border-radius: 20px;

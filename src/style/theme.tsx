@@ -12,7 +12,7 @@ export const theme = {
   shadowBlack: 'rgba(0, 0, 0, 0.1)',
 
   //-----INPUT----//
-  purpleLightInput: '#d2d2ea',
+  purpleLightInput: 'rgb(210, 210, 234)',
 
   //-----BUTTON----//
   buttonPink: 'rgb(140, 60, 105)',
@@ -52,19 +52,14 @@ export const theme = {
   gradientMenuLightFour: 'rgba(190, 190, 220, 1)',
   gradientMenuLightFive: 'rgba(170, 170, 220, 1)',
 
-  //-----GRADIENT_LINEAR_RAINBOW_PASTEL---//
-  gradientRainbowOne: 'rgba(171,255,147,1) ',
-  gradientRainbowTwo: ' rgba(137,238,190,1) ',
-  gradientRainbowThere: ' rgba(87,212,255,1) ',
-  gradientRainbowFour: 'rgba(173,171,255,1)',
-  gradientRainbowFive: 'rgba(241,138,255,1)',
-
   //-----GRADIENT_LINEAR_PURPLE_DARK----//
   gradientPurpleDarkOne: 'rgba(46, 40, 85, 1)',
   gradientPurpleDarkTwo: 'rgba(46, 40, 85, 0.95)',
   gradientPurpleDarkThere: 'rgba(46, 40, 85, 0.90)',
   gradientPurpleDarkFour: 'rgba(46, 40, 85, 0.85)',
   gradientPurpleDarkFive: 'rgba(46, 40, 85, 0.80)',
+
+   
 
   // status: ['#2e2757', '#8c3a68', '#009300'],
 };

@@ -1,21 +1,15 @@
 import styled from 'styled-components';
 import { device } from 'style/devices';
+import {
+  GradientCirclePurpleDark,
+  GradientGlassEffectLight,
+  BorderRadiusBubble,
+} from 'style/mixins';
 
 export const WrapperLogo = styled.div`
   text-align: center;
   padding-top: 10px;
-  border-radius: 0 0 40px 40px;
   margin-bottom: 10px;
-  background: radial-gradient(
-    circle,
-    ${({ theme }) => theme.gradientPurpleDark} 0%,
-    ${({ theme }) => theme.gradientPurpleOne} 25%,
-    ${({ theme }) => theme.gradientPurpleTwo} 50%,
-    ${({ theme }) => theme.gradientPurpleThere} 75%,
-    ${({ theme }) => theme.gradientPurpleFour} 100%
-  );
-  backdrop-filter: blur(5px);
-  box-shadow: 3px 3px 15px rgba(46, 39, 86, 0.7);
 `;
 export const WrapperAuth = styled.div`
   position: relative;
@@ -26,14 +20,23 @@ export const WrapperAuth = styled.div`
 `;
 
 export const WrapperElementRegistrationLogin = styled.div`
+  ${BorderRadiusBubble};
+  ${GradientGlassEffectLight};
   position: absolute;
+  overflow: hidden;
   bottom: 0;
-  width: 100vw;
+  width: 90vw;
   max-width: 600px;
-  height: 80vh;
+  height: 85vh;
   max-height: 600px;
-  margin: 0 auto;
+  border-top: 3px inset rgba(230, 230, 230, 0.2);
+  box-shadow: -3px -3px 5px rgba(94, 104, 121, 0.2), 3px 3px 5px rgba(94, 104, 121, 0.2);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
   @media ${device.mobileXL} {
+    border: 3px inset rgba(230, 230, 230, 0.2);
     top: 20vh;
     left: 50%;
     transform: translate(-50%);

@@ -58,7 +58,7 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
     <>
       <ToastContainer />
       <S.SingInWrapper $isHidden={isActive}>
-        <S.RegistrationText onClick={onClick}>Sing In</S.RegistrationText>
+        <S.RegistrationText>Registration</S.RegistrationText>
         <WrapperForm>
           <form onSubmit={handleForm}>
             <Input
@@ -114,6 +114,7 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
             />
           </form>
         </WrapperForm>
+        <S.RegistrationText onClick={onClick}>Login</S.RegistrationText>
       </S.SingInWrapper>
     </>
   );
