@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import { useNavigate, useLocation, NavLink } from 'react-router-dom';
-import { font } from 'style/mixins';
+import { font_settings } from 'style/mixins';
 
 export const NavigationWrapper = styled.div<{ $isOpenMenu: boolean }>`
   color: ${({ theme }) => theme.white};
@@ -35,7 +35,7 @@ export const WrapperNav = styled.div`
 `;
 
 export const Menu = styled.div`
-  ${font(3, 'italic', 900)};
+  ${font_settings(3, 'italic', 900)};
   text-align: center;
   padding: 30px;
   color: ${({ theme }) => theme.white};
@@ -43,7 +43,7 @@ export const Menu = styled.div`
 `;
 
 export const NavigationElementTitle = styled.div`
-  ${font(2.5, 'normal', 500)};
+  ${font_settings(2.5, 'normal', 500)};
   color: ${({ theme }) => theme.white};
   text-align: center;
   padding: 10px 0;
@@ -67,7 +67,7 @@ export const StyledLink = styled(NavLink)`
   box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.95), 5px 5px 5px rgba(0, 0, 0, 0.35),
     inset 1px 2px 5px rgba(255, 255, 255, 0.35), inset -4px -4px 5px rgba(0, 0, 0, 0.25);
   display: block;
-  ${font(2, 'normal', 500)};
+  ${font_settings(2, 'normal', 500)};
   padding: 10px;
   margin: 10px 0;
   width: 220px;

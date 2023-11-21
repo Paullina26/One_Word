@@ -1,8 +1,7 @@
 import { useContext, FC } from 'react';
 import styled from 'styled-components';
 import { GlobalContext } from 'utils/GlobalContext';
-import { BoxShadowButton } from 'style/mixins';
-import { GradientCirclePink, GradientLinerRainbow } from 'style/mixins';
+import { boxShadow_button, color_gradient_button, color_gradient_animation } from 'style/mixins';
 
 const StyledBurger = styled.button<{ $isOpenMenu: boolean }>`
   z-index: 10;
@@ -13,8 +12,8 @@ const StyledBurger = styled.button<{ $isOpenMenu: boolean }>`
   right: 10px;
   overflow: hidden;
   cursor: pointer;
-  ${GradientCirclePink};
-  ${BoxShadowButton};
+  ${color_gradient_button};
+  ${boxShadow_button};
   &:focus {
     outline: none;
   }
@@ -26,7 +25,7 @@ const WrapperBar = styled.div<{ $isOpenMenu: boolean }>`
   margin: 10px;
   position: relative;
   div {
-    ${GradientCirclePink};
+    ${color_gradient_animation};
     width: 90%;
     height: 8px;
     display: block;
@@ -36,7 +35,6 @@ const WrapperBar = styled.div<{ $isOpenMenu: boolean }>`
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 99999px;
-    
 
     &:first-child {
       transform: ${({ $isOpenMenu }) =>

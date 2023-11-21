@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { GradientGlassEffectLight, BorderRadiusBubble } from 'style/mixins';
+import { color_gradient_glassEffect_light, border_radius_effect_bubble } from 'style/mixins';
 
 export const GlassWrapper = styled.div`
-  ${GradientGlassEffectLight};
-  ${BorderRadiusBubble};
+  ${color_gradient_glassEffect_light};
+  ${border_radius_effect_bubble};
   text-align: center;
   width: 90vw;
   max-width: 500px;

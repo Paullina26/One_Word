@@ -1,13 +1,15 @@
 import styled from 'styled-components';
-import { font, BoxShadowButton, GradientCirclePink } from 'style/mixins';
+import {
+  font_settings,
+  boxShadow_button,
+  color_gradient_button,
+  default_style_button,
+} from 'style/mixins';
 
 export const Button = styled.button`
-  ${font(2.2, 'italic', 300)};
-  margin: 30px;
-  padding: 8px 20px;
-  border-radius: 20px;
-  border: none;
+  ${font_settings(2.2, 'italic', 300)};
+  ${default_style_button};
+  ${color_gradient_button};
+  ${boxShadow_button};
   color: ${({ theme }) => theme.white};
-  ${GradientCirclePink};
-  ${BoxShadowButton};
 `;

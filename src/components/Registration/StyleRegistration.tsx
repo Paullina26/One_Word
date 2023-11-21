@@ -1,11 +1,15 @@
 import styled, { keyframes } from 'styled-components';
-import { font, GradientGlassEffectDark, BorderRadiusBubble } from 'style/mixins';
+import {
+  font_settings,
+  color_gradient_glassEffect_dark,
+  border_radius_effect_bubble,
+} from 'style/mixins';
 import { device } from 'style/devices';
 
 export const SingInWrapper = styled.div<{ $isHidden: boolean }>`
-  ${font(3, 'italic', 900)};
-  ${GradientGlassEffectDark};
-  ${BorderRadiusBubble};
+  ${font_settings(3, 'italic', 900)};
+  ${color_gradient_glassEffect_dark};
+  ${border_radius_effect_bubble};
   color: ${({ theme }) => theme.white};
   width: 100%;
   height: 100%;
@@ -25,7 +29,7 @@ export const SingInWrapper = styled.div<{ $isHidden: boolean }>`
 
 export const RegistrationText = styled.div`
   padding: 20px;
-  ${font(3, 'italic', 900)};
+  ${font_settings(3, 'italic', 900)};
   color: ${({ theme }) => theme.white};
   cursor: pointer;
 `;

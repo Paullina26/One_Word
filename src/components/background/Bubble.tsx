@@ -11,14 +11,14 @@ interface BubbleProps {
   $directions: string;
   $zIndex?: number;
   $flyParams?: { x: number; y: number; time: number };
+  borderRadius?: string;
 }
 
 const BubbleStyled = styled.div<BubbleProps>`
   background-image: url(${({ $flagUrl }) => $flagUrl});
   background-size: cover;
   background-position: center;
-
-  border-radius: 50%;
+  border-radius: ${({ borderRadius }) => borderRadius || '50%'};
   position: fixed;
   top: ${({ top }) => top};
   left: ${({ left }) => left};
@@ -40,6 +40,7 @@ const Bubble: FC<BubbleProps> = ({
   $directions,
   $zIndex,
   $flyParams,
+  borderRadius,
 }) => {
   return (
     <BubbleStyled
@@ -51,6 +52,7 @@ const Bubble: FC<BubbleProps> = ({
       width={width}
       $zIndex={$zIndex}
       $flyParams={$flyParams}
+      borderRadius={borderRadius}
     />
   );
 };

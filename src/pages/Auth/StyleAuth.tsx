@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 import { device } from 'style/devices';
-import {
-  GradientCirclePurpleDark,
-  GradientGlassEffectLight,
-  BorderRadiusBubble,
-} from 'style/mixins';
+import { color_gradient_glassEffect_light, border_radius_effect_bubble } from 'style/mixins';
 
 export const WrapperLogo = styled.div`
   text-align: center;
@@ -20,8 +16,8 @@ export const WrapperAuth = styled.div`
 `;
 
 export const WrapperElementRegistrationLogin = styled.div`
-  ${BorderRadiusBubble};
-  ${GradientGlassEffectLight};
+  ${border_radius_effect_bubble};
+  ${color_gradient_glassEffect_light};
   position: absolute;
   overflow: hidden;
   bottom: 0;

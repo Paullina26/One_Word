@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { font } from 'style/mixins';
+import { font_settings } from 'style/mixins';
 
 interface InputProps {
   id: string;
@@ -21,12 +21,12 @@ interface InputProps {
 }
 
 export const LabelStyle = styled.label<{ $fontColorLabel: string }>`
-  ${font(2, 'italic', 400)};
+  ${font_settings(2, 'italic', 400)};
   text-align: center;
   color: ${({ theme, $fontColorLabel }) => theme[$fontColorLabel]};
 `;
 export const InputStyle = styled.input<{ $boxShadowLight: string; $boxShadowDark: string }>`
-  ${font(1.8, 'italic', 300)};
+  ${font_settings(1.8, 'italic', 300)};
   display: block;
   text-align: center;
   width: 80%;
@@ -37,8 +37,8 @@ export const InputStyle = styled.input<{ $boxShadowLight: string; $boxShadowDark
   background-color: ${({ theme }) => theme.white};
   border-radius: 20px;
   border: none;
-  box-shadow: -5px -5px 10px ${({ theme, $boxShadowLight }) => theme[$boxShadowLight]},
-    5px 5px 10px ${({ theme, $boxShadowDark }) => theme[$boxShadowDark]};
+  box-shadow: -3px -3px 5px ${({ theme, $boxShadowLight }) => theme[$boxShadowLight]},
+    3px 3px 5px ${({ theme, $boxShadowDark }) => theme[$boxShadowDark]};
 `;
 
 const Input: FC<InputProps> = ({

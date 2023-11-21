@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { font, GradientCirclePink } from 'style/mixins';
+import { font_settings, color_gradient_button, default_style_button } from 'style/mixins';
 
 interface SubmitProps {
   id: string;
@@ -8,22 +8,20 @@ interface SubmitProps {
   value: string;
   $boxShadowLight: string;
   $boxShadowDark: string;
+  // isLightTeam?:boolean
 }
 
 export const SubmitStyle = styled.input<{ $boxShadowLight: string; $boxShadowDark: string }>`
-  ${font(2.2, 'italic', 400)};
-  ${GradientCirclePink};
+  ${font_settings(2.2, 'italic', 300)};
+  ${color_gradient_button};
+  ${default_style_button};
   color: ${({ theme }) => theme.white};
   display: block;
-  border-radius: 20px;
-  padding: 10px 35px;
-  border: 0px;
-  margin: 40px auto 20px auto;
   cursor: pointer;
   border: 1px solid rgba(175, 175, 220, 0.2);
   box-shadow: -3px -3px 5px ${({ theme, $boxShadowLight }) => theme[$boxShadowLight]},
     3px 3px 5px ${({ theme, $boxShadowDark }) => theme[$boxShadowDark]},
-    inset 5px 10px 10px rgba(255, 255, 255, 0.25), inset -10px -10px 10px rgba(0, 0, 0, 0.25);
+    inset 2px 2px 2px rgba(255, 255, 255, 0.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
   &:hover {
     box-shadow: -3px -3px 5px ${({ theme, $boxShadowLight }) => theme[$boxShadowLight]},
       3px 3px 5px ${({ theme, $boxShadowDark }) => theme[$boxShadowDark]},

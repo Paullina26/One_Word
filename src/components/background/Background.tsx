@@ -4,26 +4,7 @@ import Bubble from 'components/Background/Bubble';
 import { flags } from 'helpers/flags';
 
 const BgStyled = styled.div`
-  /* z-index: -100; */
-  /* height: 100%;
-  width: 100%; */
-  /* background-attachment: fixed; */
-  /* overflow: hidden; */
-  /* background-image: radial-gradient(
-    circle,
-    #a2a0c8,
-    #a7a5cc,
-    #acabcf,
-    #b1b0d3,
-    #b6b6d6,
-    #bcbcd9,
-    #c1c1dc,
-    #c7c7df,
-    #cecfe3,
-    #d6d7e7,
-    #dddeeb,
-    #e5e6ef
-  ); */
+  //test
 `;
 
 const bubbles = [
@@ -36,6 +17,7 @@ const bubbles = [
     width: '60px',
     $zIndex: -10,
     $flyParams: { x: 0.3, y: 1, time: 75 },
+    borderRadius: '45% 65% 45% 65% / 45% 65% 45% 65%',
   },
   {
     $directions: 'to right top',
@@ -46,6 +28,7 @@ const bubbles = [
     width: '55px',
     $zIndex: -10,
     $flyParams: { x: 0.3, y: 1, time: 85 },
+    borderRadius: '43% 57% 41% 59% / 61% 63% 37% 39%',
   },
   {
     $directions: 'to right top',
@@ -56,6 +39,7 @@ const bubbles = [
     width: '45px',
     $zIndex: -10,
     $flyParams: { x: 0.3, y: 1, time: 75 },
+    borderRadius: '53% 47% 51% 49% / 58% 46% 54% 42%',
   },
   {
     $directions: 'to right bottom',
@@ -66,6 +50,7 @@ const bubbles = [
     width: '70px',
     $zIndex: -10,
     $flyParams: { x: 0.3, y: -1, time: 95 },
+    borderRadius: '37% 63% 65% 35% / 52% 43% 57% 48% ',
   },
   {
     $directions: 'to right top',
@@ -76,6 +61,7 @@ const bubbles = [
     width: '75px',
     $zIndex: -10,
     $flyParams: { x: -0.3, y: 1.3, time: 75 },
+    borderRadius: '37% 63% 43% 57% / 59% 38% 62% 41% ',
   },
   {
     $directions: 'to right bottom',
@@ -86,6 +72,7 @@ const bubbles = [
     width: '55px',
     $zIndex: -10,
     $flyParams: { x: 0.8, y: -1.4, time: 80 },
+    borderRadius: '53% 47% 51% 49% / 58% 46% 54% 42%',
   },
   {
     $directions: 'to left top',
@@ -96,6 +83,7 @@ const bubbles = [
     width: '30px',
     $zIndex: -10,
     $flyParams: { x: -0.8, y: -1, time: 60 },
+    borderRadius: '52% 48% 47% 53% / 37% 36% 64% 63% ',
   },
   {
     $directions: 'to right bottom',
@@ -106,6 +94,7 @@ const bubbles = [
     width: '90px',
     $zIndex: -10,
     $flyParams: { x: -0.8, y: -1, time: 60 },
+    borderRadius: '53% 47% 51% 49% / 58% 46% 54% 42%',
   },
 
   {
@@ -117,6 +106,7 @@ const bubbles = [
     width: '70px',
     $zIndex: -10,
     $flyParams: { x: -0.8, y: -0.45, time: 60 },
+    borderRadius: '59% 41% 56% 44% / 52% 59% 41% 48% ',
   },
   {
     $directions: 'circle',
@@ -126,6 +116,7 @@ const bubbles = [
     height: '70px',
     width: '70px',
     $zIndex: -10,
+    borderRadius: '58% 42% 51% 49% / 47% 49% 51% 53% ',
   },
 ];
 

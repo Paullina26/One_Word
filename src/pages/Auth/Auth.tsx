@@ -17,9 +17,9 @@ export const Auth: FC = () => {
     <>
       <Background />
       <S.WrapperAuth>
-        <S.WrapperLogo>
+        {/* <S.WrapperLogo>
           <OneWord $fontColor='rgb(46, 40, 85)' />
-        </S.WrapperLogo>
+        </S.WrapperLogo> */}
         <S.WrapperElementRegistrationLogin>
           <Login onClick={handleActive} />
           <Registration onClick={handleActive} isActive={isActive} />
