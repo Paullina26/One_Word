@@ -3,9 +3,9 @@ import { toast, ToastOptions } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toastColored } from 'helpers/StyleToastify';
 import * as S from 'components/Registration/StyleRegistration';
-import { WrapperForm, WrapperInputs } from 'components/Form/StyleForm';
-import Input from 'components/Form/Input';
-import Submit from 'components/Form/Submit';
+import { WrapperForm, WrapperInputs } from 'components/Shared/Form/StyleForm';
+import Input from 'components/Shared/Form/Input';
+import Submit from 'components/Shared/Form/Submit';
 import { headers, API } from 'API/api';
 import { Button } from 'components/Shared/Buttons/Button';
 
@@ -19,11 +19,11 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
   const [password, setPassword] = useState<string>('');
   const [passwordRepeating, setPasswordRepeating] = useState<string>('');
 
-  const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleRegistrationUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password === passwordRepeating) {
       try {
-        await sendDataToDatabase(mail, password);
+        await sendDataUserToDatabase(mail, password);
       } catch (error) {
         toast.error(`${error}`, toastColored as ToastOptions<{}>);
       }
@@ -32,7 +32,7 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
     }
   };
 
-  const sendDataToDatabase = async (mail: string, password: string) => {
+  const sendDataUserToDatabase = async (mail: string, password: string) => {
     const response = await toast.promise(
       fetch(API.registration, {
         method: 'POST',
@@ -41,10 +41,18 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
       }),
       {
         pending: 'Waiting',
-        success: 'Register is success. 👌',
         error: 'An error occurred while registering. 🤯',
       }
     );
+    const json = await response.json();
+    const { status } = response;
+    if (status === 200) {
+      toast.success('Register is success. 👌', toastColored as ToastOptions<{}>);
+    } else if (status === 400 || status === 500) {
+      toast.error(`${json.message}`, toastColored as ToastOptions<{}>);
+    } else {
+      toast.error('An error occurred while registering. 🤯', toastColored as ToastOptions<{}>);
+    }
     cleaningValueInput();
   };
 
@@ -59,7 +67,7 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
       <S.SingInWrapper $isHidden={isActive}>
         <S.RegistrationText>Registration</S.RegistrationText>
         <WrapperForm>
-          <form onSubmit={handleForm}>
+          <form onSubmit={handleRegistrationUser}>
             <WrapperInputs>
               <Input
                 $fontColorLabel='white'

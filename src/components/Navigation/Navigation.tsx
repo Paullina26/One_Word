@@ -1,6 +1,6 @@
-import Logo from 'components/Logo/Logo';
+import Logo from 'components/Shared/Logo/Logo';
 import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
-import OneWord from 'components/Logo/OneWord';
+import OneWord from 'components/Shared/Logo/OneWord';
 import { GlobalContext } from 'utils/GlobalContext';
 import { useContext, FC, useState } from 'react';
 import { useNavigate, useLocation, NavLink } from 'react-router-dom';

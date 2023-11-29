@@ -1,6 +1,6 @@
 import Background from 'components/Background/Background';
 import { Button } from 'components/Shared/Buttons/Button';
-import Logo from 'components/Logo/Logo';
+import Logo from 'components/Shared/Logo/Logo';
 import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
 import Welcome from 'components/Welcome/Welcome';
 import styled from 'styled-components';

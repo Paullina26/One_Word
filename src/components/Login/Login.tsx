@@ -6,9 +6,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toastColored } from 'helpers/StyleToastify';
 import { headers, API } from 'API/api';
 import * as S from 'components/Login/StyleLogin';
-import Input from 'components/Form/Input';
-import Submit from 'components/Form/Submit';
-import { WrapperInputs, WrapperForm } from 'components/Form/StyleForm';
+import Input from 'components/Shared/Form/Input';
+import Submit from 'components/Shared/Form/Submit';
+import { WrapperInputs, WrapperForm } from 'components/Shared/Form/StyleForm';
 import { Button } from 'components/Shared/Buttons/Button';
 
 interface LoginProps {
@@ -43,7 +43,6 @@ export const Login: FC<LoginProps> = ({ onClick }) => {
     };
     const response = await toast.promise(fetch(API.login, requestDetails), toastAlerts);
     const { status } = response;
-
     console.log(status);
     if (status === 200) {
       setIsLoginUser(true);
