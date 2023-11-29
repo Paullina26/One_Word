@@ -16,8 +16,8 @@ export const Auth: FC = () => {
       <Background />
       <S.WrapperAuth>
         <S.WrapperElementRegistrationLogin>
-          <Login onClick={handleActive} />
-          <Registration onClick={handleActive} isActive={isActive} />
+          <Login toggleAuthForm={handleActive} />
+          <Registration toggleAuthForm={handleActive} isActive={isActive} />
         </S.WrapperElementRegistrationLogin>
       </S.WrapperAuth>
     </>

@@ -12,9 +12,9 @@ import { WrapperInputs, WrapperForm } from 'components/Shared/Form/StyleForm';
 import { Button } from 'components/Shared/Buttons/Button';
 
 interface LoginProps {
-  onClick: () => void;
+  toggleAuthForm: () => void;
 }
-export const Login: FC<LoginProps> = ({ onClick }) => {
+export const Login: FC<LoginProps> = ({ toggleAuthForm }) => {
   const { isLoginUser, setIsLoginUser } = useContext(GlobalContext);
   const navigate = useNavigate();
   const [mail, setMail] = useState<string>('');
@@ -100,7 +100,7 @@ export const Login: FC<LoginProps> = ({ onClick }) => {
           <Submit id='submit_Login' type='submit' value='Login' $isLightTeam={true} />
         </form>
       </WrapperForm>
-      <Button onClick={onClick} $isLightTeam={true}>
+      <Button onClick={toggleAuthForm} $isLightTeam={true}>
         Registration
       </Button>
     </S.WrapperLogin>

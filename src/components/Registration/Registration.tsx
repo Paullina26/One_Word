@@ -10,11 +10,11 @@ import { headers, API } from 'API/api';
 import { Button } from 'components/Shared/Buttons/Button';
 
 interface RegistrationProps {
-  onClick: () => void;
+  toggleAuthForm: () => void;
   isActive: boolean;
 }
 
-export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
+export const Registration: FC<RegistrationProps> = ({ toggleAuthForm, isActive }) => {
   const [mail, setMail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordRepeating, setPasswordRepeating] = useState<string>('');
@@ -48,6 +48,7 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
     const { status } = response;
     if (status === 200) {
       toast.success('Register is success. 👌', toastColored as ToastOptions<{}>);
+      toggleAuthForm();
     } else if (status === 400 || status === 500) {
       toast.error(`${json.message}`, toastColored as ToastOptions<{}>);
     } else {
@@ -64,7 +65,7 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
 
   return (
     <>
-      <S.SingInWrapper $isHidden={isActive}>
+      <S.SingInWrapper $isActive={isActive}>
         <S.RegistrationText>Registration</S.RegistrationText>
         <WrapperForm>
           <form onSubmit={handleRegistrationUser}>
@@ -119,7 +120,7 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
             />
           </form>
         </WrapperForm>
-        <Button onClick={onClick} $isLightTeam={false}>
+        <Button onClick={toggleAuthForm} $isLightTeam={false}>
           Login
         </Button>
       </S.SingInWrapper>

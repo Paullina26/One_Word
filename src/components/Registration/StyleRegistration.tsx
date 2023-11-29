@@ -6,7 +6,7 @@ import {
 } from 'style/mixins';
 import { device } from 'style/devices';
 
-export const SingInWrapper = styled.div<{ $isHidden: boolean }>`
+export const SingInWrapper = styled.div<{ $isActive: boolean }>`
   ${font_settings(3, 'italic', 900)};
   ${color_gradient_glassEffect_dark};
   ${border_radius_effect_bubble};
@@ -19,9 +19,9 @@ export const SingInWrapper = styled.div<{ $isHidden: boolean }>`
   backdrop-filter: blur(5px);
   border: 3px inset rgba(230, 230, 230, 0.2);
   transition: all 0.2s linear;
-  opacity: ${({ $isHidden }) => ($isHidden ? '0' : '1')};
-  filter: ${({ $isHidden }) => ($isHidden ? 'blur(10px)' : 'blur(0)')};
-  transform: ${({ $isHidden }) => ($isHidden ? 'scale(0)' : 'scale(1)')};
+  opacity: ${({ $isActive }) => ($isActive ? '0' : '1')};
+  filter: ${({ $isActive }) => ($isActive ? 'blur(10px)' : 'blur(0)')};
+  transform: ${({ $isActive }) => ($isActive ? 'scale(0)' : 'scale(1)')};
   @media ${device.mobileXL} {
     //test
   }
