@@ -27,7 +27,9 @@ export const HomePage = () => {
         <Logo />
         <GlassWrapper>
           <Welcome />
-          <Button onClick={handleGoToAuth}>Try It</Button>
+          <Button $isLightTeam={true} onClick={handleGoToAuth}>
+            Try It
+          </Button>
         </GlassWrapper>
       </WrapperHome>
     </>

@@ -18,6 +18,12 @@ export const border_radius_effect_bubble = `
 border-radius: 40% 60% 40% 60% / 60% 40% 60% 40%;
 `;
 
+export const outline_focus = `
+&:focus {
+  outline: 3px solid rgb(0, 145, 255);
+}
+`;
+
 export const boxShadow_button = `
 border: 1px solid rgba(175, 175, 220, 0.2);
 box-shadow: -3px -3px 5px rgba(255, 255, 255, 0.5) ,
@@ -31,34 +37,44 @@ inset -2px -2px 2px rgba(0, 0, 0, 0.25);
 `;
 
 export const boxShadow_lightTheme_button = `
-border: 1px solid rgba(175, 175, 220, 0.2);
+border: 1px inset rgba(175, 175, 220, 0.2);
 box-shadow: -3px -3px 5px rgba(255, 255, 255, 0.5) ,
-3px 3px 5px rgba(94, 104, 121, 0.7), inset 2px 2px 2px rgba(255, 255, 255, 0.25),
+3px 3px 5px rgba(94, 104, 121, 0.5), inset 2px 2px 2px rgba(255, 255, 255, 0.25),
 inset -2px -2px 2px rgba(0, 0, 0, 0.25);
 &:hover {
     box-shadow: -3px -3px 5px rgba(255, 255, 255, 0.5),
-      3px 3px 5px rgba(94, 104, 121, 0.7), inset 3px 3px 5px rgba(0, 0, 0, 0.35),
+      3px 3px 5px rgba(94, 104, 121, 0.5), inset 3px 3px 5px rgba(0, 0, 0, 0.35),
       inset -3px -3px 5px rgba(255, 255, 255, 0.15);
   }
 `;
 
 export const boxShadow_darkTheme_button = `
-border: 1px solid rgba(175, 175, 220, 0.2);
-box-shadow: -3px -3px 5px rgba(134, 134, 171, 0.4) ,
+border: 1px inset rgba(255, 255, 255, 0.1);
+box-shadow: -3px -3px 5px rgba(134, 134, 171, 0.3) ,
 3px 3px 5px rgba(25, 20, 65, 0.5), inset 2px 2px 2px rgba(255, 255, 255, 0.25),
 inset -2px -2px 2px rgba(0, 0, 0, 0.25);
 &:hover {
-    box-shadow: -3px -3px 5px rgba(134, 134, 171, 0.4),
+    box-shadow: -3px -3px 5px rgba(134, 134, 171, 0.3),
       3px 3px 5px rgba(25, 20, 65, 0.5), inset 3px 3px 5px rgba(0, 0, 0, 0.35),
       inset -3px -3px 5px rgba(255, 255, 255, 0.15);
   }
 `;
 
-//-----BOX_SHADOW----//
-//  boxShadowWhite: 'rgba(255, 255, 255, 0.5)',
-//  boxShadowGray: 'rgba(94, 104, 121, 0.7)',
-//  boxShadowPurpleLight: 'rgba(134, 134, 171, 0.4)',
-//  boxShadowPurpleDark: 'rgba(25, 20, 65, 0.5)',
+export const boxShadow_lightTheme_input = `
+border: 1px inset rgba(255, 255, 255, 0.1);
+box-shadow: -3px -3px 5px rgba(255, 255, 255, 0.5) ,
+3px 3px 5px rgba(94, 104, 121, 0.5), inset 1px 1px 1px rgba(255, 255, 255, 0.25),
+inset -1px -1px 1px rgba(0, 0, 0, 0.25);
+
+`;
+
+export const boxShadow_darkTheme_input = `
+border: 1px inset rgba(175, 175, 220, 0.2);
+box-shadow: -3px -3px 5px rgba(134, 134, 171, 0.3) ,
+3px 3px 5px rgba(25, 20, 65, 0.5), inset 1px 1px 1px rgba(255, 255, 255, 0.25),
+inset -1px -1px 1px rgba(0, 0, 0, 0.25);
+
+`;
 
 export const default_style_button = `
   margin: 10px auto;

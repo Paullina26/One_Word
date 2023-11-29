@@ -1,6 +1,11 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { font_settings } from 'style/mixins';
+import {
+  font_settings,
+  boxShadow_darkTheme_input,
+  boxShadow_lightTheme_input,
+  outline_focus,
+} from 'style/mixins';
 
 interface InputProps {
   id: string;
@@ -16,8 +21,7 @@ interface InputProps {
   minlength?: number;
   maxLength?: number;
   $fontColorLabel: string;
-  $boxShadowLight: string;
-  $boxShadowDark: string;
+  $isLightTeam: boolean;
 }
 
 export const LabelStyle = styled.label<{ $fontColorLabel: string }>`
@@ -25,7 +29,7 @@ export const LabelStyle = styled.label<{ $fontColorLabel: string }>`
   text-align: center;
   color: ${({ theme, $fontColorLabel }) => theme[$fontColorLabel]};
 `;
-export const InputStyle = styled.input<{ $boxShadowLight: string; $boxShadowDark: string }>`
+export const InputStyle = styled.input<{ $isLightTeam: boolean }>`
   ${font_settings(1.8, 'italic', 300)};
   display: block;
   text-align: center;
@@ -34,11 +38,11 @@ export const InputStyle = styled.input<{ $boxShadowLight: string; $boxShadowDark
   height: 35px;
   margin: 5px auto 10px auto;
   padding: 5px;
-  background-color: ${({ theme }) => theme.white};
+  background-color: ${({ theme }) => theme.whiteDark};
   border-radius: 20px;
-  border: none;
-  box-shadow: -3px -3px 5px ${({ theme, $boxShadowLight }) => theme[$boxShadowLight]},
-    3px 3px 5px ${({ theme, $boxShadowDark }) => theme[$boxShadowDark]};
+  ${({ $isLightTeam }) =>
+    $isLightTeam ? `${boxShadow_lightTheme_input}` : `${boxShadow_darkTheme_input}`};
+  ${outline_focus};
 `;
 
 const Input: FC<InputProps> = ({
@@ -55,8 +59,7 @@ const Input: FC<InputProps> = ({
   className,
   maxLength,
   $fontColorLabel,
-  $boxShadowLight,
-  $boxShadowDark,
+  $isLightTeam,
 }) => {
   return (
     <LabelStyle htmlFor={id} $fontColorLabel={$fontColorLabel}>
@@ -73,8 +76,7 @@ const Input: FC<InputProps> = ({
         className={className}
         minLength={minlength}
         maxLength={maxLength}
-        $boxShadowLight={$boxShadowLight}
-        $boxShadowDark={$boxShadowDark}
+        $isLightTeam={$isLightTeam}
       />
     </LabelStyle>
   );

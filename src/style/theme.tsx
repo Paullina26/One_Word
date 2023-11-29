@@ -2,6 +2,7 @@ export const theme = {
   //-----DEFAULT----//
   black: 'rgb(0, 0, 0)',
   white: 'rgb(255, 255, 255)',
+  whiteDark: 'rgb(245, 245, 245)',
   gray: 'rgb(235, 235, 235)',
   light: 'rgb(228, 229, 240)',
   purpleLight: 'rgb(210, 210, 234)',
@@ -58,8 +59,6 @@ export const theme = {
   gradientPurpleDarkThere: 'rgba(46, 40, 85, 0.90)',
   gradientPurpleDarkFour: 'rgba(46, 40, 85, 0.85)',
   gradientPurpleDarkFive: 'rgba(46, 40, 85, 0.80)',
-
-   
 
   // status: ['#2e2757', '#8c3a68', '#009300'],
 };

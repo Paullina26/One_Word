@@ -1,5 +1,5 @@
-import { FC, useState, useContext } from 'react';
-import { ToastContainer, toast, ToastOptions } from 'react-toastify';
+import { FC, useState } from 'react';
+import { toast, ToastOptions } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toastColored } from 'helpers/StyleToastify';
 import * as S from 'components/Registration/StyleRegistration';
@@ -25,7 +25,6 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
       try {
         await sendDataToDatabase(mail, password);
       } catch (error) {
-        console.log('BŁĄD_REJESTRACJI:', error);
         toast.error(`${error}`, toastColored as ToastOptions<{}>);
       }
     } else {
@@ -57,7 +56,6 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
 
   return (
     <>
-      <ToastContainer />
       <S.SingInWrapper $isHidden={isActive}>
         <S.RegistrationText>Registration</S.RegistrationText>
         <WrapperForm>
@@ -65,8 +63,7 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
             <WrapperInputs>
               <Input
                 $fontColorLabel='white'
-                $boxShadowLight='boxShadowPurpleLight'
-                $boxShadowDark='boxShadowPurpleDark'
+                $isLightTeam={false}
                 label='Email'
                 id='e-mail_Registration'
                 type='email'
@@ -80,6 +77,7 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
               />
               <Input
                 $fontColorLabel='white'
+                $isLightTeam={false}
                 label='Password'
                 id='password_Registration'
                 type='password'
@@ -90,13 +88,10 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
                 placeholder='password'
                 minlength={4}
                 required
-                $boxShadowLight='boxShadowPurpleLight'
-                $boxShadowDark='boxShadowPurpleDark'
               />
               <Input
                 $fontColorLabel='white'
-                $boxShadowLight='boxShadowPurpleLight'
-                $boxShadowDark='boxShadowPurpleDark'
+                $isLightTeam={false}
                 label='Password Repeating'
                 id='password_Registration_Repeating'
                 type='password'
@@ -109,15 +104,16 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
               />
             </WrapperInputs>
             <Submit
-              id='submit_Login'
+              id='submit_Registration'
               type='submit'
               value='Registration'
-              $boxShadowLight='boxShadowPurpleLight'
-              $boxShadowDark='boxShadowPurpleDark'
+              $isLightTeam={false}
             />
           </form>
         </WrapperForm>
-        <Button onClick={onClick}>Login</Button>
+        <Button onClick={onClick} $isLightTeam={false}>
+          Login
+        </Button>
       </S.SingInWrapper>
     </>
   );
