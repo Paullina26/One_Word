@@ -1,7 +1,12 @@
 import { useContext, FC } from 'react';
 import styled from 'styled-components';
 import { GlobalContext } from 'utils/GlobalContext';
-import { boxShadow_button, color_gradient_button, color_gradient_animation } from 'style/mixins';
+import {
+  boxShadow_button,
+  color_gradient_button,
+  color_gradient_animation,
+  color_gradient_button_menu,
+} from 'style/mixins';
 
 const StyledBurger = styled.button<{ $isOpenMenu: boolean }>`
   z-index: 10;
@@ -12,7 +17,7 @@ const StyledBurger = styled.button<{ $isOpenMenu: boolean }>`
   right: 10px;
   overflow: hidden;
   cursor: pointer;
-  ${color_gradient_button};
+  ${color_gradient_button_menu};
   ${boxShadow_button};
   &:focus {
     outline: none;
