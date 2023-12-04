@@ -1,10 +1,8 @@
-import Logo from 'components/Shared/Logo/Logo';
-import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
-import OneWord from 'components/Shared/Logo/OneWord';
 import { GlobalContext } from 'utils/GlobalContext';
 import { useContext, FC, useState } from 'react';
 import { useNavigate, useLocation, NavLink } from 'react-router-dom';
 import * as S from 'components/Navigation/StyleNavigation';
+import { routes } from 'data/routes';
 
 interface NavigationProps {
   // isActive: boolean;
@@ -14,38 +12,38 @@ interface NavigationProps {
 export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
   const navItemLearning = [
     {
-      to: 'learning/todays_word',
-      name: 'Today`s word',
+      to: `${routes.TODAYS_WORD.to}`,
+      name: `${routes.TODAYS_WORD.name}`,
     },
     {
-      to: 'learning/hangman',
-      name: 'Hangman',
+      to: `${routes.HANGMAN.to}`,
+      name: `${routes.HANGMAN.name}`,
     },
     {
-      to: 'learning/translate',
-      name: 'Translate',
+      to: `${routes.TRANSLATE.to}`,
+      name: `${routes.TRANSLATE.name}`,
     },
     {
-      to: 'learning/flashcard',
-      name: 'Flashcard',
+      to: `${routes.FLASHCARD.to}`,
+      name: `${routes.FLASHCARD.name}`,
     },
     {
-      to: 'learning/repeat',
-      name: 'Repeat',
+      to: `${routes.REPEAT.to}`,
+      name: `${routes.REPEAT.name}`,
     },
   ];
-  const navItemSettingsUSer = [
+  const navItemSettingsUser = [
     {
-      to: '/settings/add_words',
-      name: 'Add Words',
+      to: `${routes.ADD_WORDS.to}`,
+      name: `${routes.ADD_WORDS.name}`,
     },
     {
-      to: '/settings/learning',
-      name: 'Learning',
+      to: `${routes.LEARNING.to}`,
+      name: `${routes.LEARNING.name}`,
     },
     {
-      to: '/settings/user',
-      name: 'User',
+      to: `${routes.USER.to}`,
+      name: `${routes.USER.name}`,
     },
   ];
 
@@ -57,7 +55,7 @@ export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
     );
   });
 
-  const navItemSettingsRender = navItemSettingsUSer.map(item => {
+  const navItemSettingsRender = navItemSettingsUser.map(item => {
     return (
       <S.StyledLink key={item.name} to={item.to} data-hover={item.name}>
         <p>{item.name}</p>

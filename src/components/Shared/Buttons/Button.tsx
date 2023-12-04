@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import {
   font_settings,
-  boxShadow_button,
   color_gradient_button,
   default_style_button,
   boxShadow_lightTheme_button,

@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { GlobalContext } from 'utils/GlobalContext';
 import { Routes, Route } from 'react-router-dom';
+import { routes } from 'data/routes';
 import Home from 'pages/Home/Home';
 import Auth from 'pages/Auth/Auth';
 import UserDashboard from 'pages/User/UserDashboard';
@@ -16,18 +17,18 @@ const RoutesComponent = () => {
     <Routes>
       {!isLoginUser && (
         <>
-          <Route path='/' element={<Home />} />
-          <Route path='auth' element={<Auth />} />
+          <Route path={routes.HOME.to} element={<Home />} />
+          <Route path={routes.AUTH.to} element={<Auth />} />
         </>
       )}
       {isLoginUser && (
         <>
           <Route path='user' element={<UserDashboard />}>
-            <Route path='learning/todays_word' element={<TodaysWord />} />
-            <Route path='learning/hangman' element={<Hangman />} />
-            <Route path='learning/translate' element={<Translate />} />
-            <Route path='learning/repeat' element={<Repeat />} />
-            <Route path='learning/flashcard' element={<Flashcard />} />
+            <Route path={routes.TODAYS_WORD.to} element={<TodaysWord />} />
+            <Route path={routes.HANGMAN.to} element={<Hangman />} />
+            <Route path={routes.TRANSLATE.to} element={<Translate />} />
+            <Route path={routes.REPEAT.to} element={<Repeat />} />
+            <Route path={routes.FLASHCARD.to} element={<Flashcard />} />
           </Route>
         </>
       )}

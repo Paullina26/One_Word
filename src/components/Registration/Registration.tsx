@@ -8,6 +8,7 @@ import Input from 'components/Shared/Form/Input';
 import Submit from 'components/Shared/Form/Submit';
 import { headers, API } from 'API/api';
 import { Button } from 'components/Shared/Buttons/Button';
+import { inputNameElement } from 'helpers/mixins';
 
 interface RegistrationProps {
   toggleAuthForm: () => void;
@@ -73,13 +74,9 @@ export const Registration: FC<RegistrationProps> = ({ toggleAuthForm, isActive }
               <Input
                 $fontColorLabel='white'
                 $isLightTeam={false}
-                label='Email'
-                id='e-mail_Registration'
-                type='email'
+                {...inputNameElement('email_Registration', 'email', 'Email')}
                 value={mail}
                 onChange={value => setMail(value)}
-                autoComplete='email'
-                placeholder='email'
                 minlength={4}
                 pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
                 required
@@ -87,36 +84,31 @@ export const Registration: FC<RegistrationProps> = ({ toggleAuthForm, isActive }
               <Input
                 $fontColorLabel='white'
                 $isLightTeam={false}
-                label='Password'
-                id='password_Registration'
-                type='password'
+                {...inputNameElement('password_Registration', 'password', 'Password')}
                 value={password}
                 onChange={value => setPassword(value)}
-                autoComplete='password'
-                // placeholder={nameElement.email}
-                placeholder='password'
                 minlength={4}
                 required
               />
               <Input
                 $fontColorLabel='white'
                 $isLightTeam={false}
-                label='Password Repeating'
-                id='password_Registration_Repeating'
-                type='password'
+                {...inputNameElement(
+                  'password_Registration_Repeating',
+                  'password',
+                  'Password Repeating'
+                )}
                 value={passwordRepeating}
                 onChange={value => setPasswordRepeating(value)}
-                autoComplete='password'
-                placeholder='password'
                 minlength={4}
                 required
               />
             </WrapperInputs>
             <Submit
+              $isLightTeam={false}
+              value='Registration'
               id='submit_Registration'
               type='submit'
-              value='Registration'
-              $isLightTeam={false}
             />
           </form>
         </WrapperForm>

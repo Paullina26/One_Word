@@ -10,6 +10,7 @@ import Input from 'components/Shared/Form/Input';
 import Submit from 'components/Shared/Form/Submit';
 import { WrapperInputs, WrapperForm } from 'components/Shared/Form/StyleForm';
 import { Button } from 'components/Shared/Buttons/Button';
+import { inputNameElement } from 'helpers/mixins';
 
 interface LoginProps {
   toggleAuthForm: () => void;
@@ -72,13 +73,9 @@ export const Login: FC<LoginProps> = ({ toggleAuthForm }) => {
             <Input
               $fontColorLabel='purpleDark'
               $isLightTeam={true}
-              label='Email'
-              id='e-mail_Login'
-              type='email'
-              value={mail}
+              {...inputNameElement('email_Login', 'email', 'Email')}
               onChange={value => setMail(value)}
-              autoComplete='email'
-              placeholder='email'
+              value={mail}
               minlength={4}
               pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
               required
@@ -86,18 +83,14 @@ export const Login: FC<LoginProps> = ({ toggleAuthForm }) => {
             <Input
               $fontColorLabel='purpleDark'
               $isLightTeam={true}
-              label='Password'
-              id='password_Login'
-              type='password'
-              value={password}
+              {...inputNameElement('password_Login', 'password', 'Password')}
               onChange={value => setPassword(value)}
-              autoComplete='password'
-              placeholder='password'
+              value={password}
               minlength={4}
               required
             />
           </WrapperInputs>
-          <Submit id='submit_Login' type='submit' value='Login' $isLightTeam={true} />
+          <Submit $isLightTeam={true} value='Login' id='submit_Login' type='submit' />
         </form>
       </WrapperForm>
       <Button onClick={toggleAuthForm} $isLightTeam={true}>
