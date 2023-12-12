@@ -10,7 +10,7 @@ export const WrapperLogin = styled.div`
   box-shadow: 0 4px 30px -50px ${({ theme }) => theme.shadowBlack};
   backdrop-filter: blur(5px);
   @media ${device.mobileXL} {
-    /* border-radius: 50px 50px 50px 50px; */
+    /*style code*/
   }
 `;
 

@@ -1,4 +1,6 @@
 {
   "bitoAI.codeCompletion.enableCommentToCode": true,
-  "bitoAI.codeCompletion.enableAutoCompletion": true
+  "bitoAI.codeCompletion.enableAutoCompletion": true,
+  "editor.tabCompletion": "onlySnippets",
+  "emmet.showSuggestionsAsSnippets": true
 }

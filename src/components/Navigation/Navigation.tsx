@@ -5,45 +5,47 @@ import * as S from 'components/Navigation/StyleNavigation';
 import { routes } from 'data/routes';
 
 interface NavigationProps {
-  // isActive: boolean;
   isOpenMenu: boolean;
 }
 
 export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const navItemLearning = [
     {
-      to: `${routes.TODAYS_WORD.to}`,
-      name: `${routes.TODAYS_WORD.name}`,
+      to: `${routes.LEARN_TODAYS_WORD.to}`,
+      name: `${routes.LEARN_TODAYS_WORD.name}`,
     },
     {
-      to: `${routes.HANGMAN.to}`,
-      name: `${routes.HANGMAN.name}`,
+      to: `${routes.LEARN_HANGMAN.to}`,
+      name: `${routes.LEARN_HANGMAN.name}`,
     },
     {
-      to: `${routes.TRANSLATE.to}`,
-      name: `${routes.TRANSLATE.name}`,
+      to: `${routes.LEARN_TRANSLATE.to}`,
+      name: `${routes.LEARN_TRANSLATE.name}`,
     },
     {
-      to: `${routes.FLASHCARD.to}`,
-      name: `${routes.FLASHCARD.name}`,
+      to: `${routes.LEARN_FLASHCARD.to}`,
+      name: `${routes.LEARN_FLASHCARD.name}`,
     },
     {
-      to: `${routes.REPEAT.to}`,
-      name: `${routes.REPEAT.name}`,
+      to: `${routes.LEARN_REPEAT.to}`,
+      name: `${routes.LEARN_REPEAT.name}`,
     },
   ];
   const navItemSettingsUser = [
     {
-      to: `${routes.ADD_WORDS.to}`,
-      name: `${routes.ADD_WORDS.name}`,
+      to: `${routes.SETTINGS_ADD_WORDS.to}`,
+      name: `${routes.SETTINGS_ADD_WORDS.name}`,
     },
     {
-      to: `${routes.LEARNING.to}`,
-      name: `${routes.LEARNING.name}`,
+      to: `${routes.SETTINGS_LEARNING.to}`,
+      name: `${routes.SETTINGS_LEARNING.name}`,
     },
     {
-      to: `${routes.USER.to}`,
-      name: `${routes.USER.name}`,
+      to: `${routes.SETTINGS_USER.to}`,
+      name: `${routes.SETTINGS_USER.name}`,
     },
   ];
 

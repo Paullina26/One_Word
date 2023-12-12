@@ -11,6 +11,7 @@ import Submit from 'components/Shared/Form/Submit';
 import { WrapperInputs, WrapperForm } from 'components/Shared/Form/StyleForm';
 import { Button } from 'components/Shared/Buttons/Button';
 import { inputNameElement } from 'helpers/mixins';
+import { routes } from 'data/routes';
 
 interface LoginProps {
   toggleAuthForm: () => void;
@@ -47,7 +48,7 @@ export const Login: FC<LoginProps> = ({ toggleAuthForm }) => {
     console.log(status);
     if (status === 200) {
       setIsLoginUser(true);
-      navigate('/user');
+      navigate(`${routes.LEARN_TODAYS_WORD.to}`);
       const json = await response.json();
       localStorage.setItem('token', json.token);
       toast.success('Login is success. 👌', toastColored as ToastOptions<{}>);

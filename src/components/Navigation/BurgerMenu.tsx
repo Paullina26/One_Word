@@ -9,7 +9,7 @@ import {
 } from 'style/mixins';
 
 const StyledBurger = styled.button<{ $isOpenMenu: boolean }>`
-  z-index: 10;
+  z-index: 101;
   margin: 10px;
   position: absolute;
   border-radius: 50%;

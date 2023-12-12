@@ -11,6 +11,7 @@ import {
 export const NavigationWrapper = styled.div<{ $isOpenMenu: boolean }>`
   ${color_gradient_backGround_liner_dark};
   /* box-shadow: 2px 2px 3px rgb(92, 92, 143); */
+  z-index: 100;
   color: ${({ theme }) => theme.white};
   position: absolute;
   width: 100vw;

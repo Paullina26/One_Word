@@ -5,34 +5,22 @@ import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
 import Welcome from 'components/Welcome/Welcome';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-
-export const WrapperHome = styled.div`
-  text-align: center;
-  height: 100vh;
-  overflow: hidden;
-`;
+import { routes } from 'data/routes';
 
 export const HomePage = () => {
   const navigate = useNavigate();
 
   const handleGoToAuth = () => {
-    console.log('goAuth');
-    navigate('auth');
+    navigate(`${routes.AUTH.to}`);
   };
 
   return (
-    <>
-      <Background />
-      <WrapperHome>
-        <Logo />
-        <GlassWrapper>
-          <Welcome />
-          <Button $isLightTeam={true} onClick={handleGoToAuth}>
-            Try It
-          </Button>
-        </GlassWrapper>
-      </WrapperHome>
-    </>
+    <GlassWrapper>
+      <Welcome />
+      <Button $isLightTeam={true} onClick={handleGoToAuth}>
+        Try It
+      </Button>
+    </GlassWrapper>
   );
 };
 

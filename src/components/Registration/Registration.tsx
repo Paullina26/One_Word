@@ -14,7 +14,6 @@ interface RegistrationProps {
   toggleAuthForm: () => void;
   isActive: boolean;
 }
-
 export const Registration: FC<RegistrationProps> = ({ toggleAuthForm, isActive }) => {
   const [mail, setMail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -121,3 +120,5 @@ export const Registration: FC<RegistrationProps> = ({ toggleAuthForm, isActive }
 };
 
 export default Registration;
+
+

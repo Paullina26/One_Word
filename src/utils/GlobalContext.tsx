@@ -2,6 +2,7 @@ import { useEffect, useState, createContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { API, headers } from 'API/api';
 import { FC } from 'react';
+import { routes } from 'data/routes';
 
 // const EventViewContext = createContext<EventViewContextValue>({} as EventViewContextValue);
 interface GlobalProviderProps {
@@ -55,7 +56,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
       });
       const { status } = response;
       if (status === 200) setIsLoginUser(true);
-      navigate('/user');
+      navigate(`${routes.LEARN_TODAYS_WORD.to}`);
     } catch (err) {
       console.log('5---useEf_GlobCont_LoadingUser', err);
     } finally {

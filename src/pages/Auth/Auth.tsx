@@ -12,15 +12,12 @@ export const Auth: FC = () => {
   };
 
   return (
-    <>
-      <Background />
-      <S.WrapperAuth>
-        <S.WrapperElementRegistrationLogin>
-          <Login toggleAuthForm={handleActive} />
-          <Registration toggleAuthForm={handleActive} isActive={isActive} />
-        </S.WrapperElementRegistrationLogin>
-      </S.WrapperAuth>
-    </>
+    <S.WrapperAuth>
+      <S.WrapperElementRegistrationLogin>
+        <Login toggleAuthForm={handleActive} />
+        <Registration toggleAuthForm={handleActive} isActive={isActive} />
+      </S.WrapperElementRegistrationLogin>
+    </S.WrapperAuth>
   );
 };
 
