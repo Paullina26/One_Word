@@ -5,12 +5,11 @@ import {
   color_gradient_animation,
   color_gradient_backGround_liner_dark,
   color_gradient_light_menu,
-  boxShadow_darkTheme_menu_elemnt,
+  boxShadow_darkTheme_menu_element,
 } from 'style/mixins';
 
 export const NavigationWrapper = styled.div<{ $isOpenMenu: boolean }>`
   ${color_gradient_backGround_liner_dark};
-  /* box-shadow: 2px 2px 3px rgb(92, 92, 143); */
   z-index: 100;
   color: ${({ theme }) => theme.white};
   position: absolute;
@@ -39,12 +38,11 @@ export const Menu = styled.div`
   text-align: center;
   padding: 30px;
   color: ${({ theme }) => theme.white};
-  /* cursor: pointer; */
 `;
 
 export const NavigationElementTitle = styled.div`
   ${color_gradient_backGround_liner_dark};
-  ${boxShadow_darkTheme_menu_elemnt};
+  ${boxShadow_darkTheme_menu_element};
   ${font_settings(2.5, 'normal', 500)};
   color: ${({ theme }) => theme.white};
   text-align: center;
@@ -57,7 +55,7 @@ export const NavigationElementTitle = styled.div`
 
 export const StyledLink = styled(NavLink)`
   ${font_settings(2, 'normal', 500)};
-  ${boxShadow_darkTheme_menu_elemnt};
+  ${boxShadow_darkTheme_menu_element};
   ${color_gradient_light_menu};
   display: block;
   padding: 10px;
@@ -75,7 +73,7 @@ export const StyledLink = styled(NavLink)`
 
   &:before {
     ${color_gradient_animation};
-    ${boxShadow_darkTheme_menu_elemnt};
+    ${boxShadow_darkTheme_menu_element};
     content: '';
     white-space: nowrap;
     position: absolute;

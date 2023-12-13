@@ -18,8 +18,6 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 1.6rem;
     background-attachment: fixed;
     color: black;
-    /* width: 100vw;
-    height: 100vh; */
     background-image: radial-gradient(
     circle,
     #a2a0c8,

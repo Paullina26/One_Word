@@ -3,10 +3,6 @@ import styled from 'styled-components';
 import Bubble from 'components/Background/Bubble';
 import { flags } from 'helpers/flags';
 
-const BgStyled = styled.div`
-  //test
-`;
-
 const bubbles = [
   {
     $directions: 'to right top',
@@ -122,11 +118,11 @@ const bubbles = [
 
 const Background: FC = () => {
   return (
-    <BgStyled>
+    <div>
       {bubbles.map((el, index) => (
         <Bubble key={`${el.$directions}-${index}`} {...el} />
       ))}
-    </BgStyled>
+    </div>
   );
 };
 

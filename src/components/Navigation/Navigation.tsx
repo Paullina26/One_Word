@@ -49,21 +49,17 @@ export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
     },
   ];
 
-  const navItemLearningRender = navItemLearning.map(item => {
-    return (
-      <S.StyledLink key={item.name} to={item.to} data-hover={item.name}>
-        <p>{item.name}</p>
-      </S.StyledLink>
-    );
-  });
+  const navItemLearningRender = navItemLearning.map(item => (
+    <S.StyledLink key={item.name} to={item.to} data-hover={item.name}>
+      <p>{item.name}</p>
+    </S.StyledLink>
+  ));
 
-  const navItemSettingsRender = navItemSettingsUser.map(item => {
-    return (
-      <S.StyledLink key={item.name} to={item.to} data-hover={item.name}>
-        <p>{item.name}</p>
-      </S.StyledLink>
-    );
-  });
+  const navItemSettingsRender = navItemSettingsUser.map(item => (
+    <S.StyledLink key={item.name} to={item.to} data-hover={item.name}>
+      <p>{item.name}</p>
+    </S.StyledLink>
+  ));
 
   return (
     <S.NavigationWrapper $isOpenMenu={isOpenMenu}>

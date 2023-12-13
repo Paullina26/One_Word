@@ -58,7 +58,6 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
       if (status === 200) setIsLoginUser(true);
       navigate(`${routes.LEARN_TODAYS_WORD.to}`);
     } catch (err) {
-      console.log('5---useEf_GlobCont_LoadingUser', err);
     } finally {
       setIsLoadingUser(false);
     }
@@ -66,7 +65,6 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
 
   useEffect(() => {
     checkLoginStatus();
-    // console.log('---IS_LOGIN_USER2---GlobalCon', isLoginUser);
   }, []);
 
   return (

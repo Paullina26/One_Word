@@ -4,10 +4,10 @@ import { GlobalContext } from 'utils/GlobalContext';
 import { toast, ToastOptions } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toastColored } from 'helpers/StyleToastify';
-import { headers, API } from 'API/api';
 import * as S from 'components/Login/StyleLogin';
 import Input from 'components/Shared/Form/Input';
 import Submit from 'components/Shared/Form/Submit';
+import { headers, API } from 'API/api';
 import { WrapperInputs, WrapperForm } from 'components/Shared/Form/StyleForm';
 import { Button } from 'components/Shared/Buttons/Button';
 import { inputNameElement } from 'helpers/mixins';
@@ -45,7 +45,7 @@ export const Login: FC<LoginProps> = ({ toggleAuthForm }) => {
     };
     const response = await toast.promise(fetch(API.login, requestDetails), toastAlerts);
     const { status } = response;
-    console.log(status);
+
     if (status === 200) {
       setIsLoginUser(true);
       navigate(`${routes.LEARN_TODAYS_WORD.to}`);
@@ -91,7 +91,7 @@ export const Login: FC<LoginProps> = ({ toggleAuthForm }) => {
               required
             />
           </WrapperInputs>
-          <Submit $isLightTeam={true} value='Login' id='submit_Login' type='submit' />
+          <Submit $isLightTeam={true} value='Login' id='submit_Login' />
         </form>
       </WrapperForm>
       <Button onClick={toggleAuthForm} $isLightTeam={true}>

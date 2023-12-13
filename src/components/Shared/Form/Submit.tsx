@@ -11,7 +11,7 @@ import {
 
 interface SubmitProps {
   id: string;
-  type: string;
+  // type: string;
   value: string;
   $isLightTeam: boolean;
 }
@@ -30,8 +30,8 @@ export const SubmitStyle = styled.input<{
   ${outline_focus};
 `;
 
-const Submit: FC<SubmitProps> = ({ id, type, value, $isLightTeam }) => {
-  return <SubmitStyle id={id} type={type} value={value} $isLightTeam={$isLightTeam} />;
+const Submit: FC<SubmitProps> = ({ id, value, $isLightTeam }) => {
+  return <SubmitStyle id={id} type='submit' value={value} $isLightTeam={$isLightTeam} />;
 };
 
 export default Submit;

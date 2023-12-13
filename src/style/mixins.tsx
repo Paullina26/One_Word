@@ -139,7 +139,7 @@ export const color_gradient_glassEffect_dark = `
 export const color_gradient_light_menu = `
   background: radial-gradient(circle at 100px 100px, rgb(240, 240, 250), rgba(200, 200, 230, 1));
 `;
-export const boxShadow_darkTheme_menu_elemnt = `
+export const boxShadow_darkTheme_menu_element = `
   border: none;
   box-shadow: -3px -3px 3px rgba(134, 134, 171, 0.3) ,
   3px 3px 5px rgba(25, 20, 65, 0.5), inset -1px 1px 1px rgba(255, 255, 255, 0.25),

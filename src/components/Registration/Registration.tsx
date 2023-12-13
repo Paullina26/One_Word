@@ -103,12 +103,7 @@ export const Registration: FC<RegistrationProps> = ({ toggleAuthForm, isActive }
                 required
               />
             </WrapperInputs>
-            <Submit
-              $isLightTeam={false}
-              value='Registration'
-              id='submit_Registration'
-              type='submit'
-            />
+            <Submit $isLightTeam={false} value='Registration' id='submit_Registration' />
           </form>
         </WrapperForm>
         <Button onClick={toggleAuthForm} $isLightTeam={false}>
@@ -120,5 +115,3 @@ export const Registration: FC<RegistrationProps> = ({ toggleAuthForm, isActive }
 };
 
 export default Registration;
-
-

@@ -32,8 +32,6 @@ export const fly = (x: number | undefined = 0, y: number | undefined = 0) => key
 
 70% {
     transform : translate(${50 * x}px, ${45 * y}px);
-    border-radius : '50% 50% 50% 50%/ 50% 50% 50% 50%';
-
 }
 
 80% {

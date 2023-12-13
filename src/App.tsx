@@ -6,6 +6,7 @@ import RoutesComponent from 'routes';
 import GlobalProvider from 'utils/GlobalContext';
 import TemplatesGlobal from 'templates/TemplatesGlobal';
 import Dashboard from 'components/Shared/containers/ComponentDisplay';
+
 function App() {
   return (
     <Router>
