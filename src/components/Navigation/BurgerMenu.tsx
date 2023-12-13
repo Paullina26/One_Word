@@ -6,18 +6,20 @@ import {
   color_gradient_button,
   color_gradient_animation,
   color_gradient_button_menu,
+  color_gradient_menu_bar,
+  color_gradient_menu_burger,
 } from 'style/mixins';
 
 const StyledBurger = styled.button<{ $isOpenMenu: boolean }>`
   z-index: 101;
-  margin: 10px;
-  position: absolute;
+  margin: 5px;
+  position: fixed;
   border-radius: 50%;
-  bottom: 10px;
-  right: 10px;
+  bottom: 5px;
+  right: 5px;
   overflow: hidden;
   cursor: pointer;
-  ${color_gradient_button_menu};
+  ${color_gradient_menu_burger};
   ${boxShadow_button};
   &:focus {
     outline: none;
@@ -30,7 +32,7 @@ const WrapperBar = styled.div<{ $isOpenMenu: boolean }>`
   margin: 10px;
   position: relative;
   div {
-    ${color_gradient_animation};
+    ${color_gradient_menu_bar};
     width: 90%;
     height: 8px;
     display: block;

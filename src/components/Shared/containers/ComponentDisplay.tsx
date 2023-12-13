@@ -2,8 +2,11 @@ import styled from 'styled-components';
 import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
 
 export const WrapperComponentDisplay = styled.div`
-  min-height: 50vh;
-  margin: 0 auto;
+  height: 100vh;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 interface ComponentDisplayProps {

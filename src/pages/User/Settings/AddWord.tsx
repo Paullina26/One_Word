@@ -1,5 +1,108 @@
+import styled from 'styled-components';
+import { color_gradient_glassEffect_light, font_settings } from 'style/mixins';
+import Input from 'components/Shared/Form/Input';
+import { FC, useContext, useState } from 'react';
+import { inputNameElement } from 'helpers/mixins';
+import Submit from 'components/Shared/Form/Submit';
+import Select from 'components/Shared/Form/Select';
+import { Button } from 'components/Shared/Buttons/Button';
+
+export const WrapperSettings = styled.div`
+  ${color_gradient_glassEffect_light};
+  color: ${({ theme }) => theme.purpleDark};
+  border-radius: 20px;
+  text-align: center;
+  width: 90vw;
+  max-width: 500px;
+  max-height: 650px;
+  margin: auto;
+  padding: 20px 30px;
+  backdrop-filter: blur(3px);
+  box-shadow: -3px -3px 5px rgba(94, 104, 121, 0.2), 3px 3px 5px rgba(94, 104, 121, 0.2);
+  border: 3px inset rgba(220, 220, 220, 0.2);
+`;
+
+export const Tittle = styled.p`
+  ${font_settings(2.4, 'normal', 600)}
+  margin: 5px auto;
+`;
+
 const AddWordSettings = () => {
-  return <div>Add Word Settings</div>;
+  const [wordBase, setWordBase] = useState<string>('');
+  const [selectedOptionLanguageWord, setSelectedOptionLanguageWord] = useState('');
+  const [selectedOptionWordLanguageTranslate, setSelectedOptionWordLanguageTranslate] =
+    useState('');
+  const [selectedOptionCategory, setSelectedOptionCategory] = useState('');
+  const optionsLanguage = ['English', 'German', 'Polish'];
+  const optionsCategory = [
+    'Kitchen',
+    'Travel',
+    'Sports',
+    'Food',
+    'Weather',
+    'Clothing',
+    'Animals',
+    'Work',
+  ];
+
+  const handleSelectChange = (value: string) => {
+    setSelectedOptionLanguageWord(value);
+  };
+
+  return (
+    <WrapperSettings>
+      <Tittle>Add Word</Tittle>
+      <form action='submit'>
+        <Input
+          $fontColorLabel='purpleDark'
+          $isLightTeam={true}
+          {...inputNameElement('settings_addWordBase', 'text', 'Word')}
+          onChange={value => setWordBase(value)}
+          value={wordBase}
+          minlength={2}
+          required
+        />
+        <Select
+          id='settings_selectLanguageWord'
+          $fontColorLabel='purpleDark'
+          labelValue='Select Language Word'
+          options={optionsLanguage}
+          value={selectedOptionLanguageWord}
+          onChange={handleSelectChange}
+          $isLightTeam={true}
+        />
+        <Input
+          $fontColorLabel='purpleDark'
+          $isLightTeam={true}
+          {...inputNameElement('settings_addWordTranslate', 'text', 'Word Translate')}
+          onChange={value => setWordBase(value)}
+          value={wordBase}
+          minlength={2}
+          required
+        />
+        <Select
+          id='settings_selectLanguageWordTranslate'
+          $fontColorLabel='purpleDark'
+          labelValue='Select Language Word Translate'
+          options={optionsLanguage}
+          value={selectedOptionWordLanguageTranslate}
+          onChange={handleSelectChange}
+          $isLightTeam={true}
+        />
+        <Select
+          id='settings_addWordCategory'
+          $fontColorLabel='purpleDark'
+          labelValue='Select Category'
+          options={optionsCategory}
+          value={selectedOptionCategory}
+          onChange={handleSelectChange}
+          $isLightTeam={true}
+        />
+        <Submit $isLightTeam={true} value='Add Word' id='settings_addWordSubmit' />
+      </form>
+      {/* <button>Import Word Excel</button> */}
+    </WrapperSettings>
+  );
 };
 
 export default AddWordSettings;

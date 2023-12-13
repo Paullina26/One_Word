@@ -88,6 +88,13 @@ export const color_gradient_button_menu = `
   background: radial-gradient(circle at 100px 100px, rgba(80, 0, 45, 1), rgba(200, 120, 165, 1));
 `;
 
+export const color_gradient_menu_bar = `
+  background: radial-gradient(circle at 100px 100px, rgb(46, 40, 85), rgb(7,212,255));
+`;
+export const color_gradient_menu_burger = `
+  background: radial-gradient(circle at 100px 100px, rgba(200, 120, 165), rgba(140, 60, 105, 1));
+`;
+
 export const color_gradient_animation = `
   background:  linear-gradient(
     90deg,
