@@ -94,7 +94,7 @@ export const Login: FC<LoginProps> = ({ toggleAuthForm }) => {
           <Submit $isLightTeam={true} value='Login' id='submit_Login' />
         </form>
       </WrapperForm>
-      <Button onClick={toggleAuthForm} $isLightTeam={true}>
+      <Button onClick={toggleAuthForm} $isLightTeam={true} type='button'>
         Registration
       </Button>
     </S.WrapperLogin>

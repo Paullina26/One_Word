@@ -118,11 +118,11 @@ const bubbles = [
 
 const Background: FC = () => {
   return (
-    <div>
+    <>
       {bubbles.map((el, index) => (
         <Bubble key={`${el.$directions}-${index}`} {...el} />
       ))}
-    </div>
+    </>
   );
 };
 

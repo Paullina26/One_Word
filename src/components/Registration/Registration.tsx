@@ -106,7 +106,7 @@ export const Registration: FC<RegistrationProps> = ({ toggleAuthForm, isActive }
             <Submit $isLightTeam={false} value='Registration' id='submit_Registration' />
           </form>
         </WrapperForm>
-        <Button onClick={toggleAuthForm} $isLightTeam={false}>
+        <Button onClick={toggleAuthForm} $isLightTeam={false} type='button'>
           Login
         </Button>
       </S.SingInWrapper>

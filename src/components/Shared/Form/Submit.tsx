@@ -11,7 +11,6 @@ import {
 
 interface SubmitProps {
   id: string;
-  // type: string;
   value: string;
   $isLightTeam: boolean;
 }
