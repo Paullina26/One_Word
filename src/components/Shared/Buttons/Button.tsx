@@ -1,18 +1,19 @@
 import styled from 'styled-components';
-import { font } from 'style/mixins';
+import {
+  font_settings,
+  color_gradient_button,
+  default_style_button,
+  boxShadow_lightTheme_button,
+  boxShadow_darkTheme_button,
+  outline_focus,
+} from 'style/mixins';
 
-export const Button = styled.button`
-  ${font(2.2, 'italic', 300)};
-  margin: 30px;
-  padding: 7px 20px;
-  border-radius: 20px;
-  border: none;
-  background: radial-gradient(
-    circle,
-    ${({ theme }) => theme.buttonPink} 0%,
-    ${({ theme }) => theme.buttonPinkLight} 100%
-  );
+export const Button = styled.button<{ $isLightTeam: boolean }>`
+  ${font_settings(2.2, 'italic', 300)};
+  ${default_style_button};
+  ${color_gradient_button};
+  ${({ $isLightTeam }) =>
+    $isLightTeam ? `${boxShadow_lightTheme_button}` : `${boxShadow_darkTheme_button}`};
   color: ${({ theme }) => theme.white};
-  box-shadow: -4px -4px 7px ${({ theme }) => theme.boxShadowWhite},
-    4px 4px 7px ${({ theme }) => theme.boxShadowGray};
+  ${outline_focus};
 `;

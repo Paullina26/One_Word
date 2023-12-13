@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const DescriptionWrapper = styled.div`
+  margin: 20px auto;
+`;
+
 export const Tittle = styled.p`
   margin-top: 20px;
   margin-bottom: 10px;
@@ -24,12 +28,11 @@ const texts = [
 ];
 
 const renderDescription = texts.map(text => <Description key={text}>{text}</Description>);
-// @ts-ignore
 export const Welcome = () => {
   return (
     <>
       <Tittle>Hello</Tittle>
-      {renderDescription}
+      <DescriptionWrapper>{renderDescription}</DescriptionWrapper>
     </>
   );
 };

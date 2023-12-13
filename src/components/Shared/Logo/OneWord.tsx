@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { font } from 'style/mixins';
+import { font_settings } from 'style/mixins';
 
 interface TittleOneWordProps {
   $fontColor: string;
 }
 
 export const TittleOneWord = styled.h1<{ $fontColor: string }>`
-  ${font(5, 'italic', 900)};
+  ${font_settings(5, 'italic', 900)};
   color: ${({ theme, $fontColor }) => theme[$fontColor]};
 `;
 

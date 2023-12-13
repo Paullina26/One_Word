@@ -4,6 +4,8 @@ import { theme } from 'style/theme';
 import { GlobalStyle } from 'style/GlobalStyle';
 import RoutesComponent from 'routes';
 import GlobalProvider from 'utils/GlobalContext';
+import TemplatesGlobal from 'templates/TemplatesGlobal';
+import Dashboard from 'components/Shared/containers/ComponentDisplay';
 
 function App() {
   return (
@@ -11,7 +13,9 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <GlobalProvider>
-          <RoutesComponent />
+          <TemplatesGlobal>
+            <RoutesComponent />
+          </TemplatesGlobal>
         </GlobalProvider>
       </ThemeProvider>
     </Router>

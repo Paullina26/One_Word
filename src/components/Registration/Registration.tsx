@@ -1,30 +1,30 @@
-import { FC, useState, useContext } from 'react';
-import { ToastContainer, toast, ToastOptions } from 'react-toastify';
+import { FC, useState } from 'react';
+import { toast, ToastOptions } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toastColored } from 'helpers/StyleToastify';
 import * as S from 'components/Registration/StyleRegistration';
-import { WrapperForm } from 'components/Form/StyleForm';
-import Input from 'components/Form/Input';
-import Submit from 'components/Form/Submit';
+import { WrapperForm, WrapperInputs } from 'components/Shared/Form/StyleForm';
+import Input from 'components/Shared/Form/Input';
+import Submit from 'components/Shared/Form/Submit';
 import { headers, API } from 'API/api';
+import { Button } from 'components/Shared/Buttons/Button';
+import { inputNameElement } from 'helpers/mixins';
 
 interface RegistrationProps {
-  onClick: () => void;
+  toggleAuthForm: () => void;
   isActive: boolean;
 }
-
-export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
+export const Registration: FC<RegistrationProps> = ({ toggleAuthForm, isActive }) => {
   const [mail, setMail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordRepeating, setPasswordRepeating] = useState<string>('');
 
-  const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleRegistrationUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password === passwordRepeating) {
       try {
-        await sendDataToDatabase(mail, password);
+        await sendDataUserToDatabase(mail, password);
       } catch (error) {
-        console.log('BŁĄD_REJESTRACJI:', error);
         toast.error(`${error}`, toastColored as ToastOptions<{}>);
       }
     } else {
@@ -32,7 +32,7 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
     }
   };
 
-  const sendDataToDatabase = async (mail: string, password: string) => {
+  const sendDataUserToDatabase = async (mail: string, password: string) => {
     const response = await toast.promise(
       fetch(API.registration, {
         method: 'POST',
@@ -41,10 +41,19 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
       }),
       {
         pending: 'Waiting',
-        success: 'Register is success. 👌',
         error: 'An error occurred while registering. 🤯',
       }
     );
+    const json = await response.json();
+    const { status } = response;
+    if (status === 200) {
+      toast.success('Register is success. 👌', toastColored as ToastOptions<{}>);
+      toggleAuthForm();
+    } else if (status === 400 || status === 500) {
+      toast.error(`${json.message}`, toastColored as ToastOptions<{}>);
+    } else {
+      toast.error('An error occurred while registering. 🤯', toastColored as ToastOptions<{}>);
+    }
     cleaningValueInput();
   };
 
@@ -56,64 +65,50 @@ export const Registration: FC<RegistrationProps> = ({ onClick, isActive }) => {
 
   return (
     <>
-      <ToastContainer />
-      <S.SingInWrapper $isHidden={isActive}>
-        <S.RegistrationText onClick={onClick}>Sing In</S.RegistrationText>
+      <S.SingInWrapper $isActive={isActive}>
+        <S.RegistrationText>Registration</S.RegistrationText>
         <WrapperForm>
-          <form onSubmit={handleForm}>
-            <Input
-              $fontColorLabel='white'
-              $boxShadowLight='boxShadowPurpleLight'
-              $boxShadowDark='boxShadowPurpleDark'
-              label='Email'
-              id='e-mail_Registration'
-              type='email'
-              value={mail}
-              onChange={value => setMail(value)}
-              autoComplete='email'
-              placeholder='email'
-              minlength={4}
-              pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
-              required
-            />
-            <Input
-              $fontColorLabel='white'
-              label='Password'
-              id='password_Registration'
-              type='password'
-              value={password}
-              onChange={value => setPassword(value)}
-              autoComplete='password'
-              // placeholder={nameElement.email}
-              placeholder='password'
-              minlength={4}
-              required
-              $boxShadowLight='boxShadowPurpleLight'
-              $boxShadowDark='boxShadowPurpleDark'
-            />
-            <Input
-              $fontColorLabel='white'
-              $boxShadowLight='boxShadowPurpleLight'
-              $boxShadowDark='boxShadowPurpleDark'
-              label='Password Repeating'
-              id='password_Registration_Repeating'
-              type='password'
-              value={passwordRepeating}
-              onChange={value => setPasswordRepeating(value)}
-              autoComplete='password'
-              placeholder='password'
-              minlength={4}
-              required
-            />
-            <Submit
-              id='submit_Login'
-              type='submit'
-              value='Sing In'
-              $boxShadowLight='boxShadowPurpleLight'
-              $boxShadowDark='boxShadowPurpleDark'
-            />
+          <form onSubmit={handleRegistrationUser}>
+            <WrapperInputs>
+              <Input
+                $fontColorLabel='white'
+                $isLightTeam={false}
+                {...inputNameElement('email_Registration', 'email', 'Email')}
+                value={mail}
+                onChange={value => setMail(value)}
+                minlength={4}
+                pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
+                required
+              />
+              <Input
+                $fontColorLabel='white'
+                $isLightTeam={false}
+                {...inputNameElement('password_Registration', 'password', 'Password')}
+                value={password}
+                onChange={value => setPassword(value)}
+                minlength={4}
+                required
+              />
+              <Input
+                $fontColorLabel='white'
+                $isLightTeam={false}
+                {...inputNameElement(
+                  'password_Registration_Repeating',
+                  'password',
+                  'Password Repeating'
+                )}
+                value={passwordRepeating}
+                onChange={value => setPasswordRepeating(value)}
+                minlength={4}
+                required
+              />
+            </WrapperInputs>
+            <Submit $isLightTeam={false} value='Registration' id='submit_Registration' />
           </form>
         </WrapperForm>
+        <Button onClick={toggleAuthForm} $isLightTeam={false} type='button'>
+          Login
+        </Button>
       </S.SingInWrapper>
     </>
   );

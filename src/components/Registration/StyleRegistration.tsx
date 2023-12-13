@@ -1,40 +1,35 @@
 import styled, { keyframes } from 'styled-components';
-import { font } from 'style/mixins';
+import {
+  font_settings,
+  color_gradient_glassEffect_dark,
+  border_radius_effect_bubble,
+} from 'style/mixins';
 import { device } from 'style/devices';
 
-export const SingInWrapper = styled.div<{ $isHidden: boolean }>`
-  ${font(3, 'italic', 900)};
+export const SingInWrapper = styled.div<{ $isActive: boolean }>`
+  ${font_settings(3, 'italic', 900)};
+  ${color_gradient_glassEffect_dark};
+  ${border_radius_effect_bubble};
   color: ${({ theme }) => theme.white};
   width: 100%;
-  height: 70%;
-  max-height: 530px;
+  height: 100%;
   bottom: 0;
   position: absolute;
-  padding: 10px;
-  overflow: hidden;
-  background: radial-gradient(
-    circle,
-    ${({ theme }) => theme.gradientPurpleDark} 0%,
-    ${({ theme }) => theme.gradientPurpleOne} 25%,
-    ${({ theme }) => theme.gradientPurpleTwo} 50%,
-    ${({ theme }) => theme.gradientPurpleThere} 75%,
-    ${({ theme }) => theme.gradientPurpleFour}100%
-  );
+  padding: 30px 10px;
   backdrop-filter: blur(5px);
-  box-shadow: -2px -2px 15px rgba(46, 39, 86, 0.7);
-  border-radius: 50px 50px 0 0;
-  border: none;
-  transition: height 0.3s ease-in-out;
-  height: ${({ $isHidden }) => ($isHidden ? '80px' : '89%')};
-
+  border: 3px inset rgba(230, 230, 230, 0.2);
+  transition: all 0.2s linear;
+  opacity: ${({ $isActive }) => ($isActive ? '0' : '1')};
+  filter: ${({ $isActive }) => ($isActive ? 'blur(10px)' : 'blur(0)')};
+  transform: ${({ $isActive }) => ($isActive ? 'scale(0)' : 'scale(1)')};
   @media ${device.mobileXL} {
-    border-radius: 50px 50px 50px 50px;
+    //test
   }
 `;
 
 export const RegistrationText = styled.div`
   padding: 20px;
-  ${font(3, 'italic', 900)};
+  ${font_settings(3, 'italic', 900)};
   color: ${({ theme }) => theme.white};
   cursor: pointer;
 `;

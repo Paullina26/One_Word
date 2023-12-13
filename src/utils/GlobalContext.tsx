@@ -1,7 +1,8 @@
 import { useEffect, useState, createContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { API, headers } from 'API/api';
 import { FC } from 'react';
+import { routes } from 'data/routes';
 
 // const EventViewContext = createContext<EventViewContextValue>({} as EventViewContextValue);
 interface GlobalProviderProps {
@@ -21,11 +22,14 @@ interface GlobalContextValue {
 export const GlobalContext = createContext<GlobalContextValue>({} as GlobalContextValue);
 
 const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
+  const navigate = useNavigate();
   const location = useLocation();
   const [isLoginUser, setIsLoginUser] = useState(false);
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isLoadingOpen, setIsLoadingOpen] = useState(false);
+  console.log('---IS_LOGIN_USER---GlobalCon', isLoginUser);
+  // console.log('---Global_Context_OPEN_MENU---', isOpenMenu);
 
   const values = {
     isLoginUser,
@@ -38,12 +42,12 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     setIsLoadingOpen,
   };
 
-  // useEffect(() => {
-  //   setIsOpenMenu(false);
-  // }, [location.pathname]);
+  useEffect(() => {
+    setIsOpenMenu(false);
+  }, [location.pathname]);
+
   const checkLoginStatus = async () => {
-    const token = localStorage.getItem('TOKEN');
-    console.log('TOKEN:', token);
+    const token = localStorage.getItem('token');
     if (!token || isLoginUser) return;
     setIsLoadingUser(true);
     try {
@@ -51,10 +55,9 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
         headers: { ...headers, Authorization: `Bearer ${token}` },
       });
       const { status } = response;
-      console.log('GlobalContext_isLoginUser', status);
       if (status === 200) setIsLoginUser(true);
+      navigate(`${routes.LEARN_TODAYS_WORD.to}`);
     } catch (err) {
-      console.log('useEf_GlobCont_LoadingUser', err);
     } finally {
       setIsLoadingUser(false);
     }
@@ -65,7 +68,6 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   }, []);
 
   return (
-    //@ts-ignore
     <GlobalContext.Provider value={values}>
       {children}
       {/* {isLoadingOpen && <Loading />} */}
