@@ -28,8 +28,6 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isLoadingOpen, setIsLoadingOpen] = useState(false);
-  console.log('---IS_LOGIN_USER---GlobalCon', isLoginUser);
-  // console.log('---Global_Context_OPEN_MENU---', isOpenMenu);
 
   const values = {
     isLoginUser,
@@ -58,6 +56,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
       if (status === 200) setIsLoginUser(true);
       navigate(`${routes.LEARN_TODAYS_WORD.to}`);
     } catch (err) {
+      console.log(err);
     } finally {
       setIsLoadingUser(false);
     }

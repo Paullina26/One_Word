@@ -6,6 +6,8 @@ import { inputNameElement } from 'helpers/mixins';
 import Submit from 'components/Shared/Form/Submit';
 import Select from 'components/Shared/Form/Select';
 import { Button } from 'components/Shared/Buttons/Button';
+import { optionsCategory } from 'data/option/category_options';
+import { optionsLanguage } from 'data/option/language_options';
 
 export const WrapperSettings = styled.div`
   ${color_gradient_glassEffect_light};
@@ -27,77 +29,68 @@ export const Tittle = styled.p`
   margin: 5px auto;
 `;
 
+export const WrapperInputsSettingsAddWord = styled.div`
+  margin-bottom: 30px;
+  margin-top: 20px;
+`;
+
 const AddWordSettings = () => {
   const [wordBase, setWordBase] = useState<string>('');
+  const [wordTranslate, setWordTranslate] = useState<string>('');
   const [selectedOptionLanguageWord, setSelectedOptionLanguageWord] = useState('');
   const [selectedOptionWordLanguageTranslate, setSelectedOptionWordLanguageTranslate] =
     useState('');
-  const [selectedOptionCategory, setSelectedOptionCategory] = useState('');
-  const optionsLanguage = ['English', 'German', 'Polish'];
-  const optionsCategory = [
-    'Kitchen',
-    'Travel',
-    'Sports',
-    'Food',
-    'Weather',
-    'Clothing',
-    'Animals',
-    'Work',
-  ];
 
-  const handleSelectChange = (value: string) => {
+  const handleSelectChangeBaseWord = (value: string) => {
     setSelectedOptionLanguageWord(value);
+  };
+
+  const handleSelectChangeTranslateWord = (value: string) => {
+    setSelectedOptionWordLanguageTranslate(value);
   };
 
   return (
     <WrapperSettings>
       <Tittle>Add Word</Tittle>
       <form action='submit'>
-        <Input
-          $fontColorLabel='purpleDark'
-          $isLightTeam={true}
-          {...inputNameElement('settings_addWordBase', 'text', 'Word')}
-          onChange={value => setWordBase(value)}
-          value={wordBase}
-          minlength={2}
-          required
-        />
-        <Select
-          id='settings_selectLanguageWord'
-          $fontColorLabel='purpleDark'
-          labelValue='Select Language Word'
-          options={optionsLanguage}
-          value={selectedOptionLanguageWord}
-          onChange={handleSelectChange}
-          $isLightTeam={true}
-        />
-        <Input
-          $fontColorLabel='purpleDark'
-          $isLightTeam={true}
-          {...inputNameElement('settings_addWordTranslate', 'text', 'Word Translate')}
-          onChange={value => setWordBase(value)}
-          value={wordBase}
-          minlength={2}
-          required
-        />
-        <Select
-          id='settings_selectLanguageWordTranslate'
-          $fontColorLabel='purpleDark'
-          labelValue='Select Language Word Translate'
-          options={optionsLanguage}
-          value={selectedOptionWordLanguageTranslate}
-          onChange={handleSelectChange}
-          $isLightTeam={true}
-        />
-        <Select
-          id='settings_addWordCategory'
-          $fontColorLabel='purpleDark'
-          labelValue='Select Category'
-          options={optionsCategory}
-          value={selectedOptionCategory}
-          onChange={handleSelectChange}
-          $isLightTeam={true}
-        />
+        <WrapperInputsSettingsAddWord>
+          <Input
+            $fontColorLabel='purpleDark'
+            $isLightTeam={true}
+            {...inputNameElement('settings_addWordBase', 'text', 'Word')}
+            onChange={value => setWordBase(value)}
+            value={wordBase}
+            minlength={2}
+            required
+          />
+          <Select
+            id='settings_selectLanguageWord'
+            $fontColorLabel='purpleDark'
+            labelValue='Select Language Word'
+            options={optionsLanguage}
+            value={selectedOptionLanguageWord}
+            onChange={handleSelectChangeBaseWord}
+            $isLightTeam={true}
+          />
+          <Input
+            $fontColorLabel='purpleDark'
+            $isLightTeam={true}
+            {...inputNameElement('settings_addWordTranslate', 'text', 'Word Translate')}
+            onChange={value => setWordTranslate(value)}
+            value={wordTranslate}
+            minlength={2}
+            required
+          />
+          <Select
+            id='settings_selectLanguageWordTranslate'
+            $fontColorLabel='purpleDark'
+            labelValue='Select Language Word Translate'
+            options={optionsLanguage}
+            value={selectedOptionWordLanguageTranslate}
+            onChange={handleSelectChangeTranslateWord}
+            $isLightTeam={true}
+          />
+        </WrapperInputsSettingsAddWord>
         <Submit $isLightTeam={true} value='Add Word' id='settings_addWordSubmit' />
       </form>
       {/* <button>Import Word Excel</button> */}

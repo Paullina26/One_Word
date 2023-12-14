@@ -89,7 +89,7 @@ export const color_gradient_button_menu = `
 `;
 
 export const color_gradient_menu_bar = `
-  background: radial-gradient(circle at 100px 100px, rgb(46, 40, 85), rgb(7,212,255));
+  background: radial-gradient(circle at 100px 100px, rgb(255, 255, 255), rgb(178, 175, 198));
 `;
 export const color_gradient_menu_burger = `
   background: radial-gradient(circle at 100px 100px, rgba(200, 120, 165), rgba(140, 60, 105, 1));
@@ -122,14 +122,7 @@ export const color_gradient_backGround_liner_dark = `
 `;
 
 export const color_gradient_glassEffect_light = `
-  background: linear-gradient(
-    160deg,
-    rgba(190, 190, 210, 0.7) 0%,
-    rgba(200, 200, 220, 0.7) 25%,
-    rgba(220, 220, 240, 0.7) 50%,
-    rgba(200, 200, 220, 0.7) 75%,
-    rgba(190, 190, 210, 0.7) 100%
-  );
+ background: radial-gradient(circle at 50% 50%, rgba(220, 220, 240, 0.9), rgba(190, 190, 210, 0.9));
 `;
 
 export const color_gradient_glassEffect_dark = `
