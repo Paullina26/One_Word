@@ -1,28 +1,15 @@
 import styled from 'styled-components';
-import { color_gradient_glassEffect_light, font_settings } from 'style/mixins';
-import Input from 'components/Shared/Form/Input';
+import { GlobalContext } from 'utils/GlobalContext';
 import { FC, useContext, useState } from 'react';
+import { font_settings } from 'style/mixins';
+import Input from 'components/Shared/Form/Input';
 import { inputNameElement } from 'helpers/mixins';
 import Submit from 'components/Shared/Form/Submit';
 import Select from 'components/Shared/Form/Select';
 import { Button } from 'components/Shared/Buttons/Button';
 import { optionsCategory } from 'data/option/category_options';
 import { optionsLanguage } from 'data/option/language_options';
-
-export const WrapperSettings = styled.div`
-  ${color_gradient_glassEffect_light};
-  color: ${({ theme }) => theme.purpleDark};
-  border-radius: 20px;
-  text-align: center;
-  width: 90vw;
-  max-width: 500px;
-  max-height: 650px;
-  margin: auto;
-  padding: 20px 30px;
-  backdrop-filter: blur(3px);
-  box-shadow: -3px -3px 5px rgba(94, 104, 121, 0.2), 3px 3px 5px rgba(94, 104, 121, 0.2);
-  border: 3px inset rgba(220, 220, 220, 0.2);
-`;
+import { WrapperSettings } from 'components/Shared/containers/WrapperSettings';
 
 export const Tittle = styled.p`
   ${font_settings(2.4, 'normal', 600)}
@@ -35,19 +22,17 @@ export const WrapperInputsSettingsAddWord = styled.div`
 `;
 
 const AddWordSettings = () => {
+  const { defaultWordLanguage, defaultWordLanguageTranslate } = useContext(GlobalContext);
   const [wordBase, setWordBase] = useState<string>('');
   const [wordTranslate, setWordTranslate] = useState<string>('');
-  const [selectedOptionLanguageWord, setSelectedOptionLanguageWord] = useState('');
-  const [selectedOptionWordLanguageTranslate, setSelectedOptionWordLanguageTranslate] =
-    useState('');
+  const [selectedOptionLanguageWord, setSelectedOptionLanguageWord] = useState(defaultWordLanguage);
+  const [selectedOptionWordLanguageTranslate, setSelectedOptionWordLanguageTranslate] = useState(
+    defaultWordLanguageTranslate
+  );
 
-  const handleSelectChangeBaseWord = (value: string) => {
-    setSelectedOptionLanguageWord(value);
-  };
-
-  const handleSelectChangeTranslateWord = (value: string) => {
-    setSelectedOptionWordLanguageTranslate(value);
-  };
+  // const handleSelectChangeBaseWord = (value: string) => {
+  //   setSelectedOptionLanguageWord(value);
+  // };
 
   return (
     <WrapperSettings>
@@ -69,7 +54,7 @@ const AddWordSettings = () => {
             labelValue='Select Language Word'
             options={optionsLanguage}
             value={selectedOptionLanguageWord}
-            onChange={handleSelectChangeBaseWord}
+            onChange={value => setSelectedOptionLanguageWord(value)}
             $isLightTeam={true}
           />
           <Input
@@ -87,7 +72,7 @@ const AddWordSettings = () => {
             labelValue='Select Language Word Translate'
             options={optionsLanguage}
             value={selectedOptionWordLanguageTranslate}
-            onChange={handleSelectChangeTranslateWord}
+            onChange={value => setSelectedOptionWordLanguageTranslate(value)}
             $isLightTeam={true}
           />
         </WrapperInputsSettingsAddWord>

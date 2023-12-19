@@ -11,7 +11,7 @@ import Flashcard from 'pages/User/Learning/Flashcard';
 import Repeat from 'pages/User/Learning/Repeat';
 import AddWordSettings from 'pages/User/Settings/AddWord';
 import LearningSettings from 'pages/User/Settings/Learning';
-import UserSettings from 'pages/User/Settings/User';
+import GlobalSettingsApp from 'pages/User/Settings/GlobalSettingsApp';
 
 const RoutesComponent = () => {
   const { isLoginUser } = useContext(GlobalContext);
@@ -32,7 +32,7 @@ const RoutesComponent = () => {
           <Route path='settings'>
             <Route path={`${routes.SETTINGS_ADD_WORDS.to}`} element={<AddWordSettings />} />
             <Route path={`${routes.SETTINGS_LEARNING.to}`} element={<LearningSettings />} />
-            <Route path={`${routes.SETTINGS_USER.to}`} element={<UserSettings />} />
+            <Route path={`${routes.SETTINGS_USER.to}`} element={<GlobalSettingsApp />} />
           </Route>
         </>
       )}

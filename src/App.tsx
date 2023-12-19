@@ -5,7 +5,7 @@ import { GlobalStyle } from 'style/GlobalStyle';
 import RoutesComponent from 'routes';
 import GlobalProvider from 'utils/GlobalContext';
 import TemplatesGlobal from 'templates/TemplatesGlobal';
-import Dashboard from 'components/Shared/containers/ComponentDisplay';
+import UserSettingsProvider from 'utils/ContextSettingsUser';
 
 function App() {
   return (
@@ -13,9 +13,11 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <GlobalProvider>
-          <TemplatesGlobal>
-            <RoutesComponent />
-          </TemplatesGlobal>
+          <UserSettingsProvider>
+            <TemplatesGlobal>
+              <RoutesComponent />
+            </TemplatesGlobal>
+          </UserSettingsProvider>
         </GlobalProvider>
       </ThemeProvider>
     </Router>
