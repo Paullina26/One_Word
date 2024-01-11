@@ -10,6 +10,7 @@ import { Button } from 'components/Shared/Buttons/Button';
 import { optionsCategory } from 'data/option/category_options';
 import { optionsLanguage } from 'data/option/language_options';
 import { WrapperSettings } from 'components/Shared/containers/WrapperSettings';
+import { UserSettingsContext } from 'utils/ContextSettingsUser';
 
 export const Tittle = styled.p`
   ${font_settings(2.4, 'normal', 600)}
@@ -22,7 +23,7 @@ export const WrapperInputsSettingsAddWord = styled.div`
 `;
 
 const AddWordSettings = () => {
-  const { defaultWordLanguage, defaultWordLanguageTranslate } = useContext(GlobalContext);
+  const { defaultWordLanguage, defaultWordLanguageTranslate } = useContext(UserSettingsContext);
   const [wordBase, setWordBase] = useState<string>('');
   const [wordTranslate, setWordTranslate] = useState<string>('');
   const [selectedOptionLanguageWord, setSelectedOptionLanguageWord] = useState(defaultWordLanguage);

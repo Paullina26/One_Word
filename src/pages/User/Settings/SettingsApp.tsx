@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { FC, useContext, useState } from 'react';
-import { GlobalContext } from 'utils/GlobalContext';
 import { color_gradient_glassEffect_light, font_settings } from 'style/mixins';
 import Input from 'components/Shared/Form/Input';
 import { inputNameElement } from 'helpers/mixins';
@@ -10,18 +9,19 @@ import { Button } from 'components/Shared/Buttons/Button';
 import { optionsCategory } from 'data/option/category_options';
 import { optionsLanguage } from 'data/option/language_options';
 import { WrapperSettings } from 'components/Shared/containers/WrapperSettings';
+import { UserSettingsContext } from 'utils/ContextSettingsUser';
 
 export const Tittle = styled.p`
   ${font_settings(2.4, 'normal', 600)}
   margin: 5px auto;
 `;
-const GlobalSettingsApp = () => {
+const SettingsApp = () => {
   const {
     defaultWordLanguage,
     setDefaultWordLanguage,
     defaultWordLanguageTranslate,
     setDefaultWordLanguageTranslate,
-  } = useContext(GlobalContext);
+  } = useContext(UserSettingsContext);
   const [selectedOptionLanguageWord, setSelectedOptionLanguageWord] = useState(defaultWordLanguage);
   const [selectedTranslateLanguageWord, setSelectedTranslateLanguageWord] = useState(
     defaultWordLanguageTranslate
@@ -57,4 +57,4 @@ const GlobalSettingsApp = () => {
   );
 };
 
-export default GlobalSettingsApp;
+export default SettingsApp;

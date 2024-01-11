@@ -16,10 +16,6 @@ interface GlobalContextValue {
   setIsOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
   isLoadingOpen: boolean;
   setIsLoadingOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  defaultWordLanguage: string;
-  setDefaultWordLanguage: React.Dispatch<React.SetStateAction<string>>;
-  defaultWordLanguageTranslate: string;
-  setDefaultWordLanguageTranslate: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const GlobalContext = createContext<GlobalContextValue>({} as GlobalContextValue);
@@ -31,8 +27,6 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isLoadingOpen, setIsLoadingOpen] = useState(false);
-  const [defaultWordLanguage, setDefaultWordLanguage] = useState('English');
-  const [defaultWordLanguageTranslate, setDefaultWordLanguageTranslate] = useState('Polish');
 
   const values = {
     isLoginUser,
@@ -43,10 +37,6 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     setIsOpenMenu,
     isLoadingOpen,
     setIsLoadingOpen,
-    defaultWordLanguage,
-    setDefaultWordLanguage,
-    defaultWordLanguageTranslate,
-    setDefaultWordLanguageTranslate,
   };
 
   useEffect(() => {
