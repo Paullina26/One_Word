@@ -89,7 +89,7 @@ export const color_gradient_button_menu = `
 `;
 
 export const color_gradient_menu_bar = `
-  background: radial-gradient(circle at 100px 100px, rgb(255, 255, 255), rgb(178, 175, 198));
+  background: radial-gradient(circle at 100px 100px, rgb(255, 255, 255), rgb(233, 233, 233));
 `;
 export const color_gradient_menu_burger = `
   background: radial-gradient(circle at 100px 100px, rgba(200, 120, 165), rgba(140, 60, 105, 1));

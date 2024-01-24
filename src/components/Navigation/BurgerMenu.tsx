@@ -26,7 +26,7 @@ const StyledBurger = styled.button<{ $isOpenMenu: boolean }>`
   }
 `;
 
-const WrapperBar = styled.div<{ $isOpenMenu: boolean }>`
+const WrapperBar = styled.div<{ $isOpenMenu?: boolean }>`
   width: 60px;
   height: 60px;
   margin: 10px;
