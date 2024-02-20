@@ -17,8 +17,6 @@ const TemplatesGlobal: React.FC<TemplatesGlobalProps> = props => {
 
   return (
     <>
-      {/* {isLoginUser && <Burger isOpenMenu={isOpenMenu} />} */}
-      {/* <Navigation isOpenMenu={isOpenMenu} /> */}
       {isLoginUser && <SpeedDialTooltipOpen />}
       <Background />
       <ComponentDisplay>{props.children}</ComponentDisplay>
