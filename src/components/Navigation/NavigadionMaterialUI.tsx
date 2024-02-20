@@ -69,7 +69,7 @@ const WrapperMenu = styled.div`
     }
   }
 
-  .css-i4bv87-MuiSvgIcon-root {
+  .MuiSvgIcon-root {
     font-size: 40px;
     color: #ffffff;
     &:hover {
@@ -77,7 +77,7 @@ const WrapperMenu = styled.div`
     }
   }
 
-  .css-13y48ld-MuiSpeedDialAction-staticTooltipLabel {
+  .MuiSpeedDialAction-staticTooltipLabel {
     font-size: 20px;
     color: black;
     ${color_gradient_light_menu};
@@ -88,26 +88,26 @@ const WrapperMenu = styled.div`
     }
   }
 
-  .css-1fgwdvu-MuiSpeedDialAction-staticTooltip {
+  .MuiSpeedDialAction-staticTooltip {
     &:hover {
-      .css-13y48ld-MuiSpeedDialAction-staticTooltipLabel {
+      .MuiSpeedDialAction-staticTooltipLabel {
         ${color_gradient_animation}
       }
     }
   }
 
-  .css-7dv1rb-MuiButtonBase-root-MuiFab-root-MuiSpeedDial-fab {
+  .MuiButtonBase-root {
     width: 70px;
     height: 70px;
     ${color_gradient_menu_burger};
     ${boxShadow_button};
   }
-  .css-49h81w-MuiSpeedDialIcon-root {
+  .MuiSpeedDialIcon-root {
     height: 70px;
     width: 70px;
   }
   .MuiSpeedDialIcon-icon,
-  .css-ohncnb-MuiSpeedDialIcon-root {
+  .MuiSpeedDialIcon-root {
     width: 100%;
     height: 100%;
     color: #ffffff;
