@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/One_Word/static/css/main.bc1dca3e.css",
+    "main.js": "/One_Word/static/js/main.9cc5877a.js",
+    "static/media/flag_gbr.jpg": "/One_Word/static/media/flag_gbr.1f8a6ecec2402ca0b0ec.jpg",
+    "index.html": "/One_Word/index.html",
+    "main.bc1dca3e.css.map": "/One_Word/static/css/main.bc1dca3e.css.map",
+    "main.9cc5877a.js.map": "/One_Word/static/js/main.9cc5877a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bc1dca3e.css",
+    "static/js/main.9cc5877a.js"
+  ]
+}
