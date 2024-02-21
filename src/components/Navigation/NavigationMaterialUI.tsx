@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import Box from '@mui/material/Box';
 import Backdrop from '@mui/material/Backdrop';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
@@ -9,16 +7,7 @@ import SpeedDialAction from '@mui/material/SpeedDialAction';
 import SchoolIcon from '@mui/icons-material/School';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { routes } from 'data/routes';
-import {
-  boxShadow_button,
-  color_gradient_button,
-  color_gradient_animation,
-  color_gradient_button_menu,
-  color_gradient_menu_bar,
-  color_gradient_light_menu,
-  color_gradient_menu_burger,
-  boxShadow_darkTheme_menu_element,
-} from 'style/mixins';
+import { WrapperNavigation } from './StyleNavigation';
 
 const actions = [
   {
@@ -55,74 +44,13 @@ const actions = [
   },
 ];
 
-const WrapperMenu = styled.div`
-  .MuiSpeedDialAction-fab {
-    width: 50px;
-    height: 50px;
-    ${color_gradient_menu_burger};
-    ${boxShadow_darkTheme_menu_element};
-    &:focus {
-      outline: none;
-    }
-    &:hover {
-      fill: blue;
-    }
-  }
-
-  .MuiSvgIcon-root {
-    font-size: 40px;
-    color: #ffffff;
-    &:hover {
-      fill: #ffffff;
-    }
-  }
-
-  .MuiSpeedDialAction-staticTooltipLabel {
-    font-size: 20px;
-    color: black;
-    ${color_gradient_light_menu};
-    ${boxShadow_darkTheme_menu_element};
-    width: 200px;
-    &:hover {
-      ${color_gradient_animation}
-    }
-  }
-
-  .MuiSpeedDialAction-staticTooltip {
-    &:hover {
-      .MuiSpeedDialAction-staticTooltipLabel {
-        ${color_gradient_animation}
-      }
-    }
-  }
-
-  .MuiButtonBase-root {
-    width: 70px;
-    height: 70px;
-    ${color_gradient_menu_burger};
-    ${boxShadow_button};
-  }
-  .MuiSpeedDialIcon-root {
-    height: 70px;
-    width: 70px;
-  }
-  .MuiSpeedDialIcon-icon,
-  .MuiSpeedDialIcon-root {
-    width: 100%;
-    height: 100%;
-    color: #ffffff;
-  }
-`;
-
-export default function SpeedDialTooltipOpen() {
+const NavigationMaterialUI = () => {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const toggleOpen = () => setOpen(!open);
   const navigate = useNavigate();
 
   return (
-    <WrapperMenu>
+    <WrapperNavigation>
       <Backdrop open={open} />
       <SpeedDial
         sx={{ position: 'absolute', bottom: 16, right: 16 }}
@@ -145,6 +73,8 @@ export default function SpeedDialTooltipOpen() {
           />
         ))}
       </SpeedDial>
-    </WrapperMenu>
+    </WrapperNavigation>
   );
-}
+};
+
+export default NavigationMaterialUI;

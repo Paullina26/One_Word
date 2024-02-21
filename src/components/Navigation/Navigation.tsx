@@ -3,7 +3,7 @@ import { useContext, FC, useState } from 'react';
 import { useNavigate, useLocation, NavLink } from 'react-router-dom';
 import * as S from 'components/Navigation/StyleNavigation';
 import { routes } from 'data/routes';
-import SpeedDialTooltipOpen from './NavigadionMaterialUI';
+import SpeedDialTooltipOpen from './NavigationMaterialUI';
 
 interface NavigationProps {
   isOpenMenu: boolean;

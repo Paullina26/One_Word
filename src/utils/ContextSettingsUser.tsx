@@ -21,7 +21,6 @@ const UserSettingsProvider: FC<ContextSettingsUserProviderProps> = ({ children }
   const { isLoginUser } = useContext(GlobalContext);
   const [defaultWordLanguage, setDefaultWordLanguage] = useState('English');
   const [defaultWordLanguageTranslate, setDefaultWordLanguageTranslate] = useState('Polish');
-  
 
   const values = {
     defaultWordLanguage,
@@ -30,7 +29,7 @@ const UserSettingsProvider: FC<ContextSettingsUserProviderProps> = ({ children }
     setDefaultWordLanguageTranslate,
   };
 
-  const downloadSettingUser = async () => {
+  const getSettingUser = async () => {
     const token = localStorage.getItem('token');
     if (!token || isLoginUser) return;
 
@@ -52,7 +51,7 @@ const UserSettingsProvider: FC<ContextSettingsUserProviderProps> = ({ children }
   };
 
   useEffect(() => {
-    downloadSettingUser();
+    getSettingUser();
   }, [isLoginUser]);
 
   return <UserSettingsContext.Provider value={values}>{children}</UserSettingsContext.Provider>;

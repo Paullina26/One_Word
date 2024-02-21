@@ -6,7 +6,7 @@ import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
 import Navigation from 'components/Navigation/Navigation';
 import ComponentDisplay from 'components/Shared/containers/ComponentDisplay';
 import Burger from 'components/Navigation/BurgerMenu';
-import SpeedDialTooltipOpen from 'components/Navigation/NavigadionMaterialUI';
+import NavigationMaterialUI from 'components/Navigation/NavigationMaterialUI';
 interface TemplatesGlobalProps {
   children: React.ReactNode;
 }
@@ -17,7 +17,7 @@ const TemplatesGlobal: React.FC<TemplatesGlobalProps> = props => {
 
   return (
     <>
-      {isLoginUser && <SpeedDialTooltipOpen />}
+      {isLoginUser && <NavigationMaterialUI />}
       <Background />
       <ComponentDisplay>{props.children}</ComponentDisplay>
     </>

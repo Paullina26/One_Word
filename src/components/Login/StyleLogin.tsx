@@ -20,3 +20,12 @@ export const LoginText = styled.div`
   color: ${({ theme }) => theme.purpleDark};
   cursor: pointer;
 `;
+
+export const LoginTestDataDisplay = styled.div`
+  ${font_settings(1.6, 'normal', 500)};
+  padding: 20px;
+  color: ${({ theme }) => theme.purpleDark};
+`;
+export const TittleLoginData = styled.div`
+  ${font_settings(2, 'normal', 500)};
+`;

@@ -45,8 +45,6 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   }, [location.pathname]);
 
   const checkLoginStatus = async () => {
-    console.log(999);
-
     setIsLoadingOpen(true);
     const token = localStorage.getItem('token');
     if (!token || isLoginUser) {

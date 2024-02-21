@@ -1,12 +1,77 @@
 import styled, { keyframes } from 'styled-components';
 import { useNavigate, useLocation, NavLink } from 'react-router-dom';
+import Box from '@mui/material/Box';
 import {
   font_settings,
   color_gradient_animation,
   color_gradient_backGround_liner_dark,
-  color_gradient_light_menu,
   boxShadow_darkTheme_menu_element,
+  color_gradient_light_menu,
+  color_gradient_menu_burger,
+  boxShadow_button,
 } from 'style/mixins';
+
+//MATERIAL UI NAVIGATION STYLE//
+export const WrapperNavigation = styled.div`
+  .MuiSpeedDialAction-fab {
+    width: 50px;
+    height: 50px;
+    ${color_gradient_menu_burger};
+    ${boxShadow_darkTheme_menu_element};
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      fill: blue;
+    }
+  }
+
+  .MuiSvgIcon-root {
+    font-size: 40px;
+    color: #ffffff;
+    &:hover {
+      fill: #ffffff;
+    }
+  }
+
+  .MuiSpeedDialAction-staticTooltipLabel {
+    font-size: 20px;
+    color: black;
+    ${color_gradient_light_menu};
+    ${boxShadow_darkTheme_menu_element};
+    width: 200px;
+    &:hover {
+      ${color_gradient_animation}
+    }
+  }
+
+  .MuiSpeedDialAction-staticTooltip {
+    &:hover {
+      .MuiSpeedDialAction-staticTooltipLabel {
+        ${color_gradient_animation}
+      }
+    }
+  }
+
+  .MuiButtonBase-root {
+    width: 70px;
+    height: 70px;
+    ${color_gradient_menu_burger};
+    ${boxShadow_button};
+  }
+  .MuiSpeedDialIcon-root {
+    height: 70px;
+    width: 70px;
+  }
+  .MuiSpeedDialIcon-icon,
+  .MuiSpeedDialIcon-root {
+    width: 100%;
+    height: 100%;
+    color: #ffffff;
+  }
+`;
+
+//MATERIAL UI NAVIGATION STYLE//
 
 export const NavigationWrapper = styled.div<{ $isOpenMenu: boolean }>`
   ${color_gradient_backGround_liner_dark};
