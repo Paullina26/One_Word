@@ -31,12 +31,15 @@ export const LinkButton = styled(NavLink)<{ $isLightTeam: boolean }>`
 
 export const HomePage = () => {
   return (
-    <GlassWrapper>
-      <Welcome />
-      <LinkButton $isLightTeam={true} to='/auth'>
-        Try It
-      </LinkButton>
-    </GlassWrapper>
+    <>
+      <Logo />
+      <GlassWrapper>
+        <Welcome />
+        <LinkButton $isLightTeam={true} to='/auth'>
+          Try It
+        </LinkButton>
+      </GlassWrapper>
+    </>
   );
 };
 

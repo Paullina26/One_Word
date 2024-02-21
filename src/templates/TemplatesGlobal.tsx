@@ -2,13 +2,11 @@ import styled from 'styled-components';
 import { GlobalContext } from 'utils/GlobalContext';
 import { useContext, useState } from 'react';
 import Background from 'components/Background/Background';
-import Logo from 'components/Shared/Logo/Logo';
 import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
-import OneWord from 'components/Shared/Logo/OneWord';
 import Navigation from 'components/Navigation/Navigation';
 import ComponentDisplay from 'components/Shared/containers/ComponentDisplay';
 import Burger from 'components/Navigation/BurgerMenu';
-
+import NavigationMaterialUI from 'components/Navigation/NavigationMaterialUI';
 interface TemplatesGlobalProps {
   children: React.ReactNode;
 }
@@ -19,10 +17,8 @@ const TemplatesGlobal: React.FC<TemplatesGlobalProps> = props => {
 
   return (
     <>
-      {isLoginUser && <Burger isOpenMenu={isOpenMenu} />}
-      <Navigation isOpenMenu={isOpenMenu} />
+      {isLoginUser && <NavigationMaterialUI />}
       <Background />
-      <Logo />
       <ComponentDisplay>{props.children}</ComponentDisplay>
     </>
   );

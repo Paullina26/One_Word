@@ -1,24 +1,26 @@
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, HashRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'style/theme';
 import { GlobalStyle } from 'style/GlobalStyle';
 import RoutesComponent from 'routes';
 import GlobalProvider from 'utils/GlobalContext';
 import TemplatesGlobal from 'templates/TemplatesGlobal';
-import Dashboard from 'components/Shared/containers/ComponentDisplay';
+import UserSettingsProvider from 'utils/ContextSettingsUser';
 
 function App() {
   return (
-    <Router>
+    <HashRouter>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <GlobalProvider>
-          <TemplatesGlobal>
-            <RoutesComponent />
-          </TemplatesGlobal>
+          <UserSettingsProvider>
+            <TemplatesGlobal>
+              <RoutesComponent />
+            </TemplatesGlobal>
+          </UserSettingsProvider>
         </GlobalProvider>
       </ThemeProvider>
-    </Router>
+    </HashRouter>
   );
 }
 export default App;

@@ -97,6 +97,11 @@ export const Login: FC<LoginProps> = ({ toggleAuthForm }) => {
       <Button onClick={toggleAuthForm} $isLightTeam={true} type='button'>
         Registration
       </Button>
+      <S.LoginTestDataDisplay>
+        <S.TittleLoginData>Login Test Data</S.TittleLoginData>
+        <p>test@test.test</p>
+        <p>test</p>
+      </S.LoginTestDataDisplay>
     </S.WrapperLogin>
   );
 };
