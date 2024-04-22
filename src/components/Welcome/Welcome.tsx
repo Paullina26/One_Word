@@ -13,7 +13,7 @@ export const Tittle = styled.p`
 `;
 
 export const Description = styled.p`
-  margin: 5px 20px;
+  margin: 5px;
   text-align: left;
   font-size: 1.8rem;
   font-style: italic;

@@ -9,7 +9,7 @@ import { device } from 'style/devices';
 export const SingInWrapper = styled.div<{ $isActive: boolean }>`
   ${font_settings(3, 'italic', 900)};
   ${color_gradient_glassEffect_dark};
-  ${border_radius_effect_bubble};
+  /* ${border_radius_effect_bubble}; */
   color: ${({ theme }) => theme.white};
   width: 100%;
   height: 100%;

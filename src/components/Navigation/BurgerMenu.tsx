@@ -27,14 +27,14 @@ const StyledBurger = styled.button<{ $isOpenMenu: boolean }>`
 `;
 
 const WrapperBar = styled.div<{ $isOpenMenu?: boolean }>`
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   margin: 10px;
   position: relative;
   div {
     ${color_gradient_menu_bar};
     width: 90%;
-    height: 8px;
+    height: 6px;
     display: block;
     transition: all 0.3s linear;
     position: absolute;
