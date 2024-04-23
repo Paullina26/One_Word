@@ -13,7 +13,6 @@ interface TemplatesGlobalProps {
 const TemplatesGlobal: React.FC<TemplatesGlobalProps> = props => {
   const { isOpenMenu, setIsOpenMenu } = useContext(GlobalContext);
   const { isLoginUser } = useContext(GlobalContext);
-  console.log(isLoginUser);
   return (
     <>
       {isLoginUser && <Burger isOpenMenu={isOpenMenu} />}

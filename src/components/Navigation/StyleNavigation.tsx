@@ -19,15 +19,13 @@ export const NavigationWrapper = styled.div<{ $isOpenMenu: boolean }>`
   color: ${({ theme }) => theme.white};
   position: fixed;
   width: 100vw;
-  max-width: 370px;
+  max-width: 310px;
   height: 100vh;
   bottom: 0;
   right: 0;
   padding: 0;
-  backdrop-filter: blur(5px);
   transition: transform 0.4s ease-out;
-  transform: ${({ $isOpenMenu }) =>
-    $isOpenMenu ? 'translateX(0)' : 'translateX(100%)'}; 
+  transform: ${({ $isOpenMenu }) => ($isOpenMenu ? 'translateX(0)' : 'translateX(100%)')};
   overflow-x: hidden;
 `;
 
@@ -53,9 +51,14 @@ export const NavigationElementTitle = styled.div`
   width: 300px;
   backdrop-filter: blur(5px);
   border-radius: 20px 0px 0px 20px;
+  cursor: pointer;
 `;
 
-export const StyledLink = styled(NavLink)`
+export const StyledLink = styled(NavLink)<{
+  $index: number;
+  $isOpenMenu: boolean;
+  $animateLinks: boolean;
+}>`
   ${font_settings(2, 'normal', 500)};
   ${boxShadow_darkTheme_menu_element};
   ${color_gradient_light_menu};
@@ -113,4 +116,8 @@ export const StyledLink = styled(NavLink)`
     ${color_gradient_animation};
     color: white;
   }
+
+  transform: ${({ $isOpenMenu, $animateLinks }) =>
+    $isOpenMenu && $animateLinks ? 'translateX(0)' : 'translateX(100%)'};
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out ${({ $index }) => ($index + 1) * 50}ms;
 `;

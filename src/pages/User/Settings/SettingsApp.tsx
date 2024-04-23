@@ -45,7 +45,7 @@ const SettingsApp = () => {
   const onSubmit: SubmitHandler<IForm> = data => {
     setDefaultWordLanguage(data.selectedOptionLanguageWord);
     setDefaultWordLanguageTranslate(data.selectedTranslateLanguageWord);
-    console.log(data);
+    console.log('SettingsApp', data);
   };
 
   return (

@@ -22,9 +22,20 @@ export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [animateLinks, setAnimateLinks] = useState(false);
 
   const toggleSection = (sectionNavigation: string) => {
-    setActiveSection(prev => (prev === sectionNavigation ? null : sectionNavigation));
+    setActiveSection(prev => {
+      if (prev === sectionNavigation) {
+        return null;
+      } else {
+        setAnimateLinks(false);
+        setTimeout(() => {
+          setAnimateLinks(true);
+        }, 10);
+        return sectionNavigation;
+      }
+    });
   };
 
   const sectionNavigation = {
@@ -68,6 +79,11 @@ export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
 
   useEffect(() => {
     if (isOpenMenu) {
+      setAnimateLinks(false);
+      setTimeout(() => {
+        setAnimateLinks(true);
+      }, 10);
+
       for (const section in sectionNavigation) {
         if (
           sectionNavigation[section as keyof SectionNavigation].some(
@@ -79,27 +95,27 @@ export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
         }
       }
       setActiveSection(null);
+    } else {
+      setAnimateLinks(false);
     }
   }, [isOpenMenu, location.pathname]);
 
-  const renderLinks = (sectionKey: keyof SectionNavigation) =>
-    sectionNavigation[sectionKey].map((item, index) => (
-      <S.StyledLink
-        key={item.name}
-        to={item.to}
-        data-hover={item.name}
-        className={`${location.pathname === item.to ? 'active' : ''} ${
-          activeSection === sectionKey ? 'visible' : ''
-        }`}
-        style={{
-          transitionDelay: `${activeSection === sectionKey ? index * 100 : 0}ms`,
-          opacity: activeSection === sectionKey ? '1' : '0',
-          transform: activeSection === sectionKey ? 'translateX(0)' : 'translateX(100%)',
-        }}
-      >
-        <p>{item.name}</p>
-      </S.StyledLink>
-    ));
+  const renderLinks = (sectionKey: keyof SectionNavigation) => {
+    return sectionNavigation[sectionKey].map((item, index) => {
+      return (
+        <S.StyledLink
+          key={item.name}
+          to={item.to}
+          data-hover={item.name}
+          $index={index}
+          $isOpenMenu={isOpenMenu}
+          $animateLinks={animateLinks}
+        >
+          <p>{item.name}</p>
+        </S.StyledLink>
+      );
+    });
+  };
 
   return (
     <S.NavigationWrapper $isOpenMenu={isOpenMenu}>

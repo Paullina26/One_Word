@@ -46,7 +46,7 @@ const UserSettingsProvider: FC<ContextSettingsUserProviderProps> = ({ children }
         console.log('settings are not good');
       }
     } catch (error) {
-      console.log(error);
+      console.log('Errors in ContextSettingsUser', error);
     }
   };
 
