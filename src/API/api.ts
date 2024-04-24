@@ -1,4 +1,5 @@
-export const API_BASE_URL = 'https://one-word-server.vercel.app/api/';
+// export const API_BASE_URL = 'https://one-word-server.vercel.app/api/';
+export const API_BASE_URL = 'https://onewordserv.bieda.it/api/';
 
 export const headers = {
   Accept: 'application.json',
@@ -9,10 +10,10 @@ export const API = {
   login: `${API_BASE_URL}auth/login`,
   registration: `${API_BASE_URL}auth/register`,
   isLoginUser: `${API_BASE_URL}auth/user`,
-  getUserSettings: `${API_BASE_URL}/user-settingsr`,
-  putUserSettings: `${API_BASE_URL}/user-settings`,
-  getAllWords: `${API_BASE_URL}/all`,
-  postOneWords: `${API_BASE_URL}/add-one`,
+  getUserSettings: `${API_BASE_URL}settings/user-settings`,
+  putUserSettings: `${API_BASE_URL}settings/user-settings`,
+  getAllWords: `${API_BASE_URL}all`,
+  postOneWords: `${API_BASE_URL}add-one`,
 };
 
 // const SettingsSchema = new mongoose.Schema({

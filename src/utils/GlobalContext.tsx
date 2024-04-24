@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { API, headers } from 'API/api';
 import { FC } from 'react';
 import { routes } from 'data/routes';
+import CircularProgress from '@mui/material/CircularProgress';
 
-// const EventViewContext = createContext<EventViewContextValue>({} as EventViewContextValue);
 interface GlobalProviderProps {
   children: React.ReactNode;
 }
@@ -28,8 +28,6 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isLoadingOpen, setIsLoadingOpen] = useState(false);
-  console.log('---IS_LOGIN_USER---GlobalCon', isLoginUser);
-  // console.log('---Global_Context_OPEN_MENU---', isOpenMenu);
 
   const values = {
     isLoginUser,
@@ -47,19 +45,24 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   }, [location.pathname]);
 
   const checkLoginStatus = async () => {
+    setIsLoadingOpen(true);
     const token = localStorage.getItem('token');
-    if (!token || isLoginUser) return;
-    setIsLoadingUser(true);
+    if (!token || isLoginUser) {
+      setIsLoadingOpen(false);
+      return;
+    }
     try {
       const response = await fetch(API.isLoginUser, {
         headers: { ...headers, Authorization: `Bearer ${token}` },
       });
       const { status } = response;
+
       if (status === 200) setIsLoginUser(true);
       navigate(`${routes.LEARN_TODAYS_WORD.to}`);
     } catch (err) {
+      console.log(err);
     } finally {
-      setIsLoadingUser(false);
+      setIsLoadingOpen(false);
     }
   };
 
@@ -70,7 +73,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   return (
     <GlobalContext.Provider value={values}>
       {children}
-      {/* {isLoadingOpen && <Loading />} */}
+      {isLoadingOpen && <CircularProgress />}
     </GlobalContext.Provider>
   );
 };

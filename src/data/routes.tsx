@@ -36,7 +36,7 @@ export const routes = {
     name: 'Learning',
   },
   SETTINGS_USER: {
-    to: '/settings/user',
-    name: 'User',
+    to: '/settings/GlobalSettingsApp',
+    name: 'Application',
   },
 };

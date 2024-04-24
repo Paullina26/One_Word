@@ -1,36 +1,36 @@
 import styled, { keyframes } from 'styled-components';
 import { useNavigate, useLocation, NavLink } from 'react-router-dom';
+import Box from '@mui/material/Box';
 import {
   font_settings,
   color_gradient_animation,
   color_gradient_backGround_liner_dark,
-  color_gradient_light_menu,
   boxShadow_darkTheme_menu_element,
+  color_gradient_light_menu,
+  color_gradient_menu_burger,
+  boxShadow_button,
+  color_gradient_glassEffect_light,
+  color_gradient_glassEffect_light_menu,
 } from 'style/mixins';
 
 export const NavigationWrapper = styled.div<{ $isOpenMenu: boolean }>`
-  ${color_gradient_backGround_liner_dark};
   z-index: 100;
+  ${color_gradient_glassEffect_light_menu};
   color: ${({ theme }) => theme.white};
-  position: absolute;
+  position: fixed;
   width: 100vw;
-  max-width: 350px;
+  max-width: 310px;
   height: 100vh;
   bottom: 0;
+  right: 0;
   padding: 0;
-  position: absolute;
-  border-right: 2px solid ${({ theme }) => theme.purpleLight};
-  backdrop-filter: blur(5px);
-  transition: transform 0.4s linear, opacity 0.2s linear, border-radius 0.2s linear;
-  opacity: ${({ $isOpenMenu }) => ($isOpenMenu ? '1' : '0')};
-  border-radius: ${({ $isOpenMenu }) => ($isOpenMenu ? '0' : '0 100px 100px 0')};
-  transform: ${({ $isOpenMenu }) => ($isOpenMenu ? ' translateX(0) ' : ' translateX(-50vh)')};
-  transform-origin: ${({ $isOpenMenu }) => ($isOpenMenu ? '100%' : '100%')};
+  transition: transform 0.4s ease-out;
+  transform: ${({ $isOpenMenu }) => ($isOpenMenu ? 'translateX(0)' : 'translateX(100%)')};
+  overflow-x: hidden;
 `;
 
 export const WrapperNav = styled.div`
   margin-left: 0;
-  border-radius: 0px 20px 20px 0px;
 `;
 
 export const Menu = styled.div`
@@ -47,13 +47,18 @@ export const NavigationElementTitle = styled.div`
   color: ${({ theme }) => theme.white};
   text-align: center;
   padding: 10px 0;
-  margin: 25px 0 10px 0;
+  margin: 25px 0 10px auto;
   width: 300px;
   backdrop-filter: blur(5px);
-  border-radius: 0px 20px 20px 0px;
+  border-radius: 20px 0px 0px 20px;
+  cursor: pointer;
 `;
 
-export const StyledLink = styled(NavLink)`
+export const StyledLink = styled(NavLink)<{
+  $index: number;
+  $isOpenMenu: boolean;
+  $animateLinks: boolean;
+}>`
   ${font_settings(2, 'normal', 500)};
   ${boxShadow_darkTheme_menu_element};
   ${color_gradient_light_menu};
@@ -64,8 +69,10 @@ export const StyledLink = styled(NavLink)`
   margin: 15px 0;
   text-decoration: none;
   color: ${({ theme }) => theme.black};
-  border-radius: 0px 20px 20px 0px;
+  border-radius: 20px 0px 0px 20px;
+  margin: 10px 0 10px auto;
   position: relative;
+  overflow: hidden;
 
   p {
     color: transparent;
@@ -78,18 +85,18 @@ export const StyledLink = styled(NavLink)`
     white-space: nowrap;
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
     width: 100%;
     height: 100%;
-    border-radius: 0px 20px 20px 0px;
-    transform: scaleX(0);
+    border-radius: 20px 0px 0px 20px;
+    transform: scaleY(0);
     transition: 0.5s;
     transform-origin: 0 0;
   }
 
   &:hover {
     &:before {
-      transform: scaleX(1);
+      transform: scaleY(1);
     }
   }
 
@@ -99,7 +106,7 @@ export const StyledLink = styled(NavLink)`
     white-space: nowrap;
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
     width: 100%;
     height: 100%;
     border-radius: 0px 20px 20px 0px;
@@ -107,5 +114,10 @@ export const StyledLink = styled(NavLink)`
 
   &.active {
     ${color_gradient_animation};
+    color: white;
   }
+
+  transform: ${({ $isOpenMenu, $animateLinks }) =>
+    $isOpenMenu && $animateLinks ? 'translateX(0)' : 'translateX(100%)'};
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out ${({ $index }) => ($index + 1) * 50}ms;
 `;

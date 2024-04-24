@@ -24,8 +24,9 @@ const BubbleStyled = styled.div<BubbleProps>`
   left: ${({ $left }) => $left};
   height: ${({ $height }) => $height};
   width: ${({ $width }) => $width};
-  box-shadow: -2px -2px 5px rgba(255, 255, 255, 0.5), 2px 2px 5px rgba(94, 104, 121, 0.5),
-    inset 10px 10px 10px rgba(255, 255, 255, 0.5), inset -10px -10px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 30px 10px rgba(255, 255, 255, 0.2), 5px 5px 20px rgba(158, 158, 158, 0.4),
+    10px 10px 30px rgba(0, 0, 0, 0.5), inset 0px 0px 20px 5px rgba(158, 158, 158, 0.1),
+    inset -5px -5px 15px rgba(0, 0, 0, 0.8);
   z-index: ${({ $zIndex }) => $zIndex};
   animation: ${({ $flyParams }) => fly($flyParams?.x, $flyParams?.y)}
     ${({ $flyParams }) => $flyParams?.time || 0}s linear infinite;
