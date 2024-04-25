@@ -31,6 +31,7 @@ export const NavigationWrapper = styled.div<{ $isOpenMenu: boolean }>`
 
 export const WrapperNav = styled.div`
   margin-left: 0;
+  margin-top: 70px;
 `;
 
 export const Menu = styled.div`

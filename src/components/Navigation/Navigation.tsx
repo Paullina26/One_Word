@@ -2,8 +2,8 @@ import { GlobalContext } from 'utils/GlobalContext';
 import { useContext, FC, useState, useEffect } from 'react';
 import { useNavigate, useLocation, NavLink } from 'react-router-dom';
 import * as S from 'components/Navigation/StyleNavigation';
-import { routes } from 'data/routes';
-
+import { sectionNavigation } from 'data/NavigationElements';
+import LogOut from 'components/LogOut/LogOut';
 interface NavigationProps {
   isOpenMenu: boolean;
 }
@@ -36,45 +36,6 @@ export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
         return sectionNavigation;
       }
     });
-  };
-
-  const sectionNavigation = {
-    Learning: [
-      {
-        to: `${routes.LEARN_TODAYS_WORD.to}`,
-        name: `${routes.LEARN_TODAYS_WORD.name}`,
-      },
-      {
-        to: `${routes.LEARN_HANGMAN.to}`,
-        name: `${routes.LEARN_HANGMAN.name}`,
-      },
-      {
-        to: `${routes.LEARN_TRANSLATE.to}`,
-        name: `${routes.LEARN_TRANSLATE.name}`,
-      },
-      {
-        to: `${routes.LEARN_FLASHCARD.to}`,
-        name: `${routes.LEARN_FLASHCARD.name}`,
-      },
-      {
-        to: `${routes.LEARN_REPEAT.to}`,
-        name: `${routes.LEARN_REPEAT.name}`,
-      },
-    ],
-    Settings: [
-      {
-        to: `${routes.SETTINGS_ADD_WORDS.to}`,
-        name: `${routes.SETTINGS_ADD_WORDS.name}`,
-      },
-      {
-        to: `${routes.SETTINGS_LEARNING.to}`,
-        name: `${routes.SETTINGS_LEARNING.name}`,
-      },
-      {
-        to: `${routes.SETTINGS_USER.to}`,
-        name: `${routes.SETTINGS_USER.name}`,
-      },
-    ],
   };
 
   useEffect(() => {
@@ -119,6 +80,7 @@ export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
 
   return (
     <S.NavigationWrapper $isOpenMenu={isOpenMenu}>
+      <LogOut />
       <S.WrapperNav>
         {Object.keys(sectionNavigation).map(section => (
           <>
