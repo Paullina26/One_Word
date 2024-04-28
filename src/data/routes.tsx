@@ -27,6 +27,10 @@ export const routes = {
     to: '/learning/repeat',
     name: 'Repeat',
   },
+  LEARN_CHAT: {
+    to: '/learning/chat',
+    name: 'Chat',
+  },
   SETTINGS_ADD_WORDS: {
     to: '/settings/add_words',
     name: 'Add Words',

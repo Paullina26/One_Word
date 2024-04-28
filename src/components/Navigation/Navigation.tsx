@@ -1,9 +1,11 @@
-import { GlobalContext } from 'utils/GlobalContext';
-import { useContext, FC, useState, useEffect } from 'react';
-import { useNavigate, useLocation, NavLink } from 'react-router-dom';
-import * as S from 'components/Navigation/StyleNavigation';
+import { FC, useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 import { sectionNavigation } from 'data/NavigationElements';
 import LogOut from 'components/LogOut/LogOut';
+
+import * as S from 'components/Navigation/StyleNavigation';
+
 interface NavigationProps {
   isOpenMenu: boolean;
 }
@@ -20,7 +22,6 @@ interface SectionNavigation {
 
 export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
   const location = useLocation();
-  const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [animateLinks, setAnimateLinks] = useState(false);
 

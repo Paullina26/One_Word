@@ -9,7 +9,8 @@ import UserSettingsProvider from 'utils/ContextSettingsUser';
 
 function App() {
   return (
-    <HashRouter>
+    // <HashRouter>
+    <Router>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <GlobalProvider>
@@ -20,7 +21,8 @@ function App() {
           </UserSettingsProvider>
         </GlobalProvider>
       </ThemeProvider>
-    </HashRouter>
+    </Router>
+    // </HashRouter>
   );
 }
 export default App;
