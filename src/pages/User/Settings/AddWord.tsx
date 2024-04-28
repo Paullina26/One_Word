@@ -7,7 +7,6 @@ import { inputNameElement } from 'helpers/mixins';
 import Submit from 'components/Shared/Form/Submit';
 import Select from 'components/Shared/Form/Select';
 import { Button } from 'components/Shared/Buttons/Button';
-import { optionsCategory } from 'data/option/category_options';
 import { optionsLanguage } from 'data/option/language_options';
 import { WrapperSettings } from 'components/Shared/containers/WrapperSettings';
 import { UserSettingsContext } from 'utils/ContextSettingsUser';
