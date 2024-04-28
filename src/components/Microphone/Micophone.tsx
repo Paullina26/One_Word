@@ -1,53 +1,44 @@
-import { useContext } from 'react';
+import { FC, useContext } from 'react';
 import styled from 'styled-components';
 import { GlobalContext } from 'utils/GlobalContext';
 import { useNavigate } from 'react-router-dom';
 import { routes } from 'data/routes';
 import { Button } from 'components/Shared/Buttons/Button';
-import logoutIcon from 'assets/icon/logout_Icon.svg';
-
-export const Wrapper = styled.div`
-  right: 10px;
-  position: absolute;
-  width: 150px;
-  height: 50px;
-`;
+import RecordIcon from 'assets/icon/microphone.svg';
+import StopIcon from 'assets/icon/stop.svg';
 
 export const MicrophoneButton = styled(Button)`
-  width: 100%;
-  height: 100%;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px;
-  font-size: 2.1rem;
   font-weight: 500;
+  border-radius: 50%;
+  margin: 0;
+  margin-left: 20px;
+  cursor: pointer;
 
   img {
-    margin-right: 5px;
-    margin-left: 0;
-    margin-top: -3px;
     width: 25px;
+    height: 25px;
   }
 `;
 
-export const Microphone = () => {
-  const { setIsLoginUser } = useContext(GlobalContext);
-  const navigate = useNavigate();
+interface IProps {
+  onClick: () => void;
+  isRecording?: boolean;
+}
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setIsLoginUser(false);
-    navigate(`${routes.HOME.to}`);
-  };
-
+export const Microphone: FC<IProps> = ({ onClick, isRecording }) => {
   return (
-    <Wrapper>
-      <MicrophoneButton onClick={handleLogout} $isLightTeam={true}>
-        <img src={logoutIcon} alt='Logout Icon' />
-        Log Out
-      </MicrophoneButton>
-    </Wrapper>
+    <MicrophoneButton onClick={onClick}>
+      {isRecording ? (
+        <img src={StopIcon} alt='Microphone Icon' />
+      ) : (
+        <img src={RecordIcon} alt='Microphone Icon' />
+      )}
+    </MicrophoneButton>
   );
 };
 

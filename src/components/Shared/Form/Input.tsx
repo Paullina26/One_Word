@@ -24,11 +24,12 @@ interface InputProps {
   $isLightTeam: boolean;
 }
 
-export const LabelStyle = styled.label<{ $fontColorLabel: string }>`
+export const LabelStyle = styled.label<{ $fontColorLabel?: string }>`
   ${font_settings(2, 'italic', 400)};
   text-align: center;
-  color: ${({ theme, $fontColorLabel }) => theme[$fontColorLabel]};
+  color: ${({ theme, $fontColorLabel }) => theme[$fontColorLabel || 'purpleDark']};
 `;
+
 export const InputStyle = styled.input<{ $isLightTeam: boolean }>`
   ${font_settings(1.8, 'italic', 300)};
   display: block;
@@ -40,8 +41,7 @@ export const InputStyle = styled.input<{ $isLightTeam: boolean }>`
   padding: 5px;
   background-color: ${({ theme }) => theme.whiteDark};
   border-radius: 20px;
-  ${({ $isLightTeam }) =>
-    $isLightTeam ? `${boxShadow_lightTheme_input}` : `${boxShadow_darkTheme_input}`};
+  ${({ $isLightTeam }) => ($isLightTeam ? boxShadow_lightTheme_input : boxShadow_darkTheme_input)};
   ${outline_focus};
 `;
 
