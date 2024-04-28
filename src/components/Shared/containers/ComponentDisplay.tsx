@@ -3,10 +3,13 @@ import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
 
 export const WrapperComponentDisplay = styled.div`
   height: 100vh;
+  width: 100%;
+  max-width: 1200px;
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 `;
 
 interface ComponentDisplayProps {
@@ -14,11 +17,7 @@ interface ComponentDisplayProps {
 }
 
 const ComponentDisplay: React.FC<ComponentDisplayProps> = props => {
-  return (
-    <WrapperComponentDisplay>
-      <div>{props.children}</div>
-    </WrapperComponentDisplay>
-  );
+  return <WrapperComponentDisplay>{props.children}</WrapperComponentDisplay>;
 };
 
 export default ComponentDisplay;

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { GlobalContext } from 'utils/GlobalContext';
 import { useNavigate } from 'react-router-dom';
 import { routes } from 'data/routes';
-import { color_gradient_button } from 'style/mixins';
 import { Button } from 'components/Shared/Buttons/Button';
 import logoutIcon from 'assets/icon/logout_Icon.svg';
 
