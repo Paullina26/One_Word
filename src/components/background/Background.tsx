@@ -1,6 +1,5 @@
 import { FC } from 'react';
-import styled from 'styled-components';
-import Bubble from 'components/Background/Bubble';
+import Bubble from 'components/background/Bubble';
 import { flags } from 'helpers/flags';
 
 const bubbles = [

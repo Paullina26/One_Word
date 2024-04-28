@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { fly } from 'components/Background/animation';
+import { fly } from 'components/background/animation';
 
 interface BubbleProps {
   $flagUrl: string;

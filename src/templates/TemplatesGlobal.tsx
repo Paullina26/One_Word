@@ -1,8 +1,6 @@
-import styled from 'styled-components';
 import { GlobalContext } from 'utils/GlobalContext';
-import { useContext, useState } from 'react';
-import Background from 'components/Background/Background';
-import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
+import { useContext } from 'react';
+import Background from 'components/background/Background';
 import Navigation from 'components/Navigation/Navigation';
 import ComponentDisplay from 'components/Shared/containers/ComponentDisplay';
 import Burger from 'components/Navigation/BurgerMenu';
@@ -11,7 +9,7 @@ interface TemplatesGlobalProps {
 }
 
 const TemplatesGlobal: React.FC<TemplatesGlobalProps> = props => {
-  const { isOpenMenu, setIsOpenMenu } = useContext(GlobalContext);
+  const { isOpenMenu } = useContext(GlobalContext);
   const { isLoginUser } = useContext(GlobalContext);
   return (
     <>

@@ -1,4 +1,4 @@
-import Background from 'components/Background/Background';
+import Background from 'components/background/Background';
 import { Button } from 'components/Shared/Buttons/Button';
 import Logo from 'components/Shared/Logo/Logo';
 import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
