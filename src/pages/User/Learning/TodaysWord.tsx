@@ -1,3 +1,5 @@
+import { GlobalContext } from 'utils/GlobalContext';
+
 export const TodaysWord = () => {
   return (
     <>
