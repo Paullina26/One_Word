@@ -1,4 +1,7 @@
-# Getting Started with Create React App
+# Description
+I`am working on an interactive platform for learning English, which integrates various learning methods such as games, flashcards, and translations. The user has the ability to personalize their experience by adding their own vocabulary and assigning them categories. The aim of the project is to spend a few minutes each day learning a foreign language. I am collaborating with another developer who reviews my code and provides valuable tips, which allows me to develop my skills in using the GIT version control system.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

@@ -7,6 +7,5 @@ export const GlassWrapper = styled.div`
   width: 90vw;
   max-width: 340px;
   max-height: 650px;
-  margin: auto;
   padding: 10px 15px;
 `;

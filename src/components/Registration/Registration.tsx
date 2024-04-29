@@ -21,6 +21,7 @@ export const Registration: FC<RegistrationProps> = ({ toggleAuthForm, isActive }
 
   const handleRegistrationUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(password, passwordRepeating);
     if (password === passwordRepeating) {
       try {
         await sendDataUserToDatabase(mail, password);
@@ -33,6 +34,8 @@ export const Registration: FC<RegistrationProps> = ({ toggleAuthForm, isActive }
   };
 
   const sendDataUserToDatabase = async (mail: string, password: string) => {
+    console.log(mail, password);
+
     const response = await toast.promise(
       fetch(API.registration, {
         method: 'POST',
@@ -45,6 +48,7 @@ export const Registration: FC<RegistrationProps> = ({ toggleAuthForm, isActive }
       }
     );
     const json = await response.json();
+    console.log(json);
     const { status } = response;
     if (status === 200) {
       toast.success('Register is success. 👌', toastColored as ToastOptions<{}>);

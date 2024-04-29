@@ -8,8 +8,8 @@ import {
 } from 'style/mixins';
 
 interface InputProps {
-  id: string;
-  type: string;
+  id?: string;
+  type?: string;
   value: string;
   onChange: (value: string) => void;
   placeholder: string;
@@ -48,7 +48,7 @@ export const InputStyle = styled.input<{ $isLightTeam: boolean }>`
 const Input: FC<InputProps> = ({
   label,
   id,
-  type,
+  type = 'text',
   value,
   onChange,
   autoComplete,

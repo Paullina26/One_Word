@@ -4,7 +4,6 @@ import OneWord from 'components/Shared/Logo/OneWord';
 export const WrapperLogo = styled.div`
   text-align: center;
   margin: 40px auto;
-  width: 100vw;
 `;
 
 export const TittleOnly = styled.p`

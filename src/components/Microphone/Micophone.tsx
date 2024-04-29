@@ -6,14 +6,14 @@ import { routes } from 'data/routes';
 import { Button } from 'components/Shared/Buttons/Button';
 import logoutIcon from 'assets/icon/logout_Icon.svg';
 
-export const WrapperLogOut = styled.div`
+export const Wrapper = styled.div`
   right: 10px;
   position: absolute;
   width: 150px;
   height: 50px;
 `;
 
-export const LogoutButton = styled(Button)`
+export const MicrophoneButton = styled(Button)`
   width: 100%;
   height: 100%;
   display: flex;
@@ -31,7 +31,7 @@ export const LogoutButton = styled(Button)`
   }
 `;
 
-export const LogOut = () => {
+export const Microphone = () => {
   const { setIsLoginUser } = useContext(GlobalContext);
   const navigate = useNavigate();
 
@@ -42,13 +42,13 @@ export const LogOut = () => {
   };
 
   return (
-    <WrapperLogOut>
-      <LogoutButton onClick={handleLogout} $isLightTeam={true}>
+    <Wrapper>
+      <MicrophoneButton onClick={handleLogout} $isLightTeam={true}>
         <img src={logoutIcon} alt='Logout Icon' />
         Log Out
-      </LogoutButton>
-    </WrapperLogOut>
+      </MicrophoneButton>
+    </Wrapper>
   );
 };
 
-export default LogOut;
+export default Microphone;

@@ -22,6 +22,10 @@ export const sectionNavigation = {
       to: `${routes.LEARN_REPEAT.to}`,
       name: `${routes.LEARN_REPEAT.name}`,
     },
+    {
+      to: `${routes.LEARN_CHAT.to}`,
+      name: `${routes.LEARN_CHAT.name}`,
+    },
   ],
   Settings: [
     {

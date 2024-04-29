@@ -1,15 +1,11 @@
-import styled, { keyframes } from 'styled-components';
-import { useNavigate, useLocation, NavLink } from 'react-router-dom';
-import Box from '@mui/material/Box';
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 import {
   font_settings,
   color_gradient_animation,
   color_gradient_backGround_liner_dark,
   boxShadow_darkTheme_menu_element,
   color_gradient_light_menu,
-  color_gradient_menu_burger,
-  boxShadow_button,
-  color_gradient_glassEffect_light,
   color_gradient_glassEffect_light_menu,
 } from 'style/mixins';
 
