@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, HashRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'style/theme';
 import { GlobalStyle } from 'style/GlobalStyle';
@@ -9,7 +9,7 @@ import UserSettingsProvider from 'utils/ContextSettingsUser';
 
 function App() {
   return (
-    <HashRouter>
+    <Router>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <GlobalProvider>
@@ -20,7 +20,7 @@ function App() {
           </UserSettingsProvider>
         </GlobalProvider>
       </ThemeProvider>
-    </HashRouter>
+    </Router>
   );
 }
 export default App;
