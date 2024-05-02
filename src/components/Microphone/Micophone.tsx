@@ -32,7 +32,7 @@ interface IProps {
 
 export const Microphone: FC<IProps> = ({ onClick, isRecording }) => {
   return (
-    <MicrophoneButton onClick={onClick}>
+    <MicrophoneButton onClick={onClick} type='button'>
       {isRecording ? (
         <img src={StopIcon} alt='Microphone Icon' />
       ) : (

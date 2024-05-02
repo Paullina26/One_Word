@@ -17,6 +17,7 @@ interface GlobalContextValue {
   setIsOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
   isLoadingOpen: boolean;
   setIsLoadingOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isAiUser: boolean;
 }
 
 export const GlobalContext = createContext<GlobalContextValue>({} as GlobalContextValue);
@@ -28,6 +29,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isLoadingOpen, setIsLoadingOpen] = useState(false);
+  const [isAiUser, setIsAiUser] = useState(false);
 
   const values = {
     isLoginUser,
@@ -38,6 +40,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     setIsOpenMenu,
     isLoadingOpen,
     setIsLoadingOpen,
+    isAiUser,
   };
 
   useEffect(() => {
@@ -56,8 +59,15 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
         headers: { ...headers, Authorization: `Bearer ${token}` },
       });
       const { status } = response;
+      if (status !== 200) {
+        setIsLoginUser(false);
+        return;
+      }
 
-      if (status === 200) setIsLoginUser(true);
+      const user = await response.json();
+
+      if (user.isAi === 'true') setIsAiUser(true);
+      setIsLoginUser(true);
       navigate(`${routes.LEARN_TODAYS_WORD.to}`);
     } catch (err) {
       console.log(err);

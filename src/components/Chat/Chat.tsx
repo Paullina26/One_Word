@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { AudioRecorder, useAudioRecorder } from 'react-audio-voice-recorder';
+import { useAudioRecorder } from 'react-audio-voice-recorder';
 
 import Microphone from 'components/Microphone/Micophone';
 import Textarea from 'components/Textarea/Textarea';
