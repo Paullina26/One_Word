@@ -15,7 +15,9 @@ import SettingsApp from 'pages/User/Settings/SettingsApp';
 import Chat from 'components/Chat/Chat';
 
 const RoutesComponent = () => {
-  const { isLoginUser } = useContext(GlobalContext);
+  const { isLoginUser, isLoadingOpen } = useContext(GlobalContext);
+
+  if (isLoadingOpen) return <div>loading...</div>;
 
   return (
     <Routes>
