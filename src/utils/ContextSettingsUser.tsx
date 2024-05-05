@@ -1,7 +1,8 @@
 import { useEffect, useState, createContext, useContext } from 'react';
 import { FC } from 'react';
-import { API, headers } from 'API/api';
+import { API_Endpoints, headers } from 'API/api';
 import { GlobalContext } from './GlobalContext';
+import { optionsLanguage } from 'data/option/language_options';
 
 interface ContextSettingsUserProviderProps {
   children: React.ReactNode;
@@ -19,8 +20,10 @@ export const UserSettingsContext = createContext<ContextSettingsUserValue>(
 
 const UserSettingsProvider: FC<ContextSettingsUserProviderProps> = ({ children }) => {
   const { isLoginUser } = useContext(GlobalContext);
-  const [defaultWordLanguage, setDefaultWordLanguage] = useState('English');
-  const [defaultWordLanguageTranslate, setDefaultWordLanguageTranslate] = useState('Polish');
+  const [defaultWordLanguage, setDefaultWordLanguage] = useState(optionsLanguage[0].value);
+  const [defaultWordLanguageTranslate, setDefaultWordLanguageTranslate] = useState(
+    optionsLanguage[2].value
+  );
 
   const values = {
     defaultWordLanguage,
@@ -34,7 +37,7 @@ const UserSettingsProvider: FC<ContextSettingsUserProviderProps> = ({ children }
     if (!token || isLoginUser) return;
 
     try {
-      const response = await fetch(API.getUserSettings, {
+      const response = await fetch(API_Endpoints.getUserSettings, {
         headers: { ...headers, Authorization: `Bearer ${token}` },
       });
       const { status } = response;

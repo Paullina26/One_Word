@@ -1,9 +1,7 @@
 import { FC, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-
 import { sectionNavigation } from 'data/NavigationElements';
 import LogOut from 'components/LogOut/LogOut';
-
 import * as S from 'components/Navigation/StyleNavigation';
 
 interface NavigationProps {

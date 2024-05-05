@@ -8,7 +8,7 @@ import {
 } from 'style/mixins';
 
 interface SelectProps {
-  options: string[];
+  options: Array<{ label: string; value: string }>;
   onChange: (value: string) => void;
   value: string;
   labelValue: string;
@@ -61,12 +61,15 @@ const Select: FC<SelectProps> = ({
       <StyledSelect
         id={id}
         value={value}
-        onChange={e => onChange(e.target.value)}
+        onChange={e => {
+          console.log(e.target.value);
+          onChange(e.target.value);
+        }}
         $isLightTeam={$isLightTeam}
       >
         {options.map(option => (
-          <option key={option} value={option}>
-            {option}
+          <option key={option.value} value={option.value}>
+            {option.label}
           </option>
         ))}
       </StyledSelect>

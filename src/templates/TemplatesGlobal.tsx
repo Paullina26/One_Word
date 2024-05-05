@@ -1,6 +1,6 @@
 import { GlobalContext } from 'utils/GlobalContext';
 import { useContext } from 'react';
-import Background from 'components/background/Background';
+import Background from 'components/Background/Background';
 import Navigation from 'components/Navigation/Navigation';
 import ComponentDisplay from 'components/Shared/containers/ComponentDisplay';
 import Burger from 'components/Navigation/BurgerMenu';

@@ -1,6 +1,6 @@
 import { useEffect, useState, createContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { API, headers } from 'API/api';
+import { API_Endpoints, headers } from 'API/api';
 import { FC } from 'react';
 import { routes } from 'data/routes';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -52,7 +52,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
       return;
     }
     try {
-      const response = await fetch(API.isLoginUser, {
+      const response = await fetch(API_Endpoints.user, {
         headers: { ...headers, Authorization: `Bearer ${token}` },
       });
       const { status } = response;
