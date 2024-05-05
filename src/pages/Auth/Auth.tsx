@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import Background from 'components/Background/Background';
+import Background from 'components/background/Background';
 import Login from 'components/Login/Login';
 import Registration from 'components/Registration/Registration';
 import * as S from 'pages/Auth/StyleAuth';
