@@ -23,7 +23,6 @@ interface GlobalContextValue {
 export const GlobalContext = createContext<GlobalContextValue>({} as GlobalContextValue);
 
 const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
-  const navigate = useNavigate();
   const location = useLocation();
   const [isLoginUser, setIsLoginUser] = useState(false);
   const [isLoadingUser, setIsLoadingUser] = useState(false);
@@ -67,8 +66,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
       const user = await response.json();
 
       if (user.isAi === 'true') setIsAiUser(true);
-      setIsLoginUser(true);
-      navigate(`${routes.LEARN_TODAYS_WORD.to}`);
+      if (status === 200) setIsLoginUser(true);
     } catch (err) {
       console.log(err);
     } finally {
