@@ -3,7 +3,10 @@ import TextareaAutosize from 'react-textarea-autosize';
 import { boxShadow_lightTheme_input, font_settings } from 'style/mixins';
 import styled from 'styled-components';
 
-const StyledTextarea = styled(TextareaAutosize)<{ $fontColorLabel?: string }>`
+const StyledTextarea = styled(TextareaAutosize)<{
+  $fontColorLabel?: string;
+  $paddingForButtons?: boolean;
+}>`
   padding: 30px;
   border-radius: 30px;
   width: 100%;
@@ -12,6 +15,8 @@ const StyledTextarea = styled(TextareaAutosize)<{ $fontColorLabel?: string }>`
   background-color: ${({ theme }) => theme.whiteDark};
   ${boxShadow_lightTheme_input}
   border: none;
+
+  padding-right: ${({ $paddingForButtons }) => $paddingForButtons && '60px'};
 `;
 
 interface TextareaProps {
@@ -20,6 +25,7 @@ interface TextareaProps {
   minRows?: number;
   maxRows?: number;
   fontColorLabel?: string;
+  paddingForButtons?: boolean;
 }
 
 const Textarea: FC<TextareaProps> = ({
@@ -28,6 +34,7 @@ const Textarea: FC<TextareaProps> = ({
   minRows = 3,
   maxRows = 6,
   fontColorLabel,
+  paddingForButtons,
 }) => {
   return (
     <StyledTextarea
@@ -36,6 +43,7 @@ const Textarea: FC<TextareaProps> = ({
       minRows={minRows}
       maxRows={maxRows}
       $fontColorLabel={fontColorLabel}
+      $paddingForButtons={paddingForButtons}
     />
   );
 };

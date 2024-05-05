@@ -1,67 +1,68 @@
-import { FC, useState } from 'react';
-import { useAudioRecorder } from 'react-audio-voice-recorder';
+import { FC, useEffect, useRef } from 'react';
 
-import Microphone from 'components/Microphone/Micophone';
+import Microphone from 'components/Chat/components/Micophone';
 import Textarea from 'components/Textarea/Textarea';
 
 import * as S from './StyleChat';
-
-interface Message {
-  content: string;
-  role: string;
-}
+import SendIcon from './components/SendIcon';
+import VisibleMessages from './components/VisibleMessage';
+import { useChat } from './ChatProvider';
+import VoiceView from './components/VoiceView';
+import AiLoading from './components/AiLoading';
+import Message from './components/Message';
 
 const Chat: FC = () => {
-  const [isTextVisible, setIsTextVisible] = useState(true);
-  const [inputValue, setInputValue] = useState('');
-  const [messages, setMessages] = useState<Message[]>([]);
+  const messagesRef = useRef<HTMLDivElement>(null);
 
   const {
-    startRecording,
-    stopRecording,
-    togglePauseResume,
-    recordingBlob,
-    isRecording,
-    isPaused,
-    recordingTime,
-    mediaRecorder,
-  } = useAudioRecorder();
+    sendAudioMessage,
+    inputValue,
+    setInputValue,
+    handleSendText,
+    recorderBlob,
+    streamingAnswer,
+    isMessagesVisible,
+    isWaitingForAnswer,
+    messages,
+  } = useChat();
 
-  const handleSend = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    console.log('send', inputValue);
-  };
+  useEffect(() => {
+    if (!recorderBlob) return;
+    sendAudioMessage(recorderBlob);
+  }, [recorderBlob]);
 
-  const handleStartRecording = () => {
-    startRecording();
-    console.log('start');
-    // const audio = document.createElement('audio');
-    // audio.src = url;
-    // audio.controls = true;
-    // document.body.appendChild(audio);
-  };
-
-  const handleStopRecording = () => {
-    console.log({ recordingBlob });
-    stopRecording();
-    if (recordingBlob) {
-      const url = URL.createObjectURL(recordingBlob);
-      console.log({ url });
+  useEffect(() => {
+    if (messagesRef.current) {
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
     }
-  };
+  }, [isMessagesVisible, messages]);
 
   return (
-    <S.ChatWrapper>
-      <S.Messages></S.Messages>
-      <S.Interface>
-        <Textarea value={inputValue} onChange={setInputValue} />
-        <S.StyledButton>Send</S.StyledButton>
-        <Microphone
-          onClick={isRecording ? handleStopRecording : handleStartRecording}
-          isRecording={isRecording}
-        />
-      </S.Interface>
-    </S.ChatWrapper>
+    <>
+      {isMessagesVisible ? (
+        <S.ChatWrapper>
+          <S.Messages ref={messagesRef}>
+            {messages.map((message, index) => (
+              <Message key={`${index}-${message}`} role={message.role} content={message.content} />
+            ))}
+            {streamingAnswer.length > 0 && <Message content={streamingAnswer} role='assistant' />}
+          </S.Messages>
+          {isWaitingForAnswer && <AiLoading />}
+          <S.Interface onSubmit={e => handleSendText(e)}>
+            <S.ButtonWrapper>
+              <VisibleMessages />
+            </S.ButtonWrapper>
+            <S.TextareaWrapper>
+              <Textarea value={inputValue} onChange={setInputValue} paddingForButtons />
+              <Microphone />
+              <SendIcon onClick={handleSendText} />
+            </S.TextareaWrapper>
+          </S.Interface>
+        </S.ChatWrapper>
+      ) : (
+        <VoiceView />
+      )}
+    </>
   );
 };
 
