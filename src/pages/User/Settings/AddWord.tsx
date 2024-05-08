@@ -7,10 +7,11 @@ import { inputNameElement } from 'helpers/mixins';
 import Submit from 'components/Shared/Form/Submit';
 import Select from 'components/Shared/Form/Select';
 import { Button } from 'components/Shared/Buttons/Button';
-import { optionsLanguage } from 'data/option/language_options';
+import { LanguagesMap, mappedLanguages } from 'data/option/language_options';
 import { WrapperSettings } from 'components/Shared/containers/WrapperSettings';
 import { UserSettingsContext } from 'utils/ContextSettingsUser';
 import fetchWithToken from 'API/api';
+import { toast } from 'react-toastify';
 
 export const Tittle = styled.p`
   ${font_settings(2.4, 'normal', 600)}
@@ -23,18 +24,19 @@ export const WrapperInputsSettingsAddWord = styled.div`
 `;
 
 const AddWordSettings = () => {
-  const { defaultWordLanguage, defaultWordLanguageTranslate } = useContext(UserSettingsContext);
+  const { defaultWordLanguageTranslate } = useContext(UserSettingsContext);
   const [wordBase, setWordBase] = useState<string>('');
   const [wordTranslate, setWordTranslate] = useState<string>('');
-  const [selectedOptionLanguageWord, setSelectedOptionLanguageWord] = useState(defaultWordLanguage);
   const [selectedOptionWordLanguageTranslate, setSelectedOptionWordLanguageTranslate] = useState(
     defaultWordLanguageTranslate
   );
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const postData = {
-      baseWord: wordBase,
+      basicWord: wordBase,
       transWord: wordTranslate,
       addLang: selectedOptionWordLanguageTranslate,
     };
@@ -44,10 +46,13 @@ const AddWordSettings = () => {
         method: 'POST',
         body: postData,
       });
-
       console.log('Response from API:', response);
-    } catch (error) {
-      console.error('Failed to add word:', error);
+    } catch (err) {
+      console.error(err);
+      toast.error('Nie udało sie dodać słówka');
+      setError(true);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -74,11 +79,11 @@ const AddWordSettings = () => {
             minlength={2}
             required
           />
-          <Select
+          <Select<number>
             id='settings_selectLanguageWordTranslate'
             $fontColorLabel='purpleDark'
             labelValue='Language To Learn'
-            options={optionsLanguage.map(option => ({ label: option.label, value: option.value }))}
+            options={mappedLanguages}
             value={selectedOptionWordLanguageTranslate}
             onChange={newValue => {
               console.log(newValue);

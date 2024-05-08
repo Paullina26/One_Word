@@ -1,17 +1,16 @@
 import { useEffect, useState, createContext, useContext } from 'react';
 import { FC } from 'react';
-import { API_Endpoints, headers } from 'API/api';
 import { GlobalContext } from './GlobalContext';
-import { optionsLanguage } from 'data/option/language_options';
+
+import fetchWithToken from 'API/api';
+import { mappedLanguages } from 'data/option/language_options';
 
 interface ContextSettingsUserProviderProps {
   children: React.ReactNode;
 }
 interface ContextSettingsUserValue {
-  defaultWordLanguage: string;
-  setDefaultWordLanguage: React.Dispatch<React.SetStateAction<string>>;
-  defaultWordLanguageTranslate: string;
-  setDefaultWordLanguageTranslate: React.Dispatch<React.SetStateAction<string>>;
+  defaultWordLanguageTranslate: number;
+  setDefaultWordLanguageTranslate: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const UserSettingsContext = createContext<ContextSettingsUserValue>(
@@ -20,9 +19,9 @@ export const UserSettingsContext = createContext<ContextSettingsUserValue>(
 
 const UserSettingsProvider: FC<ContextSettingsUserProviderProps> = ({ children }) => {
   const { isLoginUser } = useContext(GlobalContext);
-  const [defaultWordLanguage, setDefaultWordLanguage] = useState(optionsLanguage[0].value);
+  const [defaultWordLanguage, setDefaultWordLanguage] = useState(mappedLanguages[7].value);
   const [defaultWordLanguageTranslate, setDefaultWordLanguageTranslate] = useState(
-    optionsLanguage[2].value
+    mappedLanguages[7].value
   );
 
   const values = {
@@ -33,21 +32,16 @@ const UserSettingsProvider: FC<ContextSettingsUserProviderProps> = ({ children }
   };
 
   const getSettingUser = async () => {
-    const token = localStorage.getItem('token');
-    if (!token || isLoginUser) return;
-
+    if (!isLoginUser) return;
     try {
-      const response = await fetch(API_Endpoints.getUserSettings, {
-        headers: { ...headers, Authorization: `Bearer ${token}` },
+      const data = await fetchWithToken({
+        endpoint: 'getUserSettings',
+        method: 'GET',
       });
-      const { status } = response;
-      console.log(status);
-      if (status === 200) {
-        const data = await response.json();
-        console.log('settings are good', data);
-      } else {
-        console.log('settings are not good');
-      }
+      console.log('settings are good', data);
+      // Tutaj możesz ustawić pobrane ustawienia użytkownika, np.:
+      // setDefaultWordLanguage(data.defaultWordLanguage);
+      // setDefaultWordLanguageTranslate(data.defaultWordLanguageTranslate);
     } catch (error) {
       console.log('Errors in ContextSettingsUser', error);
     }

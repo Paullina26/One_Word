@@ -4,6 +4,7 @@ import { API_Endpoints, headers } from 'API/api';
 import { FC } from 'react';
 import { routes } from 'data/routes';
 import CircularProgress from '@mui/material/CircularProgress';
+import fetchWithToken from 'API/api';
 
 interface GlobalProviderProps {
   children: React.ReactNode;
@@ -27,7 +28,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const [isLoginUser, setIsLoginUser] = useState(false);
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const [isLoadingOpen, setIsLoadingOpen] = useState(false);
+  const [isLoadingOpen, setIsLoadingOpen] = useState(true);
 
   const values = {
     isLoginUser,
@@ -46,21 +47,17 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
 
   const checkLoginStatus = async () => {
     setIsLoadingOpen(true);
-    const token = localStorage.getItem('token');
-    if (!token || isLoginUser) {
-      setIsLoadingOpen(false);
-      return;
-    }
     try {
-      const response = await fetch(API_Endpoints.user, {
-        headers: { ...headers, Authorization: `Bearer ${token}` },
+      const userData = await fetchWithToken({
+        endpoint: 'user',
+        method: 'GET',
       });
-      const { status } = response;
 
-      if (status === 200) setIsLoginUser(true);
-      navigate(`${routes.LEARN_TODAYS_WORD.to}`);
+      if (userData) {
+        setIsLoginUser(true);
+      }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     } finally {
       setIsLoadingOpen(false);
     }

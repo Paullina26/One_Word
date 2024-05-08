@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { sectionNavigation } from 'data/NavigationElements';
 import LogOut from 'components/LogOut/LogOut';
 import * as S from 'components/Navigation/StyleNavigation';
+import React from 'react';
 
 interface NavigationProps {
   isOpenMenu: boolean;
@@ -82,12 +83,12 @@ export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
       <LogOut />
       <S.WrapperNav>
         {Object.keys(sectionNavigation).map(section => (
-          <>
+          <React.Fragment key={section}>
             <S.NavigationElementTitle onClick={() => toggleSection(section)}>
               {section}
             </S.NavigationElementTitle>
             {activeSection === section && renderLinks(section as keyof SectionNavigation)}
-          </>
+          </React.Fragment>
         ))}
       </S.WrapperNav>
     </S.NavigationWrapper>

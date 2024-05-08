@@ -7,10 +7,14 @@ import {
   outline_focus,
 } from 'style/mixins';
 
-interface SelectProps {
-  options: Array<{ label: string; value: string }>;
-  onChange: (value: string) => void;
-  value: string;
+interface SelectOption<TType = string> {
+  label: string;
+  value: TType;
+}
+interface SelectProps<T> {
+  options: SelectOption<T>[];
+  onChange: (value: T) => void;
+  value: T;
   labelValue: string;
   id: string;
   $isLightTeam: boolean;
@@ -44,7 +48,7 @@ const StyledSelect = styled.select<{ $isLightTeam: boolean }>`
   ${outline_focus};
 `;
 
-const Select: FC<SelectProps> = ({
+const Select = <T extends string | number>({
   id,
   options,
   onChange,
@@ -52,7 +56,7 @@ const Select: FC<SelectProps> = ({
   labelValue,
   $isLightTeam,
   $fontColorLabel,
-}) => {
+}: SelectProps<T>): JSX.Element => {
   return (
     <SelectWrapper>
       <SelectLabel htmlFor={id} $fontColorLabel={$fontColorLabel}>
@@ -60,10 +64,12 @@ const Select: FC<SelectProps> = ({
       </SelectLabel>
       <StyledSelect
         id={id}
-        value={value}
+        value={value.toString()}
         onChange={e => {
-          console.log(e.target.value);
-          onChange(e.target.value);
+          const newValue = e.target.value;
+          // Próba przekonwertowania na number, jeśli to możliwe; w przeciwnym razie, przekazanie stringa
+          const convertedValue = isNaN(Number(newValue)) ? newValue : Number(newValue);
+          onChange(convertedValue as T);
         }}
         $isLightTeam={$isLightTeam}
       >

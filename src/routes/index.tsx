@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { routes } from 'data/routes';
 import Home from 'pages/Home/Home';
 import Auth from 'pages/Auth/Auth';
-import TodaysWord from 'pages/User/Learning/TodaysWord';
+import TodaysWord from 'pages/User/Learning/TodaysWord/TodaysWord';
 import Hangman from 'pages/User/Learning/Hangman';
 import Translate from 'pages/User/Learning/Translate';
 import Flashcard from 'pages/User/Learning/Flashcard';
@@ -24,7 +24,7 @@ const RoutesComponent = () => {
       {isLoginUser && (
         <>
           <Route path='learning'>
-            <Route path={`${routes.LEARN_TODAYS_WORD.to}`} element={<TodaysWord />} />
+            <Route path={routes.LEARN_TODAYS_WORD.to} element={<TodaysWord />} />
             <Route path={`${routes.LEARN_HANGMAN.to}`} element={<Hangman />} />
             <Route path={`${routes.LEARN_TRANSLATE.to}`} element={<Translate />} />
             <Route path={`${routes.LEARN_REPEAT.to}`} element={<Repeat />} />

@@ -15,6 +15,9 @@ import {
   boxShadow_darkTheme_button,
   outline_focus,
 } from 'style/mixins';
+import { Navigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { GlobalContext } from 'utils/GlobalContext';
 
 export const LinkButton = styled(NavLink)<{ $isLightTeam: boolean }>`
   ${font_settings(2.2, 'italic', 300)};
@@ -30,6 +33,12 @@ export const LinkButton = styled(NavLink)<{ $isLightTeam: boolean }>`
 `;
 
 export const HomePage = () => {
+  const { isLoginUser, isLoadingOpen } = useContext(GlobalContext);
+
+  if (isLoadingOpen) return <div>loading...</div>;
+
+  if (isLoginUser) return <Navigate replace to={routes.LEARN_TODAYS_WORD.to} />;
+
   return (
     <>
       <Logo />
