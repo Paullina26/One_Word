@@ -32,9 +32,7 @@ const RoutesComponent = () => {
             <Route path={`${routes.LEARN_REPEAT.to}`} element={<Repeat />} />
             <Route path={`${routes.LEARN_FLASHCARD.to}`} element={<Flashcard />} />
             {isAiUser && <Route path={`${routes.LEARN_CHAT.to}`} element={<ChatWrapper />} />}
-            {isAiUser && (
-              <Route path={`${routes.LEARN_CHAT.to}/:?word`} element={<ChatWrapper />} />
-            )}
+            {isAiUser && <Route path={`${routes.LEARN_CHAT.to}/:word`} element={<ChatWrapper />} />}
           </Route>
           <Route path='settings'>
             <Route path={`${routes.SETTINGS_ADD_WORDS.to}`} element={<AddWordSettings />} />

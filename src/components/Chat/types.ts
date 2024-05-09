@@ -8,6 +8,7 @@ export type ChatContextValue = {
   inputValue: string;
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
   messages: Message[];
+  finishConversation: () => void;
 
   recorderBlob: Blob | null;
   isRecording: boolean;

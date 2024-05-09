@@ -2,7 +2,7 @@ import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
 import styled from 'styled-components';
 
 export const ChatWrapper = styled.div`
-  max-width: 1200px;
+  max-width: 800px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -42,7 +42,9 @@ export const Interface = styled.form`
   margin: 0 auto;
 `;
 
-export const ButtonWrapper = styled.div``;
+export const ButtonWrapper = styled.div`
+  display: flex;
+`;
 
 export const TextareaWrapper = styled.div`
   position: relative;

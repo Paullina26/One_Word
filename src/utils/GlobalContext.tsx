@@ -1,8 +1,7 @@
 import { useEffect, useState, createContext } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { API, headers } from 'API/api';
 import { FC } from 'react';
-import { routes } from 'data/routes';
 import CircularProgress from '@mui/material/CircularProgress';
 
 interface GlobalProviderProps {
@@ -18,6 +17,7 @@ interface GlobalContextValue {
   isLoadingOpen: boolean;
   setIsLoadingOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isAiUser: boolean;
+  setIsAiUser: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const GlobalContext = createContext<GlobalContextValue>({} as GlobalContextValue);
@@ -40,6 +40,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     isLoadingOpen,
     setIsLoadingOpen,
     isAiUser,
+    setIsAiUser,
   };
 
   useEffect(() => {
@@ -49,10 +50,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const checkLoginStatus = async () => {
     setIsLoadingOpen(true);
     const token = localStorage.getItem('token');
-    if (!token || isLoginUser) {
-      setIsLoadingOpen(false);
-      return;
-    }
+    if (!token || isLoginUser) return;
     try {
       const response = await fetch(API.isLoginUser, {
         headers: { ...headers, Authorization: `Bearer ${token}` },

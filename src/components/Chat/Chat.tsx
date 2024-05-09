@@ -10,26 +10,20 @@ import { useChat } from './ChatProvider';
 import VoiceView from './components/VoiceView';
 import AiLoading from './components/AiLoading';
 import Message from './components/Message';
+import FinishConversation from './components/FinishConversation';
 
 const Chat: FC = () => {
   const messagesRef = useRef<HTMLDivElement>(null);
 
   const {
-    sendAudioMessage,
     inputValue,
     setInputValue,
     handleSendText,
-    recorderBlob,
     streamingAnswer,
     isMessagesVisible,
     isWaitingForAnswer,
     messages,
   } = useChat();
-
-  useEffect(() => {
-    if (!recorderBlob) return;
-    sendAudioMessage(recorderBlob);
-  }, [recorderBlob]);
 
   useEffect(() => {
     if (messagesRef.current) {
@@ -50,6 +44,7 @@ const Chat: FC = () => {
           {isWaitingForAnswer && <AiLoading />}
           <S.Interface onSubmit={e => handleSendText(e)}>
             <S.ButtonWrapper>
+              <FinishConversation />
               <VisibleMessages />
             </S.ButtonWrapper>
             <S.TextareaWrapper>

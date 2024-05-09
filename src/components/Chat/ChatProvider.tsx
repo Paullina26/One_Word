@@ -22,16 +22,29 @@ export const ChatProvider: FC<Props> = ({ children }) => {
   const [inputValue, setInputValue] = useState('');
 
   const toggleMessagesVisibility = () => setIsMessagesVisible(prev => !prev);
-  const toggleAiSpeaking = (isSpeaking: boolean) => {
-    setIsAiSpeaking(isSpeaking);
-  };
-
-  const updateMessages = (message: Message) => {
+  const toggleAiSpeaking = (isSpeaking: boolean) => setIsAiSpeaking(isSpeaking);
+  const updateMessages = (message: Message) =>
     setMessages(prevMessages => [...prevMessages, message]);
-  };
 
   const { startRecording, stopRecording, recorderBlob, isRecording } = useRecording();
   const { streamAudio, streamingAnswer } = useStreamAudio({ updateMessages, toggleAiSpeaking });
+
+  useEffect(() => {
+    console.log(22222);
+    if (!recorderBlob) return;
+    sendAudioMessage(recorderBlob);
+  }, [recorderBlob]);
+
+  useEffect(() => {
+    checkIsAi();
+    // initial Message
+    console.log(11);
+    sendMessage();
+  }, []);
+
+  const checkIsAi = async () => {
+    await fetch(`${API_BASE_URL}chat/is-ai`);
+  };
 
   const handleSendText = (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
@@ -39,12 +52,12 @@ export const ChatProvider: FC<Props> = ({ children }) => {
     sendMessage(inputValue, false);
   };
 
-  const sendMessage = async (userMessage: string, isStreaming?: boolean) => {
+  const sendMessage = async (userMessage?: string, isStreaming?: boolean) => {
     setInputValue('');
-    // add message from user to all messages
     const prevMessages = [...messages];
-    const newMessageFromUser = { content: userMessage, role: 'user' };
-    setMessages([...prevMessages, newMessageFromUser]);
+    const newMessageFromUser = userMessage ? [{ content: userMessage, role: 'user' }] : [];
+    // add message from user to all messages
+    setMessages([...prevMessages, ...newMessageFromUser]);
 
     const token = localStorage.getItem('token');
 
@@ -56,14 +69,15 @@ export const ChatProvider: FC<Props> = ({ children }) => {
       },
       method: 'POST',
       body: JSON.stringify({
-        query: userMessage,
+        query: userMessage || '',
         languageToLearn: 'English',
         isStreaming,
         todayWord: params.word || '',
+        currentConversationId,
       }),
     });
-
-    setCurrentConversationId(messageResp?.headers?.get('x-conversation-id'));
+    const conversationId = messageResp?.headers?.get('x-conversation-id');
+    setCurrentConversationId(conversationId);
 
     if (isStreaming) {
       const reader = messageResp.body?.getReader();
@@ -75,8 +89,8 @@ export const ChatProvider: FC<Props> = ({ children }) => {
 
     // add message from ai to all messages
     const respJson = await messageResp.json();
-    const newMessageFromAi = { content: respJson.answer, role: 'assistant' };
-    const newMessagesFromAi = [...prevMessages, newMessageFromUser, newMessageFromAi];
+    const newMessageFromAi = [{ content: respJson.answer, role: 'assistant' }];
+    const newMessagesFromAi = [...prevMessages, ...newMessageFromUser, ...newMessageFromAi];
     setMessages(newMessagesFromAi);
     setIsWaitingForAnswer(false);
   };
@@ -104,6 +118,23 @@ export const ChatProvider: FC<Props> = ({ children }) => {
     sendMessage(whisperText.text, true);
   };
 
+  const finishConversation = async () => {
+    console.log('FINISh');
+    const token = localStorage.getItem('token');
+
+    const finisResp = await fetch(`${API_BASE_URL}chat/finished-conversation`, {
+      headers: {
+        ...headers,
+        Authorization: `Bearer ${token}`,
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        conversationId: currentConversationId,
+      }),
+    });
+    console.log(finisResp.json());
+  };
+
   const value = {
     sendAudioMessage,
     inputValue,
@@ -116,6 +147,7 @@ export const ChatProvider: FC<Props> = ({ children }) => {
     startRecording,
     streamingAnswer,
     handleSendText,
+    finishConversation,
 
     isMessagesVisible,
     toggleMessagesVisibility,
