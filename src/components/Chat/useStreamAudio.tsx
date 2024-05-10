@@ -35,7 +35,7 @@ export const useStreamAudio = ({
 
     if (audioQueue.length === 0 || isPlaying) return;
     let newAudioQueue = [...audioQueue];
-    newAudioQueue.sort((a, b) => a.sequence - b.sequence); // Sort by sequence number
+    newAudioQueue.sort((a, b) => a.sequence - b.sequence);
     setIsPlaying(true);
 
     const audio = newAudioQueue[0];
@@ -44,7 +44,6 @@ export const useStreamAudio = ({
 
     if (!audio?.chunk) return;
 
-    // Sprawdź, czy bufor audio nie jest pusty przed próbą dekodowania
     await audioContext.decodeAudioData(
       audio.chunk,
       function (buffer) {
