@@ -53,6 +53,7 @@ export const ChatProvider: FC<Props> = ({ children }) => {
   };
 
   const sendMessage = async (userMessage?: string, isStreaming?: boolean) => {
+    if (currentConversationId && userMessage === '') return;
     setInputValue('');
     const prevMessages = [...messages];
     const newMessageFromUser = userMessage ? [{ content: userMessage, role: 'user' }] : [];
