@@ -7,6 +7,7 @@ import { useRecording } from './useRecording';
 import { API_BASE_URL, headers } from 'API/api';
 import { getOpenaiApiKey } from './helpers';
 import { useStreamAudio } from './useStreamAudio';
+import { toast } from 'react-toastify';
 
 const ChatContext = createContext<ChatContextValue>({} as ChatContextValue);
 
@@ -30,21 +31,14 @@ export const ChatProvider: FC<Props> = ({ children }) => {
   const { streamAudio, streamingAnswer } = useStreamAudio({ updateMessages, toggleAiSpeaking });
 
   useEffect(() => {
-    console.log(22222);
     if (!recorderBlob) return;
     sendAudioMessage(recorderBlob);
   }, [recorderBlob]);
 
   useEffect(() => {
-    checkIsAi();
     // initial Message
-    console.log(11);
     sendMessage();
   }, []);
-
-  const checkIsAi = async () => {
-    await fetch(`${API_BASE_URL}chat/is-ai`);
-  };
 
   const handleSendText = (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
@@ -133,7 +127,7 @@ export const ChatProvider: FC<Props> = ({ children }) => {
         conversationId: currentConversationId,
       }),
     });
-    console.log(finisResp.json());
+    toast('Saved!');
   };
 
   const value = {

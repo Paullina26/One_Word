@@ -49,17 +49,17 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
 
   const checkLoginStatus = async () => {
     setIsLoadingOpen(true);
-    const token = localStorage.getItem('token');
-    if (!token || isLoginUser) return;
     try {
+      const token = localStorage.getItem('token');
+
+      if (!token || isLoginUser) return;
+
       const response = await fetch(API.isLoginUser, {
         headers: { ...headers, Authorization: `Bearer ${token}` },
       });
+
       const { status } = response;
-      if (status !== 200) {
-        setIsLoginUser(false);
-        return;
-      }
+      if (status !== 200) return setIsLoginUser(false);
 
       const user = await response.json();
 
