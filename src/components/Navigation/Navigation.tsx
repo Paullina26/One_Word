@@ -1,10 +1,11 @@
-import { FC, useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { FC, useState, useEffect, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 
-import { sectionNavigation } from 'data/NavigationElements';
+import { baseNavigation, chatNavigation } from 'data/NavigationElements';
 import LogOut from 'components/LogOut/LogOut';
 
 import * as S from 'components/Navigation/StyleNavigation';
+import { GlobalContext } from 'utils/GlobalContext';
 
 interface NavigationProps {
   isOpenMenu: boolean;
@@ -22,8 +23,16 @@ interface SectionNavigation {
 
 export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
   const location = useLocation();
+  const { isAiUser } = useContext(GlobalContext);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [animateLinks, setAnimateLinks] = useState(false);
+
+  const chatNav = isAiUser ? [chatNavigation] : [];
+
+  const sectionNavigation = {
+    Learning: [...baseNavigation.Learning, ...chatNav],
+    Settings: baseNavigation.Settings,
+  };
 
   const toggleSection = (sectionNavigation: string) => {
     setActiveSection(prev => {

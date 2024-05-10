@@ -1,48 +1,63 @@
-import Microphone from 'components/Microphone/Micophone';
-import { Button } from 'components/Shared/Buttons/Button';
-import Input from 'components/Shared/Form/Input';
-import { FC, useState } from 'react';
-import styled from 'styled-components';
+import { FC, useEffect, useRef } from 'react';
 
-const ChatWrapper = styled.div`
-  max-width: 100px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-`;
+import Microphone from 'components/Chat/components/Micophone';
+import Textarea from 'components/Textarea/Textarea';
 
-const Messages = styled.div`
-  width: 100%;
-  flex-grow: 1;
-`;
-
-const Interface = styled.div`
-  width: 100%;
-`;
+import * as S from './StyleChat';
+import SendIcon from './components/SendIcon';
+import VisibleMessages from './components/VisibleMessage';
+import { useChat } from './ChatProvider';
+import VoiceView from './components/VoiceView';
+import AiLoading from './components/AiLoading';
+import Message from './components/Message';
+import FinishConversation from './components/FinishConversation';
 
 const Chat: FC = () => {
-  const [isTextVisible, setIsTextVisible] = useState(true);
-  const [inputValue, setInputValue] = useState('');
+  const messagesRef = useRef<HTMLDivElement>(null);
+
+  const {
+    inputValue,
+    setInputValue,
+    handleSendText,
+    streamingAnswer,
+    isMessagesVisible,
+    isWaitingForAnswer,
+    messages,
+  } = useChat();
+
+  useEffect(() => {
+    if (messagesRef.current) {
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    }
+  }, [isMessagesVisible, messages]);
 
   return (
-    <ChatWrapper>
-      <Messages></Messages>
-      <Interface>
-        <form>
-          <Input
-            placeholder='Type a message'
-            value={inputValue}
-            onChange={setInputValue}
-            $fontColorLabel='purpleDark'
-            $isLightTeam={true}
-          />
-          <Button>Send</Button>
-          <Microphone />
-        </form>
-      </Interface>
-    </ChatWrapper>
+    <>
+      {isMessagesVisible ? (
+        <S.ChatWrapper>
+          <S.Messages ref={messagesRef}>
+            {messages.map((message, index) => (
+              <Message key={`${index}-${message}`} role={message.role} content={message.content} />
+            ))}
+            {streamingAnswer.length > 0 && <Message content={streamingAnswer} role='assistant' />}
+          </S.Messages>
+          {isWaitingForAnswer && <AiLoading />}
+          <S.Interface onSubmit={e => handleSendText(e)}>
+            <S.ButtonWrapper>
+              <FinishConversation />
+              <VisibleMessages />
+            </S.ButtonWrapper>
+            <S.TextareaWrapper>
+              <Textarea value={inputValue} onChange={setInputValue} paddingForButtons />
+              <Microphone />
+              <SendIcon onClick={handleSendText} />
+            </S.TextareaWrapper>
+          </S.Interface>
+        </S.ChatWrapper>
+      ) : (
+        <VoiceView />
+      )}
+    </>
   );
 };
 
