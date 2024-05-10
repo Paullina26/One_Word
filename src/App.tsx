@@ -6,6 +6,7 @@ import RoutesComponent from 'routes';
 import GlobalProvider from 'utils/GlobalContext';
 import TemplatesGlobal from 'templates/TemplatesGlobal';
 import UserSettingsProvider from 'utils/ContextSettingsUser';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           </UserSettingsProvider>
         </GlobalProvider>
       </ThemeProvider>
+      <ToastContainer />
     </Router>
   );
 }

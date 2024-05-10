@@ -45,12 +45,11 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
 
   const checkLoginStatus = async () => {
     setIsLoadingOpen(true);
-    const token = localStorage.getItem('token');
-    if (!token || isLoginUser) {
-      setIsLoadingOpen(false);
-      return;
-    }
     try {
+      const token = localStorage.getItem('token');
+
+      if (!token || isLoginUser) return;
+
       const response = await fetch(API.isLoginUser, {
         headers: { ...headers, Authorization: `Bearer ${token}` },
       });
