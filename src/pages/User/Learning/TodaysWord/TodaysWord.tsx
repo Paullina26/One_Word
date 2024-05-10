@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import fetchWithToken from 'API/api';
 import * as S from './StyleTodaysWord';
@@ -10,8 +11,12 @@ const TodayWord = () => {
   const [baseWord, setBaseWord] = useState(null);
   const [transWord, setTransWord] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [isShowWord, setIsShowWord] = useState(false);
+  const navigate = useNavigate();
+  const handleAddWordClick = () => {
+    navigate('/settings/add_words');
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,11 +27,12 @@ const TodayWord = () => {
         setBaseWord(data.basicWord);
         setTransWord(data.transWord);
         console.log(data);
-        setError(false);
+        setIsError(false);
       } catch (err) {
-        console.error(err);
-        toast.error('Nie udało się pobrać słowa dnia. Spróbuj ponownie później.');
-        setError(true);
+        toast.error(
+          'Failed to fetch the word of the day as there are no new words to learn. Please add new ones.'
+        );
+        setIsError(true);
       } finally {
         setLoading(false);
       }
@@ -36,7 +42,18 @@ const TodayWord = () => {
   }, []);
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error</div>;
+  if (isError)
+    return (
+      <S.Wrapper>
+        {' '}
+        <S.Tittle>Today`s Word</S.Tittle>
+        <S.WrapperBaseWord>
+          <S.Word>Please add new words</S.Word>
+        </S.WrapperBaseWord>
+        <Button onClick={handleAddWordClick}>Add Word</Button>
+        <NotificationInformation NotificationText='Missing new words to learn, please click Add Words to add new words. Or change the status of learned words.' />
+      </S.Wrapper>
+    );
 
   return (
     <S.Wrapper>
