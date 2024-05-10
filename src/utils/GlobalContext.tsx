@@ -23,7 +23,6 @@ interface GlobalContextValue {
 export const GlobalContext = createContext<GlobalContextValue>({} as GlobalContextValue);
 
 const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
-  const navigate = useNavigate();
   const location = useLocation();
   const [isLoginUser, setIsLoginUser] = useState(false);
   const [isLoadingUser, setIsLoadingUser] = useState(false);
