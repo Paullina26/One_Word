@@ -4,7 +4,7 @@ import Logo from 'components/Shared/Logo/Logo';
 import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
 import Welcome from 'components/Welcome/Welcome';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { routes } from 'data/routes';
 import {
@@ -15,6 +15,8 @@ import {
   boxShadow_darkTheme_button,
   outline_focus,
 } from 'style/mixins';
+import { useContext } from 'react';
+import { GlobalContext } from 'utils/GlobalContext';
 
 export const LinkButton = styled(NavLink)<{ $isLightTeam: boolean }>`
   ${font_settings(2.2, 'italic', 300)};
@@ -30,6 +32,12 @@ export const LinkButton = styled(NavLink)<{ $isLightTeam: boolean }>`
 `;
 
 export const HomePage = () => {
+  const { isLoginUser, isLoadingOpen } = useContext(GlobalContext);
+
+  if (isLoadingOpen) return <div>loading...</div>;
+
+  if (isLoginUser) return <Navigate replace to={routes.LEARN_TODAYS_WORD.to} />;
+
   return (
     <>
       <Logo />

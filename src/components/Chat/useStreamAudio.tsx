@@ -9,19 +9,22 @@ export const useStreamAudio = ({
   updateMessages: (message: Message) => void;
   toggleAiSpeaking: (isSpeaking: boolean) => void;
 }) => {
+  const [apiKey, setApiKey] = useState<null | string>(null);
+
   const sentence = useRef('');
+  let sequenceNum = 0;
+
   const [streamingAnswer, setStreamingAnswer] = useState('');
   const [audioQueue, setAudioQueue] = useState<{ chunk: ArrayBuffer; sequence: number }[]>([]);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isFinished, setIsFinished] = useState(false);
+  const [isFinish, setIsFinish] = useState(false);
 
   useEffect(() => {
-    if (isFinished) {
-      updateMessages({ content: streamingAnswer, role: 'assistant' });
-      setStreamingAnswer('');
-      setIsFinished(false);
-    }
-  }, [isFinished]);
+    if (!isFinish) return;
+    updateMessages({ content: streamingAnswer, role: 'assistant' });
+    setStreamingAnswer('');
+    setIsFinish(false);
+  }, [isFinish]);
 
   useEffect(() => {
     if (!isPlaying) {
@@ -29,6 +32,15 @@ export const useStreamAudio = ({
       toggleAiSpeaking(false);
     } else toggleAiSpeaking(true);
   }, [audioQueue, isPlaying]);
+
+  useEffect(() => {
+    getApiKey();
+  }, []);
+
+  const getApiKey = async () => {
+    const apiKey = await getOpenaiApiKey();
+    setApiKey(apiKey);
+  };
 
   const playNext = async () => {
     let audioContext = new AudioContext();
@@ -62,14 +74,12 @@ export const useStreamAudio = ({
   };
 
   const streamAudio = async (reader: ReadableStreamDefaultReader<Uint8Array>) => {
-    const apiKey = await getOpenaiApiKey();
     let decoder = new TextDecoder();
-    let sequenceNum = 0;
 
     const { done, value } = await reader.read();
 
-    if (done) {
-      setIsFinished(true);
+    if (done && sentence.current === '') {
+      setIsFinish(true);
       return;
     }
 
@@ -82,6 +92,7 @@ export const useStreamAudio = ({
       const sentenceToPlay = sentence.current.slice(0, stopIndex + 1).trim();
       sentence.current = sentence.current.slice(stopIndex + 1).trim();
       const currentSequence = sequenceNum++;
+
       const respAudioAi = await fetch('https://api.openai.com/v1/audio/speech', {
         method: 'POST',
         headers: {
@@ -91,13 +102,16 @@ export const useStreamAudio = ({
         body: JSON.stringify({
           model: 'tts-1',
           input: sentenceToPlay,
-          voice: 'alloy',
+          voice: 'onyx',
           response_format: 'mp3',
         }),
       });
 
       const arrayBuffer = await respAudioAi.arrayBuffer();
-      setAudioQueue(prev => [...prev, { chunk: arrayBuffer, sequence: currentSequence }]);
+      setAudioQueue(prev => [
+        ...prev,
+        { chunk: arrayBuffer, sequence: currentSequence, sentenceToPlay },
+      ]);
     }
 
     streamAudio(reader);
