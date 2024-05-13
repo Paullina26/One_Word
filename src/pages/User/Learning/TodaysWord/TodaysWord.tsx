@@ -18,18 +18,22 @@ const TodayWord = () => {
     navigate('/settings/add_words');
   };
 
+  const handleShowWord = () => {
+    setIsShowWord(!isShowWord);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchWithToken({
+        const { response, status } = await fetchWithToken({
           endpoint: 'getTodayWord',
         });
-        setBaseWord(data.basicWord);
-        setTransWord(data.transWord);
-        console.log(data);
+        setBaseWord(response.basicWord);
+        setTransWord(response.transWord);
+        console.log(response);
         setIsError(false);
       } catch (err) {
-        toast.error(
+        toast.warn(
           'Failed to fetch the word of the day as there are no new words to learn. Please add new ones.'
         );
         setIsError(true);
@@ -62,10 +66,14 @@ const TodayWord = () => {
         <S.Word>{baseWord}</S.Word>
       </S.WrapperBaseWord>
       <S.WrapperWord>
-        {isShowWord ? <S.Word>{transWord}</S.Word> : <Button>Show Word</Button>}
-        <Button>
+        {isShowWord ? (
+          <S.Word>{transWord}</S.Word>
+        ) : (
+          <Button onClick={handleShowWord}>Show Word</Button>
+        )}
+        <S.PositionedButton>
           <ManagedIcon name='speaker' />
-        </Button>
+        </S.PositionedButton>
       </S.WrapperWord>
       <S.WrapperButtons>
         <Button>

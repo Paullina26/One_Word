@@ -79,34 +79,8 @@ const fetchWithToken = async ({
   if (!response.ok) {
     throw new Error(`HTTP error! Status: ${response.status}`);
   }
-
-  return await response.json();
+  const jsonResponse = await response.json();
+  return await { response: jsonResponse, status: response.status };
 };
 
 export default fetchWithToken;
-
-// const fetchTodaysWord = async () => {
-//   try {
-//     const todaysWord = await fetchWithToken<{ word: string }>({ endpoint: 'getTodayWord' });
-//     console.log("Today's word is:", todaysWord);
-//   } catch (error) {
-//     console.error("Failed to fetch today's word:", error);
-//   }
-// };
-// fetchTodaysWord();
-
-// const updateWord = async (wordId: string, wordData: any) => {
-//   try {
-//     const result = await fetchWithToken<{ success: boolean }>({
-//       endpoint: 'updateWord',
-//       method: 'PUT',
-//       body: wordData,
-//       params: wordId
-//     });
-//     console.log('Update successful:', result);
-//   } catch (error) {
-//     console.error('Failed to update word:', error);
-//   }
-// };
-
-// updateWord('12345', { word: 'UpdatedWord' });

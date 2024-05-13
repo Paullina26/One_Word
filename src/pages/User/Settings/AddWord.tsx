@@ -41,15 +41,23 @@ const AddWordSettings = () => {
       addLang: selectedOptionWordLanguageTranslate,
     };
     try {
-      const response = await fetchWithToken({
+      const { response, status } = await fetchWithToken({
         endpoint: 'addWord',
         method: 'POST',
         body: postData,
       });
-      console.log('Response from API:', response);
+      console.log(response);
+      if (status === 200) {
+        toast.success('The word has been added!');
+        setWordBase('');
+        setWordTranslate('');
+        setSelectedOptionWordLanguageTranslate(defaultWordLanguageTranslate);
+      } else {
+        console.log('Response from API:', response);
+        throw new Error('Problem with adding a word');
+      }
     } catch (err) {
-      console.error(err);
-      toast.error('Nie udało sie dodać słówka');
+      toast.error('Failed to add the word');
       setError(true);
     } finally {
       setLoading(false);

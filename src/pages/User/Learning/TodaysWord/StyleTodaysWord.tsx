@@ -36,6 +36,16 @@ export const WrapperWord = styled.div`
   height: 150px;
   text-align: center;
   background-color: rgba(232, 232, 232, 0.75);
+  position: relative;
+`;
+
+export const PositionedButton = styled(Button)`
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: auto;
+  margin: 0;
+  white-space: nowrap;
 `;
 
 export const Word = styled.p`
