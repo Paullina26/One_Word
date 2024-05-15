@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'https://onewordserv.bieda.it/api/';
+export const API_BASE_URL = 'https://onewordserv.byst.re/api/';
 
 export const headers = {
   Accept: 'application.json',

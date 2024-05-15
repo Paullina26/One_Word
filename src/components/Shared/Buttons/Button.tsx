@@ -19,5 +19,6 @@ export const Button = styled.button<{ $isLightTeam?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 15px auto;
   height: 40px;
 `;
