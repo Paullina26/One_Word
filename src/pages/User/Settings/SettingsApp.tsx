@@ -36,7 +36,6 @@ const SettingsApp = () => {
 
   const onSubmit: SubmitHandler<IForm> = data => {
     setDefaultLanguageToLearn(data.defaultLanguageToLearn);
-    console.log('SettingsApp', data);
   };
 
   return (
