@@ -1,9 +1,8 @@
-import { FC, useState, useEffect, useContext } from 'react';
+import React, { FC, useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { baseNavigation, chatNavigation } from 'data/NavigationElements';
 import LogOut from 'components/LogOut/LogOut';
-
 import * as S from 'components/Navigation/StyleNavigation';
 import { GlobalContext } from 'utils/GlobalContext';
 
@@ -93,12 +92,12 @@ export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
       <LogOut />
       <S.WrapperNav>
         {Object.keys(sectionNavigation).map(section => (
-          <>
+          <React.Fragment key={section}>
             <S.NavigationElementTitle onClick={() => toggleSection(section)}>
               {section}
             </S.NavigationElementTitle>
             {activeSection === section && renderLinks(section as keyof SectionNavigation)}
-          </>
+          </React.Fragment>
         ))}
       </S.WrapperNav>
     </S.NavigationWrapper>

@@ -6,10 +6,10 @@ import { inputNameElement } from 'helpers/mixins';
 import Submit from 'components/Shared/Form/Submit';
 import Select from 'components/Shared/Form/Select';
 import { Button } from 'components/Shared/Buttons/Button';
-import { optionsLanguage } from 'data/option/language_options';
 import { WrapperSettings } from 'components/Shared/containers/WrapperSettings';
 import { UserSettingsContext } from 'utils/ContextSettingsUser';
 import { Controller, SubmitHandler, useForm, useFieldArray } from 'react-hook-form';
+import { mappedLanguages } from 'data/option/language_options';
 
 export const Tittle = styled.p`
   ${font_settings(2.4, 'normal', 600)}
@@ -17,34 +17,25 @@ export const Tittle = styled.p`
 `;
 
 interface IForm {
-  selectedOptionLanguageWord: string;
-  selectedTranslateLanguageWord: string;
+  defaultLanguageToLearn: number;
   notifications: {
     type: string;
     time: string;
   }[];
 }
 const SettingsApp = () => {
-  const {
-    defaultWordLanguage,
-    setDefaultWordLanguage,
-    defaultWordLanguageTranslate,
-    setDefaultWordLanguageTranslate,
-  } = useContext(UserSettingsContext);
+  const { defaultLanguageToLearn, setDefaultLanguageToLearn } = useContext(UserSettingsContext);
 
   const { handleSubmit, control, getValues } = useForm<IForm>({
     defaultValues: {
-      selectedOptionLanguageWord: defaultWordLanguage,
-      selectedTranslateLanguageWord: defaultWordLanguageTranslate,
+      defaultLanguageToLearn: defaultLanguageToLearn,
     },
   });
 
   const { fields, remove, append } = useFieldArray({ control, name: 'notifications' });
 
   const onSubmit: SubmitHandler<IForm> = data => {
-    setDefaultWordLanguage(data.selectedOptionLanguageWord);
-    setDefaultWordLanguageTranslate(data.selectedTranslateLanguageWord);
-    console.log('SettingsApp', data);
+    setDefaultLanguageToLearn(data.defaultLanguageToLearn);
   };
 
   return (
@@ -52,7 +43,7 @@ const SettingsApp = () => {
       <Tittle>Settings Word</Tittle>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Controller
+          {/* <Controller
             name='selectedOptionLanguageWord'
             control={control}
             render={({ field }) => (
@@ -66,16 +57,16 @@ const SettingsApp = () => {
                 $isLightTeam={true}
               />
             )}
-          />
+          /> */}
           <Controller
-            name='selectedTranslateLanguageWord'
+            name='defaultLanguageToLearn'
             control={control}
             render={({ field }) => (
-              <Select
+              <Select<number>
                 id='select_GlobalSettingsApp_LanguageTranslate'
                 $fontColorLabel='purpleDark'
                 labelValue='Select Translate Language Word '
-                options={optionsLanguage}
+                options={mappedLanguages}
                 value={field.value}
                 onChange={field.onChange}
                 $isLightTeam={true}

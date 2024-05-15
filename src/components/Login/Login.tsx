@@ -7,7 +7,7 @@ import { toastColored } from 'helpers/StyleToastify';
 import * as S from 'components/Login/StyleLogin';
 import Input from 'components/Shared/Form/Input';
 import Submit from 'components/Shared/Form/Submit';
-import { headers, API } from 'API/api';
+import { headers, API_Endpoints } from 'API/api';
 import { WrapperInputs, WrapperForm } from 'components/Shared/Form/StyleForm';
 import { Button } from 'components/Shared/Buttons/Button';
 import { inputNameElement } from 'helpers/mixins';
@@ -43,16 +43,16 @@ export const Login: FC<LoginProps> = ({ toggleAuthForm }) => {
       headers,
       body: JSON.stringify({ username: mail, password }),
     };
-    const response = await toast.promise(fetch(API.login, requestDetails), toastAlerts);
+    const response = await toast.promise(fetch(API_Endpoints.login, requestDetails), toastAlerts);
     const { status } = response;
 
     if (status === 200) {
-      setIsLoginUser(true);
-      navigate(`${routes.LEARN_TODAYS_WORD.to}`);
       const json = await response.json();
       localStorage.setItem('token', json.token);
+      setIsLoginUser(true);
       if (json.isAi === 'true') setIsAiUser(true);
       toast.success('Login is success. 👌', toastColored as ToastOptions<{}>);
+      navigate(`${routes.LEARN_TODAYS_WORD.to}`);
     } else if (status === 401) {
       toast.error('Wrong password or email', toastColored as ToastOptions<{}>);
     } else if (status === 404) {

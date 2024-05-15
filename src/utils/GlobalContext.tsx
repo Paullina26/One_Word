@@ -1,8 +1,8 @@
 import { useEffect, useState, createContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import { API, headers } from 'API/api';
 import { FC } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
+import fetchWithToken from 'API/api';
 
 interface GlobalProviderProps {
   children: React.ReactNode;
@@ -50,23 +50,18 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const checkLoginStatus = async () => {
     setIsLoadingOpen(true);
     try {
-      const token = localStorage.getItem('token');
-
-      if (!token || isLoginUser) return;
-
-      const response = await fetch(API.isLoginUser, {
-        headers: { ...headers, Authorization: `Bearer ${token}` },
+      const userData = await fetchWithToken({
+        endpoint: 'user',
+        method: 'GET',
       });
 
-      const { status } = response;
+      const { status } = userData;
       if (status !== 200) return setIsLoginUser(false);
 
-      const user = await response.json();
-
-      if (user.isAi === 'true') setIsAiUser(true);
+      if (userData.response.isAi === 'true') setIsAiUser(true);
       if (status === 200) setIsLoginUser(true);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     } finally {
       setIsLoadingOpen(false);
     }

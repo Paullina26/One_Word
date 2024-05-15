@@ -1,11 +1,9 @@
-import Background from 'components/Background/Background';
-import { Button } from 'components/Shared/Buttons/Button';
-import Logo from 'components/Shared/Logo/Logo';
-import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
-import Welcome from 'components/Welcome/Welcome';
 import styled from 'styled-components';
-import { Link, Navigate } from 'react-router-dom';
-import { useNavigate, NavLink } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { useContext } from 'react';
+
+import { GlobalContext } from 'utils/GlobalContext';
 import { routes } from 'data/routes';
 import {
   font_settings,
@@ -15,8 +13,9 @@ import {
   boxShadow_darkTheme_button,
   outline_focus,
 } from 'style/mixins';
-import { useContext } from 'react';
-import { GlobalContext } from 'utils/GlobalContext';
+import Logo from 'components/Shared/Logo/Logo';
+import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
+import Welcome from 'components/Welcome/Welcome';
 
 export const LinkButton = styled(NavLink)<{ $isLightTeam: boolean }>`
   ${font_settings(2.2, 'italic', 300)};

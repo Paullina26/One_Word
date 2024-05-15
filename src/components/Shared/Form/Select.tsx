@@ -7,10 +7,14 @@ import {
   outline_focus,
 } from 'style/mixins';
 
-interface SelectProps {
-  options: string[];
-  onChange: (value: string) => void;
-  value: string;
+interface SelectOption<TType = string> {
+  label: string;
+  value: TType;
+}
+interface SelectProps<T> {
+  options: SelectOption<T>[];
+  onChange: (value: T) => void;
+  value: T;
   labelValue: string;
   id: string;
   $isLightTeam: boolean;
@@ -44,7 +48,16 @@ const StyledSelect = styled.select<{ $isLightTeam: boolean }>`
   ${outline_focus};
 `;
 
-const Select: FC<SelectProps> = ({
+const handleSelectChange = <T,>(
+  e: React.ChangeEvent<HTMLSelectElement>,
+  onChange: (value: T) => void
+) => {
+  const newValue = e.target.value;
+  const convertedValue = isNaN(Number(newValue)) ? newValue : Number(newValue);
+  onChange(convertedValue as T);
+};
+
+const Select = <T extends string | number>({
   id,
   options,
   onChange,
@@ -52,7 +65,7 @@ const Select: FC<SelectProps> = ({
   labelValue,
   $isLightTeam,
   $fontColorLabel,
-}) => {
+}: SelectProps<T>): JSX.Element => {
   return (
     <SelectWrapper>
       <SelectLabel htmlFor={id} $fontColorLabel={$fontColorLabel}>
@@ -60,13 +73,13 @@ const Select: FC<SelectProps> = ({
       </SelectLabel>
       <StyledSelect
         id={id}
-        value={value}
-        onChange={e => onChange(e.target.value)}
+        value={value.toString()}
+        onChange={e => handleSelectChange(e, onChange)}
         $isLightTeam={$isLightTeam}
       >
         {options.map(option => (
-          <option key={option} value={option}>
-            {option}
+          <option key={option.value} value={option.value}>
+            {option.label}
           </option>
         ))}
       </StyledSelect>
