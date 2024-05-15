@@ -48,6 +48,15 @@ const StyledSelect = styled.select<{ $isLightTeam: boolean }>`
   ${outline_focus};
 `;
 
+const handleSelectChange = <T,>(
+  e: React.ChangeEvent<HTMLSelectElement>,
+  onChange: (value: T) => void
+) => {
+  const newValue = e.target.value;
+  const convertedValue = isNaN(Number(newValue)) ? newValue : Number(newValue);
+  onChange(convertedValue as T);
+};
+
 const Select = <T extends string | number>({
   id,
   options,
@@ -65,12 +74,7 @@ const Select = <T extends string | number>({
       <StyledSelect
         id={id}
         value={value.toString()}
-        onChange={e => {
-          const newValue = e.target.value;
-          // Próba przekonwertowania na number, jeśli to możliwe; w przeciwnym razie, przekazanie stringa
-          const convertedValue = isNaN(Number(newValue)) ? newValue : Number(newValue);
-          onChange(convertedValue as T);
-        }}
+        onChange={e => handleSelectChange(e, onChange)}
         $isLightTeam={$isLightTeam}
       >
         {options.map(option => (

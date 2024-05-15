@@ -24,12 +24,11 @@ export const WrapperInputsSettingsAddWord = styled.div`
 `;
 
 const AddWordSettings = () => {
-  const { defaultWordLanguageTranslate } = useContext(UserSettingsContext);
+  const { defaultLanguageToLearn } = useContext(UserSettingsContext);
   const [wordBase, setWordBase] = useState<string>('');
   const [wordTranslate, setWordTranslate] = useState<string>('');
-  const [selectedOptionWordLanguageTranslate, setSelectedOptionWordLanguageTranslate] = useState(
-    defaultWordLanguageTranslate
-  );
+  const [selectedOptionWordLanguageTranslate, setSelectedOptionWordLanguageTranslate] =
+    useState(defaultLanguageToLearn);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -46,12 +45,11 @@ const AddWordSettings = () => {
         method: 'POST',
         body: postData,
       });
-      console.log(response);
       if (status === 200) {
         toast.success('The word has been added!');
         setWordBase('');
         setWordTranslate('');
-        setSelectedOptionWordLanguageTranslate(defaultWordLanguageTranslate);
+        setSelectedOptionWordLanguageTranslate(defaultLanguageToLearn);
       } else {
         console.log('Response from API:', response);
         throw new Error('Problem with adding a word');
@@ -94,7 +92,6 @@ const AddWordSettings = () => {
             options={mappedLanguages}
             value={selectedOptionWordLanguageTranslate}
             onChange={newValue => {
-              console.log(newValue);
               setSelectedOptionWordLanguageTranslate(newValue);
             }}
             $isLightTeam={true}

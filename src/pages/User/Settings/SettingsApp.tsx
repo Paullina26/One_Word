@@ -17,26 +17,25 @@ export const Tittle = styled.p`
 `;
 
 interface IForm {
-  selectedTranslateLanguageWord: number;
+  defaultLanguageToLearn: number;
   notifications: {
     type: string;
     time: string;
   }[];
 }
 const SettingsApp = () => {
-  const { defaultWordLanguageTranslate, setDefaultWordLanguageTranslate } =
-    useContext(UserSettingsContext);
+  const { defaultLanguageToLearn, setDefaultLanguageToLearn } = useContext(UserSettingsContext);
 
   const { handleSubmit, control, getValues } = useForm<IForm>({
     defaultValues: {
-      selectedTranslateLanguageWord: defaultWordLanguageTranslate,
+      defaultLanguageToLearn: defaultLanguageToLearn,
     },
   });
 
   const { fields, remove, append } = useFieldArray({ control, name: 'notifications' });
 
   const onSubmit: SubmitHandler<IForm> = data => {
-    setDefaultWordLanguageTranslate(data.selectedTranslateLanguageWord);
+    setDefaultLanguageToLearn(data.defaultLanguageToLearn);
     console.log('SettingsApp', data);
   };
 
@@ -61,7 +60,7 @@ const SettingsApp = () => {
             )}
           /> */}
           <Controller
-            name='selectedTranslateLanguageWord'
+            name='defaultLanguageToLearn'
             control={control}
             render={({ field }) => (
               <Select<number>

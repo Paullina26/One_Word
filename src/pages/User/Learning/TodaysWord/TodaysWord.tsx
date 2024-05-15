@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { GlobalContext } from 'utils/GlobalContext';
+
 import fetchWithToken from 'API/api';
+import ManagedIcon from 'assets/icon/helpers/ManagedIcon';
+import { toast } from 'react-toastify';
 import * as S from './StyleTodaysWord';
 import { Button } from 'components/Shared/Buttons/Button';
 import NotificationInformation from 'components/Shared/Atoms/NotificationInformation';
-import ManagedIcon from 'assets/icon/helpers/ManagedIcon';
-import { GlobalContext } from 'utils/GlobalContext';
 
 const TodayWord = () => {
   const { isLoginUser } = useContext(GlobalContext);
@@ -19,13 +20,10 @@ const TodayWord = () => {
   const [idWord, setIdWord] = useState(null);
 
   const navigate = useNavigate();
-  const handleAddWordClick = () => {
-    navigate('/settings/add_words');
-  };
+  const handleAddWordClick = () => navigate('/settings/add_words');
+  const handleShowWord = () => setIsShowWord(!isShowWord);
 
-  const handleShowWord = () => {
-    setIsShowWord(!isShowWord);
-  };
+  //TO DO: add speak function, in settings language
 
   const handleSpeak = () => {
     if (transWord) {
@@ -81,22 +79,19 @@ const TodayWord = () => {
   };
 
   useEffect(() => {
-    if (isLoginUser) {
-      fetchData();
-    }
+    if (isLoginUser) fetchData();
   }, [isLoginUser]);
 
   if (loading) return <div>Loading...</div>;
   if (isError)
     return (
       <S.Wrapper>
-        {' '}
         <S.Tittle>Today`s Word</S.Tittle>
         <S.WrapperBaseWord>
           <S.Word>Please add new words</S.Word>
         </S.WrapperBaseWord>
         <Button onClick={handleAddWordClick}>Add Word</Button>
-        <NotificationInformation NotificationText='Missing new words to learn, please click Add Words to add new words. Or change the status of learned words.' />
+        <NotificationInformation notificationText='Missing new words to learn, please click Add Words to add new words. Or change the status of learned words.' />
       </S.Wrapper>
     );
 
@@ -118,7 +113,7 @@ const TodayWord = () => {
       </S.WrapperWord>
       <S.WrapperButtons>
         <Button onClick={handleLearnedWord}>Learned</Button>
-        <NotificationInformation NotificationText='If you click this button, the word will be learned and will not appear again.' />
+        <NotificationInformation notificationText='If you click this button, the word will be learned and will not appear again.' />
       </S.WrapperButtons>
     </S.Wrapper>
   );

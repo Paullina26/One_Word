@@ -13,13 +13,13 @@ export const NotificationWrapper = styled.div`
 `;
 
 interface NotificationInformationProps {
-  NotificationText: string;
+  notificationText: string;
 }
 
-const NotificationInformation: React.FC<NotificationInformationProps> = ({ NotificationText }) => {
+const NotificationInformation: React.FC<NotificationInformationProps> = ({ notificationText }) => {
   return (
     <NotificationWrapper>
-      <p>{NotificationText}</p>
+      <p>{notificationText}</p>
     </NotificationWrapper>
   );
 };

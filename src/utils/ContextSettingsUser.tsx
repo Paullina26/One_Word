@@ -9,26 +9,30 @@ interface ContextSettingsUserProviderProps {
   children: React.ReactNode;
 }
 interface ContextSettingsUserValue {
-  defaultWordLanguageTranslate: number;
-  setDefaultWordLanguageTranslate: React.Dispatch<React.SetStateAction<number>>;
+  defaultLanguageToLearn: number;
+  setDefaultLanguageToLearn: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const UserSettingsContext = createContext<ContextSettingsUserValue>(
   {} as ContextSettingsUserValue
 );
 
+const DEFAULT_LANGUAGE_NUMBER = 7;
+
 const UserSettingsProvider: FC<ContextSettingsUserProviderProps> = ({ children }) => {
   const { isLoginUser } = useContext(GlobalContext);
-  const [defaultWordLanguage, setDefaultWordLanguage] = useState(mappedLanguages[7].value);
-  const [defaultWordLanguageTranslate, setDefaultWordLanguageTranslate] = useState(
-    mappedLanguages[7].value
+  const [defaultWordLanguage, setDefaultWordLanguage] = useState(
+    mappedLanguages[DEFAULT_LANGUAGE_NUMBER].value
+  );
+  const [defaultLanguageToLearn, setDefaultLanguageToLearn] = useState(
+    mappedLanguages[DEFAULT_LANGUAGE_NUMBER].value
   );
 
   const values = {
     defaultWordLanguage,
     setDefaultWordLanguage,
-    defaultWordLanguageTranslate,
-    setDefaultWordLanguageTranslate,
+    defaultLanguageToLearn,
+    setDefaultLanguageToLearn,
   };
 
   const getSettingUser = async () => {
