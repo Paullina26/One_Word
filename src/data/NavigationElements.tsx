@@ -1,6 +1,6 @@
 import { routes } from 'data/routes';
 
-export const sectionNavigation = {
+export const baseNavigation = {
   Learning: [
     {
       to: `${routes.LEARN_TODAYS_WORD.to}`,
@@ -22,10 +22,6 @@ export const sectionNavigation = {
       to: `${routes.LEARN_REPEAT.to}`,
       name: `${routes.LEARN_REPEAT.name}`,
     },
-    {
-      to: `${routes.LEARN_CHAT.to}`,
-      name: `${routes.LEARN_CHAT.name}`,
-    },
   ],
   Settings: [
     {
@@ -41,4 +37,9 @@ export const sectionNavigation = {
       name: `${routes.SETTINGS_USER.name}`,
     },
   ],
+};
+
+export const chatNavigation = {
+  to: `${routes.LEARN_CHAT.to}`,
+  name: `${routes.LEARN_CHAT.name}`,
 };

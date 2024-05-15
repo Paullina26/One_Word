@@ -1,8 +1,6 @@
 import { useEffect, useState, createContext } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { API_Endpoints, headers } from 'API/api';
+import { useLocation } from 'react-router-dom';
 import { FC } from 'react';
-import { routes } from 'data/routes';
 import CircularProgress from '@mui/material/CircularProgress';
 import fetchWithToken from 'API/api';
 
@@ -18,6 +16,8 @@ interface GlobalContextValue {
   setIsOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
   isLoadingOpen: boolean;
   setIsLoadingOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isAiUser: boolean;
+  setIsAiUser: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const GlobalContext = createContext<GlobalContextValue>({} as GlobalContextValue);
@@ -27,7 +27,8 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const [isLoginUser, setIsLoginUser] = useState(false);
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const [isLoadingOpen, setIsLoadingOpen] = useState(true);
+  const [isLoadingOpen, setIsLoadingOpen] = useState(false);
+  const [isAiUser, setIsAiUser] = useState(false);
 
   const values = {
     isLoginUser,
@@ -38,6 +39,8 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     setIsOpenMenu,
     isLoadingOpen,
     setIsLoadingOpen,
+    isAiUser,
+    setIsAiUser,
   };
 
   useEffect(() => {
@@ -52,9 +55,11 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
         method: 'GET',
       });
 
-      if (userData) {
-        setIsLoginUser(true);
-      }
+      const { status } = userData;
+      if (status !== 200) return setIsLoginUser(false);
+
+      if (userData.response.isAi === 'true') setIsAiUser(true);
+      if (status === 200) setIsLoginUser(true);
     } catch (err) {
       console.error(err);
     } finally {
