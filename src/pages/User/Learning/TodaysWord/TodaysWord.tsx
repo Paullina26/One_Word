@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import fetchWithToken from 'API/api';
@@ -6,8 +6,10 @@ import * as S from './StyleTodaysWord';
 import { Button } from 'components/Shared/Buttons/Button';
 import NotificationInformation from 'components/Shared/Atoms/NotificationInformation';
 import ManagedIcon from 'assets/icon/helpers/ManagedIcon';
+import { GlobalContext } from 'utils/GlobalContext';
 
 const TodayWord = () => {
+  const { isLoginUser } = useContext(GlobalContext);
   const [baseWord, setBaseWord] = useState(null);
   const [transWord, setTransWord] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -59,6 +61,7 @@ const TodayWord = () => {
   };
 
   const fetchData = async () => {
+    setLoading(true);
     try {
       const { response, status } = await fetchWithToken({
         endpoint: 'getTodayWord',
@@ -78,8 +81,10 @@ const TodayWord = () => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (isLoginUser) {
+      fetchData();
+    }
+  }, [isLoginUser]);
 
   if (loading) return <div>Loading...</div>;
   if (isError)

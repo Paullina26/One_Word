@@ -47,12 +47,12 @@ export const Login: FC<LoginProps> = ({ toggleAuthForm }) => {
     const { status } = response;
 
     if (status === 200) {
-      setIsLoginUser(true);
-      navigate(`${routes.LEARN_TODAYS_WORD.to}`);
       const json = await response.json();
       localStorage.setItem('token', json.token);
+      setIsLoginUser(true);
       if (json.isAi === 'true') setIsAiUser(true);
       toast.success('Login is success. 👌', toastColored as ToastOptions<{}>);
+      navigate(`${routes.LEARN_TODAYS_WORD.to}`);
     } else if (status === 401) {
       toast.error('Wrong password or email', toastColored as ToastOptions<{}>);
     } else if (status === 404) {
