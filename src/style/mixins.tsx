@@ -152,7 +152,6 @@ background: linear-gradient(217deg, rgba(255, 255, 255, 0.3), rgba(182, 182, 202
             linear-gradient(127deg, rgba(255, 255, 255, 0.3), rgba(253, 253, 255, 0.3) 20.71%),
             linear-gradient(207deg, rgba(255, 255, 255, 0.3), rgba(197, 197, 217, 0.3) 20.71%),
             linear-gradient(336deg, rgba(98, 95, 126, 0.3), rgba(0, 0, 0, 0.1) 20.71%);
-// box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 box-shadow: -3px -3px 5px rgba(94, 104, 121, 0.2), 3px 3px 5px rgba(94, 104, 121, 0.2);
 backdrop-filter: blur(10px);
 border-left: 3px inset rgba(103, 29, 145, 0.2);
@@ -164,7 +163,6 @@ background: linear-gradient(217deg, rgba(40, 30, 80, 0.5), rgba(80, 70, 130, 0.5
             linear-gradient(207deg, rgba(80, 70, 130, 0.5), rgba(80, 70, 130, 0.5) 20.71%),
             linear-gradient(336deg, rgba(40, 30, 80, 0.5), rgba(0, 0, 0, 0.1) 20.71%);
 border-radius: 16px;
-// box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 box-shadow: -3px -3px 5px rgba(94, 104, 121, 0.2), 3px 3px 5px rgba(94, 104, 121, 0.2);
 backdrop-filter: blur(10px);
 border: 3px inset rgba(220, 220, 220, 0.2);

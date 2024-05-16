@@ -7,9 +7,11 @@ import { inputNameElement } from 'helpers/mixins';
 import Submit from 'components/Shared/Form/Submit';
 import Select from 'components/Shared/Form/Select';
 import { Button } from 'components/Shared/Buttons/Button';
-import { optionsLanguage } from 'data/option/language_options';
+import { LanguagesMap, mappedLanguages } from 'data/option/language_options';
 import { WrapperSettings } from 'components/Shared/containers/WrapperSettings';
 import { UserSettingsContext } from 'utils/ContextSettingsUser';
+import fetchWithToken from 'API/api';
+import { toast } from 'react-toastify';
 
 export const Tittle = styled.p`
   ${font_settings(2.4, 'normal', 600)}
@@ -22,22 +24,48 @@ export const WrapperInputsSettingsAddWord = styled.div`
 `;
 
 const AddWordSettings = () => {
-  const { defaultWordLanguage, defaultWordLanguageTranslate } = useContext(UserSettingsContext);
+  const { defaultLanguageToLearn } = useContext(UserSettingsContext);
   const [wordBase, setWordBase] = useState<string>('');
   const [wordTranslate, setWordTranslate] = useState<string>('');
-  const [selectedOptionLanguageWord, setSelectedOptionLanguageWord] = useState(defaultWordLanguage);
-  const [selectedOptionWordLanguageTranslate, setSelectedOptionWordLanguageTranslate] = useState(
-    defaultWordLanguageTranslate
-  );
+  const [selectedOptionWordLanguageTranslate, setSelectedOptionWordLanguageTranslate] =
+    useState(defaultLanguageToLearn);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  // const handleSelectChangeBaseWord = (value: string) => {
-  //   setSelectedOptionLanguageWord(value);
-  // };
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const postData = {
+      basicWord: wordBase,
+      transWord: wordTranslate,
+      addLang: selectedOptionWordLanguageTranslate,
+    };
+    try {
+      const { response, status } = await fetchWithToken({
+        endpoint: 'addWord',
+        method: 'POST',
+        body: postData,
+      });
+      if (status === 200) {
+        toast.success('The word has been added!');
+        setWordBase('');
+        setWordTranslate('');
+        setSelectedOptionWordLanguageTranslate(defaultLanguageToLearn);
+      } else {
+        console.log('Response from API:', response);
+        throw new Error('Problem with adding a word');
+      }
+    } catch (err) {
+      toast.error('Failed to add the word');
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <WrapperSettings>
       <Tittle>Add Word</Tittle>
-      <form action='submit'>
+      <form onSubmit={handleSubmit}>
         <WrapperInputsSettingsAddWord>
           <Input
             $fontColorLabel='purpleDark'
@@ -48,31 +76,24 @@ const AddWordSettings = () => {
             minlength={2}
             required
           />
-          <Select
-            id='settings_selectLanguageWord'
-            $fontColorLabel='purpleDark'
-            labelValue='Select Language Word'
-            options={optionsLanguage}
-            value={selectedOptionLanguageWord}
-            onChange={value => setSelectedOptionLanguageWord(value)}
-            $isLightTeam={true}
-          />
           <Input
             $fontColorLabel='purpleDark'
             $isLightTeam={true}
-            {...inputNameElement('settings_addWordTranslate', 'text', 'Word Translate')}
+            {...inputNameElement('settings_addWordTranslate', 'text', 'Word Translated')}
             onChange={value => setWordTranslate(value)}
             value={wordTranslate}
             minlength={2}
             required
           />
-          <Select
+          <Select<number>
             id='settings_selectLanguageWordTranslate'
             $fontColorLabel='purpleDark'
-            labelValue='Select Language Word Translate'
-            options={optionsLanguage}
+            labelValue='Language To Learn'
+            options={mappedLanguages}
             value={selectedOptionWordLanguageTranslate}
-            onChange={value => setSelectedOptionWordLanguageTranslate(value)}
+            onChange={newValue => {
+              setSelectedOptionWordLanguageTranslate(newValue);
+            }}
             $isLightTeam={true}
           />
         </WrapperInputsSettingsAddWord>

@@ -6,45 +6,82 @@ export const headers = {
   'Content-Type': 'application/json; charset=utf-8',
 };
 
-export const API = {
+export const API_Endpoints = {
+  // auth
   login: `${API_BASE_URL}auth/login`,
-  registration: `${API_BASE_URL}auth/register`,
-  isLoginUser: `${API_BASE_URL}auth/user`,
+  signup: `${API_BASE_URL}auth/register`,
+  user: `${API_BASE_URL}auth/user`,
+
+  // settings
   getUserSettings: `${API_BASE_URL}settings/user-settings`,
-  putUserSettings: `${API_BASE_URL}settings/user-settings`,
-  getAllWords: `${API_BASE_URL}all`,
-  postOneWords: `${API_BASE_URL}add-one`,
+  updateUserSettings: `${API_BASE_URL}settings/user-settings`,
+
+  // words
+  getAllWords: `${API_BASE_URL}words/all`, //GET
+  addWord: `${API_BASE_URL}words/add-one`, //POST
+  sendCsv: `${API_BASE_URL}words/add-csv`, //POST
+  getTodayWord: `${API_BASE_URL}words/today-word`, //GET
+
+  updateWord: (id: string) => `${API_BASE_URL}words/update-one/${id}`, //PUT
+  deleteWord: (id: string) => `${API_BASE_URL}words/delete-one/${id}`, // DELETE
 };
 
-// const SettingsSchema = new mongoose.Schema({
-//   userId: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: 'User',
-//   },
-//   breakDay: { type: String, default: '7' },
-//   isBreak: { type: Boolean, default: true },
-//   isSummary: { type: Boolean, default: true },
-//   notifications: {
-//     type: [NotificationSchema],
-//     default: [
-//       { time: '12:42', type: '1' },
-//       { time: '14:42', type: '2' },
-//       { time: '12:42', type: '3' },
-//     ],
-//   },
-//   selectLanguage: { type: String, default: 'en' },
-//   summaryDay: { type: String, default: '1' },
-// })
+type ApiEndpoint = keyof typeof API_Endpoints;
+type StaticEndpoint = {
+  [K in keyof typeof API_Endpoints]: (typeof API_Endpoints)[K] extends Function ? never : K;
+}[keyof typeof API_Endpoints];
 
-// basicWord: { type: String, required: [true, 'to pole jest wymagane'] },
-//   transWord: { type: String, required: [true, 'to pole jest wymagane'] },
+type DynamicEndpoint = {
+  [K in keyof typeof API_Endpoints]: (typeof API_Endpoints)[K] extends Function ? K : never;
+}[keyof typeof API_Endpoints];
 
-// addLang: { type: String, default: 'en' },
-// to ostatnie nie jest wymagane. jeśli nie podasz języka będie en
-// put('/update-one/:id'
+interface RequestOptions {
+  endpoint: StaticEndpoint | DynamicEndpoint;
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
+  body?: any;
+  customHeaders?: HeadersInit;
+  params?: string;
+}
 
-// to jak później zrobisz form do updatowania
+const fetchWithToken = async ({
+  endpoint,
+  method = 'GET',
+  body,
+  customHeaders,
+  params,
+}: RequestOptions) => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('No authentication token found.');
+  }
 
-// router.get('/today-word'
+  const fullHeaders = {
+    ...headers,
+    Authorization: `Bearer ${token}`,
+    ...customHeaders,
+  };
 
-// To jest do pobrania dzisiejszego słowa, ale to nie wiem czy będziesz używać u siebie
+  let url: string;
+  if (typeof API_Endpoints[endpoint] === 'function') {
+    if (!params) {
+      throw new Error('Params required for dynamic endpoints');
+    }
+    url = (API_Endpoints[endpoint] as (id: string) => string)(params);
+  } else {
+    url = API_Endpoints[endpoint] as string;
+  }
+
+  const response = await fetch(url, {
+    method,
+    headers: fullHeaders,
+    body: body ? JSON.stringify(body) : undefined,
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+  const jsonResponse = await response.json();
+  return await { response: jsonResponse, status: response.status };
+};
+
+export default fetchWithToken;
