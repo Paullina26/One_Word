@@ -1,13 +1,11 @@
 import styled from 'styled-components';
-import { GlobalContext } from 'utils/GlobalContext';
 import { FC, useContext, useState } from 'react';
 import { font_settings } from 'style/mixins';
 import Input from 'components/Shared/Form/Input';
 import { inputNameElement } from 'helpers/mixins';
 import Submit from 'components/Shared/Form/Submit';
 import Select from 'components/Shared/Form/Select';
-import { Button } from 'components/Shared/Buttons/Button';
-import { LanguagesMap, mappedLanguages } from 'data/option/language_options';
+import { mappedLanguages } from 'data/option/language_options';
 import { WrapperSettings } from 'components/Shared/containers/WrapperSettings';
 import { UserSettingsContext } from 'utils/ContextSettingsUser';
 import fetchWithToken from 'API/api';
@@ -23,10 +21,15 @@ export const WrapperInputsSettingsAddWord = styled.div`
   margin-top: 20px;
 `;
 
-const AddWordSettings = () => {
+type AddWordSettingsProps = {
+  wordToLearn?: string;
+  onClose?: () => void;
+};
+
+const AddWordSettings = ({ wordToLearn, onClose }: AddWordSettingsProps) => {
   const { defaultLanguageToLearn } = useContext(UserSettingsContext);
   const [wordBase, setWordBase] = useState<string>('');
-  const [wordTranslate, setWordTranslate] = useState<string>('');
+  const [wordTranslate, setWordTranslate] = useState<string>(wordToLearn || '');
   const [selectedOptionWordLanguageTranslate, setSelectedOptionWordLanguageTranslate] =
     useState(defaultLanguageToLearn);
   const [error, setError] = useState(false);
@@ -59,6 +62,7 @@ const AddWordSettings = () => {
       setError(true);
     } finally {
       setLoading(false);
+      onClose && onClose();
     }
   };
 

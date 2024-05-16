@@ -6,6 +6,7 @@ import AddWordSettings from 'pages/User/Settings/AddWord';
 
 import * as S from '../StyleChat';
 import List from 'components/Shared/List';
+import { Button } from 'components/Shared/Buttons/Button';
 
 type WordToLearn = {
   textToLearn: string;
@@ -13,7 +14,7 @@ type WordToLearn = {
 };
 
 const Summary: FC = () => {
-  const { mistakesList, newWordsList } = useChat();
+  const { mistakesList, newWordsList, handleNewChat } = useChat();
   const [currentWord, setCurrentWord] = useState<WordToLearn | null>(null);
 
   const openModal = ({ textToLearn, id }: WordToLearn) => {
@@ -59,15 +60,21 @@ const Summary: FC = () => {
         Here are your mistakes and new words from conversation. You can decide if you want to add
         some them to you list of words to learn.
       </S.Description>
-      <List items={listItems} />
+
+      {listItems.length > 0 ? (
+        <List items={listItems} />
+      ) : (
+        <S.Description>You were so good that there are not any mistakes or new words</S.Description>
+      )}
 
       <Modal open={Boolean(currentWord)} onClose={closeModal}>
         <S.ModalWrapper>
-          {/* <AddWordSettings wordToLearn={currentWord?.textToLearn} /> */}
+          <AddWordSettings wordToLearn={currentWord?.textToLearn} onClose={closeModal} />
         </S.ModalWrapper>
       </Modal>
 
       <Heading>Keep going!</Heading>
+      <Button onClick={handleNewChat}>New chat</Button>
     </S.SummaryWrapper>
   );
 };
