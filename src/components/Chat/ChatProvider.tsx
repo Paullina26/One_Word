@@ -1,13 +1,47 @@
 import React, { FC, createContext, useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { ChatContextValue, Message, Props } from './types';
+import { ChatContextValue, Message, Mistake, Props, Word } from './types';
 
 import { useRecording } from './useRecording';
 import { API_BASE_URL, headers } from 'API/api';
 import { getOpenaiApiKey } from './helpers';
 import { useStreamAudio } from './useStreamAudio';
 import { toast } from 'react-toastify';
+
+const mistakes = [
+  {
+    mistake: 'garnder',
+    correction: 'gardener',
+    id: '41176935-fc6a-4a2a-925e-1ac211d63dd8',
+  },
+  {
+    mistake: 'i Wroclaw',
+    correction: 'in Wroclaw',
+    id: '25c65d15-8fd9-41a3-b535-4d859909bec6',
+  },
+  {
+    mistake: 'are not so great as garden',
+    correction: 'are not as great as the gardens',
+    id: '1e356c4c-f9d0-4f92-a511-7be1b48bcbb2',
+  },
+  {
+    mistake: 'answered in',
+    correction: 'replied in',
+    id: '17651915-4459-47d5-8f8d-8a9c13ea6ff3',
+  },
+  {
+    mistake: 'ones that caught your attention',
+    correction: 'What does it mean when something catches your attention?',
+    id: '836121e3-cc14-4bdc-9c78-dfaf73ddb43f',
+  },
+];
+const newWords = [
+  {
+    newWord: 'caught your attention',
+    id: '7c8dc2e0-188f-4ae0-aa68-58d9ee0db95a',
+  },
+];
 
 const ChatContext = createContext<ChatContextValue>({} as ChatContextValue);
 
@@ -21,6 +55,9 @@ export const ChatProvider: FC<Props> = ({ children }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
   const [inputValue, setInputValue] = useState('');
+  const [mistakesList, setMistakesList] = useState<Mistake[]>(mistakes);
+  const [newWordsList, setNewWordsList] = useState<Word[]>(newWords);
+  const [isSummaryOpen, setIsSummaryOpen] = useState(true);
 
   const toggleMessagesVisibility = () => setIsMessagesVisible(prev => !prev);
   const toggleAiSpeaking = (isSpeaking: boolean) => setIsAiSpeaking(isSpeaking);
@@ -37,7 +74,7 @@ export const ChatProvider: FC<Props> = ({ children }) => {
 
   useEffect(() => {
     // initial Message
-    sendMessage();
+    // sendMessage();
   }, []);
 
   const handleSendText = (e?: React.FormEvent<HTMLFormElement>) => {
@@ -117,7 +154,7 @@ export const ChatProvider: FC<Props> = ({ children }) => {
     console.log('FINISh');
     const token = localStorage.getItem('token');
 
-    const finisResp = await fetch(`${API_BASE_URL}chat/finished-conversation`, {
+    const finishResp = await fetch(`${API_BASE_URL}chat/finished-conversation`, {
       headers: {
         ...headers,
         Authorization: `Bearer ${token}`,
@@ -127,7 +164,16 @@ export const ChatProvider: FC<Props> = ({ children }) => {
         conversationId: currentConversationId,
       }),
     });
-    toast('Saved!');
+    const finishRespJson: { mistakes: Mistake[]; newWords: Word[] } = await finishResp.json();
+
+    setMistakesList(finishRespJson.mistakes);
+    setNewWordsList(finishRespJson.newWords);
+
+    // reset
+    setIsSummaryOpen(true);
+    setMessages([]);
+    setCurrentConversationId(null);
+    setIsMessagesVisible(false);
   };
 
   const value = {
@@ -135,6 +181,9 @@ export const ChatProvider: FC<Props> = ({ children }) => {
     inputValue,
     setInputValue,
     messages,
+    mistakesList,
+    newWordsList,
+    isSummaryOpen,
 
     recorderBlob,
     isRecording,

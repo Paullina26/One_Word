@@ -26,6 +26,7 @@ export const LoginTestDataDisplay = styled.div`
   padding: 20px;
   color: ${({ theme }) => theme.purpleDark};
 `;
+
 export const TittleLoginData = styled.div`
   ${font_settings(2, 'normal', 500)};
 `;

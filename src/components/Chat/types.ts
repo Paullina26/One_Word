@@ -3,12 +3,26 @@ export interface Message {
   role: string;
 }
 
+export type Mistake = {
+  correction: string;
+  id: string;
+  mistake: string;
+};
+
+export type Word = {
+  newWord: string;
+  id: string;
+};
+
 export type ChatContextValue = {
   sendAudioMessage: (recordingBlob: Blob) => Promise<void>;
   inputValue: string;
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
   messages: Message[];
   finishConversation: () => void;
+  mistakesList: Mistake[];
+  newWordsList: Word[];
+  isSummaryOpen: boolean;
 
   recorderBlob: Blob | null;
   isRecording: boolean;
