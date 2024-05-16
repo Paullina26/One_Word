@@ -20,9 +20,6 @@ export type ChatContextValue = {
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
   messages: Message[];
   finishConversation: () => void;
-  mistakesList: Mistake[];
-  newWordsList: Word[];
-  isSummaryOpen: boolean;
 
   recorderBlob: Blob | null;
   isRecording: boolean;
@@ -36,6 +33,11 @@ export type ChatContextValue = {
   isAiSpeaking: boolean;
 
   isWaitingForAnswer: boolean;
+
+  handleNewChat: () => void;
+  mistakesList: Mistake[];
+  newWordsList: Word[];
+  isSummaryOpen: boolean;
 };
 
 export type Props = {
