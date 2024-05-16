@@ -58,7 +58,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
       const { status } = userData;
       if (status !== 200) return setIsLoginUser(false);
 
-      if (userData.response.isAi === 'true') setIsAiUser(true);
+      if (userData.response.isAi) setIsAiUser(true);
       if (status === 200) setIsLoginUser(true);
     } catch (err) {
       console.error(err);
