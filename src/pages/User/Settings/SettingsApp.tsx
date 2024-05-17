@@ -43,21 +43,6 @@ const SettingsApp = () => {
       <Tittle>Settings Word</Tittle>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/* <Controller
-            name='selectedOptionLanguageWord'
-            control={control}
-            render={({ field }) => (
-              <Select
-                id='select_GlobalSettingsApp_LanguageDefault'
-                $fontColorLabel='purpleDark'
-                labelValue='Select Basic Language Word'
-                options={optionsLanguage}
-                value={field.value}
-                onChange={field.onChange}
-                $isLightTeam={true}
-              />
-            )}
-          /> */}
           <Controller
             name='defaultLanguageToLearn'
             control={control}

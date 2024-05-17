@@ -1,8 +1,9 @@
 import { useEffect, useState, createContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FC } from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
+
 import fetchWithToken from 'API/api';
+import LoadingFullView from 'components/Shared/Loading/LoadingFullView';
 
 interface GlobalProviderProps {
   children: React.ReactNode;
@@ -49,6 +50,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
 
   const checkLoginStatus = async () => {
     setIsLoadingOpen(true);
+    if (isLoadingOpen || isLoginUser) return;
     try {
       const userData = await fetchWithToken({
         endpoint: 'user',
@@ -57,7 +59,6 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
 
       const { status } = userData;
       if (status !== 200) return setIsLoginUser(false);
-
       if (userData.response.isAi === 'true') setIsAiUser(true);
       if (status === 200) setIsLoginUser(true);
     } catch (err) {
@@ -71,12 +72,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     checkLoginStatus();
   }, []);
 
-  return (
-    <GlobalContext.Provider value={values}>
-      {children}
-      {isLoadingOpen && <CircularProgress />}
-    </GlobalContext.Provider>
-  );
+  return <GlobalContext.Provider value={values}>{children}</GlobalContext.Provider>;
 };
 
 export default GlobalProvider;
