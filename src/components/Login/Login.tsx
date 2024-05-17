@@ -50,7 +50,7 @@ export const Login: FC<LoginProps> = ({ toggleAuthForm }) => {
       const json = await response.json();
       localStorage.setItem('token', json.token);
       setIsLoginUser(true);
-      if (json.isAi === 'true') setIsAiUser(true);
+      if (json.isAi) setIsAiUser(true);
       toast.success('Login is success. 👌', toastColored as ToastOptions<{}>);
       navigate(`${routes.LEARN_TODAYS_WORD.to}`);
     } else if (status === 401) {

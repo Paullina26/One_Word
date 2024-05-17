@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { Button } from 'components/Shared/Buttons/Button';
 import RecordIcon from 'assets/icon/microphone.svg';
 import StopIcon from 'assets/icon/stop.svg';
-import { useChat } from '../ChatProvider';
+import { useChat } from 'components/Chat/ChatProvider';
 
 export const MicrophoneButton = styled(Button)<{ $big?: boolean; disabled?: boolean }>`
   position: absolute;

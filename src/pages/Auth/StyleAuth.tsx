@@ -3,10 +3,6 @@ import { device } from 'style/devices';
 import { color_gradient_glassEffect_light, border_radius_effect_bubble } from 'style/mixins';
 
 export const WrapperAuth = styled.div`
-  /* position: relative; */
-  /* width: 100vw; */
-  /* height: 100vh; */
-  /* overflow: hidden; */
   text-align: center;
 `;
 

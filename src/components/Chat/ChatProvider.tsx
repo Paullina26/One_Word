@@ -1,13 +1,12 @@
 import React, { FC, createContext, useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { ChatContextValue, Message, Props } from './types';
+import { ChatContextValue, Message, Mistake, Props, Word } from './types';
 
 import { useRecording } from './useRecording';
 import { API_BASE_URL, headers } from 'API/api';
 import { getOpenaiApiKey } from './helpers';
 import { useStreamAudio } from './useStreamAudio';
-import { toast } from 'react-toastify';
 
 const ChatContext = createContext<ChatContextValue>({} as ChatContextValue);
 
@@ -21,6 +20,9 @@ export const ChatProvider: FC<Props> = ({ children }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
   const [inputValue, setInputValue] = useState('');
+  const [mistakesList, setMistakesList] = useState<Mistake[]>([]);
+  const [newWordsList, setNewWordsList] = useState<Word[]>([]);
+  const [isSummaryOpen, setIsSummaryOpen] = useState(false);
 
   const toggleMessagesVisibility = () => setIsMessagesVisible(prev => !prev);
   const toggleAiSpeaking = (isSpeaking: boolean) => setIsAiSpeaking(isSpeaking);
@@ -39,6 +41,13 @@ export const ChatProvider: FC<Props> = ({ children }) => {
     // initial Message
     sendMessage();
   }, []);
+
+  const handleNewChat = () => {
+    setIsSummaryOpen(false);
+    setMistakesList([]);
+    setNewWordsList([]);
+    sendMessage();
+  };
 
   const handleSendText = (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
@@ -117,7 +126,7 @@ export const ChatProvider: FC<Props> = ({ children }) => {
     console.log('FINISh');
     const token = localStorage.getItem('token');
 
-    const finisResp = await fetch(`${API_BASE_URL}chat/finished-conversation`, {
+    const finishResp = await fetch(`${API_BASE_URL}chat/finished-conversation`, {
       headers: {
         ...headers,
         Authorization: `Bearer ${token}`,
@@ -127,7 +136,16 @@ export const ChatProvider: FC<Props> = ({ children }) => {
         conversationId: currentConversationId,
       }),
     });
-    toast('Saved!');
+    const finishRespJson: { mistakes: Mistake[]; newWords: Word[] } = await finishResp.json();
+
+    setMistakesList(finishRespJson.mistakes);
+    setNewWordsList(finishRespJson.newWords);
+
+    // reset
+    setIsSummaryOpen(true);
+    setMessages([]);
+    setCurrentConversationId(null);
+    setIsMessagesVisible(false);
   };
 
   const value = {
@@ -148,6 +166,11 @@ export const ChatProvider: FC<Props> = ({ children }) => {
     toggleMessagesVisibility,
     isAiSpeaking,
     isWaitingForAnswer,
+
+    handleNewChat,
+    mistakesList,
+    newWordsList,
+    isSummaryOpen,
   };
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
 };

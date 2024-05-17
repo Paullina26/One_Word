@@ -1,3 +1,4 @@
+import { Button } from 'components/Shared/Buttons/Button';
 import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
 import styled from 'styled-components';
 
@@ -79,4 +80,40 @@ export const LoadingWrapper = styled.div`
   svg {
     height: 80px;
   }
+`;
+
+// summary
+export const SummaryWrapper = styled(GlassWrapper)`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  padding: 50px;
+  width: 800px;
+  max-width: 100%;
+  max-height: 100vh;
+  transform: translate(-50%, -50%);
+  text-align: left;
+`;
+
+export const SummaryWordToAdd = styled.div`
+  div {
+    flex-grow: 1;
+  }
+  display: flex;
+  width: 100%;
+`;
+
+export const SummaryAddButton = styled(Button)`
+  margin-left: auto;
+`;
+
+export const Description = styled.p`
+  margin-bottom: 50px;
+`;
+
+export const ModalWrapper = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
