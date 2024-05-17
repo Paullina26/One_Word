@@ -18,11 +18,11 @@ const Wrapper = styled(GlassWrapper)`
 const Text = styled.p`
   ${font_settings(2.6, 'italic', 600)};
   color: ${({ theme }) => theme.purpleDark};
-  margin-top: -50px;
+  margin-top: -50px; //hak for lottie loading
 `;
 
 const WrapperLoading = styled.div`
-  margin-top: -50px;
+  margin-top: -50px; //hak for lottie loading
 `;
 
 const LoadingFullView = () => {

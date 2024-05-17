@@ -16,7 +16,6 @@ import {
 import Logo from 'components/Shared/Logo/Logo';
 import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
 import Welcome from 'components/Welcome/Welcome';
-import LoadingFullView from 'components/Shared/Loading/LoadingFullView';
 
 export const LinkButton = styled(NavLink)<{ $isLightTeam: boolean }>`
   ${font_settings(2.2, 'italic', 300)};
