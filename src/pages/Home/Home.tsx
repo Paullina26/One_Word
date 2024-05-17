@@ -33,8 +33,6 @@ export const LinkButton = styled(NavLink)<{ $isLightTeam: boolean }>`
 export const HomePage = () => {
   const { isLoginUser, isLoadingOpen } = useContext(GlobalContext);
 
-  if (isLoadingOpen) return <div>loading...</div>;
-
   if (isLoginUser) return <Navigate replace to={routes.LEARN_TODAYS_WORD.to} />;
 
   return (

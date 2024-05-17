@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { GlobalContext } from 'utils/GlobalContext';
 import { Routes, Route } from 'react-router-dom';
 import { routes } from 'data/routes';
+
 import Home from 'pages/Home/Home';
 import Auth from 'pages/Auth/Auth';
 import TodaysWord from 'pages/User/Learning/TodaysWord/TodaysWord';
@@ -16,8 +17,6 @@ import ChatWrapper from 'components/Chat/ChatWrapper';
 
 const RoutesComponent = () => {
   const { isLoginUser, isAiUser, isLoadingOpen } = useContext(GlobalContext);
-
-  if (isLoadingOpen) return <div>loading...</div>;
 
   return (
     <Routes>

@@ -11,6 +11,7 @@ import NotificationInformation from 'components/Shared/Atoms/NotificationInforma
 
 const TodayWord = () => {
   const { isLoginUser } = useContext(GlobalContext);
+  const { isLoadingOpen, setIsLoadingOpen } = useContext(GlobalContext);
   const [baseWord, setBaseWord] = useState(null);
   const [transWord, setTransWord] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -59,7 +60,7 @@ const TodayWord = () => {
   };
 
   const fetchData = async () => {
-    setLoading(true);
+    setIsLoadingOpen(true);
     try {
       const { response, status } = await fetchWithToken({
         endpoint: 'getTodayWord',
@@ -74,7 +75,7 @@ const TodayWord = () => {
       );
       setIsError(true);
     } finally {
-      setLoading(false);
+      setIsLoadingOpen(false);
     }
   };
 
@@ -82,7 +83,8 @@ const TodayWord = () => {
     if (isLoginUser) fetchData();
   }, [isLoginUser]);
 
-  if (loading) return <div>Loading...</div>;
+  if (isLoadingOpen) return <></>;
+
   if (isError)
     return (
       <S.Wrapper>
