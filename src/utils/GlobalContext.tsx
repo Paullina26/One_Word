@@ -21,10 +21,6 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     baseLanguage: AvailableLanguages.pl,
   });
 
-  useEffect(() => {
-    setIsOpenMenu(false);
-  }, [location.pathname]);
-
   const getUserSettings = async () => {
     const resp = await fetchWithToken({
       endpoint: 'getUserSettings',
