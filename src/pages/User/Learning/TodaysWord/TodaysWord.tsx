@@ -83,8 +83,6 @@ const TodayWord = () => {
     if (isLoginUser) fetchData();
   }, [isLoginUser]);
 
-  if (isLoadingOpen) return <></>;
-
   if (isError)
     return (
       <S.Wrapper>

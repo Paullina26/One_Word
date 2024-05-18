@@ -9,12 +9,14 @@ import { getOpenaiApiKey } from './helpers';
 import { useStreamAudio } from './useStreamAudio';
 import { GlobalContext } from 'utils/GlobalContext';
 import { LanguagesMap } from 'data/option/language_options';
+import { toast } from 'react-toastify';
+import { toastColored } from 'helpers/StyleToastify';
 
 const ChatContext = createContext<ChatContextValue>({} as ChatContextValue);
 
 export const ChatProvider: FC<Props> = ({ children }) => {
   const params = useParams();
-  const { userLanguages } = useContext(GlobalContext);
+  const { userLanguages, setIsLoadingOpen } = useContext(GlobalContext);
 
   const [isMessagesVisible, setIsMessagesVisible] = useState(true);
   const [isAiSpeaking, setIsAiSpeaking] = useState(false);
@@ -89,7 +91,7 @@ export const ChatProvider: FC<Props> = ({ children }) => {
 
     if (isStreaming) {
       const reader = messageResp.body?.getReader();
-      if (!reader) return; //TODO message toast - something went wrong
+      if (!reader) return toast.error('Something went wrong');
       streamAudio(reader);
       setIsWaitingForAnswer(false);
       return;
@@ -127,29 +129,36 @@ export const ChatProvider: FC<Props> = ({ children }) => {
   };
 
   const finishConversation = async () => {
-    console.log('FINISh');
-    const token = localStorage.getItem('token');
+    try {
+      setIsLoadingOpen(true);
+      const token = localStorage.getItem('token');
 
-    const finishResp = await fetch(`${API_BASE_URL}chat/finished-conversation`, {
-      headers: {
-        ...headers,
-        Authorization: `Bearer ${token}`,
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        conversationId: currentConversationId,
-      }),
-    });
-    const finishRespJson: { mistakes: Mistake[]; newWords: Word[] } = await finishResp.json();
+      const finishResp = await fetch(`${API_BASE_URL}chat/finished-conversation`, {
+        headers: {
+          ...headers,
+          Authorization: `Bearer ${token}`,
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          conversationId: currentConversationId,
+        }),
+      });
+      const finishRespJson: { mistakes: Mistake[]; newWords: Word[] } = await finishResp.json();
 
-    setMistakesList(finishRespJson.mistakes);
-    setNewWordsList(finishRespJson.newWords);
+      setMistakesList(finishRespJson.mistakes);
+      setNewWordsList(finishRespJson.newWords);
 
-    // reset
-    setIsSummaryOpen(true);
-    setMessages([]);
-    setCurrentConversationId(null);
-    setIsMessagesVisible(true);
+      // reset
+      setIsSummaryOpen(true);
+      setMessages([]);
+      setCurrentConversationId(null);
+      setIsMessagesVisible(true);
+    } catch (e) {
+      console.log(e);
+      toast.error('Something went wrong');
+    } finally {
+      setIsLoadingOpen(false);
+    }
   };
 
   const value = {
