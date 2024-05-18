@@ -26,11 +26,16 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   }, [location.pathname]);
 
   const getUserSettings = async () => {
-    const userData = await fetchWithToken({
+    const resp = await fetchWithToken({
       endpoint: 'getUserSettings',
       method: 'GET',
     });
-    console.log(userData);
+
+    if (resp.status === 200)
+      setUserLanguages({
+        languageToLearn: resp.response.languageToLearn,
+        baseLanguage: resp.response.baseLanguage,
+      });
   };
 
   const checkLoginStatus = async () => {
