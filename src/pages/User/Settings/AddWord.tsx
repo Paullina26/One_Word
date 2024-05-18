@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { FC, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
+import { toast } from 'react-toastify';
+
 import { font_settings } from 'style/mixins';
 import Input from 'components/Shared/Form/Input';
 import { inputNameElement } from 'helpers/mixins';
@@ -7,9 +9,8 @@ import Submit from 'components/Shared/Form/Submit';
 import Select from 'components/Shared/Form/Select';
 import { mappedLanguages } from 'data/option/language_options';
 import { WrapperSettings } from 'components/Shared/containers/WrapperSettings';
-import { UserSettingsContext } from 'utils/ContextSettingsUser';
 import fetchWithToken from 'API/api';
-import { toast } from 'react-toastify';
+import { GlobalContext } from 'utils/GlobalContext';
 
 export const Tittle = styled.p`
   ${font_settings(2.4, 'normal', 600)}
@@ -23,15 +24,19 @@ export const WrapperInputsSettingsAddWord = styled.div`
 
 type AddWordSettingsProps = {
   wordToLearn?: string;
+  inBaseLang?: string;
   onClose?: () => void;
 };
 
-const AddWordSettings = ({ wordToLearn, onClose }: AddWordSettingsProps) => {
-  const { defaultLanguageToLearn } = useContext(UserSettingsContext);
-  const [wordBase, setWordBase] = useState<string>('');
+const AddWordSettings = ({ wordToLearn, onClose, inBaseLang }: AddWordSettingsProps) => {
+  const { userLanguages } = useContext(GlobalContext);
+
+  const [wordBase, setWordBase] = useState<string>(inBaseLang || '');
   const [wordTranslate, setWordTranslate] = useState<string>(wordToLearn || '');
-  const [selectedOptionWordLanguageTranslate, setSelectedOptionWordLanguageTranslate] =
-    useState(defaultLanguageToLearn);
+  const [selectedOptionWordLanguageTranslate, setSelectedOptionWordLanguageTranslate] = useState(
+    userLanguages.languageToLearn
+  );
+
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -52,7 +57,7 @@ const AddWordSettings = ({ wordToLearn, onClose }: AddWordSettingsProps) => {
         toast.success('The word has been added!');
         setWordBase('');
         setWordTranslate('');
-        setSelectedOptionWordLanguageTranslate(defaultLanguageToLearn);
+        setSelectedOptionWordLanguageTranslate(userLanguages.languageToLearn);
       } else {
         console.log('Response from API:', response);
         throw new Error('Problem with adding a word');

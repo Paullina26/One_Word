@@ -3,22 +3,8 @@ import { useLocation } from 'react-router-dom';
 import { FC } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import fetchWithToken from 'API/api';
-
-interface GlobalProviderProps {
-  children: React.ReactNode;
-}
-interface GlobalContextValue {
-  isLoginUser: boolean;
-  setIsLoginUser: React.Dispatch<React.SetStateAction<boolean>>;
-  isLoadingUser: boolean;
-  setIsLoadingUser: React.Dispatch<React.SetStateAction<boolean>>;
-  isOpenMenu: boolean;
-  setIsOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
-  isLoadingOpen: boolean;
-  setIsLoadingOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  isAiUser: boolean;
-  setIsAiUser: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { GlobalContextValue, GlobalProviderProps, IUserLanguage } from './GlobalContext/types';
+import { AvailableLanguages } from 'data/option/language_options';
 
 export const GlobalContext = createContext<GlobalContextValue>({} as GlobalContextValue);
 
@@ -29,6 +15,47 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isLoadingOpen, setIsLoadingOpen] = useState(false);
   const [isAiUser, setIsAiUser] = useState(false);
+  const [userLanguages, setUserLanguages] = useState<IUserLanguage>({
+    languageToLearn: AvailableLanguages.en,
+    baseLanguage: AvailableLanguages.pl,
+  });
+
+  useEffect(() => {
+    setIsOpenMenu(false);
+  }, [location.pathname]);
+
+  const getUserSettings = async () => {
+    const userData = await fetchWithToken({
+      endpoint: 'getUserSettings',
+      method: 'GET',
+    });
+    console.log(userData);
+  };
+
+  const checkLoginStatus = async () => {
+    setIsLoadingOpen(true);
+    try {
+      const userData = await fetchWithToken({
+        endpoint: 'user',
+        method: 'GET',
+      });
+
+      const { status } = userData;
+      if (status !== 200) return setIsLoginUser(false);
+      if (status === 200) setIsLoginUser(true);
+
+      if (userData.response.isAi) setIsAiUser(true);
+      getUserSettings();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoadingOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    checkLoginStatus();
+  }, []);
 
   const values = {
     isLoginUser,
@@ -41,35 +68,9 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     setIsLoadingOpen,
     isAiUser,
     setIsAiUser,
+    userLanguages,
+    setUserLanguages,
   };
-
-  useEffect(() => {
-    setIsOpenMenu(false);
-  }, [location.pathname]);
-
-  const checkLoginStatus = async () => {
-    setIsLoadingOpen(true);
-    try {
-      const userData = await fetchWithToken({
-        endpoint: 'user',
-        method: 'GET',
-      });
-
-      const { status } = userData;
-      if (status !== 200) return setIsLoginUser(false);
-
-      if (userData.response.isAi) setIsAiUser(true);
-      if (status === 200) setIsLoginUser(true);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setIsLoadingOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    checkLoginStatus();
-  }, []);
 
   return (
     <GlobalContext.Provider value={values}>

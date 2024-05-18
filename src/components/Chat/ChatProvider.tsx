@@ -7,11 +7,14 @@ import { useRecording } from './useRecording';
 import { API_BASE_URL, headers } from 'API/api';
 import { getOpenaiApiKey } from './helpers';
 import { useStreamAudio } from './useStreamAudio';
+import { GlobalContext } from 'utils/GlobalContext';
+import { LanguagesMap } from 'data/option/language_options';
 
 const ChatContext = createContext<ChatContextValue>({} as ChatContextValue);
 
 export const ChatProvider: FC<Props> = ({ children }) => {
   const params = useParams();
+  const { userLanguages } = useContext(GlobalContext);
 
   const [isMessagesVisible, setIsMessagesVisible] = useState(true);
   const [isAiSpeaking, setIsAiSpeaking] = useState(false);
@@ -74,7 +77,8 @@ export const ChatProvider: FC<Props> = ({ children }) => {
       method: 'POST',
       body: JSON.stringify({
         query: userMessage || '',
-        languageToLearn: 'English',
+        languageToLearn: Array.from(LanguagesMap)[userLanguages.languageToLearn][1],
+        baseLanguage: Array.from(LanguagesMap)[userLanguages.baseLanguage][1],
         isStreaming,
         todayWord: params.word || '',
         currentConversationId,
@@ -145,7 +149,7 @@ export const ChatProvider: FC<Props> = ({ children }) => {
     setIsSummaryOpen(true);
     setMessages([]);
     setCurrentConversationId(null);
-    setIsMessagesVisible(false);
+    setIsMessagesVisible(true);
   };
 
   const value = {
