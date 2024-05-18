@@ -26,7 +26,6 @@ export const API_Endpoints = {
   deleteWord: (id: string) => `${API_BASE_URL}words/delete-one/${id}`, // DELETE
 };
 
-type ApiEndpoint = keyof typeof API_Endpoints;
 type StaticEndpoint = {
   [K in keyof typeof API_Endpoints]: (typeof API_Endpoints)[K] extends Function ? never : K;
 }[keyof typeof API_Endpoints];

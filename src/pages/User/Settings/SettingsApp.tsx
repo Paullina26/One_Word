@@ -1,15 +1,12 @@
 import styled from 'styled-components';
-import { FC, useContext, useState } from 'react';
-import { color_gradient_glassEffect_light, font_settings } from 'style/mixins';
-import Input from 'components/Shared/Form/Input';
-import { inputNameElement } from 'helpers/mixins';
+import { useContext } from 'react';
+import { font_settings } from 'style/mixins';
 import Submit from 'components/Shared/Form/Submit';
 import Select from 'components/Shared/Form/Select';
-import { Button } from 'components/Shared/Buttons/Button';
 import { WrapperSettings } from 'components/Shared/containers/WrapperSettings';
-import { UserSettingsContext } from 'utils/ContextSettingsUser';
 import { Controller, SubmitHandler, useForm, useFieldArray } from 'react-hook-form';
 import { mappedLanguages } from 'data/option/language_options';
+import { GlobalContext } from 'utils/GlobalContext';
 
 export const Tittle = styled.p`
   ${font_settings(2.4, 'normal', 600)}
@@ -17,25 +14,30 @@ export const Tittle = styled.p`
 `;
 
 interface IForm {
-  defaultLanguageToLearn: number;
+  baseLanguage: number;
+  languageToLearn: number;
   notifications: {
     type: string;
     time: string;
   }[];
 }
 const SettingsApp = () => {
-  const { defaultLanguageToLearn, setDefaultLanguageToLearn } = useContext(UserSettingsContext);
+  const { userLanguages, setUserLanguages } = useContext(GlobalContext);
 
   const { handleSubmit, control, getValues } = useForm<IForm>({
     defaultValues: {
-      defaultLanguageToLearn: defaultLanguageToLearn,
+      ...userLanguages,
     },
   });
 
   const { fields, remove, append } = useFieldArray({ control, name: 'notifications' });
 
   const onSubmit: SubmitHandler<IForm> = data => {
-    setDefaultLanguageToLearn(data.defaultLanguageToLearn);
+    const { baseLanguage, languageToLearn } = data;
+    setUserLanguages({
+      baseLanguage,
+      languageToLearn,
+    });
   };
 
   return (
@@ -44,11 +46,26 @@ const SettingsApp = () => {
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Controller
-            name='defaultLanguageToLearn'
+            name='languageToLearn'
             control={control}
             render={({ field }) => (
               <Select<number>
-                id='select_GlobalSettingsApp_LanguageTranslate'
+                id='settings_languageToLearn'
+                $fontColorLabel='purpleDark'
+                labelValue='Select Translate Language Word '
+                options={mappedLanguages}
+                value={field.value}
+                onChange={field.onChange}
+                $isLightTeam={true}
+              />
+            )}
+          />
+          <Controller
+            name='baseLanguage'
+            control={control}
+            render={({ field }) => (
+              <Select<number>
+                id='settings_baseLanguage'
                 $fontColorLabel='purpleDark'
                 labelValue='Select Translate Language Word '
                 options={mappedLanguages}

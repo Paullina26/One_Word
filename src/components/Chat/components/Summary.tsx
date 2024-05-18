@@ -11,43 +11,59 @@ import { Button } from 'components/Shared/Buttons/Button';
 type WordToLearn = {
   textToLearn: string;
   id: string;
+  inBaseLang: string;
 };
 
 const Summary: FC = () => {
   const { mistakesList, newWordsList, handleNewChat } = useChat();
   const [currentWord, setCurrentWord] = useState<WordToLearn | null>(null);
 
-  const openModal = ({ textToLearn, id }: WordToLearn) => {
-    setCurrentWord({ textToLearn, id });
+  const openModal = ({ textToLearn, id, inBaseLang }: WordToLearn) => {
+    setCurrentWord({ textToLearn, id, inBaseLang });
   };
 
   const closeModal = () => setCurrentWord(null);
 
-  const SingleItem = ({ text, mistake, id }: { text: string; mistake?: string; id: string }) => (
+  const SingleItem = ({
+    text,
+    mistake,
+    id,
+    inBaseLang,
+  }: {
+    text: string;
+    mistake?: string;
+    id: string;
+    inBaseLang: string;
+  }) => (
     <>
       <S.SummaryWordToAdd>
         <div>
           <span>{text}</span>
+          <p>
+            translate: <i>{mistake}</i>
+          </p>
           {mistake && (
             <p>
-              mistake: <i>{mistake}</i>
+              mistake: <i>{inBaseLang}</i>
             </p>
           )}
         </div>
-        <S.SummaryAddButton onClick={() => openModal({ textToLearn: text, id })}>
+        <S.SummaryAddButton onClick={() => openModal({ textToLearn: text, id, inBaseLang })}>
           Add
         </S.SummaryAddButton>
       </S.SummaryWordToAdd>
     </>
   );
 
-  const mistakesListItems = mistakesList.map(({ id, correction, mistake }) => ({
-    element: <SingleItem key={id} text={correction} id={id} mistake={mistake} />,
+  const mistakesListItems = mistakesList.map(({ id, correction, mistake, inBaseLang }) => ({
+    element: (
+      <SingleItem key={id} text={correction} id={id} mistake={mistake} inBaseLang={inBaseLang} />
+    ),
     id,
   }));
 
-  const newWordsListItems = newWordsList.map(({ id, newWord }) => ({
-    element: <SingleItem key={id} text={newWord} id={id} />,
+  const newWordsListItems = newWordsList.map(({ id, newWord, inBaseLang }) => ({
+    element: <SingleItem key={id} text={newWord} id={id} inBaseLang={inBaseLang} />,
     id,
   }));
 
@@ -69,7 +85,11 @@ const Summary: FC = () => {
 
       <Modal open={Boolean(currentWord)} onClose={closeModal}>
         <S.ModalWrapper>
-          <AddWordSettings wordToLearn={currentWord?.textToLearn} onClose={closeModal} />
+          <AddWordSettings
+            wordToLearn={currentWord?.textToLearn}
+            inBaseLang={currentWord?.inBaseLang}
+            onClose={closeModal}
+          />
         </S.ModalWrapper>
       </Modal>
 

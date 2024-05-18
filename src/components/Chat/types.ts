@@ -7,11 +7,13 @@ export type Mistake = {
   correction: string;
   id: string;
   mistake: string;
+  inBaseLang: string;
 };
 
 export type Word = {
   newWord: string;
   id: string;
+  inBaseLang: string;
 };
 
 export type ChatContextValue = {
