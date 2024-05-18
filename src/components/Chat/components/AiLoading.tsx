@@ -1,6 +1,6 @@
 import { useLottie } from 'lottie-react';
 
-import loading from './loading.json';
+import loading from '../../../components/Shared/Loading/loading.json';
 import * as S from '../StyleChat';
 
 const AiLoading = () => {

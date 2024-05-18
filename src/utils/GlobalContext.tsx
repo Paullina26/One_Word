@@ -1,10 +1,11 @@
 import { useEffect, useState, createContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { FC } from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
+
 import fetchWithToken from 'API/api';
 import { GlobalContextValue, GlobalProviderProps, IUserLanguage } from './GlobalContext/types';
 import { AvailableLanguages } from 'data/option/language_options';
+import LoadingFullView from 'components/Shared/Loading/LoadingFullView';
 
 export const GlobalContext = createContext<GlobalContextValue>({} as GlobalContextValue);
 
@@ -34,6 +35,9 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
 
   const checkLoginStatus = async () => {
     setIsLoadingOpen(true);
+
+    if (isLoadingOpen || isLoginUser) return;
+
     try {
       const userData = await fetchWithToken({
         endpoint: 'user',
@@ -54,6 +58,10 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
+    setIsOpenMenu(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
     checkLoginStatus();
   }, []);
 
@@ -72,12 +80,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     setUserLanguages,
   };
 
-  return (
-    <GlobalContext.Provider value={values}>
-      {children}
-      {isLoadingOpen && <CircularProgress />}
-    </GlobalContext.Provider>
-  );
+  return <GlobalContext.Provider value={values}>{children}</GlobalContext.Provider>;
 };
 
 export default GlobalProvider;
