@@ -1,4 +1,4 @@
-import Loading from './Loading';
+import Error from './Error';
 
 import styled from 'styled-components';
 import { GlassWrapper } from '../containers/GlassWrapper';
@@ -16,12 +16,12 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 
-  ${color_gradient_glassEffect_light}; ///background page full view
+  ${color_gradient_glassEffect_light}; //background page full view
 `;
 
 const StyledGlass = styled(GlassWrapper)`
   width: 340px;
-  height: 200px;
+  height: 400px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -39,17 +39,15 @@ const WrapperLoading = styled.div`
   margin-top: -50px; //hak for lottie loading
 `;
 
-const LoadingFullView = () => {
+const ErrorFullView = () => {
   return (
     <Wrapper>
       <StyledGlass>
-        <WrapperLoading>
-          <Loading />
-        </WrapperLoading>
-        <Text>Loading...</Text>
+        <Error />
+        <Text>Error, please refresh page.</Text>
       </StyledGlass>
     </Wrapper>
   );
 };
 
-export default LoadingFullView;
+export default ErrorFullView;

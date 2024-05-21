@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color_gradient_glassEffect_light, border_radius_effect_bubble } from 'style/mixins';
+import { color_gradient_glassEffect_light } from 'style/mixins';
 
 export const GlassWrapper = styled.div`
   ${color_gradient_glassEffect_light};

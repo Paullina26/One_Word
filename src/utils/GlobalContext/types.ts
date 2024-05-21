@@ -15,6 +15,8 @@ export interface GlobalContextValue {
   setIsAiUser: React.Dispatch<React.SetStateAction<boolean>>;
   userLanguages: IUserLanguage;
   setUserLanguages: React.Dispatch<React.SetStateAction<IUserLanguage>>;
+  isErrorOpen: boolean;
+  setIsErrorOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IUserLanguage {

@@ -5,7 +5,6 @@ import { FC } from 'react';
 import fetchWithToken from 'API/api';
 import { GlobalContextValue, GlobalProviderProps, IUserLanguage } from './GlobalContext/types';
 import { AvailableLanguages } from 'data/option/language_options';
-import LoadingFullView from 'components/Shared/Loading/LoadingFullView';
 
 export const GlobalContext = createContext<GlobalContextValue>({} as GlobalContextValue);
 
@@ -15,6 +14,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isLoadingOpen, setIsLoadingOpen] = useState(false);
+  const [isErrorOpen, setIsErrorOpen] = useState(false);
   const [isAiUser, setIsAiUser] = useState(false);
   const [userLanguages, setUserLanguages] = useState<IUserLanguage>({
     languageToLearn: AvailableLanguages.en,
@@ -53,6 +53,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
       getUserSettings();
     } catch (err) {
       console.error(err);
+      setIsErrorOpen(true);
     } finally {
       setIsLoadingOpen(false);
     }
@@ -75,6 +76,8 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     setIsOpenMenu,
     isLoadingOpen,
     setIsLoadingOpen,
+    isErrorOpen,
+    setIsErrorOpen,
     isAiUser,
     setIsAiUser,
     userLanguages,

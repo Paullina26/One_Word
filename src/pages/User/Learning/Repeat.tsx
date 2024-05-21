@@ -1,10 +1,9 @@
 export const Repeat = () => {
   return (
     <>
-      <div>Repeat</div>
-      {/* <div>
-        <h1>TESTOWE MIEJSCE</h1>
-      </div> */}
+      <div>
+        <h1>TESTOWE MIEJSCE WIDOKÓW</h1>
+      </div>
     </>
   );
 };
