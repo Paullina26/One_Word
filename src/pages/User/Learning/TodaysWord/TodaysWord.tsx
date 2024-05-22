@@ -105,9 +105,11 @@ const TodayWord = () => {
         ) : (
           <Button onClick={handleShowWord}>Show Word</Button>
         )}
-        <S.PositionedButton onClick={handleSpeak} disabled={isSpeaking}>
-          <ManagedIcon name='speaker' />
-        </S.PositionedButton>
+        {isShowWord && (
+          <S.PositionedButton onClick={handleSpeak} disabled={isSpeaking}>
+            <ManagedIcon name='speaker' />
+          </S.PositionedButton>
+        )}
       </S.WrapperWord>
       <S.WrapperButtons>
         <Button onClick={handleLearnedWord}>Learned</Button>
