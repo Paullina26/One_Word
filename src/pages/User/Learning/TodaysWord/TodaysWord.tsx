@@ -10,8 +10,7 @@ import { Button } from 'components/Shared/Buttons/Button';
 import NotificationInformation from 'components/Shared/Atoms/NotificationInformation';
 
 const TodayWord = () => {
-  const { isLoginUser } = useContext(GlobalContext);
-  const { isLoadingOpen, setIsLoadingOpen } = useContext(GlobalContext);
+  const { isLoadingOpen, setIsLoadingOpen, isLoginUser } = useContext(GlobalContext);
   const [baseWord, setBaseWord] = useState(null);
   const [transWord, setTransWord] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -50,7 +49,6 @@ const TodayWord = () => {
         body: { status: 2 },
         params: idWord,
       });
-
       toast.success('Word status updated successfully!');
       fetchData();
     } catch (error) {

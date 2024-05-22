@@ -16,7 +16,7 @@ import SettingsApp from 'pages/User/Settings/SettingsApp';
 import ChatWrapper from 'components/Chat/ChatWrapper';
 
 const RoutesComponent = () => {
-  const { isLoginUser, isAiUser, isLoadingOpen } = useContext(GlobalContext);
+  const { isLoginUser, isAiUser } = useContext(GlobalContext);
 
   return (
     <Routes>
