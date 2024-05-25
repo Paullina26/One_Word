@@ -17,7 +17,7 @@ interface LoginProps {
   toggleAuthForm: () => void;
 }
 export const Login: FC<LoginProps> = ({ toggleAuthForm }) => {
-  const { setIsAiUser, setIsLoginUser } = useContext(GlobalContext);
+  const { setLoginUser } = useContext(GlobalContext);
   const navigate = useNavigate();
   const [mail, setMail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -47,10 +47,11 @@ export const Login: FC<LoginProps> = ({ toggleAuthForm }) => {
     const { status } = response;
 
     if (status === 200) {
-      const json = await response.json();
-      localStorage.setItem('token', json.token);
-      setIsLoginUser(true);
-      if (json.isAi) setIsAiUser(true);
+      const user = await response.json();
+
+      localStorage.setItem('token', user.token);
+      setLoginUser(user, true);
+
       toast.success('Login is success. 👌', toastColored as ToastOptions<{}>);
       navigate(`${routes.LEARN_TODAYS_WORD.to}`);
     } else if (status === 401) {

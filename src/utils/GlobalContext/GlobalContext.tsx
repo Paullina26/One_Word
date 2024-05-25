@@ -3,26 +3,30 @@ import { useLocation } from 'react-router-dom';
 import { FC } from 'react';
 
 import fetchWithToken from 'API/api';
-import { GlobalContextValue, GlobalProviderProps, IUserLanguage } from './GlobalContext/types';
+import { GlobalContextValue, GlobalProviderProps, IUserLanguage, User } from './types';
 import { AvailableLanguages } from 'data/option/language_options';
+import { useNotification } from '../Notifications/useNotification';
+import { PreferencesResp } from 'types/api';
 
 export const GlobalContext = createContext<GlobalContextValue>({} as GlobalContextValue);
 
 const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const location = useLocation();
+  const { runOneSignal, offOneSignal, scheduleNotification } = useNotification();
+
   const [isLoginUser, setIsLoginUser] = useState(false);
   const [isLoadingUser, setIsLoadingUser] = useState(false);
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isLoadingOpen, setIsLoadingOpen] = useState(false);
   const [isErrorOpen, setIsErrorOpen] = useState(false);
-  const [isAiUser, setIsAiUser] = useState(false);
+  const [user, setUser] = useState<null | User>(null);
   const [userLanguages, setUserLanguages] = useState<IUserLanguage>({
     languageToLearn: AvailableLanguages.en,
     baseLanguage: AvailableLanguages.pl,
   });
 
-  const getUserSettings = async () => {
-    const resp = await fetchWithToken({
+  const getUserSettings = async (userId: string, isLogin?: boolean) => {
+    const resp: { response: PreferencesResp; status: number } = await fetchWithToken({
       endpoint: 'getUserSettings',
       method: 'GET',
     });
@@ -32,6 +36,12 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
         languageToLearn: resp.response.languageToLearn,
         baseLanguage: resp.response.baseLanguage,
       });
+
+    if (isLogin) {
+      resp.response.notifications.forEach(notification => {
+        // scheduleNotification({ time: notification.time, userId })
+      });
+    }
   };
 
   const checkLoginStatus = async () => {
@@ -45,15 +55,31 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
         method: 'GET',
       });
       const { status } = userData;
-      if (status !== 200) return setIsLoginUser(false);
-      if (status === 200) setIsLoginUser(true);
-      if (userData.response.isAi) setIsAiUser(true);
-      getUserSettings();
+      if (status !== 200) return resetLoginUser();
+      if (status === 200) setLoginUser(userData.response);
     } catch (err) {
       console.error(err);
     } finally {
       setIsLoadingOpen(false);
     }
+  };
+
+  const resetLoginUser = () => {
+    setIsLoginUser(false);
+    setUser(null);
+    offOneSignal();
+    setUserLanguages({
+      languageToLearn: AvailableLanguages.en,
+      baseLanguage: AvailableLanguages.pl,
+    });
+  };
+
+  // if login or getUser is ok
+  const setLoginUser = (user: User, isLogin?: boolean) => {
+    setIsLoginUser(true);
+    setUser(user);
+    getUserSettings(user.id, isLogin);
+    if (isLogin) runOneSignal(user);
   };
 
   useEffect(() => {
@@ -75,10 +101,11 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     setIsLoadingOpen,
     isErrorOpen,
     setIsErrorOpen,
-    isAiUser,
-    setIsAiUser,
+    user,
     userLanguages,
     setUserLanguages,
+    resetLoginUser,
+    setLoginUser,
   };
 
   return <GlobalContext.Provider value={values}>{children}</GlobalContext.Provider>;

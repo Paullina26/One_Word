@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import { GlobalContext } from 'utils/GlobalContext';
 import { useNavigate } from 'react-router-dom';
 import { routes } from 'data/routes';
 import { color_gradient_button } from 'style/mixins';
 import { Button } from 'components/Shared/Buttons/Button';
 import logoutIcon from 'assets/icon/logout_Icon.svg';
+import { GlobalContext } from 'utils/GlobalContext';
 
 export const WrapperLogOut = styled.div`
   right: 10px;
@@ -33,12 +33,12 @@ export const LogoutButton = styled(Button)`
 `;
 
 export const LogOut = () => {
-  const { setIsLoginUser } = useContext(GlobalContext);
+  const { resetLoginUser } = useContext(GlobalContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    setIsLoginUser(false);
+    resetLoginUser();
     navigate(`${routes.HOME.to}`);
   };
 

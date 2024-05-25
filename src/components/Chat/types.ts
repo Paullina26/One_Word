@@ -40,6 +40,7 @@ export type ChatContextValue = {
   mistakesList: Mistake[];
   newWordsList: Word[];
   isSummaryOpen: boolean;
+  isAi?: boolean;
 };
 
 export type Props = {
