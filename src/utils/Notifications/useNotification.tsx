@@ -1,57 +1,60 @@
-import { useEffect } from 'react';
-import OneSignal from 'react-onesignal';
-import { User } from 'utils/GlobalContext/types';
+import fetchWithToken from 'API/api';
+import { initializeApp } from 'firebase/app';
+import { getMessaging, getToken } from 'firebase/messaging';
+
+const firebaseConfig = {};
 
 export const useNotification = () => {
-  const apiKey = process.env.REACT_APP_SIGNAL_API_KEY || '';
-  const appId = process.env.REACT_APP_SIGNAL_APP_ID || '';
-
-  const runOneSignal = async (user: User) => {
-    console.log(user);
-    await OneSignal.init({
-      appId,
-      allowLocalhostAsSecureOrigin: true,
+  const getVapidKey = async () => {
+    const resp = await fetchWithToken({
+      endpoint: 'vapidPublicKey',
+      method: 'GET',
     });
 
-    OneSignal.Slidedown.promptPush();
-    OneSignal.login(user.id);
-    // OneSignal.Debug.setLogLevel('trace');
+    console.log(7777, resp);
+    return resp.response;
   };
 
-  const offOneSignal = () => {
-    OneSignal.logout();
-  };
+  const subscribeUser = (publicKey: string, userId: string) => {
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+      navigator.serviceWorker.ready.then(registration => {
+        const subscribeOptions = {
+          userVisibleOnly: true,
+          applicationServerKey: publicKey,
+        };
 
-  const scheduleNotification = async ({ time, userId }: { time: string; userId: string }) => {
-    const notificationData = {
-      app_id: appId,
-      target_channel: 'push',
-      include_aliases: { external_id: [userId] }, // Zmodyfikuj na odpowiedni identyfikator użytkownika
-      contents: {
-        en: 'It is time for learn! Just one more word!',
-      },
-      delayed_option: 'timezone', // Planowanie z uwzględnieniem strefy czasowej użytkownika
-      timezone: 'Europe/Warsaw',
-      delivery_time_of_day: time, //'20:10', // Godzina wysyłki notyfikacji
-      repeat_every: 'day', // Powtarzaj co dzień
-    };
+        registration.pushManager
+          .subscribe(subscribeOptions)
+          .then(async subscription => {
+            console.log('Received PushSubscription:', subscription);
+            const resp = await fetchWithToken({
+              endpoint: 'subscribe',
+              method: 'POST',
+              body: { subscription, userId },
+            });
 
-    try {
-      const response = await fetch('https://api.onesignal.com/notifications', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Basic ${apiKey}`,
-        },
-        body: JSON.stringify(notificationData),
+            console.log(resp);
+          })
+          .catch(err => {
+            console.error('Failed to subscribe the user: ', err);
+          });
       });
-
-      const responseData = await response.json();
-      console.log('Response:', responseData);
-    } catch (error) {
-      console.error('Error:', error);
     }
   };
 
-  return { scheduleNotification, runOneSignal, offOneSignal };
+  const sendNotification = async (title: string, body: string, userId?: string) => {
+    try {
+      const resp = await fetchWithToken({
+        endpoint: 'sendNotification',
+        method: 'POST',
+        body: { title, body, userId },
+      });
+
+      console.log('Notification sent successfully', resp);
+    } catch (error) {
+      console.error('Error sending notification:', error);
+    }
+  };
+
+  return { subscribeUser, sendNotification, getVapidKey };
 };

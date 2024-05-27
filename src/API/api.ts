@@ -24,6 +24,10 @@ export const API_Endpoints = {
 
   updateWord: (id: string) => `${API_BASE_URL}words/update-one/${id}`, //PUT
   deleteWord: (id: string) => `${API_BASE_URL}words/delete-one/${id}`, // DELETE
+
+  sendNotification: `${API_BASE_URL}subscription/sendNotification`,
+  subscribe: `${API_BASE_URL}subscription/subscribe`,
+  vapidPublicKey: `${API_BASE_URL}subscription/vapidPublicKey`,
 };
 
 type StaticEndpoint = {
