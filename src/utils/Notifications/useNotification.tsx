@@ -1,8 +1,4 @@
 import fetchWithToken from 'API/api';
-import { initializeApp } from 'firebase/app';
-import { getMessaging, getToken } from 'firebase/messaging';
-
-const firebaseConfig = {};
 
 export const useNotification = () => {
   const getVapidKey = async () => {
