@@ -7,6 +7,9 @@ import { WrapperSettings } from 'components/Shared/containers/WrapperSettings';
 import { Controller, SubmitHandler, useForm, useFieldArray } from 'react-hook-form';
 import { mappedLanguages } from 'data/option/language_options';
 import { GlobalContext } from 'utils/GlobalContext';
+import { Button } from 'components/Shared/Buttons/Button';
+import Divider from '@mui/material/Divider';
+import { useNotification } from 'utils/Notifications/useNotification';
 
 export const Tittle = styled.p`
   ${font_settings(2.4, 'normal', 600)}
@@ -22,7 +25,9 @@ interface IForm {
   }[];
 }
 const SettingsApp = () => {
-  const { userLanguages, setUserLanguages } = useContext(GlobalContext);
+  const { userLanguages, setUserLanguages, user } = useContext(GlobalContext);
+  const { subscribeUser } = useNotification();
+  const notificationPermission = Notification.permission;
 
   const { handleSubmit, control, getValues } = useForm<IForm>({
     defaultValues: {
@@ -85,6 +90,12 @@ const SettingsApp = () => {
           <Submit $isLightTeam={true} value='Apply' id='submit_GlobalSettingsApp' />
         </form>
       </div>
+      <Divider />
+      {notificationPermission === 'granted' ? (
+        <Button onClick={() => subscribeUser(user?.id)}>I dont want notification</Button>
+      ) : (
+        <Button onClick={() => subscribeUser(user?.id)}>I want notification</Button>
+      )}
     </WrapperSettings>
   );
 };

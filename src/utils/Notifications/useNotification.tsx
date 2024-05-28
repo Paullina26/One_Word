@@ -7,11 +7,14 @@ export const useNotification = () => {
       method: 'GET',
     });
 
-    console.log(7777, resp);
     return resp.response;
   };
 
-  const subscribeUser = (publicKey: string, userId: string) => {
+  const subscribeUser = async (userId?: string) => {
+    if (!userId) return;
+
+    const publicKey = await getVapidKey();
+
     if ('serviceWorker' in navigator && 'PushManager' in window) {
       navigator.serviceWorker.ready.then(registration => {
         const subscribeOptions = {
@@ -23,13 +26,11 @@ export const useNotification = () => {
           .subscribe(subscribeOptions)
           .then(async subscription => {
             console.log('Received PushSubscription:', subscription);
-            const resp = await fetchWithToken({
+            await fetchWithToken({
               endpoint: 'subscribe',
               method: 'POST',
               body: { subscription, userId },
             });
-
-            console.log(resp);
           })
           .catch(err => {
             console.error('Failed to subscribe the user: ', err);
@@ -49,6 +50,32 @@ export const useNotification = () => {
       console.log('Notification sent successfully', resp);
     } catch (error) {
       console.error('Error sending notification:', error);
+    }
+  };
+
+  const unsubscribeUser = async (userId: string) => {
+    if (!userId) return;
+
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+      try {
+        const registration = await navigator.serviceWorker.ready;
+        const subscription = await registration.pushManager.getSubscription();
+
+        if (subscription) {
+          await subscription.unsubscribe();
+          console.log('User unsubscribed successfully');
+
+          await fetchWithToken({
+            endpoint: 'unsubscribe',
+            method: 'POST',
+            body: { userId },
+          });
+        } else {
+          console.warn('User is not subscribed');
+        }
+      } catch (error) {
+        console.error('Failed to unsubscribe the user: ', error);
+      }
     }
   };
 

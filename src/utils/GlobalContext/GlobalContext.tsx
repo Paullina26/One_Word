@@ -6,13 +6,11 @@ import fetchWithToken from 'API/api';
 import { GlobalContextValue, GlobalProviderProps, IUserLanguage, User } from './types';
 import { AvailableLanguages } from 'data/option/language_options';
 import { PreferencesResp } from 'types/api';
-import { useNotification } from 'utils/Notifications/useNotification';
 
 export const GlobalContext = createContext<GlobalContextValue>({} as GlobalContextValue);
 
 const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const location = useLocation();
-  const { subscribeUser, sendNotification, getVapidKey } = useNotification();
 
   const [isLoginUser, setIsLoginUser] = useState(false);
   const [isLoadingUser, setIsLoadingUser] = useState(false);
@@ -58,7 +56,6 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
       const { status } = userData;
       if (status !== 200) return resetLoginUser();
       if (status === 200) setLoginUser(userData.response);
-      setSubscription(userData.response.id);
     } catch (err) {
       console.error(err);
     } finally {
@@ -80,13 +77,6 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     setIsLoginUser(true);
     setUser(user);
     getUserSettings(user.id, isLogin);
-  };
-
-  const setSubscription = async (userId: string) => {
-    console.log('!!!!!!!!!!!!');
-    const publicKey = await getVapidKey();
-    console.log({ publicKey });
-    subscribeUser(publicKey, userId);
   };
 
   useEffect(() => {
@@ -115,12 +105,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     setLoginUser,
   };
 
-  return (
-    <GlobalContext.Provider value={values}>
-      <button onClick={() => sendNotification('hello', 'dilbe', user?.id)}>click</button>
-      {children}
-    </GlobalContext.Provider>
-  );
+  return <GlobalContext.Provider value={values}>{children}</GlobalContext.Provider>;
 };
 
 export default GlobalProvider;
