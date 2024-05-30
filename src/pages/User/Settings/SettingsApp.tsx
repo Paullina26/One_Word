@@ -26,7 +26,7 @@ interface IForm {
 }
 const SettingsApp = () => {
   const { userLanguages, setUserLanguages, user } = useContext(GlobalContext);
-  const { subscribeUser } = useNotification();
+  const { subscribeUser, unsubscribeUser } = useNotification();
   const notificationPermission = Notification.permission;
 
   const { handleSubmit, control, getValues } = useForm<IForm>({
@@ -92,7 +92,7 @@ const SettingsApp = () => {
       </div>
       <Divider />
       {notificationPermission === 'granted' ? (
-        <Button onClick={() => subscribeUser(user?.id)}>I dont want notification</Button>
+        <Button onClick={() => unsubscribeUser(user?.id)}>I dont want notification</Button>
       ) : (
         <Button onClick={() => subscribeUser(user?.id)}>I want notification</Button>
       )}

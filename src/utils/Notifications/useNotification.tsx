@@ -53,7 +53,7 @@ export const useNotification = () => {
     }
   };
 
-  const unsubscribeUser = async (userId: string) => {
+  const unsubscribeUser = async (userId?: string) => {
     if (!userId) return;
 
     if ('serviceWorker' in navigator && 'PushManager' in window) {
@@ -79,5 +79,5 @@ export const useNotification = () => {
     }
   };
 
-  return { subscribeUser, sendNotification, getVapidKey };
+  return { subscribeUser, sendNotification, getVapidKey, unsubscribeUser };
 };
