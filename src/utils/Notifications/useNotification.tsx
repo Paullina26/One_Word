@@ -1,6 +1,14 @@
 import fetchWithToken from 'API/api';
+import { useEffect, useState } from 'react';
 
 export const useNotification = () => {
+  const [isSubscription, setIsSubscription] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    getSubscription();
+  }, []);
+
   const getVapidKey = async () => {
     const resp = await fetchWithToken({
       endpoint: 'vapidPublicKey',
@@ -10,7 +18,14 @@ export const useNotification = () => {
     return resp.response;
   };
 
+  const getSubscription = async () => {
+    const registration = await navigator.serviceWorker.ready;
+    const subscription = await registration.pushManager.getSubscription();
+    setIsSubscription(Boolean(subscription));
+  };
+
   const subscribeUser = async (userId?: string) => {
+    setIsLoading(true);
     if (!userId) return;
 
     const publicKey = await getVapidKey();
@@ -31,32 +46,35 @@ export const useNotification = () => {
               method: 'POST',
               body: { subscription, userId },
             });
+            setIsSubscription(true);
           })
           .catch(err => {
             console.error('Failed to subscribe the user: ', err);
-          });
+          })
+          .finally(() => setIsLoading(false));
       });
     }
   };
 
   const sendNotification = async (title: string, body: string, userId?: string) => {
-    try {
-      const resp = await fetchWithToken({
-        endpoint: 'sendNotification',
-        method: 'POST',
-        body: { title, body, userId },
-      });
-
-      console.log('Notification sent successfully', resp);
-    } catch (error) {
-      console.error('Error sending notification:', error);
-    }
+    // try {
+    //   const resp = await fetchWithToken({
+    //     endpoint: 'sendNotification',
+    //     method: 'POST',
+    //     body: { title, body, userId },
+    //   });
+    //   console.log('Notification sent successfully', resp);
+    // } catch (error) {
+    //   console.error('Error sending notification:', error);
+    // }
   };
 
   const unsubscribeUser = async (userId?: string) => {
+    setIsLoading(true);
     if (!userId) return;
 
     if ('serviceWorker' in navigator && 'PushManager' in window) {
+      console.log('is');
       try {
         const registration = await navigator.serviceWorker.ready;
         const subscription = await registration.pushManager.getSubscription();
@@ -64,20 +82,30 @@ export const useNotification = () => {
         if (subscription) {
           await subscription.unsubscribe();
           console.log('User unsubscribed successfully');
+          setIsSubscription(false);
 
           await fetchWithToken({
             endpoint: 'unsubscribe',
-            method: 'POST',
+            method: 'DELETE',
             body: { userId },
           });
         } else {
-          console.warn('User is not subscribed');
+          console.error('User is not subscribed');
         }
       } catch (error) {
         console.error('Failed to unsubscribe the user: ', error);
+      } finally {
+        setIsLoading(false);
       }
     }
   };
 
-  return { subscribeUser, sendNotification, getVapidKey, unsubscribeUser };
+  return {
+    isLoading,
+    subscribeUser,
+    sendNotification,
+    getVapidKey,
+    unsubscribeUser,
+    isSubscription,
+  };
 };
