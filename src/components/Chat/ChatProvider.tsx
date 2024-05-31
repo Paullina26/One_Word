@@ -10,13 +10,12 @@ import { useStreamAudio } from './useStreamAudio';
 import { GlobalContext } from 'utils/GlobalContext';
 import { LanguagesMap } from 'data/option/language_options';
 import { toast } from 'react-toastify';
-import { toastColored } from 'helpers/StyleToastify';
 
 const ChatContext = createContext<ChatContextValue>({} as ChatContextValue);
 
 export const ChatProvider: FC<Props> = ({ children }) => {
   const params = useParams();
-  const { userLanguages, setIsLoadingOpen } = useContext(GlobalContext);
+  const { userLanguages, setIsLoadingOpen, user } = useContext(GlobalContext);
 
   const [isMessagesVisible, setIsMessagesVisible] = useState(true);
   const [isAiSpeaking, setIsAiSpeaking] = useState(false);
@@ -184,6 +183,8 @@ export const ChatProvider: FC<Props> = ({ children }) => {
     mistakesList,
     newWordsList,
     isSummaryOpen,
+
+    isAi: user?.isAi,
   };
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
 };

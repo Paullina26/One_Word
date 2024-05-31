@@ -7,6 +7,10 @@ import { WrapperSettings } from 'components/Shared/containers/WrapperSettings';
 import { Controller, SubmitHandler, useForm, useFieldArray } from 'react-hook-form';
 import { mappedLanguages } from 'data/option/language_options';
 import { GlobalContext } from 'utils/GlobalContext';
+import { Button } from 'components/Shared/Buttons/Button';
+import Divider from '@mui/material/Divider';
+import { useNotification } from 'utils/Notifications/useNotification';
+import Loading from 'components/Shared/Loading/Loading';
 
 export const Tittle = styled.p`
   ${font_settings(2.4, 'normal', 600)}
@@ -22,9 +26,10 @@ interface IForm {
   }[];
 }
 const SettingsApp = () => {
-  const { userLanguages, setUserLanguages } = useContext(GlobalContext);
+  const { userLanguages, setUserLanguages, user } = useContext(GlobalContext);
+  const { subscribeUser, unsubscribeUser, isSubscription, isLoading } = useNotification();
 
-  const { handleSubmit, control, getValues } = useForm<IForm>({
+  const { handleSubmit, control } = useForm<IForm>({
     defaultValues: {
       ...userLanguages,
     },
@@ -85,6 +90,16 @@ const SettingsApp = () => {
           <Submit $isLightTeam={true} value='Apply' id='submit_GlobalSettingsApp' />
         </form>
       </div>
+      <Divider />
+
+      <Button onClick={() => subscribeUser(user?.id)}>
+        {isLoading ? <Loading /> : `I want notification`}
+      </Button>
+      {!isSubscription && (
+        <Button onClick={() => unsubscribeUser(user?.id)}>
+          {isLoading ? <Loading /> : `Remove notification from all devices`}
+        </Button>
+      )}
     </WrapperSettings>
   );
 };

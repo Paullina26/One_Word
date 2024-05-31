@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { GlobalContext } from 'utils/GlobalContext';
 import { Routes, Route } from 'react-router-dom';
 import { routes } from 'data/routes';
 
@@ -14,9 +13,10 @@ import AddWordSettings from 'pages/User/Settings/AddWord';
 import LearningSettings from 'pages/User/Settings/Learning';
 import SettingsApp from 'pages/User/Settings/SettingsApp';
 import ChatWrapper from 'components/Chat/ChatWrapper';
+import { GlobalContext } from 'utils/GlobalContext/GlobalContext';
 
 const RoutesComponent = () => {
-  const { isLoginUser, isAiUser } = useContext(GlobalContext);
+  const { isLoginUser, user } = useContext(GlobalContext);
 
   return (
     <Routes>
@@ -30,8 +30,10 @@ const RoutesComponent = () => {
             <Route path={`${routes.LEARN_TRANSLATE.to}`} element={<Translate />} />
             <Route path={`${routes.LEARN_REPEAT.to}`} element={<Repeat />} />
             <Route path={`${routes.LEARN_FLASHCARD.to}`} element={<Flashcard />} />
-            {isAiUser && <Route path={`${routes.LEARN_CHAT.to}`} element={<ChatWrapper />} />}
-            {isAiUser && <Route path={`${routes.LEARN_CHAT.to}/:word`} element={<ChatWrapper />} />}
+            {user?.isAi && <Route path={`${routes.LEARN_CHAT.to}`} element={<ChatWrapper />} />}
+            {user?.isAi && (
+              <Route path={`${routes.LEARN_CHAT.to}/:word`} element={<ChatWrapper />} />
+            )}
           </Route>
           <Route path='settings'>
             <Route path={`${routes.SETTINGS_ADD_WORDS.to}`} element={<AddWordSettings />} />

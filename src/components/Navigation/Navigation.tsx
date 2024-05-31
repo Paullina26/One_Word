@@ -22,11 +22,11 @@ interface SectionNavigation {
 
 export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
   const location = useLocation();
-  const { isAiUser } = useContext(GlobalContext);
+  const { user } = useContext(GlobalContext);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [animateLinks, setAnimateLinks] = useState(false);
 
-  const chatNav = isAiUser ? [chatNavigation] : [];
+  const chatNav = user?.isAi ? [chatNavigation] : [];
 
   const sectionNavigation = {
     Learning: [...baseNavigation.Learning, ...chatNav],
