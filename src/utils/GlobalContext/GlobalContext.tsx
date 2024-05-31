@@ -34,13 +34,6 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
         languageToLearn: resp.response.languageToLearn,
         baseLanguage: resp.response.baseLanguage,
       });
-
-    // if (isLogin) {
-    //   resp.response.notifications.forEach(notification => {
-    //     console.log({ notification });
-    //     scheduleNotification({ time: notification.time, userId });
-    //   });
-    // }
   };
 
   const checkLoginStatus = async () => {
