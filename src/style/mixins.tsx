@@ -145,6 +145,10 @@ border-radius: 16px;
 box-shadow: -3px -3px 5px rgba(94, 104, 121, 0.2), 3px 3px 5px rgba(94, 104, 121, 0.2);
 backdrop-filter: blur(10px);
 border: 3px inset rgba(220, 220, 220, 0.2);
+
+// for ios
+-webkit-backdrop-filter: blur(3px);
+backdrop-filter: blur(3px);
 `;
 
 export const color_gradient_glassEffect_light_menu = `
