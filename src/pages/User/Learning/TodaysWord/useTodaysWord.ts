@@ -77,6 +77,14 @@ const useTodayWord = () => {
     if (isLoginUser) fetchData();
   }, [isLoginUser]);
 
+  useEffect(() => {
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'visible') {
+        setIsShowWord(false);
+      }
+    });
+  }, []);
+
   return {
     baseWord,
     transWord,
