@@ -11,7 +11,7 @@ import Translate from 'pages/User/Learning/Translate';
 import Flashcard from 'pages/User/Learning/Flashcard';
 import Repeat from 'pages/User/Learning/Repeat';
 import AddWordSettings from 'pages/User/Settings/AddWord';
-import LearningSettings from 'pages/User/Settings/Learning';
+import LearningSettings from 'pages/User/Settings/Learning/Learning';
 import SettingsApp from 'pages/User/Settings/SettingsApp';
 import ChatWrapper from 'components/Chat/ChatWrapper';
 

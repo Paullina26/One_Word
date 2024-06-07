@@ -6,6 +6,7 @@ import backIcon from '../../../assets/icon/back.svg';
 import nextIcon from '../../../assets/icon/next.svg';
 import xmarkIcon from '../../../assets/icon/xmark.svg';
 import translateIcon from '../../../assets/icon/translate.svg';
+import addIcon from '../add.svg';
 
 interface Icon {
   src: string;
@@ -44,6 +45,10 @@ const icons: Record<string, Icon> = {
   translate: {
     src: translateIcon,
     alt: 'Translate Icon',
+  },
+  add: {
+    src: addIcon,
+    alt: 'Add Icon',
   },
 };
 
