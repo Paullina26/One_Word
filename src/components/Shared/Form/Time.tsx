@@ -115,7 +115,7 @@ const TimePickerViewRenderers: FC<DatePickerProps> = ({
       <ReactDatePicker
         id={id}
         selected={value}
-        onChange={(date: any) => onChange(date)}
+        onChange={(date: Date | null) => onChange(date)}
         showTimeSelect
         showTimeSelectOnly
         timeIntervals={timeIntervals || 15}
