@@ -11,11 +11,7 @@ import { mappedLanguages } from 'data/option/language_options';
 import { WrapperSettings } from 'components/Shared/containers/WrapperSettings';
 import fetchWithToken from 'API/api';
 import { GlobalContext } from 'utils/GlobalContext';
-
-export const Tittle = styled.p`
-  ${font_settings(2.4, 'normal', 600)}
-  margin: 5px auto;
-`;
+import { TitleSmall } from 'components/Shared/Atoms/Title';
 
 export const WrapperInputsSettingsAddWord = styled.div`
   margin-bottom: 30px;
@@ -73,7 +69,7 @@ const AddWordSettings = ({ wordToLearn, onClose, inBaseLang }: AddWordSettingsPr
 
   return (
     <WrapperSettings>
-      <Tittle>Add Word</Tittle>
+      <TitleSmall>Add Word</TitleSmall>
       <form onSubmit={handleSubmit}>
         <WrapperInputsSettingsAddWord>
           <Input
