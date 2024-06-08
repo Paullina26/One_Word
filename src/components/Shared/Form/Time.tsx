@@ -11,8 +11,8 @@ import {
 import 'react-datepicker/dist/react-datepicker.css';
 
 interface DatePickerProps {
-  value: any;
-  onChange: any;
+  value: Date | null;
+  onChange: (date: Date | null) => void;
   timeIntervals?: number;
   label?: string;
   id?: string;

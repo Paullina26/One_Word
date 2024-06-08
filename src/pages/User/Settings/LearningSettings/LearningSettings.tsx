@@ -2,13 +2,13 @@ import { useForm, useFieldArray, Controller } from 'react-hook-form';
 
 import TimePickerViewRenderers from 'components/Shared/Form/Time';
 
-import * as S from './StyleLearning';
+import * as S from './StyleLearningSettings';
 import Submit from 'components/Shared/Form/Submit';
 import ManagedIcon from 'assets/icon/helpers/ManagedIcon';
 import Select from 'components/Shared/Form/Select';
 import { ButtonIcon } from 'components/Shared/Buttons/Button';
 import { TitleSmall, TitleBig } from 'components/Shared/Atoms/Title';
-import useLearning from './useLearning';
+import useLearningSettings from './useLearningSettings';
 
 const LearningSettings: React.FC = () => {
   const {
@@ -22,7 +22,7 @@ const LearningSettings: React.FC = () => {
     onSubmit,
     fields,
     control,
-  } = useLearning();
+  } = useLearningSettings();
 
   return (
     <S.Wrapper>
@@ -53,19 +53,19 @@ const LearningSettings: React.FC = () => {
             <ManagedIcon name='add' />
           </ButtonIcon>
           <Select
-            id='reviewDays'
+            id='summaryDay'
             options={daysOfWeek}
-            onChange={value => setValue('reviewDays', value)}
-            value={watch('reviewDays')}
+            onChange={value => setValue('summaryDay', value)}
+            value={watch('summaryDay')}
             labelValue='On which days do you want to review?'
             $isLightTeam={true}
             $fontColorLabel='purpleDark'
           />
           <Select
-            id='offDays'
+            id='breakDay'
             options={daysOfWeek}
-            onChange={value => setValue('offDays', value)}
-            value={watch('offDays')}
+            onChange={value => setValue('breakDay', value)}
+            value={watch('breakDay')}
             labelValue='On which days do you want to take a break?'
             $isLightTeam={true}
             $fontColorLabel='purpleDark'

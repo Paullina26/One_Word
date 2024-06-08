@@ -15,14 +15,20 @@ const daysOfWeek = [
 
 const MAX_NOTIFICATIONS = 5;
 
-const useLearning = () => {
+interface FormValues {
+  notifications: { time: Date | null; type: string }[];
+  summaryDay: string;
+  breakDay: string;
+}
+
+const useLearningSettings = () => {
   const [isAddButtonDisabled, setIsAddButtonDisabled] = useState(false);
 
-  const { control, handleSubmit, setValue, watch } = useForm({
+  const { control, handleSubmit, setValue, watch } = useForm<FormValues>({
     defaultValues: {
-      notifications: [{ time: '', type: '1' }],
-      reviewDays: '6',
-      offDays: '7',
+      notifications: [{ time: null, type: '1' }],
+      summaryDay: '6',
+      breakDay: '7',
     },
   });
 
@@ -31,21 +37,21 @@ const useLearning = () => {
     name: 'notifications',
   });
 
-  const formatTime = (time: Date) => {
+  const formatTime = (time: Date | null) => {
+    if (!time) return '';
     const hours = time.getHours().toString().padStart(2, '0');
     const minutes = time.getMinutes().toString().padStart(2, '0');
     return `${hours}:${minutes}`;
   };
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: FormValues) => {
     const formattedData = {
       ...data,
-      notifications: data.notifications.map((notification: any) => ({
-        time: notification.time ? formatTime(new Date(notification.time)) : '',
+      notifications: data.notifications.map(notification => ({
+        time: notification.time ? formatTime(notification.time) : '',
         type: notification.type || '1',
       })),
     };
-    console.log(formattedData);
 
     try {
       const response = await fetchWithToken({
@@ -67,7 +73,7 @@ const useLearning = () => {
       toast.warning(`You have reached the maximum number of notifications ${MAX_NOTIFICATIONS}`);
       setIsAddButtonDisabled(true);
     } else {
-      append({ time: '', type: '1' });
+      append({ time: null, type: '1' });
     }
   };
 
@@ -92,4 +98,4 @@ const useLearning = () => {
   };
 };
 
-export default useLearning;
+export default useLearningSettings;
