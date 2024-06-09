@@ -10,6 +10,7 @@ export const ChatWrapper = styled.div`
   justify-content: space-between;
   flex-direction: column;
   padding-bottom: 50px;
+  padding-top: 50px;
 `;
 
 export const Messages = styled.div`
@@ -22,6 +23,7 @@ export const Messages = styled.div`
   flex-direction: column;
   padding: 20px;
   overflow-y: auto;
+  font-size: 1.8rem;
 `;
 
 export const MessageWrapper = styled(GlassWrapper)<{ $role?: string }>`
