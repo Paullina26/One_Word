@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
 import { font_settings } from 'style/mixins';
-import { ButtonIcon } from 'components/Shared/Buttons/Button';
+import ButtonIcon from 'components/Shared/Buttons/ButtonIcon';
 
 export const Wrapper = styled(GlassWrapper)`
   margin: 20px auto;
@@ -41,10 +41,6 @@ export const WrapperTimePicker = styled.div`
   padding: 0 5px;
   height: auto;
   width: 100%;
-`;
-
-export const PositionButtonIcon = styled(ButtonIcon)`
-  margin: 0 5px;
 `;
 
 export const TimePickerPosition = styled.div`

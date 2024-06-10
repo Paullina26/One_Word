@@ -4,11 +4,10 @@ import TimePickerViewRenderers from 'components/Shared/Form/Time';
 
 import * as S from './StyleLearningSettings';
 import Submit from 'components/Shared/Form/Submit';
-import ManagedIcon from 'assets/icon/helpers/ManagedIcon';
 import Select from 'components/Shared/Form/Select';
-import { ButtonIcon } from 'components/Shared/Buttons/Button';
 import { TitleSmall, TitleBig } from 'components/Shared/Atoms/Title';
 import useLearningSettings from './useLearningSettings';
+import ButtonIcon from 'components/Shared/Buttons/ButtonIcon';
 
 const LearningSettings: React.FC = () => {
   const {
@@ -39,19 +38,22 @@ const LearningSettings: React.FC = () => {
                   <TimePickerViewRenderers value={field.value} onChange={field.onChange} />
                 )}
               />
-              <S.PositionButtonIcon
-                color='secondary'
+              <ButtonIcon
+                nameIcon='xmark'
+                margin='2px auto'
                 onClick={() => handleRemoveNotification(index)}
-              >
-                <ManagedIcon name='xmark' />
-              </S.PositionButtonIcon>
+              />
             </S.Notification>
           ))}
         </S.WrapperTimePicker>
         <S.NotificationForm>
-          <ButtonIcon type='button' onClick={handleAddNotification} disabled={isAddButtonDisabled}>
-            <ManagedIcon name='add' />
-          </ButtonIcon>
+          <ButtonIcon
+            nameIcon='add'
+            type='button'
+            onClick={handleAddNotification}
+            disabled={isAddButtonDisabled}
+            margin='10px auto'
+          />
           <Select
             id='summaryDay'
             options={daysOfWeek}

@@ -1,9 +1,9 @@
 import useTodayWord from './useTodaysWord';
 
-import ManagedIcon from 'assets/icon/helpers/ManagedIcon';
 import * as S from './StyleTodaysWord';
 import { Button } from 'components/Shared/Buttons/Button';
 import NotificationInformation from 'components/Shared/Atoms/NotificationInformation';
+import ButtonIcon from 'components/Shared/Buttons/ButtonIcon';
 
 const TodayWord = () => {
   const {
@@ -43,9 +43,16 @@ const TodayWord = () => {
           <Button onClick={handleShowWord}>Show Word</Button>
         )}
         {isShowWord && (
-          <S.PositionedButton onClick={handleSpeak} disabled={isSpeaking}>
-            <ManagedIcon name='speaker' />
-          </S.PositionedButton>
+          <ButtonIcon
+            nameIcon='speaker'
+            type='button'
+            positionAbsolute
+            margin='auto 5px 5px'
+            bottom='10px'
+            right='10px'
+            onClick={handleSpeak}
+            disabled={isSpeaking}
+          />
         )}
       </S.WrapperWord>
       <S.WrapperButtons>
