@@ -11,7 +11,7 @@ import { Button } from 'components/Shared/Buttons/Button';
 type WordToLearn = {
   textToLearn: string;
   id: string;
-  inBaseLang: string;
+  inBaseLang?: string;
 };
 
 const Summary: FC = () => {
@@ -33,18 +33,20 @@ const Summary: FC = () => {
     text: string;
     mistake?: string;
     id: string;
-    inBaseLang: string;
+    inBaseLang?: string;
   }) => (
     <>
       <S.SummaryWordToAdd>
         <div>
           <span>{text}</span>
-          <p>
-            translate: <i>{mistake}</i>
-          </p>
+          {inBaseLang && (
+            <p>
+              base language: <i>{inBaseLang}</i>
+            </p>
+          )}
           {mistake && (
             <p>
-              mistake: <i>{inBaseLang}</i>
+              mistake: <i>{mistake}</i>
             </p>
           )}
         </div>
@@ -55,10 +57,8 @@ const Summary: FC = () => {
     </>
   );
 
-  const mistakesListItems = mistakesList.map(({ id, correction, mistake, inBaseLang }) => ({
-    element: (
-      <SingleItem key={id} text={correction} id={id} mistake={mistake} inBaseLang={inBaseLang} />
-    ),
+  const mistakesListItems = mistakesList.map(({ id, correction, mistake }) => ({
+    element: <SingleItem key={id} text={correction} id={id} mistake={mistake} />,
     id,
   }));
 
@@ -74,14 +74,17 @@ const Summary: FC = () => {
       <Heading>Summary</Heading>
       <S.Description>
         Here are your mistakes and new words from conversation. You can decide if you want to add
-        some them to you list of words to learn.
+        some them to your list of words to learn.
       </S.Description>
-
-      {listItems.length > 0 ? (
-        <List items={listItems} />
-      ) : (
-        <S.Description>You were so good that there are not any mistakes or new words</S.Description>
-      )}
+      <S.SummaryList>
+        {listItems.length > 0 ? (
+          <List items={listItems} />
+        ) : (
+          <S.Description>
+            You were so good that there are not any mistakes or new words
+          </S.Description>
+        )}
+      </S.SummaryList>
 
       <Modal open={Boolean(currentWord)} onClose={closeModal}>
         <S.ModalWrapper>

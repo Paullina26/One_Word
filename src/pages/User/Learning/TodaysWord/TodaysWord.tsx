@@ -16,6 +16,7 @@ const TodayWord = () => {
     handleShowWord,
     handleSpeak,
     handleLearnedWord,
+    goToChat,
   } = useTodayWord();
 
   if (isError)
@@ -35,6 +36,9 @@ const TodayWord = () => {
       <S.Tittle>Today`s Word</S.Tittle>
       <S.WrapperBaseWord>
         <S.Word>{baseWord}</S.Word>
+        <S.PositionedButton onClick={goToChat} positionTop>
+          <ManagedIcon name='chat' />
+        </S.PositionedButton>
       </S.WrapperBaseWord>
       <S.WrapperWord>
         {isShowWord ? (
