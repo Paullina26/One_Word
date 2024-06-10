@@ -5,15 +5,14 @@ import fetchWithToken from 'API/api';
 import { toast } from 'react-toastify';
 
 const useTodayWord = () => {
-  const { isLoadingOpen, setIsLoadingOpen, isLoginUser } = useContext(GlobalContext);
+  const navigate = useNavigate();
+  const { setIsLoadingOpen, isLoginUser } = useContext(GlobalContext);
   const [baseWord, setBaseWord] = useState<string | null>(null);
   const [transWord, setTransWord] = useState<string | null>(null);
   const [isError, setIsError] = useState(false);
   const [isShowWord, setIsShowWord] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [idWord, setIdWord] = useState<string | null>(null);
-
-  const navigate = useNavigate();
 
   const handleAddWordClick = () => navigate('/settings/add_words');
   const handleShowWord = () => setIsShowWord(!isShowWord);
@@ -73,6 +72,8 @@ const useTodayWord = () => {
     }
   };
 
+  const goToChat = () => navigate(`/learning/chat/${transWord}`);
+
   useEffect(() => {
     if (isLoginUser) fetchData();
   }, [isLoginUser]);
@@ -95,6 +96,7 @@ const useTodayWord = () => {
     handleShowWord,
     handleSpeak,
     handleLearnedWord,
+    goToChat,
   };
 };
 

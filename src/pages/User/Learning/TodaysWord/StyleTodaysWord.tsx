@@ -24,6 +24,7 @@ export const WrapperBaseWord = styled.div`
   text-align: center;
   background-color: rgba(232, 232, 232, 0.75);
   margin-bottom: 20px;
+  position: relative;
 `;
 
 export const WrapperWord = styled.div`
@@ -39,13 +40,15 @@ export const WrapperWord = styled.div`
   position: relative;
 `;
 
-export const PositionedButton = styled(Button)`
+export const PositionedButton = styled(Button)<{ positionTop?: boolean }>`
   position: absolute;
-  bottom: 10px;
+  bottom: ${({ positionTop }) => (positionTop ? 'auto' : '10px')};
+  top: ${({ positionTop }) => (positionTop ? '10px' : 'auto')};
   right: 10px;
   width: auto;
   margin: 0;
   white-space: nowrap;
+  cursor: pointer;
 `;
 
 export const Word = styled.p`
