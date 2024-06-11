@@ -13,7 +13,7 @@ interface Icon {
   src: string;
   alt: string;
 }
-type Icons =
+export type Icons =
   | 'microphone'
   | 'check'
   | 'speaker'
