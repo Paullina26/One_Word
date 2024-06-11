@@ -3,12 +3,15 @@ import styled from 'styled-components';
 
 const WrapperList = styled.ul`
   list-style: none;
+  overflow-y: auto;
+  height: 100%;
 `;
 
 const ListItem = styled.li`
   padding: 10px 0;
   font-size: 2rem;
   width: 100%;
+
   p {
     font-size: 1.6rem;
   }

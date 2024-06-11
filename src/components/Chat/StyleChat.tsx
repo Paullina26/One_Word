@@ -92,7 +92,8 @@ export const SummaryWrapper = styled(GlassWrapper)`
   padding: 50px;
   width: 800px;
   max-width: 100%;
-  max-height: 100vh;
+  height: 80vh;
+  max-height: 80vh;
   transform: translate(-50%, -50%);
   text-align: left;
 `;
@@ -118,4 +119,8 @@ export const ModalWrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+`;
+
+export const SummaryList = styled.div`
+  height: calc(100% - 290px);
 `;

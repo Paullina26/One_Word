@@ -6,14 +6,26 @@ import backIcon from '../../../assets/icon/back.svg';
 import nextIcon from '../../../assets/icon/next.svg';
 import xmarkIcon from '../../../assets/icon/xmark.svg';
 import translateIcon from '../../../assets/icon/translate.svg';
+import chatIcon from '../../../assets/icon/chat.svg';
 import addIcon from '../add.svg';
 
 interface Icon {
   src: string;
   alt: string;
 }
+type Icons =
+  | 'microphone'
+  | 'check'
+  | 'speaker'
+  | 'logout'
+  | 'back'
+  | 'next'
+  | 'xmark'
+  | 'translate'
+  | 'add'
+  | 'chat';
 
-const icons: Record<string, Icon> = {
+const icons: Record<Icons, Icon> = {
   microphone: {
     src: microphoneIcon,
     alt: 'Microphone Icon',
@@ -50,10 +62,14 @@ const icons: Record<string, Icon> = {
     src: addIcon,
     alt: 'Add Icon',
   },
+  chat: {
+    src: chatIcon,
+    alt: 'chat Icon',
+  },
 };
 
 interface ManagedIconProps {
-  name: string;
+  name: Icons;
   width?: string;
   height?: string;
 }
