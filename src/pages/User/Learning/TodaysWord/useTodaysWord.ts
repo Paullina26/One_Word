@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 const useTodayWord = () => {
   const navigate = useNavigate();
-  const { setIsLoadingOpen, isLoginUser } = useContext(GlobalContext);
+  const { setIsLoadingOpen, isLoginUser, user } = useContext(GlobalContext);
   const [baseWord, setBaseWord] = useState<string | null>(null);
   const [transWord, setTransWord] = useState<string | null>(null);
   const [isError, setIsError] = useState(false);
@@ -97,6 +97,7 @@ const useTodayWord = () => {
     handleSpeak,
     handleLearnedWord,
     goToChat,
+    isAi: user?.isAi,
   };
 };
 
