@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
 import { Button } from 'components/Shared/Buttons/Button';
-import ManagedIcon from 'assets/icon/helpers/ManagedIcon';
+import ManagedIcon, { Icons } from 'assets/icon/helpers/ManagedIcon';
 
 interface ButtonIconProps {
-  nameIcon: string;
+  nameIcon: Icons;
   onClick: () => void;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
