@@ -92,10 +92,12 @@ const SettingsApp = () => {
       </div>
       <Divider />
 
-      <Button onClick={() => subscribeUser(user?.id)}>
-        {isLoading ? <Loading /> : `I want notification`}
-      </Button>
       {!isSubscription && (
+        <Button onClick={() => subscribeUser(user?.id)}>
+          {isLoading ? <Loading /> : `I want notification`}
+        </Button>
+      )}
+      {isSubscription && (
         <Button onClick={() => unsubscribeUser(user?.id)}>
           {isLoading ? <Loading /> : `Remove notification from all devices`}
         </Button>
