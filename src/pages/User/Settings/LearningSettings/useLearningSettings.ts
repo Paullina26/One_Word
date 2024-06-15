@@ -24,7 +24,7 @@ interface FormValues {
 const useLearningSettings = () => {
   const [isAddButtonDisabled, setIsAddButtonDisabled] = useState(false);
 
-  const { control, handleSubmit, setValue, watch } = useForm<FormValues>({
+  const { control, handleSubmit, setValue, watch, reset } = useForm<FormValues>({
     defaultValues: {
       notifications: [{ time: null, type: '1' }],
       summaryDay: '6',
@@ -42,6 +42,29 @@ const useLearningSettings = () => {
     const hours = time.getHours().toString().padStart(2, '0');
     const minutes = time.getMinutes().toString().padStart(2, '0');
     return `${hours}:${minutes}`;
+  };
+
+  const fetchUserSettings = async () => {
+    try {
+      const response = await fetchWithToken({
+        endpoint: 'getUserSettings',
+        method: 'GET',
+      });
+      if (response.status === 200) {
+        const settings = response.response;
+        reset({
+          notifications: settings.notifications.map((notif: any) => ({
+            time: new Date(`1970-01-01T${notif.time}:00`), // converting time string to Date object
+            type: notif.type,
+          })),
+          summaryDay: settings.summaryDay.toString(),
+          breakDay: settings.breakDay.toString(),
+        });
+      }
+    } catch (error) {
+      console.error('Error fetching user settings:', error);
+      toast.error('Failed to fetch user settings');
+    }
   };
 
   const onSubmit = async (data: FormValues) => {
@@ -95,6 +118,7 @@ const useLearningSettings = () => {
     onSubmit,
     fields,
     control,
+    fetchUserSettings,
   };
 };
 
