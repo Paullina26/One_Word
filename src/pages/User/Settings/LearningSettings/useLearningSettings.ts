@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFieldArray, useForm, Controller } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import fetchWithToken from 'API/api';
@@ -52,9 +52,10 @@ const useLearningSettings = () => {
       });
       if (response.status === 200) {
         const settings = response.response;
+        // const [summaryDay, breakDay, notifications] = settings;
         reset({
           notifications: settings.notifications.map((notif: any) => ({
-            time: new Date(`1970-01-01T${notif.time}:00`), // converting time string to Date object
+            time: new Date(`1970-01-01T${notif.time}:00`),
             type: notif.type,
           })),
           summaryDay: settings.summaryDay.toString(),
@@ -99,6 +100,10 @@ const useLearningSettings = () => {
       append({ time: null, type: '1' });
     }
   };
+
+  useEffect(() => {
+    fetchUserSettings();
+  }, []);
 
   const handleRemoveNotification = (index: number) => {
     remove(index);

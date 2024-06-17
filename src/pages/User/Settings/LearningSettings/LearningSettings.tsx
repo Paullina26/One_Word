@@ -6,7 +6,6 @@ import Select from 'components/Shared/Form/Select';
 import { TitleSmall, TitleBig } from 'components/Shared/Atoms/Title';
 import useLearningSettings from './useLearningSettings';
 import ButtonIcon from 'components/Shared/Buttons/ButtonIcon';
-import { useEffect } from 'react';
 
 const LearningSettings: React.FC = () => {
   const {
@@ -22,10 +21,6 @@ const LearningSettings: React.FC = () => {
     control,
     fetchUserSettings,
   } = useLearningSettings();
-
-  useEffect(() => {
-    fetchUserSettings();
-  }, []);
 
   return (
     <S.Wrapper>
