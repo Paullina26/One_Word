@@ -8,7 +8,7 @@ interface ButtonIconProps {
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   margin?: string;
-  positionAbsolute?: boolean;
+  $positionAbsolute?: boolean;
   top?: string;
   left?: string;
   right?: string;
@@ -35,14 +35,14 @@ const absoluteStyles = css<{ top?: string; left?: string; right?: string; bottom
 
 export const ButtonIconStyle = styled(Button)<{
   margin?: string;
-  positionAbsolute?: boolean;
+  $positionAbsolute?: boolean;
   top?: string;
   left?: string;
   right?: string;
   bottom?: string;
 }>`
   ${baseStyles}
-  ${({ positionAbsolute }) => positionAbsolute && absoluteStyles}
+  ${({ $positionAbsolute }) => $positionAbsolute && absoluteStyles}
 `;
 
 const ButtonIcon: React.FC<ButtonIconProps> = ({
@@ -51,7 +51,7 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({
   onClick,
   disabled = false,
   margin,
-  positionAbsolute = false,
+  $positionAbsolute = false,
   top,
   left,
   right,
@@ -63,7 +63,7 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({
       onClick={onClick}
       disabled={disabled}
       margin={margin}
-      positionAbsolute={positionAbsolute}
+      $positionAbsolute={$positionAbsolute}
       top={top}
       left={left}
       right={right}

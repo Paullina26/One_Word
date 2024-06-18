@@ -54,7 +54,7 @@ const TodayWord = () => {
           <ButtonIcon
             nameIcon='speaker'
             type='button'
-            positionAbsolute
+            $positionAbsolute
             margin='auto 5px 5px'
             bottom='10px'
             right='10px'

@@ -1,7 +1,5 @@
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
-
 import TimePickerViewRenderers from 'components/Shared/Form/Time';
-
 import * as S from './StyleLearningSettings';
 import Submit from 'components/Shared/Form/Submit';
 import Select from 'components/Shared/Form/Select';
@@ -21,6 +19,7 @@ const LearningSettings: React.FC = () => {
     onSubmit,
     fields,
     control,
+    fetchUserSettings,
   } = useLearningSettings();
 
   return (
