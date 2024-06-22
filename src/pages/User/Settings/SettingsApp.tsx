@@ -27,7 +27,8 @@ interface IForm {
 }
 const SettingsApp = () => {
   const { userLanguages, setUserLanguages, user } = useContext(GlobalContext);
-  const { subscribeUser, unsubscribeUser, isSubscription, isLoading } = useNotification();
+  const { subscribeUser, unsubscribeAll, unsubscribeDevice, isSubscription, isLoading } =
+    useNotification();
 
   const { handleSubmit, control } = useForm<IForm>({
     defaultValues: {
@@ -98,10 +99,13 @@ const SettingsApp = () => {
         </Button>
       )}
       {isSubscription && (
-        <Button onClick={() => unsubscribeUser(user?.id)}>
-          {isLoading ? <Loading /> : `Remove notification from all devices`}
+        <Button onClick={() => unsubscribeDevice(user?.id)}>
+          {isLoading ? <Loading /> : `Remove notification from this device`}
         </Button>
       )}
+      <Button onClick={() => unsubscribeAll(user?.id)}>
+        {isLoading ? <Loading /> : `Remove notification from all devices`}
+      </Button>
     </WrapperSettings>
   );
 };

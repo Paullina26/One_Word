@@ -27,7 +27,8 @@ export const API_Endpoints = {
 
   sendNotification: `${API_BASE_URL}subscription/sendNotification`,
   subscribe: `${API_BASE_URL}subscription/subscribe`,
-  unsubscribe: `${API_BASE_URL}subscription/unsubscribe`,
+  unsubscribeDevice: `${API_BASE_URL}subscription/unsubscribe-device`,
+  unsubscribeAll: `${API_BASE_URL}subscription/unsubscribe-all`,
   vapidPublicKey: `${API_BASE_URL}subscription/vapidPublicKey`,
 };
 

@@ -69,12 +69,11 @@ export const useNotification = () => {
     // }
   };
 
-  const unsubscribeUser = async (userId?: string) => {
+  const unsubscribeAll = async (userId?: string) => {
     setIsLoading(true);
     if (!userId) return;
 
     if ('serviceWorker' in navigator && 'PushManager' in window) {
-      console.log('is');
       try {
         const registration = await navigator.serviceWorker.ready;
         const subscription = await registration.pushManager.getSubscription();
@@ -85,9 +84,39 @@ export const useNotification = () => {
           setIsSubscription(false);
 
           await fetchWithToken({
-            endpoint: 'unsubscribe',
+            endpoint: 'unsubscribeAll',
             method: 'DELETE',
             body: { userId },
+          });
+        } else {
+          console.error('User is not subscribed');
+        }
+      } catch (error) {
+        console.error('Failed to unsubscribe the user: ', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  const unsubscribeDevice = async (userId?: string) => {
+    setIsLoading(true);
+    if (!userId) return;
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+      try {
+        const registration = await navigator.serviceWorker.ready;
+        const subscription = await registration.pushManager.getSubscription();
+
+        if (subscription) {
+          const endpoint = subscription.endpoint;
+          await subscription.unsubscribe();
+          console.log('User unsubscribed successfully');
+          setIsSubscription(false);
+
+          await fetchWithToken({
+            endpoint: 'unsubscribeDevice',
+            method: 'DELETE',
+            body: { userId, endpoint },
           });
         } else {
           console.error('User is not subscribed');
@@ -105,7 +134,8 @@ export const useNotification = () => {
     subscribeUser,
     sendNotification,
     getVapidKey,
-    unsubscribeUser,
+    unsubscribeAll,
     isSubscription,
+    unsubscribeDevice,
   };
 };
