@@ -37,9 +37,9 @@ export const Repeat = () => {
         />
       </div>
       <S.WrapperButton>
-        <ButtonIcon nameIcon='back' margin='2px auto' onClick={() => handleBackWord()} />
-        <ButtonIcon nameIcon='check' margin='2px auto' onClick={() => handleCheckWord()} />
-        <ButtonIcon nameIcon='next' margin='2px auto' onClick={() => handleNextWord()} />
+        <ButtonIcon nameIcon='back' $margin='2px auto' onClick={() => handleBackWord()} />
+        <ButtonIcon nameIcon='check' $margin='2px auto' onClick={() => handleCheckWord()} />
+        <ButtonIcon nameIcon='next' $margin='2px auto' onClick={() => handleNextWord()} />
       </S.WrapperButton>
     </S.Wrapper>
   );

@@ -55,7 +55,7 @@ const TodayWord = () => {
             nameIcon='speaker'
             type='button'
             $positionAbsolute
-            margin='auto 5px 5px'
+            $margin='auto 5px 5px'
             bottom='10px'
             right='10px'
             onClick={handleSpeak}
