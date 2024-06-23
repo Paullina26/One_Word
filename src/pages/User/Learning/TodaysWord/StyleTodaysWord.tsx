@@ -16,23 +16,12 @@ export const Wrapper = styled(GlassWrapper)`
 
 export const WrapperBaseWord = styled(WrapperLearning)``;
 
-export const WrapperWord = styled.div`
-  ${font_settings(1.2, 'normal', 300)}
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: dashed 2px ${({ theme }) => theme.purpleDark};
-  border-radius: 10px;
-  height: 150px;
-  text-align: center;
-  background-color: rgba(232, 232, 232, 0.75);
-  position: relative;
-`;
+export const WrapperWord = styled(WrapperLearning)``;
 
-export const PositionedButton = styled(Button)<{ positionTop?: boolean }>`
+export const PositionedButton = styled(Button)<{ $positionTop?: boolean }>`
   position: absolute;
-  bottom: ${({ positionTop }) => (positionTop ? 'auto' : '10px')};
-  top: ${({ positionTop }) => (positionTop ? '10px' : 'auto')};
+  bottom: ${({ $positionTop }) => ($positionTop ? 'auto' : '10px')};
+  top: ${({ $positionTop }) => ($positionTop ? '10px' : 'auto')};
   right: 10px;
   width: auto;
   margin: 0;

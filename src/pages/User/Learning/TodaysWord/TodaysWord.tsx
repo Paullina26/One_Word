@@ -39,7 +39,7 @@ const TodayWord = () => {
       <S.WrapperBaseWord>
         <S.Word>{baseWord}</S.Word>
         {isAi && (
-          <S.PositionedButton onClick={goToChat} positionTop>
+          <S.PositionedButton onClick={goToChat} $positionTop>
             <ManagedIcon name='chat' />
           </S.PositionedButton>
         )}
