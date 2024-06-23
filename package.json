@@ -65,6 +65,7 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/react-datepicker": "^6.2.0",
     "@types/react-time-picker": "^6.0.0",
+    "babel-plugin-styled-components": "^2.1.4",
     "customize-cra": "^1.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
