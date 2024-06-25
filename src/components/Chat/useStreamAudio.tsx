@@ -19,6 +19,8 @@ export const useStreamAudio = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [isFinish, setIsFinish] = useState(false);
 
+  const audioContextRef = useRef<AudioContext | null>(null);
+
   useEffect(() => {
     if (!isFinish) return;
     updateMessages({ content: streamingAnswer, role: 'assistant' });
@@ -35,9 +37,7 @@ export const useStreamAudio = ({
 
   useEffect(() => {
     getApiKey();
-    if (isSafariOrIOS()) {
-      warmupAudioContextForIOS();
-    }
+    initializeAudioContext();
   }, []);
 
   const getApiKey = async () => {
@@ -45,8 +45,35 @@ export const useStreamAudio = ({
     setApiKey(apiKey);
   };
 
+  const initializeAudioContext = () => {
+    const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    const isIOS = /iP(hone|od|ad)/.test(navigator.platform);
+
+    if (AudioContext && (isSafari || isIOS)) {
+      const fixAudioContext = () => {
+        if (!audioContextRef.current) {
+          audioContextRef.current = new AudioContext();
+        }
+
+        const buffer = audioContextRef.current.createBuffer(1, 1, 22050);
+        const source = audioContextRef.current.createBufferSource();
+        source.buffer = buffer;
+        source.connect(audioContextRef.current.destination);
+        source.start(0);
+        document.removeEventListener('touchstart', fixAudioContext);
+        document.removeEventListener('touchend', fixAudioContext);
+      };
+
+      document.addEventListener('touchstart', fixAudioContext);
+      document.addEventListener('touchend', fixAudioContext);
+    } else if (AudioContext) {
+      audioContextRef.current = new AudioContext();
+    }
+  };
+
   const playNext = async () => {
-    let audioContext = new AudioContext();
+    if (!audioContextRef.current) return;
 
     if (audioQueue.length === 0 || isPlaying) return;
     let newAudioQueue = [...audioQueue];
@@ -59,12 +86,13 @@ export const useStreamAudio = ({
 
     if (!audio?.chunk) return;
 
-    await audioContext.decodeAudioData(
+    await audioContextRef.current.decodeAudioData(
       audio.chunk,
       function (buffer) {
-        let source = audioContext.createBufferSource();
+        if (!audioContextRef.current) return;
+        const source = audioContextRef.current.createBufferSource();
         source.buffer = buffer;
-        source.connect(audioContext.destination);
+        source.connect(audioContextRef.current.destination);
         source.onended = () => {
           setIsPlaying(false);
         };
@@ -118,47 +146,6 @@ export const useStreamAudio = ({
     }
 
     streamAudio(reader);
-  };
-
-  const isSafariOrIOS = () => {
-    const userAgent = window.navigator.userAgent;
-    const isIOS = /iP(hone|od|ad)/.test(userAgent);
-    const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
-    return isIOS || isSafari;
-  };
-
-  const warmupAudioContextForIOS = () => {
-    window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    if (window.AudioContext) {
-      window.audioContext = new window.AudioContext();
-    }
-
-    const fixAudioContext = function (e) {
-      if (window.audioContext) {
-        // Create empty buffer
-        var buffer = window.audioContext.createBuffer(1, 1, 22050);
-        var source = window.audioContext.createBufferSource();
-        source.buffer = buffer;
-        // Connect to output (speakers)
-        source.connect(window.audioContext.destination);
-        // Play sound
-        if (source.start) {
-          source.start(0);
-        } else if (source.play) {
-          source.play(0);
-        } else if (source.noteOn) {
-          source.noteOn(0);
-        }
-      }
-      // Remove events
-      document.removeEventListener('touchstart', fixAudioContext);
-      document.removeEventListener('touchend', fixAudioContext);
-    };
-
-    // iOS 6-8
-    document.addEventListener('touchstart', fixAudioContext);
-    // iOS 9+
-    document.addEventListener('touchend', fixAudioContext);
   };
 
   return { streamAudio, streamingAnswer };
