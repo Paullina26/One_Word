@@ -35,6 +35,7 @@ const Repeat: React.FC = () => {
 
   const handleCheckWord = () => {
     if (wordsRepeat[currentWordIndex].transWord.toLowerCase() === wordTranslate.toLowerCase()) {
+      handleNextWord();
       setFeedback('Good job!');
     } else {
       setFeedback(`Correct is: ${wordsRepeat[currentWordIndex].transWord}`);
@@ -59,6 +60,7 @@ const Repeat: React.FC = () => {
       });
       console.log('Response', result);
       setWordsRepeat(result.response.words);
+      console.log('wordsRepeat', wordsRepeat);
       if (result.response.words.length > 0) {
         setWordBase(result.response.words[0].basicWord);
       }
@@ -81,7 +83,7 @@ const Repeat: React.FC = () => {
   return (
     <S.Wrapper>
       <TitleBig>Repeat</TitleBig>
-      <S.WrapperBaseWord>{wordBase ? wordBase : 'No Words'}</S.WrapperBaseWord>
+      <S.WrapperBaseWord>{wordBase || 'No words'}</S.WrapperBaseWord>
       <div>{feedback && <div>{feedback}</div>}</div>
       <div>
         <S.InputStyle

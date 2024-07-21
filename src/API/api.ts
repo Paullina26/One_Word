@@ -1,11 +1,11 @@
-// Podstawowe URL i nagłówki
+// Basic URL and headers
 export const API_BASE_URL = 'https://onewordserv.byst.re/api/';
 export const headers = {
   Accept: 'application.json',
   'Content-Type': 'application/json; charset=utf-8',
 };
 
-// Definicje endpointów API
+//API endpoint definitions
 export const API_Endpoints = {
   // Authentication endpoints
   login: `${API_BASE_URL}auth/login`,
@@ -34,7 +34,7 @@ export const API_Endpoints = {
   vapidPublicKey: `${API_BASE_URL}subscription/vapidPublicKey`,
 };
 
-// Typy endpointów statycznych i dynamicznych
+// Static and dynamic endpoint types
 type StaticEndpoint = {
   [K in keyof typeof API_Endpoints]: (typeof API_Endpoints)[K] extends Function ? never : K;
 }[keyof typeof API_Endpoints];
@@ -43,13 +43,13 @@ type DynamicEndpoint = {
   [K in keyof typeof API_Endpoints]: (typeof API_Endpoints)[K] extends Function ? K : never;
 }[keyof typeof API_Endpoints];
 
-// Interfejs dla parametrów zapytania
+// Interface for query parameters
 interface QueryParams {
   limit?: number;
   days?: number;
 }
 
-// Interfejs opcji żądania
+// Request options interface
 interface RequestOptions {
   endpoint: StaticEndpoint | DynamicEndpoint;
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
