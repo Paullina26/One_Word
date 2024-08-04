@@ -96,7 +96,12 @@ const Repeat: React.FC = () => {
         />
       </div>
       <S.WrapperButton>
-        <ButtonIcon nameIcon='back' $margin='2px auto' onClick={handleBackWord} />
+        <ButtonIcon
+          nameIcon='back'
+          $margin='2px auto'
+          onClick={handleBackWord}
+          $isClickable={false}
+        />
         <ButtonIcon nameIcon='check' $margin='2px auto' onClick={handleCheckWord} />
         <ButtonIcon nameIcon='next' $margin='2px auto' onClick={handleNextWord} />
       </S.WrapperButton>
