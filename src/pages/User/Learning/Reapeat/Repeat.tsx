@@ -24,6 +24,20 @@ const Repeat: React.FC = () => {
   const [wordTranslate, setWordTranslate] = useState<string>('');
   const [feedback, setFeedback] = useState<string>('');
 
+  const [isBackClickable, setIsBackClickable] = useState<boolean>(false);
+  const [isCheckClickable, setIsCheckClickable] = useState<boolean>(false);
+  const [isNextClickable, setIsNextClickable] = useState<boolean>(true);
+
+  const updateButtonStates = () => {
+    setIsBackClickable(currentWordIndex > 0);
+    setIsCheckClickable(wordTranslate !== '' && feedback === '');
+    setIsNextClickable(currentWordIndex < wordsRepeat.length - 1);
+  };
+
+  useEffect(() => {
+    updateButtonStates();
+  }, [currentWordIndex, wordTranslate, feedback, wordsRepeat]);
+
   const handleBackWord = () => {
     if (currentWordIndex > 0) {
       setCurrentWordIndex(currentWordIndex - 1);
@@ -31,6 +45,7 @@ const Repeat: React.FC = () => {
       setWordTranslate('');
       setFeedback('');
     }
+    updateButtonStates();
   };
 
   const handleCheckWord = () => {
@@ -40,6 +55,7 @@ const Repeat: React.FC = () => {
     } else {
       setFeedback(`Correct is: ${wordsRepeat[currentWordIndex].transWord}`);
     }
+    updateButtonStates();
   };
 
   const handleNextWord = () => {
@@ -49,6 +65,7 @@ const Repeat: React.FC = () => {
       setWordTranslate('');
       setFeedback('');
     }
+    updateButtonStates();
   };
 
   const getLearnedWordsLast7Days = async () => {
@@ -60,10 +77,10 @@ const Repeat: React.FC = () => {
       });
       console.log('Response', result);
       setWordsRepeat(result.response.words);
-      console.log('wordsRepeat', wordsRepeat);
       if (result.response.words.length > 0) {
         setWordBase(result.response.words[0].basicWord);
       }
+      updateButtonStates();
     } catch (error) {
       console.error('Error fetching learned words:', error);
     }
@@ -72,13 +89,6 @@ const Repeat: React.FC = () => {
   useEffect(() => {
     getLearnedWordsLast7Days();
   }, []);
-
-  useEffect(() => {
-    console.log('Words repeat updated:', wordsRepeat);
-    if (wordsRepeat.length > 0 && currentWordIndex < wordsRepeat.length) {
-      setWordBase(wordsRepeat[currentWordIndex].basicWord);
-    }
-  }, [wordsRepeat, currentWordIndex]);
 
   return (
     <S.Wrapper>
@@ -100,10 +110,20 @@ const Repeat: React.FC = () => {
           nameIcon='back'
           $margin='2px auto'
           onClick={handleBackWord}
-          $isClickable={false}
+          $isClickable={isBackClickable}
         />
-        <ButtonIcon nameIcon='check' $margin='2px auto' onClick={handleCheckWord} />
-        <ButtonIcon nameIcon='next' $margin='2px auto' onClick={handleNextWord} />
+        <ButtonIcon
+          nameIcon='check'
+          $margin='2px auto'
+          onClick={handleCheckWord}
+          $isClickable={isCheckClickable}
+        />
+        <ButtonIcon
+          nameIcon='next'
+          $margin='2px auto'
+          onClick={handleNextWord}
+          $isClickable={isNextClickable}
+        />
       </S.WrapperButton>
     </S.Wrapper>
   );
