@@ -4,128 +4,45 @@ import { TitleBig } from 'components/Shared/Atoms/Title';
 import { inputNameElement } from 'helpers/mixins';
 import fetchWithToken from 'API/api';
 import { useState, useEffect } from 'react';
+import RepeatWords from 'components/RepeatWords/RepeatWords';
+import Input from 'components/Shared/Form/Input';
 
-interface Word {
-  _id: string;
-  userId: string;
-  basicWord: string;
-  transWord: string;
-  addLang: number;
-  status: number;
-  createdDate: string;
-  updatedDate: string;
-  __v: number;
-}
+interface RepeatProps {}
 
-const Repeat: React.FC = () => {
-  const [wordsRepeat, setWordsRepeat] = useState<Word[]>([]);
-  const [currentWordIndex, setCurrentWordIndex] = useState<number>(0);
-  const [wordBase, setWordBase] = useState<string>('');
-  const [wordTranslate, setWordTranslate] = useState<string>('');
-  const [feedback, setFeedback] = useState<string>('');
+const Repeat: React.FC<RepeatProps> = () => {
+  const [daysRepeat, setDaysRepeat] = useState<string>('');
 
-  const [isBackClickable, setIsBackClickable] = useState<boolean>(false);
-  const [isCheckClickable, setIsCheckClickable] = useState<boolean>(false);
-  const [isNextClickable, setIsNextClickable] = useState<boolean>(true);
-
-  const updateButtonStates = () => {
-    setIsBackClickable(currentWordIndex > 0);
-    setIsCheckClickable(wordTranslate !== '' && feedback === '');
-    setIsNextClickable(currentWordIndex < wordsRepeat.length - 1);
-  };
-
-  useEffect(() => {
-    updateButtonStates();
-  }, [currentWordIndex, wordTranslate, feedback, wordsRepeat]);
-
-  const handleBackWord = () => {
-    if (currentWordIndex > 0) {
-      setCurrentWordIndex(currentWordIndex - 1);
-      setWordBase(wordsRepeat[currentWordIndex - 1].basicWord);
-      setWordTranslate('');
-      setFeedback('');
-    }
-    updateButtonStates();
-  };
-
-  const handleCheckWord = () => {
-    if (wordsRepeat[currentWordIndex].transWord.toLowerCase() === wordTranslate.toLowerCase()) {
-      handleNextWord();
-      setFeedback('Good job!');
+  const check = () => {
+    const days = parseInt(daysRepeat, 10);
+    if (days >= 1 && days <= 30) {
+      console.log('Days Repeat:', days);
+      // Tutaj dodaj logikę przetwarzania daysRepeat, np. wysłanie do serwera
     } else {
-      setFeedback(`Correct is: ${wordsRepeat[currentWordIndex].transWord}`);
-    }
-    updateButtonStates();
-  };
-
-  const handleNextWord = () => {
-    if (currentWordIndex < wordsRepeat.length - 1) {
-      setCurrentWordIndex(currentWordIndex + 1);
-      setWordBase(wordsRepeat[currentWordIndex + 1].basicWord);
-      setWordTranslate('');
-      setFeedback('');
-    }
-    updateButtonStates();
-  };
-
-  const getLearnedWordsLast7Days = async () => {
-    try {
-      const result = await fetchWithToken({
-        endpoint: 'learnedWords',
-        method: 'GET',
-        queryParams: { days: 7, limit: 100 },
-      });
-      console.log('Response', result);
-      setWordsRepeat(result.response.words);
-      if (result.response.words.length > 0) {
-        setWordBase(result.response.words[0].basicWord);
-      }
-      updateButtonStates();
-    } catch (error) {
-      console.error('Error fetching learned words:', error);
+      console.error('The value must be between 1 and 30.');
     }
   };
-
-  useEffect(() => {
-    getLearnedWordsLast7Days();
-  }, []);
 
   return (
-    <S.Wrapper>
-      <TitleBig>Repeat</TitleBig>
-      <S.WrapperBaseWord>{wordBase || 'No words'}</S.WrapperBaseWord>
-      <div>{feedback && <div>{feedback}</div>}</div>
-      <div>
-        <S.InputStyle
-          $fontColorLabel='purpleDark'
-          $isLightTeam={true}
-          {...inputNameElement('word_Transate', 'wordTransate', 'Word Transate')}
-          onChange={(value: string) => setWordTranslate(value)}
-          value={wordTranslate}
-          required
-        />
-      </div>
-      <S.WrapperButton>
-        <ButtonIcon
-          nameIcon='back'
-          $margin='2px auto'
-          onClick={handleBackWord}
-          $isClickable={isBackClickable}
-        />
-        <ButtonIcon
-          nameIcon='check'
-          $margin='2px auto'
-          onClick={handleCheckWord}
-          $isClickable={isCheckClickable}
-        />
-        <ButtonIcon
-          nameIcon='next'
-          $margin='2px auto'
-          onClick={handleNextWord}
-          $isClickable={isNextClickable}
-        />
-      </S.WrapperButton>
-    </S.Wrapper>
+    <div>
+      {/* <RepeatWords daysRepeat={7} /> */}
+      <S.Wrapper>
+        <TitleBig>Repeat</TitleBig>
+        <form action='submit'>
+          <p>How many days do you want to repeat?</p>
+          <Input
+            type='number'
+            value={daysRepeat}
+            onChange={setDaysRepeat}
+            placeholder='Enter number of days'
+            min={1}
+            max={30}
+            $fontColorLabel='purpleDark'
+            $isLightTeam={true}
+          />
+          <ButtonIcon nameIcon='check' $margin='2px auto' onClick={check} $isClickable={true} />
+        </form>
+      </S.Wrapper>
+    </div>
   );
 };
 

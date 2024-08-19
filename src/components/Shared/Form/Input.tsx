@@ -22,6 +22,8 @@ interface InputProps {
   maxLength?: number;
   $fontColorLabel: string;
   $isLightTeam: boolean;
+  min?: number;
+  max?: number;
 }
 
 export const LabelStyle = styled.label<{ $fontColorLabel?: string }>`
@@ -60,6 +62,8 @@ const Input: FC<InputProps> = ({
   maxLength,
   $fontColorLabel,
   $isLightTeam,
+  min,
+  max,
 }) => {
   return (
     <LabelStyle htmlFor={id} $fontColorLabel={$fontColorLabel}>
@@ -77,6 +81,8 @@ const Input: FC<InputProps> = ({
         minLength={minlength}
         maxLength={maxLength}
         $isLightTeam={$isLightTeam}
+        min={min}
+        max={max}
       />
     </LabelStyle>
   );
