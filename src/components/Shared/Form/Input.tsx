@@ -22,12 +22,15 @@ interface InputProps {
   maxLength?: number;
   $fontColorLabel: string;
   $isLightTeam: boolean;
+  min?: number;
+  max?: number;
 }
 
 export const LabelStyle = styled.label<{ $fontColorLabel?: string }>`
   ${font_settings(2, 'italic', 400)};
   text-align: center;
   color: ${({ theme, $fontColorLabel }) => theme[$fontColorLabel || 'purpleDark']};
+  padding: 20px auto;
 `;
 
 export const InputStyle = styled.input<{ $isLightTeam: boolean }>`
@@ -37,7 +40,7 @@ export const InputStyle = styled.input<{ $isLightTeam: boolean }>`
   width: 80%;
   max-width: 300px;
   height: 35px;
-  margin: 5px auto 10px auto;
+  margin: 15px auto 20px auto;
   padding: 5px;
   background-color: ${({ theme }) => theme.whiteDark};
   border-radius: 20px;
@@ -60,6 +63,8 @@ const Input: FC<InputProps> = ({
   maxLength,
   $fontColorLabel,
   $isLightTeam,
+  min,
+  max,
 }) => {
   return (
     <LabelStyle htmlFor={id} $fontColorLabel={$fontColorLabel}>
@@ -77,6 +82,8 @@ const Input: FC<InputProps> = ({
         minLength={minlength}
         maxLength={maxLength}
         $isLightTeam={$isLightTeam}
+        min={min}
+        max={max}
       />
     </LabelStyle>
   );
