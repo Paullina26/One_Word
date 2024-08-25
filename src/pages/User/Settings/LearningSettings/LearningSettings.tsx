@@ -39,7 +39,7 @@ const LearningSettings: React.FC = () => {
               />
               <ButtonIcon
                 nameIcon='xmark'
-                margin='2px auto'
+                $margin='2px auto'
                 onClick={() => handleRemoveNotification(index)}
               />
             </S.Notification>
@@ -51,7 +51,7 @@ const LearningSettings: React.FC = () => {
             type='button'
             onClick={handleAddNotification}
             disabled={isAddButtonDisabled}
-            margin='10px auto'
+            $margin='10px auto'
           />
           <Select
             id='summaryDay'

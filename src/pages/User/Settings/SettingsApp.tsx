@@ -11,8 +11,10 @@ import { Button } from 'components/Shared/Buttons/Button';
 import Divider from '@mui/material/Divider';
 import { useNotification } from 'utils/Notifications/useNotification';
 import Loading from 'components/Shared/Loading/Loading';
+import fetchWithToken from 'API/api';
+import { API_Endpoints } from 'API/api';
 
-export const Tittle = styled.p`
+export const Title = styled.p`
   ${font_settings(2.4, 'normal', 600)}
   margin: 5px auto;
 `;
@@ -25,6 +27,7 @@ interface IForm {
     time: string;
   }[];
 }
+
 const SettingsApp = () => {
   const { userLanguages, setUserLanguages, user } = useContext(GlobalContext);
   const { subscribeUser, unsubscribeAll, unsubscribeDevice, isSubscription, isLoading } =
@@ -38,17 +41,28 @@ const SettingsApp = () => {
 
   const { fields, remove, append } = useFieldArray({ control, name: 'notifications' });
 
-  const onSubmit: SubmitHandler<IForm> = data => {
+  const onSubmit: SubmitHandler<IForm> = async data => {
     const { baseLanguage, languageToLearn } = data;
     setUserLanguages({
       baseLanguage,
       languageToLearn,
     });
+
+    try {
+      await fetchWithToken({
+        endpoint: 'updateUserSettings',
+        method: 'PUT',
+        body: data,
+      });
+      console.log(data);
+    } catch (error) {
+      console.error('Error updating user settings:', error);
+    }
   };
 
   return (
     <WrapperSettings>
-      <Tittle>Settings Word</Tittle>
+      <Title>Settings</Title>
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Controller
@@ -58,7 +72,7 @@ const SettingsApp = () => {
               <Select<number>
                 id='settings_languageToLearn'
                 $fontColorLabel='purpleDark'
-                labelValue='Select Translate Language Word '
+                labelValue='Language to Learn'
                 options={mappedLanguages}
                 value={field.value}
                 onChange={field.onChange}
@@ -73,7 +87,7 @@ const SettingsApp = () => {
               <Select<number>
                 id='settings_baseLanguage'
                 $fontColorLabel='purpleDark'
-                labelValue='Select Translate Language Word '
+                labelValue='Base Language'
                 options={mappedLanguages}
                 value={field.value}
                 onChange={field.onChange}
@@ -81,7 +95,6 @@ const SettingsApp = () => {
               />
             )}
           />
-
           {fields.map(el => (
             <span key={el.time}>
               {el.type} - {el.time}
@@ -92,7 +105,6 @@ const SettingsApp = () => {
         </form>
       </div>
       <Divider />
-
       {!isSubscription && (
         <Button onClick={() => subscribeUser(user?.id)}>
           {isLoading ? <Loading /> : `I want notification`}

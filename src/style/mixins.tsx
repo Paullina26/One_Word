@@ -95,6 +95,13 @@ backdrop-filter: blur(10px);
 border: 2px inset rgba(0, 0, 0, 0.35)
 `;
 
+export const color_gradient_button_InActive = `
+background: radial-gradient(circle at 50% 50%, rgba(138, 121, 146, 0.95), rgba(60, 58, 76, 0.95));
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(10px);
+border: 2px inset rgba(0, 0, 0, 0.35)
+`;
+
 export const color_gradient_button_menu = `
   background: radial-gradient(circle at 100px 100px, rgba(80, 0, 45, 1), rgba(200, 120, 165, 1));
 `;

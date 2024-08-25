@@ -5,6 +5,7 @@ export const TitleBig = styled.h2`
   text-align: center;
   ${font_settings(3, 'ita', 500)};
   color: ${({ theme }) => theme.purpleDark};
+  margin: 5px auto;
 `;
 
 export const TitleSmall = styled.p`

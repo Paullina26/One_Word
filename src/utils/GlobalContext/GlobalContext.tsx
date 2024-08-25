@@ -28,7 +28,6 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
       endpoint: 'getUserSettings',
       method: 'GET',
     });
-
     if (resp.status === 200)
       setUserLanguages({
         languageToLearn: resp.response.languageToLearn,
