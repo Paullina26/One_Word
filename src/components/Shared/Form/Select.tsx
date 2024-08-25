@@ -39,7 +39,7 @@ const StyledSelect = styled.select<{ $isLightTeam: boolean }>`
   width: 80%;
   max-width: 300px;
   height: 35px;
-  margin: 5px auto 10px auto;
+  margin: 15px auto 20px auto;
   padding: 5px;
   background-color: ${({ theme }) => theme.whiteDark};
   border-radius: 20px;

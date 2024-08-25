@@ -10,15 +10,13 @@ import RepeatForm from 'components/Repeat/RepeatForm/RepeatForm';
 interface RepeatProps {}
 
 const Repeat: React.FC<RepeatProps> = () => {
-  const [daysRepeat, setDaysRepeat] = useState<number>(7);
-  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [daysRepeat, setDaysRepeat] = useState(7);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = () => {
     if (daysRepeat >= 1 && daysRepeat <= 30) {
-      console.log('Days Repeat:', daysRepeat);
       setIsSubmitted(true);
     } else {
-      console.error('The value must be between 1 and 30.');
       setIsSubmitted(false);
     }
   };
