@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { Button } from 'components/Shared/Buttons/Button';
-import ManagedIcon, { Icons } from 'assets/icon/helpers/ManagedIcon';
+import { Button } from '@components/Shared/Buttons/Button';
+import ManagedIcon, { Icons } from '@assets/icon/helpers/ManagedIcon';
 
 interface ButtonIconProps {
   nameIcon: Icons;

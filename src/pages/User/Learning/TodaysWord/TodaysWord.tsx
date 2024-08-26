@@ -1,10 +1,10 @@
 import useTodayWord from './useTodaysWord';
 
 import * as S from './StyleTodaysWord';
-import { Button } from 'components/Shared/Buttons/Button';
-import NotificationInformation from 'components/Shared/Atoms/NotificationInformation';
-import ButtonIcon from 'components/Shared/Buttons/ButtonIcon';
-import ManagedIcon from 'assets/icon/helpers/ManagedIcon';
+import { Button } from '@components/Shared/Buttons/Button';
+import NotificationInformation from '@components/Shared/Atoms/NotificationInformation';
+import ButtonIcon from '@components/Shared/Buttons/ButtonIcon';
+import ManagedIcon from '@assets/icon/helpers/ManagedIcon';
 
 const TodayWord = () => {
   const {

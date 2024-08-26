@@ -1,17 +1,19 @@
 import { FC, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GlobalContext } from 'utils/GlobalContext';
 import { toast, ToastOptions } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { toastColored } from 'helpers/StyleToastify';
-import * as S from 'components/Login/StyleLogin';
-import Input from 'components/Shared/Form/Input';
-import Submit from 'components/Shared/Form/Submit';
-import { headers, API_Endpoints } from 'API/api';
-import { WrapperInputs, WrapperForm } from 'components/Shared/Form/StyleForm';
-import { Button } from 'components/Shared/Buttons/Button';
-import { inputNameElement } from 'helpers/mixins';
-import { routes } from 'data/routes';
+
+import { GlobalContext } from '@utils/GlobalContext';
+import { toastColored } from '@helpers/StyleToastify';
+import Input from '@components/Shared/Form/Input';
+import Submit from '@components/Shared/Form/Submit';
+import { headers, API_Endpoints } from '@api/api';
+import { WrapperInputs, WrapperForm } from '@components/Shared/Form/StyleForm';
+import { Button } from '@components/Shared/Buttons/Button';
+import { inputNameElement } from '@helpers/mixins';
+import { routes } from '@data/routes';
+
+import * as S from './StyleLogin';
 
 interface LoginProps {
   toggleAuthForm: () => void;

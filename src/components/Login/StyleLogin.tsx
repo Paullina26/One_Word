@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { font_settings } from 'style/mixins';
-import { device } from 'style/devices';
+import { font_settings } from '@style/mixins';
+import { device } from '@style/devices';
 
 export const WrapperLogin = styled.div`
   text-align: center;

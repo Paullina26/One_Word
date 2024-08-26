@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { device } from 'style/devices';
-import { color_gradient_glassEffect_light, border_radius_effect_bubble } from 'style/mixins';
+
+import { device } from '@style/devices';
+import { color_gradient_glassEffect_light, border_radius_effect_bubble } from '@style/mixins';
 
 export const WrapperAuth = styled.div`
   text-align: center;

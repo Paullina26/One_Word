@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color_gradient_glassEffect_light, font_settings } from 'style/mixins';
+import { color_gradient_glassEffect_light } from '@style/mixins';
 
 export const WrapperSettings = styled.div`
   ${color_gradient_glassEffect_light};

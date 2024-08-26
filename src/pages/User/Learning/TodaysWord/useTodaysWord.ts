@@ -1,8 +1,9 @@
 import { useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { GlobalContext } from 'utils/GlobalContext';
-import fetchWithToken from 'API/api';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+
+import { GlobalContext } from '@utils/GlobalContext';
+import fetchWithToken from '@api/api';
 
 const useTodayWord = () => {
   const navigate = useNavigate();

@@ -2,7 +2,7 @@ import Loading from './Loading';
 
 import styled from 'styled-components';
 import { GlassWrapper } from '../containers/GlassWrapper';
-import { font_settings, color_gradient_glassEffect_light } from 'style/mixins';
+import { font_settings, color_gradient_glassEffect_light } from '@style/mixins';
 
 const Wrapper = styled.div`
   position: fixed;

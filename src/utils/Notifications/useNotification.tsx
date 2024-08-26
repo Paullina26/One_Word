@@ -1,4 +1,4 @@
-import fetchWithToken from 'API/api';
+import fetchWithToken from '@api/api';
 import { useEffect, useState } from 'react';
 
 export const useNotification = () => {

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import Icon from 'assets/icon/closeIcon.svg';
-import { Button } from 'components/Shared/Buttons/Button';
-import { useChat } from 'components/Chat/ChatProvider';
+
+import Icon from '@assets/icon/closeIcon.svg';
+import { Button } from '@components/Shared/Buttons/Button';
+import { useChat } from '@components/Chat/ChatProvider';
 
 export const FinishConversationButton = styled(Button)`
   height: 50px;

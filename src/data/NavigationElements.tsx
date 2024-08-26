@@ -1,4 +1,4 @@
-import { routes } from 'data/routes';
+import { routes } from '@data/routes';
 
 export const baseNavigation = {
   Learning: [

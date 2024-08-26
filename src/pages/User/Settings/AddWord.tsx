@@ -2,16 +2,15 @@ import styled from 'styled-components';
 import { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { font_settings } from 'style/mixins';
-import Input from 'components/Shared/Form/Input';
-import { inputNameElement } from 'helpers/mixins';
-import Submit from 'components/Shared/Form/Submit';
-import Select from 'components/Shared/Form/Select';
-import { mappedLanguages } from 'data/option/language_options';
-import { WrapperSettings } from 'components/Shared/containers/WrapperSettings';
-import fetchWithToken from 'API/api';
-import { GlobalContext } from 'utils/GlobalContext';
-import { TitleSmall } from 'components/Shared/Atoms/Title';
+import Input from '@components/Shared/Form/Input';
+import { inputNameElement } from '@helpers/mixins';
+import Submit from '@components/Shared/Form/Submit';
+import Select from '@components/Shared/Form/Select';
+import { mappedLanguages } from '@data/option/language_options';
+import { WrapperSettings } from '@components/Shared/containers/WrapperSettings';
+import fetchWithToken from '@api/api';
+import { GlobalContext } from '@utils/GlobalContext';
+import { TitleSmall } from '@components/Shared/Atoms/Title';
 
 export const WrapperInputsSettingsAddWord = styled.div`
   margin-bottom: 30px;

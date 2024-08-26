@@ -1,18 +1,18 @@
 import styled from 'styled-components';
 import { useContext } from 'react';
-import { font_settings } from 'style/mixins';
-import Submit from 'components/Shared/Form/Submit';
-import Select from 'components/Shared/Form/Select';
-import { WrapperSettings } from 'components/Shared/containers/WrapperSettings';
-import { Controller, SubmitHandler, useForm, useFieldArray } from 'react-hook-form';
-import { mappedLanguages } from 'data/option/language_options';
-import { GlobalContext } from 'utils/GlobalContext';
-import { Button } from 'components/Shared/Buttons/Button';
 import Divider from '@mui/material/Divider';
-import { useNotification } from 'utils/Notifications/useNotification';
-import Loading from 'components/Shared/Loading/Loading';
-import fetchWithToken from 'API/api';
-import { API_Endpoints } from 'API/api';
+import { Controller, SubmitHandler, useForm, useFieldArray } from 'react-hook-form';
+
+import { font_settings } from '@style/mixins';
+import Submit from '@components/Shared/Form/Submit';
+import Select from '@components/Shared/Form/Select';
+import { WrapperSettings } from '@components/Shared/containers/WrapperSettings';
+import { mappedLanguages } from '@data/option/language_options';
+import { GlobalContext } from '@utils/GlobalContext';
+import { Button } from '@components/Shared/Buttons/Button';
+import { useNotification } from '@utils/Notifications/useNotification';
+import Loading from '@components/Shared/Loading/Loading';
+import fetchWithToken from '@api/api';
 
 export const Title = styled.p`
   ${font_settings(2.4, 'normal', 600)}

@@ -1,12 +1,13 @@
 import { FC, useState } from 'react';
-import { useChat } from '../ChatProvider';
 import { Modal } from '@mui/material';
-import { Heading } from 'components/Shared/Heading';
-import AddWordSettings from 'pages/User/Settings/AddWord';
+
+import { Heading } from '@components/Shared/Heading';
+import AddWordSettings from '@pages/User/Settings/AddWord';
+import { Button } from '@components/Shared/Buttons/Button';
+import List from '@components/Shared/List';
 
 import * as S from '../StyleChat';
-import List from 'components/Shared/List';
-import { Button } from 'components/Shared/Buttons/Button';
+import { useChat } from '../ChatProvider';
 
 type WordToLearn = {
   textToLearn: string;

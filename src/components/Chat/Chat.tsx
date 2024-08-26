@@ -1,12 +1,13 @@
 import { FC } from 'react';
+import { Navigate } from 'react-router-dom';
+
+import { routes } from '@data/routes';
 
 import { useChat } from './ChatProvider';
 import Conversation from './components/Conversation';
 import VoiceView from './components/VoiceView';
 import Summary from './components/Summary';
 import * as S from './StyleChat';
-import { Navigate } from 'react-router-dom';
-import { routes } from 'data/routes';
 
 const Chat: FC = () => {
   const { isMessagesVisible, isSummaryOpen, isAi } = useChat();

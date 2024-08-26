@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
+import { GlassWrapper } from '@components/Shared/containers/GlassWrapper';
 
 export const WrapperComponentDisplay = styled.div`
   height: 100vh;
