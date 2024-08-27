@@ -32,6 +32,6 @@ export const InputStyle = styled(Input)`
   height: 150px;
   text-align: center;
   background-color: rgba(232, 232, 232, 0.75);
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   position: relative;
 `;
