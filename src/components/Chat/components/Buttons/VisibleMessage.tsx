@@ -1,8 +1,10 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { Button } from 'components/Shared/Buttons/Button';
-import HideMessages from 'assets/icon/message_hide.svg';
-import UnhideMessages from 'assets/icon/message-unhide.svg';
+
+import { Button } from '@components/Shared/Buttons/Button';
+import HideMessages from '@assets/icon/message_hide.svg';
+import UnhideMessages from '@assets/icon/message-unhide.svg';
+
 import { useChat } from '../../ChatProvider';
 
 export const VisibleMessagesButton = styled(Button)`

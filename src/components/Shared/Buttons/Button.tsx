@@ -7,7 +7,7 @@ import {
   boxShadow_darkTheme_button,
   outline_focus,
   color_gradient_button_InActive,
-} from 'style/mixins';
+} from '@style/mixins';
 
 export const Button = styled.button<{ $isLightTeam?: boolean; $isClickable?: boolean }>`
   ${font_settings(2.1, 'italic', 300)};

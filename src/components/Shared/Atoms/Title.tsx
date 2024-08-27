@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { font_settings } from 'style/mixins';
+import { font_settings } from '@style/mixins';
 
 export const TitleBig = styled.h2`
   text-align: center;

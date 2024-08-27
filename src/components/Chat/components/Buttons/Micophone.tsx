@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import styled, { css } from 'styled-components';
-import { Button } from 'components/Shared/Buttons/Button';
-import RecordIcon from 'assets/icon/microphone.svg';
-import StopIcon from 'assets/icon/stop.svg';
-import { useChat } from 'components/Chat/ChatProvider';
+
+import { Button } from '@components/Shared/Buttons/Button';
+import { useChat } from '@components/Chat/ChatProvider';
+import RecordIcon from '@assets/icon/microphone.svg';
+import StopIcon from '@assets/icon/stop.svg';
 
 export const MicrophoneButton = styled(Button)<{ $big?: boolean; disabled?: boolean }>`
   position: absolute;

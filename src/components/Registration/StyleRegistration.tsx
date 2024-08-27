@@ -1,10 +1,10 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import {
   font_settings,
   color_gradient_glassEffect_dark,
   border_radius_effect_bubble,
-} from 'style/mixins';
-import { device } from 'style/devices';
+} from '@style/mixins';
+import { device } from '@style/devices';
 
 export const SingInWrapper = styled.div<{ $isActive: boolean }>`
   ${font_settings(3, 'italic', 900)};

@@ -1,7 +1,8 @@
 import { FC, useState } from 'react';
-import Login from 'components/Login/Login';
-import Registration from 'components/Registration/Registration';
-import * as S from 'pages/Auth/StyleAuth';
+import Login from '@components/Login/Login';
+import Registration from '@components/Registration/Registration';
+
+import * as S from './StyleAuth';
 
 export const Auth: FC = () => {
   const [isActive, setIsActive] = useState(true);

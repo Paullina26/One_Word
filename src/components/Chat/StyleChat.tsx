@@ -1,5 +1,5 @@
-import { Button } from 'components/Shared/Buttons/Button';
-import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
+import { Button } from '@components/Shared/Buttons/Button';
+import { GlassWrapper } from '@components/Shared/containers/GlassWrapper';
 import styled from 'styled-components';
 
 export const ChatWrapper = styled.div`

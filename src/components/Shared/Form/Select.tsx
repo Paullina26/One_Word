@@ -5,7 +5,7 @@ import {
   boxShadow_darkTheme_input,
   boxShadow_lightTheme_input,
   outline_focus,
-} from 'style/mixins';
+} from '@style/mixins';
 
 interface SelectOption<TType = string> {
   label: string;

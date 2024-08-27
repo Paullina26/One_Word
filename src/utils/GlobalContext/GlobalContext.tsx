@@ -1,11 +1,16 @@
-import { useEffect, useState, createContext } from 'react';
+import { useEffect, useState, createContext, FC } from 'react';
 import { useLocation } from 'react-router-dom';
-import { FC } from 'react';
 
-import fetchWithToken from 'API/api';
-import { GlobalContextValue, GlobalProviderProps, IUserLanguage, User } from './types';
-import { AvailableLanguages } from 'data/option/language_options';
-import { PreferencesResp } from 'types/api';
+import fetchWithToken from '@api/api';
+import { AvailableLanguages } from '@data/option/language_options';
+
+import {
+  GlobalContextValue,
+  GlobalProviderProps,
+  IUserLanguage,
+  PreferencesResp,
+  User,
+} from './types';
 
 export const GlobalContext = createContext<GlobalContextValue>({} as GlobalContextValue);
 
@@ -23,7 +28,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     baseLanguage: AvailableLanguages.pl,
   });
 
-  const getUserSettings = async (userId: string, isLogin?: boolean) => {
+  const getUserSettings = async () => {
     const resp: { response: PreferencesResp; status: number } = await fetchWithToken({
       endpoint: 'getUserSettings',
       method: 'GET',
@@ -65,10 +70,10 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   };
 
   // if login or getUser is ok
-  const setLoginUser = (user: User, isLogin?: boolean) => {
+  const setLoginUser = (user: User) => {
     setIsLoginUser(true);
     setUser(user);
-    getUserSettings(user.id, isLogin);
+    getUserSettings();
   };
 
   useEffect(() => {

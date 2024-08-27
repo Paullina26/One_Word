@@ -1,11 +1,11 @@
 import { useContext } from 'react';
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { routes } from 'data/routes';
-import { color_gradient_button } from 'style/mixins';
-import { Button } from 'components/Shared/Buttons/Button';
-import logoutIcon from 'assets/icon/logout_Icon.svg';
-import { GlobalContext } from 'utils/GlobalContext';
+import styled from 'styled-components';
+
+import { routes } from '@data/routes';
+import { Button } from '@components/Shared/Buttons/Button';
+import { GlobalContext } from '@utils/GlobalContext';
+import logoutIcon from '@assets/icon/logout_Icon.svg';
 
 export const WrapperLogOut = styled.div`
   right: 10px;

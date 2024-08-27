@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useFieldArray, useForm, Controller } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import fetchWithToken from 'API/api';
+import fetchWithToken from '@api/api';
 
 const daysOfWeek = [
   { label: 'Monday', value: '1' },

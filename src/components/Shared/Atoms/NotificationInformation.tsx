@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { font_settings } from 'style/mixins';
+import { font_settings } from '@style/mixins';
 
 export const NotificationWrapper = styled.div`
   background-color: rgba(103, 161, 243, 0.6);

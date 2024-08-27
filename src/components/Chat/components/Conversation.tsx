@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef } from 'react';
 
-import Textarea from 'components/Textarea/Textarea';
+import Textarea from '@components/Textarea/Textarea';
 
 import * as S from '../StyleChat';
 import { useChat } from '../ChatProvider';

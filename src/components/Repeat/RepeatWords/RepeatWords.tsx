@@ -1,8 +1,8 @@
 import * as S from './StyleRepeatWords';
-import ButtonIcon from 'components/Shared/Buttons/ButtonIcon';
-import { TitleBig } from 'components/Shared/Atoms/Title';
-import { inputNameElement } from 'helpers/mixins';
-import { Word, RepeatWordsProps } from 'components/Repeat/RepeatWords/RepeatWords.types';
+import ButtonIcon from '@components/Shared/Buttons/ButtonIcon';
+import { TitleBig } from '@components/Shared/Atoms/Title';
+import { inputNameElement } from '@helpers/mixins';
+import { Word, RepeatWordsProps } from '@components/Repeat/RepeatWords/RepeatWords.types';
 import { useRepeatWords } from './useRpeatWords';
 
 const RepeatWords: React.FC<RepeatWordsProps> = ({ daysRepeat }) => {

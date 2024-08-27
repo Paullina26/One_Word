@@ -1,11 +1,13 @@
-import { useForm, useFieldArray, Controller } from 'react-hook-form';
-import TimePickerViewRenderers from 'components/Shared/Form/Time';
-import * as S from './StyleLearningSettings';
-import Submit from 'components/Shared/Form/Submit';
-import Select from 'components/Shared/Form/Select';
-import { TitleSmall, TitleBig } from 'components/Shared/Atoms/Title';
+import { Controller } from 'react-hook-form';
+
+import TimePickerViewRenderers from '@components/Shared/Form/Time';
+import Submit from '@components/Shared/Form/Submit';
+import Select from '@components/Shared/Form/Select';
+import { TitleSmall, TitleBig } from '@components/Shared/Atoms/Title';
+import ButtonIcon from '@components/Shared/Buttons/ButtonIcon';
+
 import useLearningSettings from './useLearningSettings';
-import ButtonIcon from 'components/Shared/Buttons/ButtonIcon';
+import * as S from './StyleLearningSettings';
 
 const LearningSettings: React.FC = () => {
   const {

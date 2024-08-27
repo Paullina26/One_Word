@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
-import { boxShadow_lightTheme_input, font_settings } from 'style/mixins';
+import { boxShadow_lightTheme_input, font_settings } from '@style/mixins';
 import styled from 'styled-components';
 
 const StyledTextarea = styled(TextareaAutosize)<{

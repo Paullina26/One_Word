@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 
-import { font_settings } from 'style/mixins';
-import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
-import { Button } from 'components/Shared/Buttons/Button';
-import ButtonIcon from 'components/Shared/Buttons/ButtonIcon';
-import Input from 'components/Shared/Form/Input';
-import { WrapperLearning } from 'components/Shared/containers/WrapperLearning';
+import { font_settings } from '@style/mixins';
+import { GlassWrapper } from '@components/Shared/containers/GlassWrapper';
+import Input from '@components/Shared/Form/Input';
+import { WrapperLearning } from '@components/Shared/containers/WrapperLearning';
 
 export const Wrapper = styled(GlassWrapper)`
   margin: 20px auto;

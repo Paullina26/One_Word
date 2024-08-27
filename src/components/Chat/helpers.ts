@@ -1,4 +1,4 @@
-import { API_BASE_URL, headers } from 'API/api';
+import { API_BASE_URL, headers } from '@api/api';
 
 export const getOpenaiApiKey = async () => {
   const token = localStorage.getItem('token');

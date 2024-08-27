@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
-import Input from 'components/Shared/Form/Input';
-import ButtonIcon from 'components/Shared/Buttons/ButtonIcon';
-import * as S from 'pages/User/Learning/Repeat/StyleRepeat';
-import { TitleBig } from 'components/Shared/Atoms/Title';
+import { FC } from 'react';
+import Input from '@components/Shared/Form/Input';
+import ButtonIcon from '@components/Shared/Buttons/ButtonIcon';
+import * as S from '@pages/User/Learning/Repeat/StyleRepeat';
+import { TitleBig } from '@components/Shared/Atoms/Title';
 
 interface RepeatFormProps {
   daysRepeat: number;

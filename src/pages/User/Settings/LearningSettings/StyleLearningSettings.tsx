@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
-import { font_settings } from 'style/mixins';
-import ButtonIcon from 'components/Shared/Buttons/ButtonIcon';
+import { GlassWrapper } from '@components/Shared/containers/GlassWrapper';
+import { font_settings } from '@style/mixins';
+import ButtonIcon from '@components/Shared/Buttons/ButtonIcon';
 
 export const Wrapper = styled(GlassWrapper)`
   margin: 20px auto;

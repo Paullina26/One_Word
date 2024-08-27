@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { font_settings } from 'style/mixins';
-import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
-import { Button } from 'components/Shared/Buttons/Button';
-import { WrapperLearning } from 'components/Shared/containers/WrapperLearning';
+
+import { font_settings } from '@style/mixins';
+import { GlassWrapper } from '@components/Shared/containers/GlassWrapper';
+import { Button } from '@components/Shared/Buttons/Button';
+import { WrapperLearning } from '@components/Shared/containers/WrapperLearning';
 
 export const Tittle = styled.p`
   ${font_settings(2.6, 'normal', 600)}

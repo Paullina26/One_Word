@@ -1,6 +1,7 @@
 import { FC } from 'react';
-import { font_settings } from 'style/mixins';
 import styled from 'styled-components';
+
+import { font_settings } from '@style/mixins';
 
 export const Wrapper = styled.div`
   ${font_settings(3, 'normal', 600)}
