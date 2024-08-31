@@ -24,7 +24,7 @@
       "@pages/*": ["./src/pages/*"],
       "@data/*": ["./src/data/*"],
       "@helpers/*": ["./src/helpers/*"],
-      "@api/*": ["./src/api/*"],
+      "@api/*": ["src/api/*"],
       "@types/*": ["./src/types/*"],
       "@assets/*": ["./src/assets/*"]
     }

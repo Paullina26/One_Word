@@ -24,6 +24,10 @@ export interface GlobalContextValue {
   setIsErrorOpen: React.Dispatch<React.SetStateAction<boolean>>;
   resetLoginUser: () => void;
   setLoginUser: (user: User, isLogin?: boolean) => void;
+  isSummary: boolean;
+  setIsSummary: React.Dispatch<React.SetStateAction<boolean>>;
+  isBrakeDay: boolean;
+  setIsBrakeDay: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IUserLanguage {

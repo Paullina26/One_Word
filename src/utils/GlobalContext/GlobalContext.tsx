@@ -23,6 +23,8 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const [isLoadingOpen, setIsLoadingOpen] = useState(false);
   const [isErrorOpen, setIsErrorOpen] = useState(false);
   const [user, setUser] = useState<null | User>(null);
+  const [isSummary, setIsSummary] = useState(false);
+  const [isBrakeDay, setIsBrakeDay] = useState(false);
   const [userLanguages, setUserLanguages] = useState<IUserLanguage>({
     languageToLearn: AvailableLanguages.en,
     baseLanguage: AvailableLanguages.pl,
@@ -38,6 +40,7 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
         languageToLearn: resp.response.languageToLearn,
         baseLanguage: resp.response.baseLanguage,
       });
+    setIsSummary(resp.response.isSummary);
   };
 
   const checkLoginStatus = async () => {
@@ -100,6 +103,10 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     setUserLanguages,
     resetLoginUser,
     setLoginUser,
+    isSummary,
+    setIsSummary,
+    isBrakeDay,
+    setIsBrakeDay,
   };
 
   return <GlobalContext.Provider value={values}>{children}</GlobalContext.Provider>;

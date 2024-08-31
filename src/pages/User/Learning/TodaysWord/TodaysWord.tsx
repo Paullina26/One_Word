@@ -1,10 +1,13 @@
 import useTodayWord from './useTodaysWord';
+import { useContext } from 'react';
+import { GlobalContext } from '@utils/GlobalContext';
 
 import * as S from './StyleTodaysWord';
 import { Button } from '@components/Shared/Buttons/Button';
 import NotificationInformation from '@components/Shared/Atoms/NotificationInformation';
 import ButtonIcon from '@components/Shared/Buttons/ButtonIcon';
 import ManagedIcon from '@assets/icon/helpers/ManagedIcon';
+import RepeatWords from '@components/Repeat/RepeatWords/RepeatWords';
 
 const TodayWord = () => {
   const {
@@ -21,6 +24,9 @@ const TodayWord = () => {
     isAi,
   } = useTodayWord();
 
+  const { isSummary } = useContext(GlobalContext);
+  const { isBrakeDay } = useContext(GlobalContext);
+
   if (isError)
     return (
       <S.Wrapper>
@@ -32,6 +38,10 @@ const TodayWord = () => {
         <NotificationInformation notificationText='Missing new words to learn, please click Add Words to add new words. Or change the status of learned words.' />
       </S.Wrapper>
     );
+
+  if (isSummary) {
+    return <RepeatWords daysRepeat={7} />;
+  }
 
   return (
     <S.Wrapper>
