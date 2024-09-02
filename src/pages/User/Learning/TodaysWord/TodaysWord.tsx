@@ -8,6 +8,7 @@ import NotificationInformation from '@components/Shared/Atoms/NotificationInform
 import ButtonIcon from '@components/Shared/Buttons/ButtonIcon';
 import ManagedIcon from '@assets/icon/helpers/ManagedIcon';
 import RepeatWords from '@components/Repeat/RepeatWords/RepeatWords';
+import { TitleSmall } from '@components/Shared/Atoms/Title';
 
 const TodayWord = () => {
   const {
@@ -24,12 +25,13 @@ const TodayWord = () => {
     isAi,
   } = useTodayWord();
 
-  const { isSummary, isBrakeDay } = useContext(GlobalContext);
+  const { userSettings, isBrakeDay } = useContext(GlobalContext);
+  const today = new Date().getDay();
 
   if (isError)
     return (
       <S.Wrapper>
-        <S.Tittle>Today`s Word</S.Tittle>
+        <TitleSmall>Today`s Word</TitleSmall>
         <S.WrapperBaseWord>
           <S.Word>Please add new words</S.Word>
         </S.WrapperBaseWord>
@@ -38,14 +40,14 @@ const TodayWord = () => {
       </S.Wrapper>
     );
 
-  if (isSummary) {
+  if (userSettings && userSettings.isSummary && userSettings.summaryDay === today) {
     return <RepeatWords daysRepeat={7} />;
   }
 
-  if (isBrakeDay) {
+  if (userSettings && userSettings.breakDay && userSettings.breakDay === today) {
     return (
       <S.Wrapper>
-        <S.Tittle>Today`s Word</S.Tittle>
+        <TitleSmall>Today`s Word</TitleSmall>
         <p>Today is your day off. Enjoy your rest!</p>
       </S.Wrapper>
     );
@@ -53,7 +55,7 @@ const TodayWord = () => {
 
   return (
     <S.Wrapper>
-      <S.Tittle>Today`s Word</S.Tittle>
+      <TitleSmall>Today`s Word</TitleSmall>
       <S.WrapperBaseWord>
         <S.Word>{baseWord}</S.Word>
         {isAi && (

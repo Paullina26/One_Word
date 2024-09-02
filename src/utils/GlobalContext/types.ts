@@ -28,6 +28,8 @@ export interface GlobalContextValue {
   setIsSummary: React.Dispatch<React.SetStateAction<boolean>>;
   isBrakeDay: boolean;
   setIsBrakeDay: React.Dispatch<React.SetStateAction<boolean>>;
+  userSettings: UserSettings;
+  setUserSettings: React.Dispatch<React.SetStateAction<UserSettings>>;
 }
 
 export interface IUserLanguage {
@@ -38,12 +40,25 @@ export interface IUserLanguage {
 export interface ISingleNotification {
   type: number;
   time: string;
+  _id: string;
 }
 
 export interface PreferencesResp {
   userId: string;
   breakDay: number;
-  isBreak: number;
+  isBreak: boolean;
+  isSummary: boolean;
+  notifications: ISingleNotification[];
+  languageToLearn: number;
+  baseLanguage: number;
+  summaryDay: number;
+  _id: string;
+}
+export interface UserSettings {
+  _id: string;
+  userId: string;
+  breakDay: number;
+  isBreak: boolean;
   isSummary: boolean;
   notifications: ISingleNotification[];
   languageToLearn: number;

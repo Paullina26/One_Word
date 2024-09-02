@@ -10,6 +10,7 @@ import {
   IUserLanguage,
   PreferencesResp,
   User,
+  UserSettings,
 } from './types';
 
 export const GlobalContext = createContext<GlobalContextValue>({} as GlobalContextValue);
@@ -23,11 +24,25 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const [isLoadingOpen, setIsLoadingOpen] = useState(false);
   const [isErrorOpen, setIsErrorOpen] = useState(false);
   const [user, setUser] = useState<null | User>(null);
+  //---------DO USUNIECIA?-------//
   const [isSummary, setIsSummary] = useState(false);
   const [isBrakeDay, setIsBrakeDay] = useState(false);
   const [userLanguages, setUserLanguages] = useState<IUserLanguage>({
     languageToLearn: AvailableLanguages.en,
     baseLanguage: AvailableLanguages.pl,
+  });
+  //---------DO USUNIECIA?-------//
+
+  const [userSettings, setUserSettings] = useState<UserSettings>({
+    _id: '',
+    userId: '',
+    breakDay: 0,
+    isBreak: false,
+    isSummary: false,
+    notifications: [],
+    languageToLearn: AvailableLanguages.en,
+    baseLanguage: AvailableLanguages.pl,
+    summaryDay: 0,
   });
 
   const getUserSettings = async () => {
@@ -35,13 +50,21 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
       endpoint: 'getUserSettings',
       method: 'GET',
     });
-    if (resp.status === 200)
+    console.log(resp.response);
+    if (resp.status === 200) {
       setUserLanguages({
         languageToLearn: resp.response.languageToLearn,
         baseLanguage: resp.response.baseLanguage,
       });
-    setIsSummary(resp.response.isSummary);
+      setIsSummary(resp.response.isSummary);
+      setUserSettings({
+        ...resp.response,
+        isBreak: Boolean(resp.response.isBreak),
+      });
+    }
   };
+
+  console.log('USER SETTINGS 3', userSettings);
 
   const checkLoginStatus = async () => {
     setIsLoadingOpen(true);
@@ -70,9 +93,19 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
       languageToLearn: AvailableLanguages.en,
       baseLanguage: AvailableLanguages.pl,
     });
+    setUserSettings({
+      _id: '',
+      userId: '',
+      breakDay: 0,
+      isBreak: false,
+      isSummary: false,
+      notifications: [],
+      languageToLearn: AvailableLanguages.en,
+      baseLanguage: AvailableLanguages.pl,
+      summaryDay: 0,
+    });
   };
 
-  // if login or getUser is ok
   const setLoginUser = (user: User) => {
     setIsLoginUser(true);
     setUser(user);
@@ -107,6 +140,8 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     setIsSummary,
     isBrakeDay,
     setIsBrakeDay,
+    userSettings,
+    setUserSettings,
   };
 
   return <GlobalContext.Provider value={values}>{children}</GlobalContext.Provider>;
