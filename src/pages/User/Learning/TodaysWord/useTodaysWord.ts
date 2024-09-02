@@ -7,7 +7,7 @@ import fetchWithToken from '@api/api';
 
 const useTodayWord = () => {
   const navigate = useNavigate();
-  const { setIsLoadingOpen, isLoginUser, user } = useContext(GlobalContext);
+  const { setIsLoadingOpen, isLoginUser, user, isBrakeDay } = useContext(GlobalContext);
   const [baseWord, setBaseWord] = useState<string | null>(null);
   const [transWord, setTransWord] = useState<string | null>(null);
   const [isError, setIsError] = useState(false);
@@ -34,6 +34,11 @@ const useTodayWord = () => {
   const handleLearnedWord = async () => {
     if (idWord === null) {
       toast.error('Word ID is missing.');
+      return;
+    }
+
+    if (isBrakeDay) {
+      toast.info('Today is your day off. Enjoy your rest!.');
       return;
     }
 

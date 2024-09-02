@@ -24,8 +24,7 @@ const TodayWord = () => {
     isAi,
   } = useTodayWord();
 
-  const { isSummary } = useContext(GlobalContext);
-  const { isBrakeDay } = useContext(GlobalContext);
+  const { isSummary, isBrakeDay } = useContext(GlobalContext);
 
   if (isError)
     return (
@@ -41,6 +40,15 @@ const TodayWord = () => {
 
   if (isSummary) {
     return <RepeatWords daysRepeat={7} />;
+  }
+
+  if (isBrakeDay) {
+    return (
+      <S.Wrapper>
+        <S.Tittle>Today`s Word</S.Tittle>
+        <p>Today is your day off. Enjoy your rest!</p>
+      </S.Wrapper>
+    );
   }
 
   return (
