@@ -7,7 +7,6 @@ import { AvailableLanguages } from '@data/option/language_options';
 import {
   GlobalContextValue,
   GlobalProviderProps,
-  IUserLanguage,
   PreferencesResp,
   User,
   UserSettings,
@@ -24,7 +23,6 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const [isLoadingOpen, setIsLoadingOpen] = useState(false);
   const [isErrorOpen, setIsErrorOpen] = useState(false);
   const [user, setUser] = useState<null | User>(null);
-
   const [userSettings, setUserSettings] = useState<UserSettings>({
     _id: '',
     userId: '',
@@ -48,13 +46,10 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
       });
     }
   };
-  console.log('USER SETTINGS 3', userSettings);
 
   const checkLoginStatus = async () => {
     setIsLoadingOpen(true);
-
     if (isLoadingOpen || isLoginUser) return;
-
     try {
       const userData = await fetchWithToken({
         endpoint: 'user',

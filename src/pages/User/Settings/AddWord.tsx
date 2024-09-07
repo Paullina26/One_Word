@@ -25,7 +25,6 @@ type AddWordSettingsProps = {
 
 const AddWordSettings = ({ wordToLearn, onClose, inBaseLang }: AddWordSettingsProps) => {
   const { userSettings } = useContext(GlobalContext);
-
   const [wordBase, setWordBase] = useState<string>(inBaseLang || '');
   const [wordTranslate, setWordTranslate] = useState<string>(wordToLearn || '');
   const [selectedOptionWordLanguageTranslate, setSelectedOptionWordLanguageTranslate] = useState(

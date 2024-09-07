@@ -7,7 +7,7 @@ import fetchWithToken from '@api/api';
 
 const useTodayWord = () => {
   const navigate = useNavigate();
-  const { setIsLoadingOpen, isLoginUser, user, isBrakeDay } = useContext(GlobalContext);
+  const { setIsLoadingOpen, isLoginUser, user, userSettings } = useContext(GlobalContext);
   const [baseWord, setBaseWord] = useState<string | null>(null);
   const [transWord, setTransWord] = useState<string | null>(null);
   const [isError, setIsError] = useState(false);
@@ -26,7 +26,6 @@ const useTodayWord = () => {
       utterance.onend = () => {
         setIsSpeaking(false);
       };
-
       window.speechSynthesis.speak(utterance);
     }
   };
@@ -36,12 +35,10 @@ const useTodayWord = () => {
       toast.error('Word ID is missing.');
       return;
     }
-
-    if (isBrakeDay) {
+    if (userSettings.isBreak) {
       toast.info('Today is your day off. Enjoy your rest!.');
       return;
     }
-
     try {
       const { response, status } = await fetchWithToken({
         endpoint: 'updateWord',
@@ -49,7 +46,6 @@ const useTodayWord = () => {
         body: { status: 2 },
         params: idWord,
       });
-
       toast.success('Word status updated successfully!');
       fetchData();
     } catch (error) {
@@ -63,7 +59,6 @@ const useTodayWord = () => {
       const { response, status } = await fetchWithToken({
         endpoint: 'getTodayWord',
       });
-
       setBaseWord(response.basicWord);
       setTransWord(response.transWord);
       setIdWord(response._id);
