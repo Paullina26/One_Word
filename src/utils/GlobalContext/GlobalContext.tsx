@@ -24,14 +24,6 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const [isLoadingOpen, setIsLoadingOpen] = useState(false);
   const [isErrorOpen, setIsErrorOpen] = useState(false);
   const [user, setUser] = useState<null | User>(null);
-  //---------DO USUNIECIA?-------//
-  const [isSummary, setIsSummary] = useState(false);
-  const [isBrakeDay, setIsBrakeDay] = useState(false);
-  const [userLanguages, setUserLanguages] = useState<IUserLanguage>({
-    languageToLearn: AvailableLanguages.en,
-    baseLanguage: AvailableLanguages.pl,
-  });
-  //---------DO USUNIECIA?-------//
 
   const [userSettings, setUserSettings] = useState<UserSettings>({
     _id: '',
@@ -50,20 +42,12 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
       endpoint: 'getUserSettings',
       method: 'GET',
     });
-    console.log(resp.response);
     if (resp.status === 200) {
-      setUserLanguages({
-        languageToLearn: resp.response.languageToLearn,
-        baseLanguage: resp.response.baseLanguage,
-      });
-      setIsSummary(resp.response.isSummary);
       setUserSettings({
         ...resp.response,
-        isBreak: Boolean(resp.response.isBreak),
       });
     }
   };
-
   console.log('USER SETTINGS 3', userSettings);
 
   const checkLoginStatus = async () => {
@@ -89,10 +73,6 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const resetLoginUser = () => {
     setIsLoginUser(false);
     setUser(null);
-    setUserLanguages({
-      languageToLearn: AvailableLanguages.en,
-      baseLanguage: AvailableLanguages.pl,
-    });
     setUserSettings({
       _id: '',
       userId: '',
@@ -132,14 +112,8 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     isErrorOpen,
     setIsErrorOpen,
     user,
-    userLanguages,
-    setUserLanguages,
     resetLoginUser,
     setLoginUser,
-    isSummary,
-    setIsSummary,
-    isBrakeDay,
-    setIsBrakeDay,
     userSettings,
     setUserSettings,
   };

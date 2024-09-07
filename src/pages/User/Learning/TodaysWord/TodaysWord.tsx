@@ -25,7 +25,7 @@ const TodayWord = () => {
     isAi,
   } = useTodayWord();
 
-  const { userSettings, isBrakeDay } = useContext(GlobalContext);
+  const { userSettings } = useContext(GlobalContext);
   const today = new Date().getDay();
 
   if (isError)

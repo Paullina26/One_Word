@@ -18,16 +18,10 @@ export interface GlobalContextValue {
   isLoadingOpen: boolean;
   setIsLoadingOpen: React.Dispatch<React.SetStateAction<boolean>>;
   user: User | null;
-  userLanguages: IUserLanguage;
-  setUserLanguages: React.Dispatch<React.SetStateAction<IUserLanguage>>;
   isErrorOpen: boolean;
   setIsErrorOpen: React.Dispatch<React.SetStateAction<boolean>>;
   resetLoginUser: () => void;
   setLoginUser: (user: User, isLogin?: boolean) => void;
-  isSummary: boolean;
-  setIsSummary: React.Dispatch<React.SetStateAction<boolean>>;
-  isBrakeDay: boolean;
-  setIsBrakeDay: React.Dispatch<React.SetStateAction<boolean>>;
   userSettings: UserSettings;
   setUserSettings: React.Dispatch<React.SetStateAction<UserSettings>>;
 }

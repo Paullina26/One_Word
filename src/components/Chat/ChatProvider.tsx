@@ -15,7 +15,7 @@ const ChatContext = createContext<ChatContextValue>({} as ChatContextValue);
 
 export const ChatProvider: FC<Props> = ({ children }) => {
   const params = useParams();
-  const { userLanguages, setIsLoadingOpen, user } = useContext(GlobalContext);
+  const { userSettings, setIsLoadingOpen, user } = useContext(GlobalContext);
 
   const [isMessagesVisible, setIsMessagesVisible] = useState(true);
   const [isAiSpeaking, setIsAiSpeaking] = useState(false);
@@ -78,8 +78,8 @@ export const ChatProvider: FC<Props> = ({ children }) => {
       method: 'POST',
       body: JSON.stringify({
         query: userMessage || '',
-        languageToLearn: Array.from(LanguagesMap)[userLanguages.languageToLearn][1],
-        baseLanguage: Array.from(LanguagesMap)[userLanguages.baseLanguage][1],
+        languageToLearn: Array.from(LanguagesMap)[userSettings.languageToLearn][1],
+        baseLanguage: Array.from(LanguagesMap)[userSettings.baseLanguage][1],
         isStreaming,
         todayWord: params.word || '',
         currentConversationId,
