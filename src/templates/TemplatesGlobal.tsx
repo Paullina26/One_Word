@@ -7,6 +7,8 @@ import ComponentDisplay from '@components/Shared/containers/ComponentDisplay';
 import Burger from '@components/Navigation/BurgerMenu';
 import LoadingFullView from '@components/Shared/Loading/LoadingFullView';
 import ErrorFullView from '@components/Shared/Error/ErrorFullView';
+import AppVersion from '@components/AppVersion/AppVersion';
+
 interface TemplatesGlobalProps {
   children: React.ReactNode;
 }
@@ -23,6 +25,7 @@ const TemplatesGlobal: React.FC<TemplatesGlobalProps> = props => {
         {isErrorOpen && <ErrorFullView />}
         {props.children}
       </ComponentDisplay>
+      <AppVersion />
     </>
   );
 };
