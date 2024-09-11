@@ -22,5 +22,5 @@ jobs:
             git status
             npm install
             npm run build
-            service nginx restart
+            sudo service nginx restart
             ${{ secrets.SUDO_PASSWORD }}
