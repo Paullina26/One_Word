@@ -27,6 +27,8 @@ const TodayWord = () => {
 
   const { userSettings } = useContext(GlobalContext);
   const today = new Date().getDay();
+  const isSummaryDay = userSettings?.isSummary && userSettings.summaryDay === today;
+  const isBreakDay = userSettings?.breakDay && userSettings.breakDay === today;
 
   if (isError)
     return (
@@ -40,11 +42,11 @@ const TodayWord = () => {
       </S.Wrapper>
     );
 
-  if (userSettings && userSettings.isSummary && userSettings.summaryDay === today) {
+  if (isSummaryDay) {
     return <RepeatWords daysRepeat={7} />;
   }
 
-  if (userSettings && userSettings.breakDay && userSettings.breakDay === today) {
+  if (isBreakDay) {
     return (
       <S.Wrapper>
         <TitleSmall>Today`s Word</TitleSmall>
