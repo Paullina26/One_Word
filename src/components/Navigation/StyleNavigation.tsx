@@ -23,6 +23,13 @@ export const NavigationWrapper = styled.div<{ $isOpenMenu: boolean }>`
   transition: transform 0.4s ease-out;
   transform: ${({ $isOpenMenu }) => ($isOpenMenu ? 'translateX(0)' : 'translateX(100%)')};
   overflow-x: hidden;
+
+  span {
+    display: block;
+    width: 100%;
+    text-align: right;
+    padding-right: 10px;
+  }
 `;
 
 export const WrapperNav = styled.div`

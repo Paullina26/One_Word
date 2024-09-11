@@ -100,6 +100,7 @@ export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
           </React.Fragment>
         ))}
       </S.WrapperNav>
+      <span>ver 0.0.1</span>
     </S.NavigationWrapper>
   );
 };
