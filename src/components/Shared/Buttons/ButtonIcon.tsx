@@ -9,10 +9,10 @@ interface ButtonIconProps {
   disabled?: boolean;
   $margin?: string;
   $positionAbsolute?: boolean;
-  top?: string;
-  left?: string;
-  right?: string;
-  bottom?: string;
+  $top?: string;
+  $left?: string;
+  $right?: string;
+  $bottom?: string;
   $isClickable?: boolean;
 }
 
@@ -26,13 +26,13 @@ const baseStyles = css<{ $margin?: string }>`
   margin: ${({ $margin }) => $margin || '10px auto'};
 `;
 
-const absoluteStyles = css<{ top?: string; left?: string; right?: string; bottom?: string }>`
+const absoluteStyles = css<{ $top?: string; $left?: string; $right?: string; $bottom?: string }>`
   position: absolute;
   white-space: nowrap;
-  top: ${({ top }) => top || 'auto'};
-  left: ${({ left }) => left || 'auto'};
-  right: ${({ right }) => right || 'auto'};
-  bottom: ${({ bottom }) => bottom || 'auto'};
+  top: ${({ $top }) => $top || 'auto'};
+  left: ${({ $left }) => $left || 'auto'};
+  right: ${({ $right }) => $right || 'auto'};
+  bottom: ${({ $bottom }) => $bottom || 'auto'};
 `;
 
 const inActiveStyles = css`
@@ -44,10 +44,10 @@ const inActiveStyles = css`
 export const ButtonIconStyle = styled(Button)<{
   $margin?: string;
   $positionAbsolute?: boolean;
-  top?: string;
-  left?: string;
-  right?: string;
-  bottom?: string;
+  $top?: string;
+  $left?: string;
+  $right?: string;
+  $bottom?: string;
   $isClickable?: boolean;
 }>`
   ${baseStyles}
@@ -62,10 +62,10 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({
   disabled = false,
   $margin,
   $positionAbsolute = false,
-  top,
-  left,
-  right,
-  bottom,
+  $top,
+  $left,
+  $right,
+  $bottom,
   $isClickable = true,
 }) => {
   return (
@@ -75,10 +75,10 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({
       disabled={disabled || !$isClickable}
       $margin={$margin}
       $positionAbsolute={$positionAbsolute}
-      top={top}
-      left={left}
-      right={right}
-      bottom={bottom}
+      $top={$top}
+      $left={$left}
+      $right={$right}
+      $bottom={$bottom}
       $isClickable={$isClickable}
     >
       <ManagedIcon name={nameIcon} />

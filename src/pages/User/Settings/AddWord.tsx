@@ -24,12 +24,11 @@ type AddWordSettingsProps = {
 };
 
 const AddWordSettings = ({ wordToLearn, onClose, inBaseLang }: AddWordSettingsProps) => {
-  const { userLanguages } = useContext(GlobalContext);
-
+  const { userSettings } = useContext(GlobalContext);
   const [wordBase, setWordBase] = useState<string>(inBaseLang || '');
   const [wordTranslate, setWordTranslate] = useState<string>(wordToLearn || '');
   const [selectedOptionWordLanguageTranslate, setSelectedOptionWordLanguageTranslate] = useState(
-    userLanguages.languageToLearn
+    userSettings.languageToLearn
   );
 
   const [error, setError] = useState(false);
@@ -52,7 +51,7 @@ const AddWordSettings = ({ wordToLearn, onClose, inBaseLang }: AddWordSettingsPr
         toast.success('The word has been added!');
         setWordBase('');
         setWordTranslate('');
-        setSelectedOptionWordLanguageTranslate(userLanguages.languageToLearn);
+        setSelectedOptionWordLanguageTranslate(userSettings.languageToLearn);
       } else {
         console.log('Response from API:', response);
         throw new Error('Problem with adding a word');

@@ -7,9 +7,9 @@ import { AvailableLanguages } from '@data/option/language_options';
 import {
   GlobalContextValue,
   GlobalProviderProps,
-  IUserLanguage,
   PreferencesResp,
   User,
+  UserSettings,
 } from './types';
 
 export const GlobalContext = createContext<GlobalContextValue>({} as GlobalContextValue);
@@ -23,9 +23,16 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const [isLoadingOpen, setIsLoadingOpen] = useState(false);
   const [isErrorOpen, setIsErrorOpen] = useState(false);
   const [user, setUser] = useState<null | User>(null);
-  const [userLanguages, setUserLanguages] = useState<IUserLanguage>({
+  const [userSettings, setUserSettings] = useState<UserSettings>({
+    _id: '',
+    userId: '',
+    breakDay: 0,
+    isBreak: false,
+    isSummary: false,
+    notifications: [],
     languageToLearn: AvailableLanguages.en,
     baseLanguage: AvailableLanguages.pl,
+    summaryDay: 0,
   });
 
   const getUserSettings = async () => {
@@ -33,18 +40,16 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
       endpoint: 'getUserSettings',
       method: 'GET',
     });
-    if (resp.status === 200)
-      setUserLanguages({
-        languageToLearn: resp.response.languageToLearn,
-        baseLanguage: resp.response.baseLanguage,
+    if (resp.status === 200) {
+      setUserSettings({
+        ...resp.response,
       });
+    }
   };
 
   const checkLoginStatus = async () => {
     setIsLoadingOpen(true);
-
     if (isLoadingOpen || isLoginUser) return;
-
     try {
       const userData = await fetchWithToken({
         endpoint: 'user',
@@ -63,13 +68,19 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
   const resetLoginUser = () => {
     setIsLoginUser(false);
     setUser(null);
-    setUserLanguages({
+    setUserSettings({
+      _id: '',
+      userId: '',
+      breakDay: 0,
+      isBreak: false,
+      isSummary: false,
+      notifications: [],
       languageToLearn: AvailableLanguages.en,
       baseLanguage: AvailableLanguages.pl,
+      summaryDay: 0,
     });
   };
 
-  // if login or getUser is ok
   const setLoginUser = (user: User) => {
     setIsLoginUser(true);
     setUser(user);
@@ -96,10 +107,10 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
     isErrorOpen,
     setIsErrorOpen,
     user,
-    userLanguages,
-    setUserLanguages,
     resetLoginUser,
     setLoginUser,
+    userSettings,
+    setUserSettings,
   };
 
   return <GlobalContext.Provider value={values}>{children}</GlobalContext.Provider>;

@@ -22,7 +22,7 @@ export const WrapperButton = styled.div`
 
 export const WrapperBaseWord = styled(WrapperLearning)``;
 
-export const InputStyle = styled(Input)`
+export const InputStyle = styled(Input)<{ $isCorrect: boolean | null }>`
   ${font_settings(2.2, 'normal', 400)}
   width: 100%;
   display: flex;
@@ -32,6 +32,14 @@ export const InputStyle = styled(Input)`
   height: 150px;
   text-align: center;
   background-color: rgba(232, 232, 232, 0.75);
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   position: relative;
+  /* background-color: ${({ $isCorrect }) =>
+    $isCorrect === null
+      ? 'rgba(232, 232, 232, 0.75);'
+      : $isCorrect
+      ? 'rgba(204, 225, 198, 0.75);'
+      : 'rgba(232, 203, 203, 0.75);'}; */
+  border: 3px solid
+    ${({ $isCorrect }) => ($isCorrect === null ? 'none' : $isCorrect ? 'green' : 'red')};
 `;

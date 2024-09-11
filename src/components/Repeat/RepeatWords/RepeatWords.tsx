@@ -17,6 +17,7 @@ const RepeatWords: React.FC<RepeatWordsProps> = ({ daysRepeat }) => {
     handleBackWord,
     handleCheckWord,
     handleNextWord,
+    isCorrect,
   } = useRepeatWords({ daysRepeat });
 
   return (
@@ -32,6 +33,7 @@ const RepeatWords: React.FC<RepeatWordsProps> = ({ daysRepeat }) => {
           onChange={(value: string) => setWordTranslate(value)}
           value={wordTranslate}
           required
+          $isCorrect={isCorrect}
         />
       </div>
       <S.WrapperButton>
