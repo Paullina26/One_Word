@@ -1,11 +1,12 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
-import * as S from '../StyleChat';
+import { GlassWrapper } from '@components/Shared/containers/GlassWrapper';
+
 import VoiceAnimation from './VoiceAnimationt';
 import Microphone from './Buttons/Micophone';
-import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
 import VisibleMessages from './Buttons/VisibleMessage';
 import { FinishConversationButton } from './Buttons/FinishConversation';
+import * as S from '../StyleChat';
 
 interface VoiceViewProps {}
 

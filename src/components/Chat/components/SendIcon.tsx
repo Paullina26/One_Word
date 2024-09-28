@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import Icon from 'assets/icon/send_icon.svg';
-import { Button } from 'components/Shared/Buttons/Button';
+import Icon from '@assets/icon/send_icon.svg';
+import { Button } from '@components/Shared/Buttons/Button';
 
 export const SendButton = styled(Button)`
   position: absolute;

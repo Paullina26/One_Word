@@ -1,21 +1,21 @@
 import React, { FC, createContext, useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
-import { ChatContextValue, Message, Mistake, Props, Word } from './types';
-
-import { useRecording } from './useRecording';
-import { API_BASE_URL, headers } from 'API/api';
-import { getOpenaiApiKey } from './helpers';
-import { useStreamAudio } from './useStreamAudio';
-import { GlobalContext } from 'utils/GlobalContext';
-import { LanguagesMap } from 'data/option/language_options';
 import { toast } from 'react-toastify';
+
+import { API_BASE_URL, headers } from '@api/api';
+import { LanguagesMap } from '@data/option/language_options';
+import { GlobalContext } from '@utils/GlobalContext';
+
+import { getOpenaiApiKey } from './helpers';
+import { useRecording } from './useRecording';
+import { useStreamAudio } from './useStreamAudio';
+import { ChatContextValue, Message, Mistake, Props, Word } from './types';
 
 const ChatContext = createContext<ChatContextValue>({} as ChatContextValue);
 
 export const ChatProvider: FC<Props> = ({ children }) => {
   const params = useParams();
-  const { userLanguages, setIsLoadingOpen, user } = useContext(GlobalContext);
+  const { userSettings, setIsLoadingOpen, user } = useContext(GlobalContext);
 
   const [isMessagesVisible, setIsMessagesVisible] = useState(true);
   const [isAiSpeaking, setIsAiSpeaking] = useState(false);
@@ -78,8 +78,8 @@ export const ChatProvider: FC<Props> = ({ children }) => {
       method: 'POST',
       body: JSON.stringify({
         query: userMessage || '',
-        languageToLearn: Array.from(LanguagesMap)[userLanguages.languageToLearn][1],
-        baseLanguage: Array.from(LanguagesMap)[userLanguages.baseLanguage][1],
+        languageToLearn: Array.from(LanguagesMap)[userSettings.languageToLearn][1],
+        baseLanguage: Array.from(LanguagesMap)[userSettings.baseLanguage][1],
         isStreaming,
         todayWord: params.word || '',
         currentConversationId,

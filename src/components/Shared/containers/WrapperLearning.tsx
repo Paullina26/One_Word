@@ -1,10 +1,5 @@
 import styled from 'styled-components';
-import {
-  font_settings,
-  boxShadow_darkTheme_input,
-  boxShadow_lightTheme_input,
-  outline_focus,
-} from 'style/mixins';
+import { font_settings, boxShadow_darkTheme_input, outline_focus } from '@style/mixins';
 
 export const WrapperLearning = styled.div`
   ${font_settings(2.2, 'normal', 400)}

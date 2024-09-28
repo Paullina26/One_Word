@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Word } from 'components/Repeat/RepeatWords/RepeatWords.types';
-import fetchWithToken from 'API/api';
+import { Word } from '@components/Repeat/RepeatWords/RepeatWords.types';
+import fetchWithToken from '@api/api';
 
 interface UseRepeatWordsProps {
   daysRepeat: number;
@@ -12,6 +12,7 @@ export const useRepeatWords = ({ daysRepeat }: UseRepeatWordsProps) => {
   const [wordBase, setWordBase] = useState('');
   const [wordTranslate, setWordTranslate] = useState('');
   const [feedback, setFeedback] = useState('');
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
   const [isBackClickable, setIsBackClickable] = useState(false);
   const [isCheckClickable, setIsCheckClickable] = useState(false);
@@ -33,16 +34,19 @@ export const useRepeatWords = ({ daysRepeat }: UseRepeatWordsProps) => {
       setWordBase(wordsRepeat[currentWordIndex - 1].basicWord);
       setWordTranslate('');
       setFeedback('');
+      setIsCorrect(null);
     }
     updateButtonStates();
   };
 
   const handleCheckWord = () => {
     if (wordsRepeat[currentWordIndex].transWord.toLowerCase() === wordTranslate.toLowerCase()) {
+      setIsCorrect(true);
       handleNextWord();
       setFeedback('Good job!');
     } else {
       setFeedback(`Correct is: ${wordsRepeat[currentWordIndex].transWord}`);
+      setIsCorrect(false);
     }
     updateButtonStates();
   };
@@ -53,6 +57,7 @@ export const useRepeatWords = ({ daysRepeat }: UseRepeatWordsProps) => {
       setWordBase(wordsRepeat[currentWordIndex + 1].basicWord);
       setWordTranslate('');
       setFeedback('');
+      setIsCorrect(null);
     }
     updateButtonStates();
   };
@@ -90,5 +95,6 @@ export const useRepeatWords = ({ daysRepeat }: UseRepeatWordsProps) => {
     handleBackWord,
     handleCheckWord,
     handleNextWord,
+    isCorrect,
   };
 };

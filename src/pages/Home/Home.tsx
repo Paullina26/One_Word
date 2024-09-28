@@ -3,8 +3,8 @@ import { Navigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 
-import { GlobalContext } from 'utils/GlobalContext';
-import { routes } from 'data/routes';
+import { GlobalContext } from '@utils/GlobalContext';
+import { routes } from '@data/routes';
 import {
   font_settings,
   color_gradient_button,
@@ -12,10 +12,10 @@ import {
   boxShadow_lightTheme_button,
   boxShadow_darkTheme_button,
   outline_focus,
-} from 'style/mixins';
-import Logo from 'components/Shared/Logo/Logo';
-import { GlassWrapper } from 'components/Shared/containers/GlassWrapper';
-import Welcome from 'components/Welcome/Welcome';
+} from '@style/mixins';
+import Logo from '@components/Shared/Logo/Logo';
+import { GlassWrapper } from '@components/Shared/containers/GlassWrapper';
+import Welcome from '@components/Welcome/Welcome';
 
 export const LinkButton = styled(NavLink)<{ $isLightTeam: boolean }>`
   ${font_settings(2.2, 'italic', 300)};
@@ -31,7 +31,7 @@ export const LinkButton = styled(NavLink)<{ $isLightTeam: boolean }>`
 `;
 
 export const HomePage = () => {
-  const { isLoginUser, isLoadingOpen } = useContext(GlobalContext);
+  const { isLoginUser } = useContext(GlobalContext);
 
   if (isLoginUser) return <Navigate replace to={routes.LEARN_TODAYS_WORD.to} />;
 

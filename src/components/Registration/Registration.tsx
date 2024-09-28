@@ -1,14 +1,14 @@
 import { FC, useState } from 'react';
 import { toast, ToastOptions } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { toastColored } from 'helpers/StyleToastify';
-import * as S from 'components/Registration/StyleRegistration';
-import { WrapperForm, WrapperInputs } from 'components/Shared/Form/StyleForm';
-import Input from 'components/Shared/Form/Input';
-import Submit from 'components/Shared/Form/Submit';
-import { headers, API_Endpoints } from 'API/api';
-import { Button } from 'components/Shared/Buttons/Button';
-import { inputNameElement } from 'helpers/mixins';
+import { toastColored } from '@helpers/StyleToastify';
+import * as S from '@components/Registration/StyleRegistration';
+import { WrapperForm, WrapperInputs } from '@components/Shared/Form/StyleForm';
+import Input from '@components/Shared/Form/Input';
+import Submit from '@components/Shared/Form/Submit';
+import { headers, API_Endpoints } from '@api/api';
+import { Button } from '@components/Shared/Buttons/Button';
+import { inputNameElement } from '@helpers/mixins';
 
 interface RegistrationProps {
   toggleAuthForm: () => void;

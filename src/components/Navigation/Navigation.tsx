@@ -1,10 +1,10 @@
 import React, { FC, useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { baseNavigation, chatNavigation } from 'data/NavigationElements';
-import LogOut from 'components/LogOut/LogOut';
-import * as S from 'components/Navigation/StyleNavigation';
-import { GlobalContext } from 'utils/GlobalContext';
+import { baseNavigation, chatNavigation } from '@data/NavigationElements';
+import LogOut from '@components/LogOut/LogOut';
+import * as S from '@components/Navigation/StyleNavigation';
+import { GlobalContext } from '@utils/GlobalContext';
 
 interface NavigationProps {
   isOpenMenu: boolean;

@@ -1,11 +1,6 @@
-import * as S from './StyleRepeat';
-import ButtonIcon from 'components/Shared/Buttons/ButtonIcon';
-import { TitleBig } from 'components/Shared/Atoms/Title';
-import { inputNameElement } from 'helpers/mixins';
-import fetchWithToken from 'API/api';
-import { useState, useEffect } from 'react';
-import RepeatWords from 'components/Repeat/RepeatWords/RepeatWords';
-import RepeatForm from 'components/Repeat/RepeatForm/RepeatForm';
+import { useState } from 'react';
+import RepeatWords from '@components/Repeat/RepeatWords/RepeatWords';
+import RepeatForm from '@components/Repeat/RepeatForm/RepeatForm';
 
 interface RepeatProps {}
 

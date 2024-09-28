@@ -1,10 +1,14 @@
 import useTodayWord from './useTodaysWord';
+import { useContext } from 'react';
+import { GlobalContext } from '@utils/GlobalContext';
 
 import * as S from './StyleTodaysWord';
-import { Button } from 'components/Shared/Buttons/Button';
-import NotificationInformation from 'components/Shared/Atoms/NotificationInformation';
-import ButtonIcon from 'components/Shared/Buttons/ButtonIcon';
-import ManagedIcon from 'assets/icon/helpers/ManagedIcon';
+import { Button } from '@components/Shared/Buttons/Button';
+import NotificationInformation from '@components/Shared/Atoms/NotificationInformation';
+import ButtonIcon from '@components/Shared/Buttons/ButtonIcon';
+import ManagedIcon from '@assets/icon/helpers/ManagedIcon';
+import RepeatWords from '@components/Repeat/RepeatWords/RepeatWords';
+import { TitleSmall } from '@components/Shared/Atoms/Title';
 
 const TodayWord = () => {
   const {
@@ -21,10 +25,15 @@ const TodayWord = () => {
     isAi,
   } = useTodayWord();
 
+  const { userSettings } = useContext(GlobalContext);
+  const today = new Date().getDay();
+  const isSummaryDay = userSettings?.isSummary && userSettings.summaryDay === today;
+  const isBreakDay = userSettings?.breakDay && userSettings.breakDay === today;
+
   if (isError)
     return (
       <S.Wrapper>
-        <S.Tittle>Today`s Word</S.Tittle>
+        <TitleSmall>Today`s Word</TitleSmall>
         <S.WrapperBaseWord>
           <S.Word>Please add new words</S.Word>
         </S.WrapperBaseWord>
@@ -33,9 +42,22 @@ const TodayWord = () => {
       </S.Wrapper>
     );
 
+  if (isSummaryDay) {
+    return <RepeatWords daysRepeat={7} />;
+  }
+
+  if (isBreakDay) {
+    return (
+      <S.Wrapper>
+        <TitleSmall>Today`s Word</TitleSmall>
+        <p>Today is your day off. Enjoy your rest!</p>
+      </S.Wrapper>
+    );
+  }
+
   return (
     <S.Wrapper>
-      <S.Tittle>Today`s Word</S.Tittle>
+      <TitleSmall>Today`s Word</TitleSmall>
       <S.WrapperBaseWord>
         <S.Word>{baseWord}</S.Word>
         {isAi && (
@@ -56,8 +78,8 @@ const TodayWord = () => {
             type='button'
             $positionAbsolute
             $margin='auto 5px 5px'
-            bottom='10px'
-            right='10px'
+            $bottom='10px'
+            $right='10px'
             onClick={handleSpeak}
             disabled={isSpeaking}
           />

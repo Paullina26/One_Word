@@ -1,8 +1,8 @@
 import * as S from './StyleRepeatWords';
-import ButtonIcon from 'components/Shared/Buttons/ButtonIcon';
-import { TitleBig } from 'components/Shared/Atoms/Title';
-import { inputNameElement } from 'helpers/mixins';
-import { Word, RepeatWordsProps } from 'components/Repeat/RepeatWords/RepeatWords.types';
+import ButtonIcon from '@components/Shared/Buttons/ButtonIcon';
+import { TitleBig } from '@components/Shared/Atoms/Title';
+import { inputNameElement } from '@helpers/mixins';
+import { Word, RepeatWordsProps } from '@components/Repeat/RepeatWords/RepeatWords.types';
 import { useRepeatWords } from './useRpeatWords';
 
 const RepeatWords: React.FC<RepeatWordsProps> = ({ daysRepeat }) => {
@@ -17,6 +17,7 @@ const RepeatWords: React.FC<RepeatWordsProps> = ({ daysRepeat }) => {
     handleBackWord,
     handleCheckWord,
     handleNextWord,
+    isCorrect,
   } = useRepeatWords({ daysRepeat });
 
   return (
@@ -32,6 +33,7 @@ const RepeatWords: React.FC<RepeatWordsProps> = ({ daysRepeat }) => {
           onChange={(value: string) => setWordTranslate(value)}
           value={wordTranslate}
           required
+          $isCorrect={isCorrect}
         />
       </div>
       <S.WrapperButton>

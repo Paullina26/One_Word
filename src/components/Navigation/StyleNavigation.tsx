@@ -7,7 +7,7 @@ import {
   boxShadow_darkTheme_menu_element,
   color_gradient_light_menu,
   color_gradient_glassEffect_light_menu,
-} from 'style/mixins';
+} from '@style/mixins';
 
 export const NavigationWrapper = styled.div<{ $isOpenMenu: boolean }>`
   z-index: 100;

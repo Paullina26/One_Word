@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { font_settings } from 'style/mixins';
+
+import { font_settings } from '@style/mixins';
 
 interface TittleOneWordProps {
   $fontColor: string;

@@ -7,7 +7,7 @@ import {
   boxShadow_darkTheme_button,
   boxShadow_lightTheme_button,
   outline_focus,
-} from 'style/mixins';
+} from '@style/mixins';
 
 interface SubmitProps {
   id: string;

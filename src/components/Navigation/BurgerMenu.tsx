@@ -1,6 +1,6 @@
 import { useContext, FC } from 'react';
 import styled from 'styled-components';
-import { GlobalContext } from 'utils/GlobalContext';
+import { GlobalContext } from '@utils/GlobalContext';
 import {
   boxShadow_button,
   color_gradient_button,
@@ -8,7 +8,7 @@ import {
   color_gradient_button_menu,
   color_gradient_menu_bar,
   color_gradient_menu_burger,
-} from 'style/mixins';
+} from '@style/mixins';
 
 const StyledBurger = styled.button<{ $isOpenMenu: boolean }>`
   z-index: 101;

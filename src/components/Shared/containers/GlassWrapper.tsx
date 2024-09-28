@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color_gradient_glassEffect_light } from 'style/mixins';
+import { color_gradient_glassEffect_light } from '@style/mixins';
 import { ScrollbarStyles } from '../Atoms/ScrollbarStyle';
 
 export const GlassWrapper = styled.div`
