@@ -115,3 +115,5 @@ const GlobalProvider: FC<GlobalProviderProps> = ({ children }) => {
 
   return <GlobalContext.Provider value={values}>{children}</GlobalContext.Provider>;
 };
+
+export default GlobalProvider;
