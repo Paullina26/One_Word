@@ -29,9 +29,8 @@ export const InputStyle = styled(Input)<{ $isCorrect: boolean | null }>`
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  height: 150px;
   text-align: center;
-  background-color: rgba(232, 232, 232, 0.75);
+  background-color: rgba(232, 232, 232, 0.85);
   margin-bottom: 10px;
   position: relative;
   /* background-color: ${({ $isCorrect }) =>

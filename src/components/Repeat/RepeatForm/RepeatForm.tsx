@@ -32,6 +32,7 @@ const RepeatForm: FC<RepeatFormProps> = ({ daysRepeat, onDaysRepeatChange, onSub
           max={30}
           $fontColorLabel='purpleDark'
           $isLightTeam={true}
+          $height='80px'
         />
         <ButtonIcon nameIcon='check' $margin='2px auto' onClick={onSubmit} $isClickable={true} />
       </form>
