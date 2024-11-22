@@ -84,7 +84,7 @@ const Input: FC<InputProps> = ({
         minLength={minlength}
         maxLength={maxLength}
         $isLightTeam={$isLightTeam}
-        $height={$height || '100px'}
+        $height={$height || '35px'}
         min={min}
         max={max}
       />
