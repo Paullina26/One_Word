@@ -25,6 +25,7 @@ export const WrapperBaseWord = styled(WrapperLearning)``;
 export const InputStyle = styled(Input)<{ $isCorrect: boolean | null }>`
   ${font_settings(2.2, 'normal', 400)}
   width: 100%;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
