@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import { AvailableLanguages } from '@data/option/language_options';
 import { User, UserSettings } from '@utils/GlobalContext/types';
 
