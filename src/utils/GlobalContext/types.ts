@@ -8,6 +8,28 @@ export type User = {
   id: string;
 };
 
+export interface GlobalStoreState {
+  isLoginUser: boolean;
+  isLoadingUser: boolean;
+  isOpenMenu: boolean;
+  isLoadingOpen: boolean;
+  isErrorOpen: boolean;
+  user: User | null;
+  userSettings: UserSettings;
+
+  setIsLoginUser: (isLoginUser: boolean) => void;
+  setIsLoadingUser: (isLoadingUser: boolean) => void;
+  setIsOpenMenu: (isOpenMenu: boolean) => void;
+  setIsLoadingOpen: (isLoadingOpen: boolean) => void;
+  setIsErrorOpen: (isErrorOpen: boolean) => void;
+  setUser: (user: User | null) => void;
+  setUserSettings: (userSettings: UserSettings) => void;
+
+  getUserSettings: () => Promise<void>;
+  checkLoginStatus: () => Promise<void>;
+  resetLoginUser: () => void;
+}
+
 export interface GlobalContextValue {
   isLoginUser: boolean;
   setIsLoginUser: React.Dispatch<React.SetStateAction<boolean>>;
