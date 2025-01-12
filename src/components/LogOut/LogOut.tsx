@@ -4,7 +4,9 @@ import styled from 'styled-components';
 
 import { routes } from '@data/routes';
 import { Button } from '@components/Shared/Buttons/Button';
-import { GlobalContext } from '@utils/GlobalContext';
+import { useGlobalStore } from '@utils/store/globalStore';
+
+// import { GlobalContext } from '@utils/GlobalContext';
 import logoutIcon from '@assets/icon/logout_Icon.svg';
 
 export const WrapperLogOut = styled.div`
@@ -33,7 +35,7 @@ export const LogoutButton = styled(Button)`
 `;
 
 export const LogOut = () => {
-  const { resetLoginUser } = useContext(GlobalContext);
+  const { resetLoginUser } = useGlobalStore();
   const navigate = useNavigate();
 
   const handleLogout = () => {

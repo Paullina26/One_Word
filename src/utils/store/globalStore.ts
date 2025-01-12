@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';
 
 import { AvailableLanguages } from '@data/option/language_options';
 import {
-  GlobalContextValue,
   GlobalProviderProps,
   User,
   UserSettings,
@@ -39,18 +38,23 @@ export const useGlobalStore = create<GlobalStoreState>((set, get) => ({
   setIsErrorOpen: isErrorOpen => set({ isErrorOpen }),
   setUser: user => set({ user }),
   setUserSettings: userSettings => set({ userSettings }),
+
   getUserSettings: async () => {
+    console.log('getUserSettings');
     const resp: { response: PreferencesResp; status: number } = await fetchWithToken({
       endpoint: 'getUserSettings',
       method: 'GET',
     });
     if (resp.status === 200) {
+      console.log('resp', resp);
       set({ userSettings: resp.response });
     }
   },
+
   checkLoginStatus: async () => {
     const { isLoadingOpen, isLoginUser } = get();
     set({ isLoadingOpen: true });
+    console.log('isLoadingOpen', isLoadingOpen);
     if (isLoadingOpen || isLoginUser) return;
     try {
       const userData = await fetchWithToken({
@@ -59,13 +63,17 @@ export const useGlobalStore = create<GlobalStoreState>((set, get) => ({
       });
       const { status } = userData;
       if (status !== 200) return get().resetLoginUser();
+      console.log('userData', userData);
       // Handle successful login status
     } catch (error) {
+      console.error(error);
       // Handle error
     } finally {
+      console.log('isLoadingOpen', isLoadingOpen);
       set({ isLoadingOpen: false });
     }
   },
+
   resetLoginUser: () => {
     set({
       isLoginUser: false,

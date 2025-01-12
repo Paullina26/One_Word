@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import { Navigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import { useContext } from 'react';
 
-import { GlobalContext } from '@utils/GlobalContext';
+import { useGlobalStore } from '@utils/store/globalStore';
 import { routes } from '@data/routes';
 import {
   font_settings,
@@ -31,7 +30,7 @@ export const LinkButton = styled(NavLink)<{ $isLightTeam: boolean }>`
 `;
 
 export const HomePage = () => {
-  const { isLoginUser } = useContext(GlobalContext);
+  const { isLoginUser } = useGlobalStore();
 
   if (isLoginUser) return <Navigate replace to={routes.LEARN_TODAYS_WORD.to} />;
 

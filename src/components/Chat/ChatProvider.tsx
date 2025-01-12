@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import { API_BASE_URL, headers } from '@api/api';
 import { LanguagesMap } from '@data/option/language_options';
-import { GlobalContext } from '@utils/GlobalContext';
+import { useGlobalStore } from '@utils/store/globalStore';
 
 import { getOpenaiApiKey } from './helpers';
 import { useRecording } from './useRecording';
@@ -15,7 +15,7 @@ const ChatContext = createContext<ChatContextValue>({} as ChatContextValue);
 
 export const ChatProvider: FC<Props> = ({ children }) => {
   const params = useParams();
-  const { userSettings, setIsLoadingOpen, user } = useContext(GlobalContext);
+  const { userSettings, setIsLoadingOpen, user } = useGlobalStore();
 
   const [isMessagesVisible, setIsMessagesVisible] = useState(true);
   const [isAiSpeaking, setIsAiSpeaking] = useState(false);

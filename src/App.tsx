@@ -3,9 +3,10 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from '@style/theme';
 import { GlobalStyle } from '@style/GlobalStyle';
 import RoutesComponent from './routes';
-import GlobalProvider from '@utils/GlobalContext';
+// import GlobalProvider from '@utils/GlobalContext';
 import TemplatesGlobal from '@templates/TemplatesGlobal';
 import { ToastContainer } from 'react-toastify';
+import { GlobalProvider } from '@utils/store/GlobalProvider';
 
 function App() {
   return (

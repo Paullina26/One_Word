@@ -9,12 +9,14 @@ import Submit from '@components/Shared/Form/Submit';
 import { headers, API_Endpoints } from '@api/api';
 import { Button } from '@components/Shared/Buttons/Button';
 import { inputNameElement } from '@helpers/mixins';
+import { useGlobalStore } from '@utils/store/globalStore';
 
 interface RegistrationProps {
   toggleAuthForm: () => void;
   isActive: boolean;
 }
 export const Registration: FC<RegistrationProps> = ({ toggleAuthForm, isActive }) => {
+  const setLoginUser = useGlobalStore(state => state.setUser);
   const [mail, setMail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordRepeating, setPasswordRepeating] = useState<string>('');
@@ -52,6 +54,7 @@ export const Registration: FC<RegistrationProps> = ({ toggleAuthForm, isActive }
     const { status } = response;
     if (status === 200) {
       toast.success('Register is success. 👌', toastColored as ToastOptions<{}>);
+      setLoginUser(json.user);
       toggleAuthForm();
     } else if (status === 400 || status === 500) {
       toast.error(`${json.message}`, toastColored as ToastOptions<{}>);

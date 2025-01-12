@@ -30,23 +30,23 @@ export interface GlobalStoreState {
   resetLoginUser: () => void;
 }
 
-export interface GlobalContextValue {
-  isLoginUser: boolean;
-  setIsLoginUser: React.Dispatch<React.SetStateAction<boolean>>;
-  isLoadingUser: boolean;
-  setIsLoadingUser: React.Dispatch<React.SetStateAction<boolean>>;
-  isOpenMenu: boolean;
-  setIsOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
-  isLoadingOpen: boolean;
-  setIsLoadingOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  user: User | null;
-  isErrorOpen: boolean;
-  setIsErrorOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  resetLoginUser: () => void;
-  setLoginUser: (user: User, isLogin?: boolean) => void;
-  userSettings: UserSettings;
-  setUserSettings: React.Dispatch<React.SetStateAction<UserSettings>>;
-}
+// export interface GlobalContextValue {
+//   isLoginUser: boolean;
+//   setIsLoginUser: React.Dispatch<React.SetStateAction<boolean>>;
+//   isLoadingUser: boolean;
+//   setIsLoadingUser: React.Dispatch<React.SetStateAction<boolean>>;
+//   isOpenMenu: boolean;
+//   setIsOpenMenu: React.Dispatch<React.SetStateAction<boolean>>;
+//   isLoadingOpen: boolean;
+//   setIsLoadingOpen: React.Dispatch<React.SetStateAction<boolean>>;
+//   user: User | null;
+//   isErrorOpen: boolean;
+//   setIsErrorOpen: React.Dispatch<React.SetStateAction<boolean>>;
+//   resetLoginUser: () => void;
+//   setLoginUser: (user: User, isLogin?: boolean) => void;
+//   userSettings: UserSettings;
+//   setUserSettings: React.Dispatch<React.SetStateAction<UserSettings>>;
+// }
 
 export interface IUserLanguage {
   baseLanguage: number;

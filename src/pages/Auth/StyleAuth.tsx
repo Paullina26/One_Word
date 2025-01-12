@@ -14,9 +14,9 @@ export const WrapperElementRegistrationLogin = styled.div`
   overflow: hidden;
   bottom: 0;
   width: 90vw;
-  max-width: 600px;
+  max-width: 400px;
   height: 85vh;
-  max-height: 600px;
+  max-height: 550px;
   border-top: 3px inset rgba(230, 230, 230, 0.2);
   box-shadow: -3px -3px 5px rgba(94, 104, 121, 0.2), 3px 3px 5px rgba(94, 104, 121, 0.2);
   left: 50%;
@@ -25,7 +25,7 @@ export const WrapperElementRegistrationLogin = styled.div`
 
   @media ${device.mobileXL} {
     border: 3px inset rgba(230, 230, 230, 0.2);
-    top: 20vh;
+    top: 10vh;
     left: 50%;
     transform: translate(-50%);
   }

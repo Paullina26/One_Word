@@ -1,6 +1,6 @@
 import { FC, createContext, useContext } from 'react';
 import { useGlobalStore } from './globalStore';
-import { GlobalContextValue, GlobalProviderProps, GlobalStoreState } from '../GlobalContext/types';
+import { GlobalProviderProps, GlobalStoreState } from '../GlobalContext/types';
 
 const GlobalContext = createContext<GlobalStoreState>({} as GlobalStoreState);
 

@@ -2,12 +2,12 @@ import { useContext, useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
-import { GlobalContext } from '@utils/GlobalContext';
+import { useGlobalStore } from '@utils/store/globalStore';
 import fetchWithToken from '@api/api';
 
 const useTodayWord = () => {
   const navigate = useNavigate();
-  const { setIsLoadingOpen, isLoginUser, user, userSettings } = useContext(GlobalContext);
+  const { setIsLoadingOpen, isLoginUser, user, userSettings } = useGlobalStore();
   const [baseWord, setBaseWord] = useState<string | null>(null);
   const [transWord, setTransWord] = useState<string | null>(null);
   const [isError, setIsError] = useState(false);
