@@ -1,15 +1,7 @@
 import { create } from 'zustand';
-import { Dispatch, SetStateAction, useEffect, useState, createContext, FC } from 'react';
-import { useLocation } from 'react-router-dom';
 
 import { AvailableLanguages } from '@data/option/language_options';
-import {
-  GlobalProviderProps,
-  User,
-  UserSettings,
-  PreferencesResp,
-  GlobalStoreState,
-} from '@utils/GlobalContext/types';
+import { PreferencesResp, GlobalStoreState } from '@utils/GlobalContext/types';
 import fetchWithToken from '@api/api';
 
 export const useGlobalStore = create<GlobalStoreState>((set, get) => ({
