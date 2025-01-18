@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Word } from '@components/Repeat/RepeatWords/RepeatWords.types';
 import fetchWithToken from '@api/api';
+import { useGlobalStore } from '@utils/store/globalStore';
 
 interface UseRepeatWordsProps {
   daysRepeat: number;

@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -6,7 +5,6 @@ import { routes } from '@data/routes';
 import { Button } from '@components/Shared/Buttons/Button';
 import { useGlobalStore } from '@utils/store/globalStore';
 
-// import { GlobalContext } from '@utils/GlobalContext';
 import logoutIcon from '@assets/icon/logout_Icon.svg';
 
 export const WrapperLogOut = styled.div`
