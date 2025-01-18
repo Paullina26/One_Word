@@ -17,7 +17,6 @@ import ChatWrapper from '@components/Chat/ChatWrapper';
 
 const RoutesComponent = () => {
   const { isLoginUser, user } = useGlobalStore();
-  console.log('RoutesComponent -> isLoginUser', isLoginUser);
   return (
     <Routes>
       <Route path={routes.HOME.to} element={<Home />} />

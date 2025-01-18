@@ -1,8 +1,10 @@
 import { create } from 'zustand';
-
 import { AvailableLanguages } from '@data/option/language_options';
 import { PreferencesResp, GlobalStoreState, User } from '@utils/GlobalContext/types';
 import fetchWithToken from '@api/api';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastOptions } from 'react-toastify';
+import { toastColored } from '@helpers/StyleToastify';
 
 export const useGlobalStore = create<GlobalStoreState>((set, get) => ({
   isLoginUser: false,
@@ -32,13 +34,11 @@ export const useGlobalStore = create<GlobalStoreState>((set, get) => ({
   setUserSettings: userSettings => set({ userSettings }),
 
   getUserSettings: async () => {
-    console.log('getUserSettings');
     const resp: { response: PreferencesResp; status: number } = await fetchWithToken({
       endpoint: 'getUserSettings',
       method: 'GET',
     });
     if (resp.status === 200) {
-      console.log('resp', resp);
       set({ userSettings: resp.response });
     }
   },
@@ -52,7 +52,6 @@ export const useGlobalStore = create<GlobalStoreState>((set, get) => ({
   checkLoginStatus: async () => {
     const { isLoadingOpen, isLoginUser } = get();
     set({ isLoadingOpen: true });
-    console.log('isLoadingOpen', isLoadingOpen);
     if (isLoadingOpen || isLoginUser) return;
     try {
       const userData = await fetchWithToken({
@@ -61,14 +60,10 @@ export const useGlobalStore = create<GlobalStoreState>((set, get) => ({
       });
       const { status } = userData;
       if (status !== 200) return get().resetLoginUser();
-      console.log('userData', userData);
       if (status === 200) get().setLoginUser(userData.response);
-      // Handle successful login status
     } catch (error) {
-      console.error(error);
-      // Handle error
+      toast.error(`Error:${error}`, toastColored as ToastOptions<{}>);
     } finally {
-      console.log('isLoadingOpen', isLoadingOpen);
       set({ isLoadingOpen: false });
     }
   },
