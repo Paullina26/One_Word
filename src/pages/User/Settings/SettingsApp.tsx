@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { useContext } from 'react';
+import { useGlobalStore } from '@utils/store/globalStore';
+
 import Divider from '@mui/material/Divider';
 import { Controller, SubmitHandler, useForm, useFieldArray } from 'react-hook-form';
 
@@ -8,7 +9,6 @@ import Submit from '@components/Shared/Form/Submit';
 import Select from '@components/Shared/Form/Select';
 import { WrapperSettings } from '@components/Shared/containers/WrapperSettings';
 import { mappedLanguages } from '@data/option/language_options';
-import { GlobalContext } from '@utils/GlobalContext';
 import { Button } from '@components/Shared/Buttons/Button';
 import { useNotification } from '@utils/Notifications/useNotification';
 import Loading from '@components/Shared/Loading/Loading';
@@ -30,7 +30,7 @@ interface IForm {
 }
 
 const SettingsApp = () => {
-  const { user, userSettings, setUserSettings } = useContext(GlobalContext);
+  const { user, userSettings, setUserSettings } = useGlobalStore();
   const { subscribeUser, unsubscribeAll, unsubscribeDevice, isSubscription, isLoading } =
     useNotification();
 

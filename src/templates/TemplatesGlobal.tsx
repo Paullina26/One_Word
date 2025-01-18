@@ -1,5 +1,4 @@
-import { GlobalContext } from '@utils/GlobalContext';
-import { useContext } from 'react';
+import { useGlobalStore } from '@utils/store/globalStore';
 
 import Background from '@components/Background/Background';
 import Navigation from '@components/Navigation/Navigation';
@@ -14,7 +13,7 @@ interface TemplatesGlobalProps {
 }
 
 const TemplatesGlobal: React.FC<TemplatesGlobalProps> = props => {
-  const { isOpenMenu, isLoadingOpen, isErrorOpen, isLoginUser } = useContext(GlobalContext);
+  const { isOpenMenu, isLoadingOpen, isErrorOpen, isLoginUser } = useGlobalStore();
   return (
     <>
       {isLoginUser && <Burger isOpenMenu={isOpenMenu} />}

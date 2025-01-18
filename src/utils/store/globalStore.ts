@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 import { AvailableLanguages } from '@data/option/language_options';
-import { PreferencesResp, GlobalStoreState } from '@utils/GlobalContext/types';
+import { PreferencesResp, GlobalStoreState, User } from '@utils/GlobalContext/types';
 import fetchWithToken from '@api/api';
 
 export const useGlobalStore = create<GlobalStoreState>((set, get) => ({
@@ -43,6 +43,12 @@ export const useGlobalStore = create<GlobalStoreState>((set, get) => ({
     }
   },
 
+  setLoginUser: (user: User) => {
+    get().setIsLoginUser(true);
+    get().setUser(user);
+    get().getUserSettings();
+  },
+
   checkLoginStatus: async () => {
     const { isLoadingOpen, isLoginUser } = get();
     set({ isLoadingOpen: true });
@@ -56,6 +62,7 @@ export const useGlobalStore = create<GlobalStoreState>((set, get) => ({
       const { status } = userData;
       if (status !== 200) return get().resetLoginUser();
       console.log('userData', userData);
+      if (status === 200) get().setLoginUser(userData.response);
       // Handle successful login status
     } catch (error) {
       console.error(error);
