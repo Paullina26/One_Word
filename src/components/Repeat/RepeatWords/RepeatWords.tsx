@@ -4,7 +4,7 @@ import { TitleBig } from '@components/Shared/Atoms/Title';
 import { inputNameElement } from '@helpers/mixins';
 import { Word, RepeatWordsProps } from '@components/Repeat/RepeatWords/RepeatWords.types';
 import { useRepeatWords } from './useRpeatWords';
-
+import Points from '@pages/User/Learning/Points/Points';
 const RepeatWords: React.FC<RepeatWordsProps> = ({ daysRepeat }) => {
   const {
     wordBase,
@@ -56,6 +56,7 @@ const RepeatWords: React.FC<RepeatWordsProps> = ({ daysRepeat }) => {
           $isClickable={isNextClickable}
         />
       </S.WrapperButton>
+      <Points />
     </S.Wrapper>
   );
 };

@@ -1,6 +1,5 @@
 import useTodayWord from './useTodaysWord';
-import { useContext } from 'react';
-import { GlobalContext } from '@utils/GlobalContext';
+import { useGlobalStore } from '@utils/store/globalStore';
 
 import * as S from './StyleTodaysWord';
 import { Button } from '@components/Shared/Buttons/Button';
@@ -25,7 +24,7 @@ const TodayWord = () => {
     isAi,
   } = useTodayWord();
 
-  const { userSettings } = useContext(GlobalContext);
+  const { userSettings } = useGlobalStore();
   const today = new Date().getDay();
   const isSummaryDay = userSettings?.isSummary && userSettings.summaryDay === today;
   const isBreakDay = userSettings?.breakDay && userSettings.breakDay === today;

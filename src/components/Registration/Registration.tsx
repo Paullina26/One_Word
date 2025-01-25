@@ -9,19 +9,20 @@ import Submit from '@components/Shared/Form/Submit';
 import { headers, API_Endpoints } from '@api/api';
 import { Button } from '@components/Shared/Buttons/Button';
 import { inputNameElement } from '@helpers/mixins';
+import { useGlobalStore } from '@utils/store/globalStore';
 
 interface RegistrationProps {
   toggleAuthForm: () => void;
   isActive: boolean;
 }
 export const Registration: FC<RegistrationProps> = ({ toggleAuthForm, isActive }) => {
+  const setLoginUser = useGlobalStore(state => state.setUser);
   const [mail, setMail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordRepeating, setPasswordRepeating] = useState<string>('');
 
   const handleRegistrationUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(password, passwordRepeating);
     if (password === passwordRepeating) {
       try {
         await sendDataUserToDatabase(mail, password);
@@ -34,8 +35,6 @@ export const Registration: FC<RegistrationProps> = ({ toggleAuthForm, isActive }
   };
 
   const sendDataUserToDatabase = async (mail: string, password: string) => {
-    console.log(mail, password);
-
     const response = await toast.promise(
       fetch(API_Endpoints.signup, {
         method: 'POST',
@@ -48,10 +47,10 @@ export const Registration: FC<RegistrationProps> = ({ toggleAuthForm, isActive }
       }
     );
     const json = await response.json();
-    console.log(json);
     const { status } = response;
     if (status === 200) {
       toast.success('Register is success. 👌', toastColored as ToastOptions<{}>);
+      setLoginUser(json.user);
       toggleAuthForm();
     } else if (status === 400 || status === 500) {
       toast.error(`${json.message}`, toastColored as ToastOptions<{}>);

@@ -1,6 +1,5 @@
 import { useContext, FC } from 'react';
 import styled from 'styled-components';
-import { GlobalContext } from '@utils/GlobalContext';
 import {
   boxShadow_button,
   color_gradient_button,
@@ -9,6 +8,7 @@ import {
   color_gradient_menu_bar,
   color_gradient_menu_burger,
 } from '@style/mixins';
+import { useGlobalStore } from '@utils/store/globalStore';
 
 const StyledBurger = styled.button<{ $isOpenMenu: boolean }>`
   z-index: 101;
@@ -64,7 +64,7 @@ interface BurgerProps {
 }
 
 export const Burger: FC<BurgerProps> = ({ isOpenMenu }) => {
-  const { setIsOpenMenu } = useContext(GlobalContext);
+  const { setIsOpenMenu } = useGlobalStore();
 
   const handleMenu = () => {
     setIsOpenMenu(!isOpenMenu);

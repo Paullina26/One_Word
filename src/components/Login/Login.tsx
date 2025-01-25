@@ -1,9 +1,9 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastOptions } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { GlobalContext } from '@utils/GlobalContext';
+import { useGlobalStore } from '@utils/store/globalStore';
 import { toastColored } from '@helpers/StyleToastify';
 import Input from '@components/Shared/Form/Input';
 import Submit from '@components/Shared/Form/Submit';
@@ -19,7 +19,7 @@ interface LoginProps {
   toggleAuthForm: () => void;
 }
 export const Login: FC<LoginProps> = ({ toggleAuthForm }) => {
-  const { setLoginUser } = useContext(GlobalContext);
+  const setLoginUser = useGlobalStore(state => state.setUser);
   const navigate = useNavigate();
   const [mail, setMail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -52,7 +52,7 @@ export const Login: FC<LoginProps> = ({ toggleAuthForm }) => {
       const user = await response.json();
 
       localStorage.setItem('token', user.token);
-      setLoginUser(user, true);
+      setLoginUser(user);
 
       toast.success('Login is success. 👌', toastColored as ToastOptions<{}>);
       navigate(`${routes.LEARN_TODAYS_WORD.to}`);

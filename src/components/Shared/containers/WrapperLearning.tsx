@@ -9,9 +9,9 @@ export const WrapperLearning = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  height: 150px;
+  height: 100px;
   text-align: center;
-  background-color: rgba(232, 232, 232, 0.75);
+  background-color: rgba(232, 232, 232, 0.85);
   margin-bottom: 20px;
   position: relative;
 `;
