@@ -14,3 +14,7 @@ export interface Word {
 export interface RepeatWordsProps {
   daysRepeat: number;
 }
+
+export interface PointsProps {
+  numberOfWords: number;
+}

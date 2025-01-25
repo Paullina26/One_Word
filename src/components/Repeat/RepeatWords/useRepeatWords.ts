@@ -1,19 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Word } from '@components/Repeat/RepeatWords/RepeatWords.types';
+import { RepeatWordsProps, Word } from '@components/Repeat/RepeatWords/RepeatWords.types';
 import fetchWithToken from '@api/api';
 import { useGlobalStore } from '@utils/store/globalStore';
 
-interface UseRepeatWordsProps {
-  daysRepeat: number;
-}
-
-export const useRepeatWords = ({ daysRepeat }: UseRepeatWordsProps) => {
+export const useRepeatWords = ({ daysRepeat }: RepeatWordsProps) => {
   const [wordsRepeat, setWordsRepeat] = useState<Word[]>([]);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [wordBase, setWordBase] = useState('');
   const [wordTranslate, setWordTranslate] = useState('');
   const [feedback, setFeedback] = useState('');
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [numberOfWords, setNumberOfWords] = useState(0);
 
   const [isBackClickable, setIsBackClickable] = useState(false);
   const [isCheckClickable, setIsCheckClickable] = useState(false);
@@ -28,6 +25,8 @@ export const useRepeatWords = ({ daysRepeat }: UseRepeatWordsProps) => {
   useEffect(() => {
     updateButtonStates();
   }, [currentWordIndex, wordTranslate, feedback, wordsRepeat]);
+
+  console.log('wordsRepeat', wordsRepeat);
 
   const handleBackWord = () => {
     if (currentWordIndex > 0) {
@@ -72,6 +71,8 @@ export const useRepeatWords = ({ daysRepeat }: UseRepeatWordsProps) => {
       });
       console.log('Response', result);
       setWordsRepeat(result.response.words);
+      setNumberOfWords(result.response.words.length);
+      console.log('Words length', result.response.words.length);
       if (result.response.words.length > 0) {
         setWordBase(result.response.words[0].basicWord);
       }
@@ -97,5 +98,6 @@ export const useRepeatWords = ({ daysRepeat }: UseRepeatWordsProps) => {
     handleCheckWord,
     handleNextWord,
     isCorrect,
+    numberOfWords,
   };
 };
