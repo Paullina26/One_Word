@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { AvailableLanguages } from '@data/option/language_options';
-import { PreferencesResp, GlobalStoreState, User } from '@utils/GlobalContext/types';
+import { PreferencesResp, GlobalStoreState, User } from '@utils/types/types';
 import fetchWithToken from '@api/api';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast, ToastOptions } from 'react-toastify';

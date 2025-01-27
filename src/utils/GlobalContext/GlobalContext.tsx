@@ -10,7 +10,7 @@ import {
   PreferencesResp,
   User,
   UserSettings,
-} from './types';
+} from '../types/types';
 
 export const GlobalContext = createContext<GlobalContextValue>({} as GlobalContextValue);
 

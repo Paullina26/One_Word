@@ -13,7 +13,7 @@ import { Button } from '@components/Shared/Buttons/Button';
 import { useNotification } from '@utils/Notifications/useNotification';
 import Loading from '@components/Shared/Loading/Loading';
 import fetchWithToken from '@api/api';
-import { UserSettings } from '@utils/GlobalContext/types';
+import { UserSettings } from '@utils/types/types';
 
 export const Title = styled.p`
   ${font_settings(2.4, 'normal', 600)}
