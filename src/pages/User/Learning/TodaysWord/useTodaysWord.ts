@@ -2,12 +2,17 @@ import { useContext, useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
-import { useGlobalStore } from '@utils/store/globalStore';
 import fetchWithToken from '@api/api';
+import { useUserStore } from '@utils/store/userStore';
+import { useSettingsStore } from '@utils/store/settingsStore';
+import { useUIStore } from '@utils/store/uiStore';
 
 const useTodayWord = () => {
   const navigate = useNavigate();
-  const { setIsLoadingOpen, isLoginUser, user, userSettings } = useGlobalStore();
+  const { isLoginUser, user } = useUserStore();
+  const { userSettings } = useSettingsStore();
+  const { setIsLoadingOpen } = useUIStore();
+
   const [baseWord, setBaseWord] = useState<string | null>(null);
   const [transWord, setTransWord] = useState<string | null>(null);
   const [isError, setIsError] = useState(false);

@@ -1,5 +1,4 @@
 import useTodayWord from './useTodaysWord';
-import { useGlobalStore } from '@utils/store/globalStore';
 
 import * as S from './StyleTodaysWord';
 import { Button } from '@components/Shared/Buttons/Button';
@@ -8,6 +7,7 @@ import ButtonIcon from '@components/Shared/Buttons/ButtonIcon';
 import ManagedIcon from '@assets/icon/helpers/ManagedIcon';
 import RepeatWords from '@components/Repeat/RepeatWords/RepeatWords';
 import { TitleSmall } from '@components/Shared/Atoms/Title';
+import { useSettingsStore } from '@utils/store/settingsStore';
 
 const TodayWord = () => {
   const {
@@ -24,7 +24,7 @@ const TodayWord = () => {
     isAi,
   } = useTodayWord();
 
-  const { userSettings } = useGlobalStore();
+  const { userSettings } = useSettingsStore();
   const today = new Date().getDay();
   const isSummaryDay = userSettings?.isSummary && userSettings.summaryDay === today;
   const isBreakDay = userSettings?.breakDay && userSettings.breakDay === today;

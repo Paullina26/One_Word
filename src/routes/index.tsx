@@ -1,8 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { routes } from '@data/routes';
 
-import { useGlobalStore } from '@utils/store/globalStore';
-
 import Home from '@pages/Home/Home';
 import Auth from '@pages/Auth/Auth';
 import TodaysWord from '@pages/User/Learning/TodaysWord/TodaysWord';
@@ -14,9 +12,10 @@ import AddWordSettings from '@pages/User/Settings/AddWord';
 import LearningSettings from '@pages/User/Settings/LearningSettings/LearningSettings';
 import SettingsApp from '@pages/User/Settings/SettingsApp';
 import ChatWrapper from '@components/Chat/ChatWrapper';
+import { useUserStore } from '@utils/store/userStore';
 
 const RoutesComponent = () => {
-  const { isLoginUser, user } = useGlobalStore();
+  const { isLoginUser, user } = useUserStore();
   return (
     <Routes>
       <Route path={routes.HOME.to} element={<Home />} />

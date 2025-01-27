@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { useGlobalStore } from '@utils/store/globalStore';
 
 import Divider from '@mui/material/Divider';
 import { Controller, SubmitHandler, useForm, useFieldArray } from 'react-hook-form';
@@ -14,6 +13,8 @@ import { useNotification } from '@utils/Notifications/useNotification';
 import Loading from '@components/Shared/Loading/Loading';
 import fetchWithToken from '@api/api';
 import { UserSettings } from '@utils/types/types';
+import { useUserStore } from '@utils/store/userStore';
+import { useSettingsStore } from '@utils/store/settingsStore';
 
 export const Title = styled.p`
   ${font_settings(2.4, 'normal', 600)}
@@ -30,7 +31,9 @@ interface IForm {
 }
 
 const SettingsApp = () => {
-  const { user, userSettings, setUserSettings } = useGlobalStore();
+  const { user } = useUserStore();
+  const { userSettings, setUserSettings } = useSettingsStore();
+
   const { subscribeUser, unsubscribeAll, unsubscribeDevice, isSubscription, isLoading } =
     useNotification();
 

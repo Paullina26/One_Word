@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 import { routes } from '@data/routes';
 import { Button } from '@components/Shared/Buttons/Button';
-import { useGlobalStore } from '@utils/store/globalStore';
 
 import logoutIcon from '@assets/icon/logout_Icon.svg';
+import { useUserStore } from '@utils/store/userStore';
 
 export const WrapperLogOut = styled.div`
   right: 10px;
@@ -33,7 +33,7 @@ export const LogoutButton = styled(Button)`
 `;
 
 export const LogOut = () => {
-  const { resetLoginUser } = useGlobalStore();
+  const { resetLoginUser } = useUserStore();
   const navigate = useNavigate();
 
   const handleLogout = () => {

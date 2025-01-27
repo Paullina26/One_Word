@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { baseNavigation, chatNavigation } from '@data/NavigationElements';
 import LogOut from '@components/LogOut/LogOut';
 import * as S from '@components/Navigation/StyleNavigation';
-import { useGlobalStore } from '@utils/store/globalStore';
+import { useUserStore } from '@utils/store/userStore';
 
 interface NavigationProps {
   isOpenMenu: boolean;
@@ -22,7 +22,7 @@ interface SectionNavigation {
 
 export const Navigation: FC<NavigationProps> = ({ isOpenMenu }) => {
   const location = useLocation();
-  const { user } = useGlobalStore();
+  const { user } = useUserStore();
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [animateLinks, setAnimateLinks] = useState(false);
 

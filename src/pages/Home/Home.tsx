@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Navigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
-import { useGlobalStore } from '@utils/store/globalStore';
 import { routes } from '@data/routes';
 import {
   font_settings,
@@ -15,6 +14,7 @@ import {
 import Logo from '@components/Shared/Logo/Logo';
 import { GlassWrapper } from '@components/Shared/containers/GlassWrapper';
 import Welcome from '@components/Welcome/Welcome';
+import { useUserStore } from '@utils/store/userStore';
 
 export const LinkButton = styled(NavLink)<{ $isLightTeam: boolean }>`
   ${font_settings(2.2, 'italic', 300)};
@@ -30,7 +30,7 @@ export const LinkButton = styled(NavLink)<{ $isLightTeam: boolean }>`
 `;
 
 export const HomePage = () => {
-  const { isLoginUser } = useGlobalStore();
+  const { isLoginUser } = useUserStore();
 
   if (isLoginUser) return <Navigate replace to={routes.LEARN_TODAYS_WORD.to} />;
 

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { RepeatWordsProps, Word } from '@components/Repeat/RepeatWords/RepeatWords.types';
 import fetchWithToken from '@api/api';
-import { useGlobalStore } from '@utils/store/globalStore';
 
 export const useRepeatWords = ({ daysRepeat }: RepeatWordsProps) => {
   const [wordsRepeat, setWordsRepeat] = useState<Word[]>([]);

@@ -8,7 +8,7 @@ import {
   color_gradient_menu_bar,
   color_gradient_menu_burger,
 } from '@style/mixins';
-import { useGlobalStore } from '@utils/store/globalStore';
+import { useUIStore } from '@utils/store/uiStore';
 
 const StyledBurger = styled.button<{ $isOpenMenu: boolean }>`
   z-index: 101;
@@ -64,7 +64,7 @@ interface BurgerProps {
 }
 
 export const Burger: FC<BurgerProps> = ({ isOpenMenu }) => {
-  const { setIsOpenMenu } = useGlobalStore();
+  const { setIsOpenMenu } = useUIStore();
 
   const handleMenu = () => {
     setIsOpenMenu(!isOpenMenu);
