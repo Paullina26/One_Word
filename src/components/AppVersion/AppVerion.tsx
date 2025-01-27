@@ -20,7 +20,7 @@ const VersionContainer = styled.div`
 `;
 
 const AppVersion: React.FC = () => {
-  const version = '0.0.6';
+  const version = '0.0.7';
   return <VersionContainer>{version}</VersionContainer>;
 };
 
