@@ -25,6 +25,7 @@ interface InputProps {
   min?: number;
   max?: number;
   $height?: string;
+  disabled?: boolean;
 }
 
 export const LabelStyle = styled.label<{ $fontColorLabel?: string }>`
@@ -67,6 +68,7 @@ const Input: FC<InputProps> = ({
   min,
   max,
   $height,
+  disabled,
 }) => {
   return (
     <LabelStyle htmlFor={id} $fontColorLabel={$fontColorLabel}>
@@ -87,6 +89,7 @@ const Input: FC<InputProps> = ({
         $height={$height || '35px'}
         min={min}
         max={max}
+        disabled={disabled}
       />
     </LabelStyle>
   );

@@ -8,6 +8,8 @@ import Points from '@pages/User/Learning/Points/Points';
 
 const RepeatWords: React.FC<RepeatWordsProps> = ({ daysRepeat }) => {
   const {
+    wordsRepeat,
+    currentWordIndex,
     wordBase,
     wordTranslate,
     feedback,
@@ -20,6 +22,8 @@ const RepeatWords: React.FC<RepeatWordsProps> = ({ daysRepeat }) => {
     handleNextWord,
     isCorrect,
     numberOfWords,
+    correctCount,
+    incorrectCount,
   } = useRepeatWords({ daysRepeat });
 
   return (
@@ -36,6 +40,7 @@ const RepeatWords: React.FC<RepeatWordsProps> = ({ daysRepeat }) => {
           value={wordTranslate}
           required
           $isCorrect={isCorrect}
+          disabled={wordsRepeat[currentWordIndex]?.wordUserAnswer !== undefined}
         />
       </div>
       <S.WrapperButton>
@@ -58,7 +63,11 @@ const RepeatWords: React.FC<RepeatWordsProps> = ({ daysRepeat }) => {
           $isClickable={isNextClickable}
         />
       </S.WrapperButton>
-      <Points numberOfWords={numberOfWords} />
+      <Points
+        numberOfWords={numberOfWords}
+        correctCount={correctCount}
+        incorrectCount={incorrectCount}
+      />
     </S.Wrapper>
   );
 };
