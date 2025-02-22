@@ -31,7 +31,7 @@ const RepeatWords: React.FC<RepeatWordsProps> = ({ daysRepeat }) => {
         <S.InputStyle
           $fontColorLabel='purpleDark'
           $isLightTeam={true}
-          {...inputNameElement('word_Transate', 'wordTransate', 'Word Transate')}
+          {...inputNameElement('word_Translate', 'wordTranslate', 'Word Translate')}
           onChange={(value: string) => setWordTranslate(value)}
           value={wordTranslate}
           required

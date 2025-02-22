@@ -25,8 +25,6 @@ export const useRepeatWords = ({ daysRepeat }: RepeatWordsProps) => {
     updateButtonStates();
   }, [currentWordIndex, wordTranslate, feedback, wordsRepeat]);
 
-  console.log('wordsRepeat', wordsRepeat);
-
   const handleBackWord = () => {
     if (currentWordIndex > 0) {
       setCurrentWordIndex(currentWordIndex - 1);
