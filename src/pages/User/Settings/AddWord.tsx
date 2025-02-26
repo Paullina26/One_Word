@@ -10,7 +10,7 @@ import { mappedLanguages } from '@data/option/language_options';
 import { WrapperSettings } from '@components/Shared/containers/WrapperSettings';
 import fetchWithToken from '@api/api';
 import { TitleSmall } from '@components/Shared/Atoms/Title';
-import { useGlobalStore } from '@utils/store/globalStore';
+import { useSettingsStore } from '@utils/store/settingsStore';
 
 export const WrapperInputsSettingsAddWord = styled.div`
   margin-bottom: 30px;
@@ -24,7 +24,7 @@ type AddWordSettingsProps = {
 };
 
 const AddWordSettings = ({ wordToLearn, onClose, inBaseLang }: AddWordSettingsProps) => {
-  const { userSettings } = useGlobalStore();
+  const { userSettings } = useSettingsStore();
   const [wordBase, setWordBase] = useState<string>(inBaseLang || '');
   const [wordTranslate, setWordTranslate] = useState<string>(wordToLearn || '');
   const [selectedOptionWordLanguageTranslate, setSelectedOptionWordLanguageTranslate] = useState(

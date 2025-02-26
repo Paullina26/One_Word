@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { toast, ToastOptions } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { useGlobalStore } from '@utils/store/globalStore';
 import { toastColored } from '@helpers/StyleToastify';
 import Input from '@components/Shared/Form/Input';
 import Submit from '@components/Shared/Form/Submit';
@@ -14,12 +13,14 @@ import { inputNameElement } from '@helpers/mixins';
 import { routes } from '@data/routes';
 
 import * as S from './StyleLogin';
+import { useUserStore } from '@utils/store/userStore';
 
 interface LoginProps {
   toggleAuthForm: () => void;
 }
 export const Login: FC<LoginProps> = ({ toggleAuthForm }) => {
-  const setLoginUser = useGlobalStore(state => state.setUser);
+  const { setLoginUser } = useUserStore();
+
   const navigate = useNavigate();
   const [mail, setMail] = useState<string>('');
   const [password, setPassword] = useState<string>('');

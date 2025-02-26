@@ -9,8 +9,16 @@ export interface Word {
   updatedDate: string;
   daysRepeat: number;
   __v: number;
+  wordUserAnswer?: string;
+  isCorrect?: boolean | null;
 }
 
 export interface RepeatWordsProps {
   daysRepeat: number;
+}
+
+export interface PointsProps {
+  numberOfWords: number;
+  correctCount: number;
+  incorrectCount: number;
 }

@@ -1,3 +1,7 @@
+import { useEffect } from 'react';
+import { useUIStore } from '@utils/store/uiStore';
+import { useUserStore } from '@utils/store/userStore';
+
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '@style/theme';
@@ -9,7 +13,9 @@ import { useEffect } from 'react';
 import { useGlobalStore } from '@utils/store/globalStore';
 
 function App() {
-  const { setIsOpenMenu, checkLoginStatus } = useGlobalStore();
+  const { setIsOpenMenu } = useUIStore();
+  const { checkLoginStatus } = useUserStore();
+
   useEffect(() => {
     setIsOpenMenu(false);
   }, [location.pathname]);

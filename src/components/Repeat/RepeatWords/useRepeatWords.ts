@@ -1,19 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Word } from '@components/Repeat/RepeatWords/RepeatWords.types';
+import { RepeatWordsProps, Word } from '@components/Repeat/RepeatWords/RepeatWords.types';
 import fetchWithToken from '@api/api';
 import { useGlobalStore } from '@utils/store/globalStore';
 
-interface UseRepeatWordsProps {
-  daysRepeat: number;
-}
-
-export const useRepeatWords = ({ daysRepeat }: UseRepeatWordsProps) => {
+export const useRepeatWords = ({ daysRepeat }: RepeatWordsProps) => {
   const [wordsRepeat, setWordsRepeat] = useState<Word[]>([]);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [wordBase, setWordBase] = useState('');
   const [wordTranslate, setWordTranslate] = useState('');
   const [feedback, setFeedback] = useState('');
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [numberOfWords, setNumberOfWords] = useState(0);
+  const [correctCount, setCorrectCount] = useState(0);
+  const [incorrectCount, setIncorrectCount] = useState(0);
 
   const [isBackClickable, setIsBackClickable] = useState(false);
   const [isCheckClickable, setIsCheckClickable] = useState(false);
@@ -21,7 +20,10 @@ export const useRepeatWords = ({ daysRepeat }: UseRepeatWordsProps) => {
 
   const updateButtonStates = () => {
     setIsBackClickable(currentWordIndex > 0);
-    setIsCheckClickable(wordTranslate !== '' && feedback === '');
+    const currentWord = wordsRepeat[currentWordIndex];
+    setIsCheckClickable(
+      wordTranslate !== '' && feedback === '' && currentWord?.wordUserAnswer === undefined
+    );
     setIsNextClickable(currentWordIndex < wordsRepeat.length - 1);
   };
 
@@ -32,22 +34,35 @@ export const useRepeatWords = ({ daysRepeat }: UseRepeatWordsProps) => {
   const handleBackWord = () => {
     if (currentWordIndex > 0) {
       setCurrentWordIndex(currentWordIndex - 1);
-      setWordBase(wordsRepeat[currentWordIndex - 1].basicWord);
-      setWordTranslate('');
-      setFeedback('');
-      setIsCorrect(null);
+      const previousWord = wordsRepeat[currentWordIndex - 1];
+      setWordBase(previousWord.basicWord);
+      setWordTranslate(previousWord.wordUserAnswer || '');
+      setFeedback(previousWord.isCorrect === false ? `Correct is: ${previousWord.transWord}` : '');
+      setIsCorrect(previousWord.isCorrect ?? null);
     }
     updateButtonStates();
   };
 
   const handleCheckWord = () => {
-    if (wordsRepeat[currentWordIndex].transWord.toLowerCase() === wordTranslate.toLowerCase()) {
+    const currentWord = wordsRepeat[currentWordIndex];
+    if (currentWord.transWord.toLowerCase() === wordTranslate.toLowerCase()) {
       setIsCorrect(true);
-      handleNextWord();
       setFeedback('Good job!');
+      setCorrectCount(correctCount + 1);
+      wordsRepeat[currentWordIndex] = {
+        ...currentWord,
+        wordUserAnswer: wordTranslate,
+        isCorrect: true,
+      };
     } else {
-      setFeedback(`Correct is: ${wordsRepeat[currentWordIndex].transWord}`);
+      setFeedback(`Correct is: ${currentWord.transWord}`);
       setIsCorrect(false);
+      setIncorrectCount(incorrectCount + 1);
+      wordsRepeat[currentWordIndex] = {
+        ...currentWord,
+        wordUserAnswer: wordTranslate,
+        isCorrect: false,
+      };
     }
     updateButtonStates();
   };
@@ -55,10 +70,11 @@ export const useRepeatWords = ({ daysRepeat }: UseRepeatWordsProps) => {
   const handleNextWord = () => {
     if (currentWordIndex < wordsRepeat.length - 1) {
       setCurrentWordIndex(currentWordIndex + 1);
-      setWordBase(wordsRepeat[currentWordIndex + 1].basicWord);
-      setWordTranslate('');
-      setFeedback('');
-      setIsCorrect(null);
+      const nextWord = wordsRepeat[currentWordIndex + 1];
+      setWordBase(nextWord.basicWord);
+      setWordTranslate(nextWord.wordUserAnswer || '');
+      setFeedback(nextWord.isCorrect === false ? `Correct is: ${nextWord.transWord}` : '');
+      setIsCorrect(nextWord.isCorrect ?? null);
     }
     updateButtonStates();
   };
@@ -70,8 +86,8 @@ export const useRepeatWords = ({ daysRepeat }: UseRepeatWordsProps) => {
         method: 'GET',
         queryParams: { days: daysRepeat, limit: 100 },
       });
-      console.log('Response', result);
       setWordsRepeat(result.response.words);
+      setNumberOfWords(result.response.words.length);
       if (result.response.words.length > 0) {
         setWordBase(result.response.words[0].basicWord);
       }
@@ -86,6 +102,8 @@ export const useRepeatWords = ({ daysRepeat }: UseRepeatWordsProps) => {
   }, []);
 
   return {
+    wordsRepeat,
+    currentWordIndex,
     wordBase,
     wordTranslate,
     feedback,
@@ -97,5 +115,8 @@ export const useRepeatWords = ({ daysRepeat }: UseRepeatWordsProps) => {
     handleCheckWord,
     handleNextWord,
     isCorrect,
+    numberOfWords,
+    correctCount,
+    incorrectCount,
   };
 };

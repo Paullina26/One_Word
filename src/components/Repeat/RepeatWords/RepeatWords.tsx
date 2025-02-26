@@ -3,10 +3,13 @@ import ButtonIcon from '@components/Shared/Buttons/ButtonIcon';
 import { TitleBig } from '@components/Shared/Atoms/Title';
 import { inputNameElement } from '@helpers/mixins';
 import { Word, RepeatWordsProps } from '@components/Repeat/RepeatWords/RepeatWords.types';
-import { useRepeatWords } from './useRpeatWords';
+import { useRepeatWords } from './useRepeatWords';
 import Points from '@pages/User/Learning/Points/Points';
+
 const RepeatWords: React.FC<RepeatWordsProps> = ({ daysRepeat }) => {
   const {
+    wordsRepeat,
+    currentWordIndex,
     wordBase,
     wordTranslate,
     feedback,
@@ -18,6 +21,9 @@ const RepeatWords: React.FC<RepeatWordsProps> = ({ daysRepeat }) => {
     handleCheckWord,
     handleNextWord,
     isCorrect,
+    numberOfWords,
+    correctCount,
+    incorrectCount,
   } = useRepeatWords({ daysRepeat });
 
   return (
@@ -29,11 +35,12 @@ const RepeatWords: React.FC<RepeatWordsProps> = ({ daysRepeat }) => {
         <S.InputStyle
           $fontColorLabel='purpleDark'
           $isLightTeam={true}
-          {...inputNameElement('word_Transate', 'wordTransate', 'Word Transate')}
+          {...inputNameElement('word_Translate', 'wordTranslate', 'Word Translate')}
           onChange={(value: string) => setWordTranslate(value)}
           value={wordTranslate}
           required
           $isCorrect={isCorrect}
+          disabled={wordsRepeat[currentWordIndex]?.wordUserAnswer !== undefined}
         />
       </div>
       <S.WrapperButton>
@@ -56,7 +63,11 @@ const RepeatWords: React.FC<RepeatWordsProps> = ({ daysRepeat }) => {
           $isClickable={isNextClickable}
         />
       </S.WrapperButton>
-      <Points />
+      <Points
+        numberOfWords={numberOfWords}
+        correctCount={correctCount}
+        incorrectCount={incorrectCount}
+      />
     </S.Wrapper>
   );
 };
