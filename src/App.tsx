@@ -9,6 +9,8 @@ import { GlobalStyle } from '@style/GlobalStyle';
 import RoutesComponent from './routes';
 import TemplatesGlobal from '@templates/TemplatesGlobal';
 import { ToastContainer } from 'react-toastify';
+import { useEffect } from 'react';
+import { useGlobalStore } from '@utils/store/globalStore';
 
 function App() {
   const { setIsOpenMenu } = useUIStore();
